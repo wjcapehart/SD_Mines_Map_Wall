@@ -4,8 +4,12 @@ __pycache__/
 *$py.class
 
 # Working Directories
-./graphics_files/
-./radar_temp_files/
+graphics_files/
+graphics_files/*.gif
+
+radar_temp_files/*.txt
+radar_temp_files/*.png
+
 .DS_Store
 
 # C extensions
