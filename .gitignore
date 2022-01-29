@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Working Directories
+graphics_files
+radar_temp_files
+
 # C extensions
 *.so
 
