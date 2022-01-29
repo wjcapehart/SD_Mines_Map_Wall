@@ -6,6 +6,7 @@ __pycache__/
 # Working Directories
 ./graphics_files/
 ./radar_temp_files/
+.DS_Store
 
 # C extensions
 *.so
