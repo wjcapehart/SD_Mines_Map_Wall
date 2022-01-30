@@ -55,7 +55,6 @@ import pandas            as pd
 
 import airportsdata as airpt
 
-import IPython.display as idisplay
 
 #
 ####################################################
@@ -73,7 +72,7 @@ import IPython.display as idisplay
 # System Control
 #
 
-os.system("rm -v ./radar_temp_files/*")
+os.system("rm -v ./temp_files_radar/*")
 
 time_now   = datetime.utcnow()
 time_start = time_now - timedelta(hours=2)
@@ -172,7 +171,7 @@ for datehour in siphon_pulls_YYYYMMDD_HH:
 
     
     metar_url  = "https://thredds-test.unidata.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_"+datehour+".txt"
-    metar_file = "./radar_temp_files/metar_"+datehour+".txt"
+    metar_file = "./temp_files_radar/metar_"+datehour+".txt"
     
     
     path_to_file = pathlib.Path(metar_file)
@@ -342,18 +341,22 @@ def make_radar_station_map(ds):
                                                    globe=None))
 
     plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
-                fontsize=20)
+                fontsize=20, color="black")
 
     ax.set_title(valid_time + "  (" + local_time+")",
-                    fontsize=15)
+                    fontsize=15, color="black")
 
 
     ax.set_extent([geospatial_lon_min, 
                    geospatial_lon_max, 
                    geospatial_lat_min, 
                    geospatial_lat_max], crs=ccrs.PlateCarree())
-    ax.add_feature(feature    = cfeature.STATES)
-    ax.add_feature(feature    = cfeature.COASTLINE)
+    ax.add_feature(feature    = cfeature.STATES,
+                   edgecolor  = 'black',
+                   facecolor  = 'none')
+    ax.add_feature(feature    = cfeature.COASTLINE,
+                   edgecolor  = 'black',
+                   facecolor  = 'none')
     ax.add_feature(feature    = USCOUNTIES, 
                    linewidths = 0.5,
                    edgecolor  = 'black',
@@ -364,10 +367,15 @@ def make_radar_station_map(ds):
                               norm = norm, 
                               cmap = cmap)
     ax.set_aspect('equal', 'datalim')
-    plt.colorbar(filled_cm, 
+    
+    color_bar = plt.colorbar(filled_cm, 
                  label  = "Reflectivity (dbZ)",
                  shrink = 0.8,
                  pad    = 0.012)
+    cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
+    plt.setp(cbytick_obj, color='black')
+
+    
 
 
     # Metar Plots
@@ -393,20 +401,21 @@ def make_radar_station_map(ds):
                                    color='black')
         stationplot.plot_parameter('SE',
                                    np.array([single_row['staleness']]),
-                                   color='grey')
+                                   color='black')
 
         stationplot.plot_symbol('C', 
                                 np.array([single_row['cloud_eights']]), 
-                                sky_cover)
+                                sky_cover,color='black')
         stationplot.plot_symbol('W', 
                                 np.array([single_row['current_wx1_symbol']]), 
-                                current_weather)
+                                current_weather,color='black')
 
         stationplot.plot_text((2, 0), 
                               np.array([single_row['ICAO_id']]), 
                               color='black')
         stationplot.plot_barb(np.array([single_row['eastward_wind']]), 
-                              np.array([single_row['northward_wind']]))
+                              np.array([single_row['northward_wind']]),
+                             color='black')
         
         del single_row
         
@@ -495,7 +504,7 @@ for name in sorted(catalog.datasets):
 
     
     make_radar_station_map(ds)
-    plt.savefig("./radar_temp_files/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
+    plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
     counter = counter + 1
     figure_counter = figure_counter + 1
 
@@ -518,13 +527,19 @@ for name in sorted(catalog.datasets):
 #
 
 os.system("convert -delay 25 " + 
-          "./radar_temp_files/Radar_Loop_Image_*.png"  + 
+          "./temp_files_radar/Radar_Loop_Image_*.png"  + 
           " " + 
           "./graphics_files/RealTime_Radar_Loop.gif")
 
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

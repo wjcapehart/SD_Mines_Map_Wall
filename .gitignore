@@ -10,9 +10,18 @@ graphics_files/*.gif
 radar_temp_files/*.txt
 radar_temp_files/*.png
 
+temp_files_radar/*.txt
+temp_files_radar/*.png
+
+
 sat_wv_files/*.png
 sat_ir_files/*.png
 sat_vis_files/*.png
+
+temp_files_sat_wv/*.png
+temp_files_sat_ir/*.png
+temp_files_sat_vis/*.png
+
 
 .DS_Store
 
