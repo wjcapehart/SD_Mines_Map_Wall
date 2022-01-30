@@ -10,6 +10,10 @@ graphics_files/*.gif
 radar_temp_files/*.txt
 radar_temp_files/*.png
 
+sat_wv_files/*.png
+sat_ir_files/*.png
+sat_vis_files/*.png
+
 .DS_Store
 
 # C extensions
@@ -121,3 +125,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+*.png
+.DS_Store
+.DS_Store

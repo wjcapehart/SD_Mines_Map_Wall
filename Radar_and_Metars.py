@@ -18,7 +18,6 @@
 from datetime            import datetime, timedelta
 
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 import numpy             as np
 
 import cartopy.crs       as ccrs
@@ -148,6 +147,12 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 # In[4]:
 
 
+tz
+
+
+# In[5]:
+
+
 ####################################################
 ####################################################
 ####################################################
@@ -238,7 +243,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 ####################################################
 
 
-# In[5]:
+# In[6]:
 
 
 ####################################################
@@ -418,7 +423,7 @@ def make_radar_station_map(ds):
 ####################################################
 
 
-# In[6]:
+# In[7]:
 
 
 ####################################################
@@ -460,7 +465,7 @@ for name in datasets_sorted:
 ####################################################
 
 
-# In[7]:
+# In[8]:
 
 
 ####################################################
@@ -481,8 +486,8 @@ for name in sorted(catalog.datasets):
     print(ds)
     print(percent_done)
     fig, ax = plt.subplots(1, 1, 
-                           figsize=(9, 8))#,
-                           #facecolor = 'white')
+                           figsize=(9, 8),
+                           facecolor = 'white')
     
 
 
@@ -503,7 +508,7 @@ for name in sorted(catalog.datasets):
 ####################################################
 
 
-# In[8]:
+# In[9]:
 
 
 ##################################################
