@@ -47,7 +47,7 @@ total_frames = 45*2
 
 png_processing_directory = "./temp_files_sat_wv/"
 
-gif_file_name = "./graphics_files/RealTime_SAT_WV_Loop.gif"
+gif_file_name = "./graphics_files/RealTime_SAT_IR_Loop.gif"
 
 image_header_label = "GOES 16 Band 8 [6.2 µm Upper-level Water Vapor]"
 
@@ -184,8 +184,9 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
         im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper')
 
-        wv_cmap = colortables.get_colortable('WVCIMSS_r')
+        wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 195, 265)
         im.set_cmap(wv_cmap)
+        im.set_norm(wv_norm)
         plt.tight_layout()
 
         plt.savefig( dataset_png_file_name)
