@@ -126,7 +126,6 @@ file_names_to_use.sort()
 #
 
 for filename in files_on_hand:
-    print(filename)
     if filename not in file_names_to_retain:
         print("Purging ", filename )
         os.remove( filename  )
