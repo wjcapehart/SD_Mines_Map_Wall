@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Water Vapour
+# # Visible 
 
-# In[1]:
+# In[ ]:
 
 
 from datetime import datetime
@@ -20,12 +20,12 @@ import os                as os
 import pandas             as pd
 
 
-# In[2]:
+# In[ ]:
 
 
 # %load solutions/data_url.py
 total_frames = 45*2
-os.system("rm -v ./sat_wv_temp_files/*")
+os.system("rm -v ./sat_vis_temp_files/*")
 
 
 # Cell content replaced by load magic replacement.
@@ -33,7 +33,7 @@ os.system("rm -v ./sat_wv_temp_files/*")
 # Create variables for URL generation
 image_date = datetime.utcnow().date()
 region = 'CONUS'
-channel = 8
+channel = 2
 
 # We want to match something like:
 # https://thredds-test.unidata.ucar.edu/thredds/catalog/satellite/goes16/GOES16/Mesoscale-1/Channel08/20181113/catalog.html
@@ -46,25 +46,25 @@ data_url = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/produc
 print(data_url)
 
 
-# In[3]:
+# In[ ]:
 
 
 cat = TDSCatalog(data_url)
 
 
-# In[4]:
+# In[ ]:
 
 
 cat.datasets[1:total_frames]
 
 
-# In[5]:
+# In[ ]:
 
 
 len(cat.datasets[1:total_frames])
 
 
-# In[6]:
+# In[ ]:
 
 
 for i in range(1,len(cat.datasets[1:total_frames])+1,2) : 
@@ -92,7 +92,7 @@ for i in range(1,len(cat.datasets[1:total_frames])+1,2) :
     fig = plt.figure(figsize=(13, 8),
                            facecolor = 'white')
 
-    plt.suptitle("GOES 16 Band 8 [6.2 µm Upper-level Water Vapor]",
+    plt.suptitle("GOES 16 Band 2 [0.64 µm Visble Red]",
                     fontsize=20)
     ax = fig.add_subplot(1, 1, 1, projection=proj)
     ax.set_title(valid_time + "  (" + local_time+")",
@@ -101,13 +101,12 @@ for i in range(1,len(cat.datasets[1:total_frames])+1,2) :
     ax.add_feature(cfeature.STATES.with_scale('50m'), linestyle=':', edgecolor='black')
     ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=2, edgecolor='black')
 
-    im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper')
+    im = ax.imshow(np.sqrt(dat), extent=(x.min(), x.max(), y.min(), y.max()), origin='upper',cmap='Greys_r')
 
-    wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 195, 265)
-    im.set_cmap(wv_cmap)
-    im.set_norm(wv_norm)
+    #wv_cmap = colortables.get_colortable('WVCIMSS_r')
+    #im.set_cmap(wv_cmap)
     plt.tight_layout()
-    plt.savefig("./sat_wv_temp_files/Sat_WV_Loop_Image_"+file_time+".png")
+    plt.savefig("./sat_vis_temp_files/Sat_VIS_Loop_Image_"+file_time+".png")
     plt.close()
     
 
@@ -121,9 +120,9 @@ for i in range(1,len(cat.datasets[1:total_frames])+1,2) :
 #
 
 os.system("convert -delay 15 " + 
-          "./sat_wv_temp_files/Sat_WV_Loop_Image_*.png"  + 
+          "./sat_vis_temp_files/Sat_VIS_Loop_Image_*.png"  + 
           " " + 
-          "./graphics_files/RealTime_SAT_WV_Loop.gif")
+          "./graphics_files/RealTime_SAT_VIS_Loop.gif")
 
 
 #

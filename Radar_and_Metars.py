@@ -344,7 +344,8 @@ def make_radar_station_map(ds):
     plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
                 fontsize=20)
 
-    ax.set_title(valid_time + "  (" + local_time+")")
+    ax.set_title(valid_time + "  (" + local_time+")",
+                    fontsize=15)
 
 
     ax.set_extent([geospatial_lon_min, 
