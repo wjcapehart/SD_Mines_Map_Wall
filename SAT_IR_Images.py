@@ -3,7 +3,7 @@
 
 # # Infrared
 
-# In[ ]:
+# In[1]:
 
 
 ##################################################
@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 ##################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ##################################################
@@ -75,7 +75,7 @@ print(data_url)
 ##################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ##################################################
@@ -89,7 +89,7 @@ cat = TDSCatalog(data_url)
 ##################################################
 
 
-# In[ ]:
+# In[4]:
 
 
 ##################################################
@@ -117,7 +117,7 @@ file_names_to_use.sort()
 ##################################################    
 
 
-# In[ ]:
+# In[5]:
 
 
 ##################################################
@@ -135,7 +135,7 @@ for filename in files_on_hand:
 ##################################################    
 
 
-# In[ ]:
+# In[10]:
 
 
 ##################################################
@@ -181,13 +181,18 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
         ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=2, edgecolor='black')
+        
 
+        print("range dat = ",np.nanmin(dat.values),np.nanmax(dat.values))
         im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper')
 
-        wv_cmap = colortables.get_colortable('WVCIMSS_r')
+        wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
         im.set_cmap(wv_cmap)
-        plt.tight_layout()
+        im.set_norm(wv_norm)
 
+        
+        plt.tight_layout()
+        
         plt.savefig( dataset_png_file_name)
         plt.close()
     else:
@@ -215,10 +220,4 @@ os.system("convert -delay 15 " +
 
 #
 ##################################################
-
-
-# In[ ]:
-
-
-
 
