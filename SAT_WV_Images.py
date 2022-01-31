@@ -47,7 +47,7 @@ total_frames = 45*2
 
 png_processing_directory = "./temp_files_sat_wv/"
 
-gif_file_name = "./graphics_files/RealTime_SAT_IR_Loop.gif"
+gif_file_name = "./graphics_files/RealTime_SAT_WV_Loop.gif"
 
 image_header_label = "GOES 16 Band 8 [6.2 µm Upper-level Water Vapor]"
 
