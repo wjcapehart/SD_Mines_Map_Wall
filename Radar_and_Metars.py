@@ -81,7 +81,7 @@ print(time_start)
 print(time_now)
 
 
-metar_time_spread = 45
+metar_time_spread = 59
 
 siphon_time_series       = pd.date_range(time_start- timedelta(hours=1), time_now,freq='H')
 siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
@@ -249,58 +249,112 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 ####################################################
 ####################################################
 #
-# Radar Plotting Function
+# Retrieve Radar Data
 #
 
+ds  = get_radarserver_datasets('http://thredds.ucar.edu/thredds/')
+url = ds['NEXRAD Level III Radar from IDD'].follow().catalog_url
+rs  = RadarServer(url)
 
-def make_radar_station_map(ds):
+query = rs.query()
+
+query.stations(radar_id).time_range(time_start,
+                                    time_now).variables('N0Q')
+
+rs.validate_query(query)
+
+catalog = rs.get_catalog(query)
+
+datasets_sorted = sorted(catalog.datasets)
+
+list(datasets_sorted)
+
+figure_counter    = 1
+number_of_figures = len(sorted(catalog.datasets))
+
+
+
+for name in datasets_sorted:
+    ds = catalog.datasets[name]
+    print(ds)
+    
+#
+####################################################
+####################################################
+####################################################
+
+
+# In[7]:
+
+
+####################################################
+####################################################
+####################################################
+#
+# Create Individual Map Files
+#
+
+counter = 0
+
+
+figure_counter = 1
+number_of_figures = len(sorted(catalog.datasets))
+for name in sorted(catalog.datasets):
+    percent_done = figure_counter / number_of_figures
+    ds = catalog.datasets[name]
+    print(ds)
+    print(percent_done)
+    fig, ax = plt.subplots(1, 1, 
+                           figsize=(9, 8),
+                           facecolor = 'white')
     
     radar    = Dataset(ds.access_urls['CdmRemote'])
-
 
     rng      = radar.variables['gate'][:] 
     az       = radar.variables['azimuth'][:]
     ref      = radar.variables['BaseReflectivityDR'][:]
     time_utc = datetime.strptime(radar.time_coverage_start, "%Y-%m-%dT%H:%M:%SZ")
 
-    time_utc_p = time_utc + timedelta(minutes=metar_time_spread/2)
-    time_utc_m = time_utc - timedelta(minutes=metar_time_spread/2)
     
+    metar_dataframe['staleness']     = (time_utc-metar_dataframe['date_time'])/ np.timedelta64(1, 'm')
+    metar_dataframe['abs_staleness'] =  np.abs( metar_dataframe['staleness'] )
     
-    
-    metar_dataframe['staleness'] = (time_utc-metar_dataframe['date_time'])/ np.timedelta64(1, 'm')
+    local_metars = metar_dataframe[(metar_dataframe['abs_staleness'] < metar_time_spread/2) ].copy()
+    mystations   = local_metars["ICAO_id"].unique()
 
-    
-    local_metars = metar_dataframe[(metar_dataframe['date_time'] > time_utc_m) &
-                                   (metar_dataframe['date_time'] < time_utc_p) ].copy()
-    
-    
-    alpha_array = (np.abs(local_metars['staleness'])/metar_time_spread*2).to_numpy()
+    first = True
+
+    for mystation in mystations:
+        deleteme  = local_metars[local_metars["ICAO_id"] == mystation].copy().sort_values("abs_staleness")
+        deleteme2 = deleteme[deleteme["abs_staleness"]   == np.min(deleteme["abs_staleness"]) ]
+        if (first) :
+            first = False
+            recent_local_metars = deleteme2
+        else:
+            recent_local_metars = pd.concat([recent_local_metars,deleteme2])
+
+        del deleteme2
+        del deleteme
+
+    del local_metars
+    del mystations
+
+    recent_local_metars = recent_local_metars.sort_values(["abs_staleness"],ascending=False).reset_index()
+
+    alpha_array = 1-(np.abs(recent_local_metars['abs_staleness'])/metar_time_spread*2).to_numpy()
     alpha_array[ alpha_array<0] = 0
     alpha_array[ alpha_array>1] = 1
 
-
-    
-    
-    local_metars['alpha'] = alpha_array
-
-
-    local_metars = local_metars.sort_values("alpha").reset_index()
-    
-    
+    recent_local_metars['alpha'] = alpha_array
 
     valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H:%M:%S %Z")
     local_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H:%M:%S %Z")
 
     print(valid_time + "  (" + local_time+")")
 
-
     x   = rng * np.sin(np.deg2rad(az))[:, None]
     y   = rng * np.cos(np.deg2rad(az))[:, None]
     ref = np.ma.array(ref, mask=np.isnan(ref))
-
-
-
 
     RadarLatitude      = radar.RadarLatitude
     RadarLongitude     = radar.RadarLongitude
@@ -312,25 +366,10 @@ def make_radar_station_map(ds):
     #
     ###################################
 
-
-
-
- 
-
-
-    #
-    ###################################
-
-
     ###################################
     #
     # Render Image
     #
-
-    # fig, ax = plt.subplots(1, 1, figsize=(9, 8))
-    
-
-
     
     ax = plt.subplot(111, 
                      projection=ccrs.Stereographic(central_latitude    = RadarLatitude, 
@@ -345,7 +384,6 @@ def make_radar_station_map(ds):
 
     ax.set_title(valid_time + "  (" + local_time+")",
                     fontsize=15, color="black")
-
 
     ax.set_extent([geospatial_lon_min, 
                    geospatial_lon_max, 
@@ -375,13 +413,12 @@ def make_radar_station_map(ds):
     cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
     plt.setp(cbytick_obj, color='black')
 
-    
-
-
     # Metar Plots
-    print("number of obs",len(local_metars))
-    for i in range(0,len(local_metars)) :
-        single_row = local_metars.loc[i]
+        
+    print("number of obs",len(recent_local_metars))
+    
+    for i in range(0,len(recent_local_metars)) :
+        single_row = recent_local_metars.loc[i]
     
         stationplot = StationPlot(ax, 
                                   single_row['longitude'], 
@@ -418,92 +455,11 @@ def make_radar_station_map(ds):
                              color='black')
         
         del single_row
-        
-    del local_metars
+            
+    del recent_local_metars 
 
     plt.tight_layout()
-
-    #
-    ###################################
-
-
-#
-####################################################
-####################################################
-####################################################
-
-
-# In[7]:
-
-
-####################################################
-####################################################
-####################################################
-#
-# Retrieve Radar Data
-#
-
-ds  = get_radarserver_datasets('http://thredds.ucar.edu/thredds/')
-url = ds['NEXRAD Level III Radar from IDD'].follow().catalog_url
-rs  = RadarServer(url)
-
-query = rs.query()
-
-query.stations(radar_id).time_range(time_start,
-                                    time_now).variables('N0Q')
-
-rs.validate_query(query)
-
-catalog = rs.get_catalog(query)
-
-datasets_sorted = sorted(catalog.datasets)
-
-list(datasets_sorted)
-
-figure_counter    = 1
-number_of_figures = len(sorted(catalog.datasets))
-
-
-
-for name in datasets_sorted:
-    ds = catalog.datasets[name]
-    print(ds)
     
-#
-####################################################
-####################################################
-####################################################
-
-
-# In[8]:
-
-
-####################################################
-####################################################
-####################################################
-#
-# Create Individual Map Files
-#
-
-counter = 0
-
-
-figure_counter = 1
-number_of_figures = len(sorted(catalog.datasets))
-for name in sorted(catalog.datasets):
-    percent_done = figure_counter / number_of_figures
-    ds = catalog.datasets[name]
-    print(ds)
-    print(percent_done)
-    fig, ax = plt.subplots(1, 1, 
-                           figsize=(9, 8),
-                           facecolor = 'white')
-    
-
-
-
-    
-    make_radar_station_map(ds)
     plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
     counter = counter + 1
     figure_counter = figure_counter + 1
@@ -518,7 +474,7 @@ for name in sorted(catalog.datasets):
 ####################################################
 
 
-# In[9]:
+# In[8]:
 
 
 ##################################################
