@@ -21,7 +21,8 @@ sat_vis_files/*.png
 temp_files_sat_wv/*.png
 temp_files_sat_ir/*.png
 temp_files_sat_vis/*.png
-
+temp_files_sat_ir_meso1/*.png
+temp_files_sat_ir_meso2/*.png
 
 .DS_Store
 
@@ -137,3 +138,4 @@ dmypy.json
 *.png
 .DS_Store
 .DS_Store
+dreamweaver/mapwall_test.html

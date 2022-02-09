@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Infrared CONUS
+# ### Infrared Meso 2
 
 # In[ ]:
 
@@ -45,18 +45,18 @@ import matplotlib.pyplot as plt
 
 total_frames = 45*2
 
-png_processing_directory = "./temp_files_sat_ir/"
+png_processing_directory = "./temp_files_sat_ir_meso2/"
 
-gif_file_name = "./graphics_files/RealTime_SAT_IR_Loop.gif"
+gif_file_name = "./graphics_files/RealTime_SAT_IR_Meso2_Loop.gif"
 
-image_header_label = "GOES 16 Band 13 [10.3 µm Clean Longwave IR Window]"
+image_header_label = "GOES 16 Meso-2 Band 13 [10.3 µm Clean LW IR Window]"
 
 # Cell content replaced by load magic replacement.
 
 # Create variables for URL generation
 
 image_date = datetime.utcnow().date()
-region = 'CONUS'
+region = 'Mesoscale-2'
 channel = 13
 
 # We want to match something like:
@@ -170,7 +170,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
 
 
-        fig = plt.figure(figsize=(13, 8), facecolor = 'white')
+        fig = plt.figure(figsize=(8, 8), facecolor = 'white')
 
         plt.suptitle(image_header_label,
                      fontsize = 20, 
@@ -220,4 +220,10 @@ os.system("convert -delay 15 " +
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
 
