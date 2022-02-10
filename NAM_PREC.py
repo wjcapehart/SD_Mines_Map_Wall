@@ -355,6 +355,7 @@ for i in range(len(times_utc)) :
                                                 levels    = contourf_levels,
                                                 cbar_kwargs = {"label"       : "3-Hourly Precip (in)",
                                                                "orientation" : "horizontal",
+                                                               "pad"         :0.01,
                                                                "shrink"      :0.75,
                                                                "aspect"      :30})    
 
