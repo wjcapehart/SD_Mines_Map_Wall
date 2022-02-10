@@ -279,6 +279,8 @@ thickness.attrs["long_name"] = "1000-500 hPa Thickness"
 thickness.attrs["units"]     = "dam"
 
 
+display(mslp.dims)
+display(thickness.dims)
 
 
 #
@@ -352,7 +354,6 @@ for i in range(len(times_utc)) :
                                                    extend      = 'both',
                                                    levels      = contourf_levels,
                                                    cbar_kwargs = {"orientation" : "horizontal",
-                                                                  "pad"         : 0.01,
                                                                   "shrink"      : 0.75,
                                                                   "aspect"      :   30})    
 
