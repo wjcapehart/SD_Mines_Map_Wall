@@ -279,8 +279,6 @@ thickness.attrs["long_name"] = "1000-500 hPa Thickness"
 thickness.attrs["units"]     = "dam"
 
 
-display(mslp.dims)
-display(thickness.dims)
 
 
 #
