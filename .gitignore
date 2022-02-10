@@ -23,6 +23,9 @@ temp_files_sat_ir/*.png
 temp_files_sat_vis/*.png
 temp_files_sat_ir_meso1/*.png
 temp_files_sat_ir_meso2/*.png
+temp_files_nam500/*.png
+temp_files_namsfc/*.png
+temp_files_namprec/*.png
 
 .DS_Store
 
