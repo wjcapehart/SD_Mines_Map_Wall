@@ -326,9 +326,9 @@ for i in range(len(times_utc)) :
                                                       extend   = 'both',
                                                       levels    = contourf_levels,
                                                       cbar_kwargs = {"orientation" : "horizontal",
-                                                                    "pad":0.01,
-                                                                    "shrink":0.75,
-                                                                    "aspect":30})    
+                                                                  "pad"         : 0.01,
+                                                                  "shrink"      : 0.75,
+                                                                  "aspect"      :   25})    
 
 
     contour_levels = np.arange(480,612, 6)
