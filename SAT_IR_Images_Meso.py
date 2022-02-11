@@ -224,6 +224,9 @@ os.system("convert -delay 15 " +
           " " + 
           gif_file_name1)
 
+print("completed "+ gif_file_name1)
+
+
 #
 ##################################################
 
@@ -443,6 +446,9 @@ os.system("convert -delay 15 " +
           " " + 
           gif_file_name2)
 
+print("completed "+ gif_file_name2)
+
+
 #
 ##################################################
 
@@ -465,7 +471,7 @@ os.system("convert -delay 15 " +
 
 
 
-# In[ ]:
+# In[1]:
 
 
 ##################################################
@@ -480,7 +486,9 @@ big_string = " ".join(file_names_to_use_meso12)
 os.system("convert -delay 15 " + 
           big_string + 
           " " + 
-          gif_file_name)
+          gif_file_name12)
+
+print("completed "+gif_file_name12)
 
 #
 ##################################################
