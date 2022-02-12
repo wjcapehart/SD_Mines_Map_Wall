@@ -170,7 +170,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
 
 
-        fig = plt.figure(figsize=(13, 8), facecolor = 'white')
+        fig = plt.figure(figsize=(12.25, 8), facecolor = 'white')
 
         plt.suptitle(image_header_label,
                      fontsize = 20, 
@@ -187,8 +187,14 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 195, 265)
         im.set_cmap(wv_cmap)
         im.set_norm(wv_norm)
-        plt.tight_layout()
-
+        
+        #. plt.tight_layout()
+        plt.subplots_adjust(left   = 0.01, 
+                            right  = 0.99, 
+                            top    = 0.91, 
+                            bottom = 0, 
+                            wspace = 0)
+ 
         plt.savefig( dataset_png_file_name)
         plt.close()
     else:

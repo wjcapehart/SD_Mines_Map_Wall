@@ -5,7 +5,7 @@
 # 
 # Creates an Animated Plot for Radar and Station Models
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -62,7 +62,7 @@ import airportsdata as airpt
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ####################################################
@@ -116,7 +116,7 @@ norm, cmap = colortables.get_with_steps("NWSStormClearReflectivity",
 ####################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -143,13 +143,13 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 ####################################################
 
 
-# In[4]:
+# In[ ]:
 
 
 tz
 
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -242,7 +242,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 ####################################################
 
 
-# In[6]:
+# In[ ]:
 
 
 ####################################################
@@ -284,7 +284,7 @@ for name in datasets_sorted:
 ####################################################
 
 
-# In[7]:
+# In[ ]:
 
 
 ####################################################
@@ -458,8 +458,15 @@ for name in sorted(catalog.datasets):
             
     del recent_local_metars 
 
-    plt.tight_layout()
-    
+        
+    #. plt.tight_layout()
+    plt.subplots_adjust(left   = 0.01, 
+                            right  = 0.99, 
+                            top    = 0.91, 
+                            bottom = .01, 
+                            wspace = 0)
+ 
+     
     plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
     counter = counter + 1
     figure_counter = figure_counter + 1
@@ -474,7 +481,7 @@ for name in sorted(catalog.datasets):
 ####################################################
 
 
-# In[8]:
+# In[ ]:
 
 
 ##################################################

@@ -3,7 +3,7 @@
 
 # # Visible
 
-# In[1]:
+# In[ ]:
 
 
 ##################################################
@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 ##################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ##################################################
@@ -49,7 +49,7 @@ png_processing_directory = "./temp_files_sat_vis/"
 
 gif_file_name = "./graphics_files/RealTime_SAT_VIS_Loop.gif"
 
-image_header_label = "GOES 16 Band 2 [0.64 µm Visble Red]"
+image_header_label = "GOES 16 Band 2 [0.64 µm Visible Red]"
 
 # Cell content replaced by load magic replacement.
 
@@ -75,7 +75,7 @@ print(data_url)
 ##################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ##################################################
@@ -89,7 +89,7 @@ cat = TDSCatalog(data_url)
 ##################################################
 
 
-# In[4]:
+# In[ ]:
 
 
 ##################################################
@@ -116,7 +116,7 @@ file_names_to_use.sort()
 ##################################################    
 
 
-# In[5]:
+# In[ ]:
 
 
 ##################################################
@@ -135,7 +135,7 @@ for filename in files_on_hand:
 ##################################################    
 
 
-# In[6]:
+# In[ ]:
 
 
 ##################################################
@@ -170,7 +170,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
 
 
-        fig = plt.figure(figsize=(13, 8), facecolor = 'white')
+        fig = plt.figure(figsize=(12.25, 8), facecolor = 'white')
 
         plt.suptitle(image_header_label,
                      fontsize = 20, 
@@ -188,8 +188,15 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
         #wv_cmap = colortables.get_colortable('WVCIMSS_r')
         #im.set_cmap(wv_cmap)
-        plt.tight_layout()
-
+        
+        #. plt.tight_layout()
+        plt.subplots_adjust(left   = 0.01, 
+                            right  = 0.99, 
+                            top    = 0.91, 
+                            bottom = 0, 
+                            wspace = 0)
+ 
+ 
         plt.savefig( dataset_png_file_name)
         plt.close()
     else:
