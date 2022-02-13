@@ -399,9 +399,7 @@ for i in range(len(times_utc)) :
     fig = plt.figure(figsize   = (9*3, 8), 
                      facecolor = 'white')
     
-    plt.suptitle(plot_label,
-                 fontsize = 20, 
-                 color    = "black")
+
 
 
 
@@ -432,7 +430,7 @@ for i in range(len(times_utc)) :
                                                        ax = ax1,
                                                        extend   = 'both',
                                                        levels    = contourf_levels,
-                                                       cbar_kwargs = {"label"       : r"Relative Vorticity [10$^{-5}$ s$^{-1}$]",
+                                                       cbar_kwargs = {"label"       : "",
                                                                        "orientation" : "horizontal",
                                                                        "pad"         : colorbar_pad,
                                                                        "shrink"      : colorbar_shrink,
@@ -446,28 +444,27 @@ for i in range(len(times_utc)) :
 
     ax1.clabel(contour_plot)
     
-
-
-     
-    ax1.set_title(time_label,
-                  zorder                =           99998,
-                  fontsize              =              15, 
-                  color                 =         "black",
-                  bbox = dict(facecolor =         'white', 
-                              edgecolor =         "white"))
-
-
-    ax1.annotate("    500-hPa Isobaric Heights [dam]    \n    500-hPa Relative Vorticity    ", 
-                 [0.5,0.987], 
+    ax1.annotate(r"500-hPa Relative Vorticity [10$^{-5}$ s$^{-1}$]", 
+                 [0.5,-0.1], 
                  xycoords              = "axes fraction", 
                  fontsize              =              15, 
                  verticalalignment     =           "top",
                  horizontalalignment   =        "center",
                  backgroundcolor       =         "white",
                  zorder                =           99999,
-                 bbox = dict(facecolor =         'white', 
-                             edgecolor =         "white"))
-    
+                 bbox = dict(facecolor ='white',edgecolor ="white"))
+
+    ax1.annotate("(Contours are 500-hPa Isobaric Heights [dam])", 
+                 [0.5,-0.15], 
+                 xycoords              = "axes fraction", 
+                 fontsize              =              14, 
+                 verticalalignment     =           "top",
+                 horizontalalignment   =        "center",
+                 backgroundcolor       =         "white",
+                 zorder                =           99999,
+                 bbox = dict(facecolor ='white',edgecolor ="white"))
+
+
     #############################################################
     
     ax2 = fig.add_subplot(    1,     3,     2, 
@@ -491,24 +488,20 @@ for i in range(len(times_utc)) :
                                                    ax=ax2,
                                                    extend      = 'both',
                                                    levels      = contourf_levels,
-                                                   cbar_kwargs = {"label"       : "1000-500-hPa Thickness [dam]",
-                                                                   "orientation" : "horizontal",
-                                                                   "pad"         : colorbar_pad, 
-                                                                   "shrink"      : colorbar_shrink,
-                                                                   "aspect"      :   colorbar_aspect})    
+                                                   cbar_kwargs = {"label"       : "","orientation" : "horizontal","pad"         : colorbar_pad,"shrink"      : colorbar_shrink,"aspect"      :   colorbar_aspect})    
 
 
 
     contour_plot2 = thickness[i,:,:].plot.contour(colors     =        "white",
-                                                   ax=ax2,
-                                            linewidths =           2.5, 
-                                            levels     = np.array([540]))
+                                                  ax=ax2,
+                                                  linewidths =           2.5,
+                                                  levels     = np.array([540]))
 
 
     contour_plot3 = thickness[i,:,:].plot.contour(colors     =        "white",
-                                                   ax=ax2,
-                                            linewidths =           0.75, 
-                                            levels     = contourf_levels)
+                                                  ax=ax2,
+                                                  linewidths =           0.75, 
+                                                  levels     = contourf_levels)
 
 
         
@@ -537,27 +530,25 @@ for i in range(len(times_utc)) :
     plot_maxmin_points(lon2d, lat2d, smoothed, 'max', 50, symbol='H', color='k',  transform=ccrs.PlateCarree())
     plot_maxmin_points(lon2d, lat2d, smoothed, 'min', 25, symbol='L', color='k', transform=ccrs.PlateCarree())
 
-    ax2.annotate("    Mean Sea-Level Pressure [hPa]    \n    1000-500-hPa Thickness [dam]    ", 
-                 [0.5,0.987], 
+    ax2.annotate("Color: 1000-500-hPa Thickness [dam]", 
+                 [0.5,-0.1], 
                  xycoords              = "axes fraction", 
                  fontsize              =              15, 
                  verticalalignment     =           "top",
                  horizontalalignment   =        "center",
                  backgroundcolor       =         "white",
                  zorder                =           99999,
-                 bbox = dict(facecolor =         'white', 
-                             edgecolor =         "white"))
+                 bbox = dict(facecolor =         'white', edgecolor =         "white"))
 
-
-     
-    ax2.set_title(time_label,
-                  zorder                =           99998,
-                  fontsize              =              15, 
-                  color                 =         "black",
-                  bbox = dict(facecolor =         'white', 
-                              edgecolor =         "white"))
-
-
+    ax2.annotate("(Contours are Mean Sea-Level Pressure [hPa])", 
+                 [0.5,-0.15], 
+                 xycoords              = "axes fraction", 
+                 fontsize              =              14, 
+                 verticalalignment     =           "top",
+                 horizontalalignment   =        "center",
+                 backgroundcolor       =         "white",
+                 zorder                =           99999,
+                 bbox = dict(facecolor =         'white', edgecolor =         "white"))
 
     #############################################################
     
@@ -586,12 +577,7 @@ for i in range(len(times_utc)) :
                                                      extend   = 'max',
                                                      norm      = rain_norm,
                                                      levels    = contourf_levels,
-                                                     cbar_kwargs = {"label"        : "3-Hourly Precip [in]",
-                                                                     "orientation" : "horizontal",
-                                                                     "pad"         : colorbar_pad,
-                                                                     "ticks"       : contourf_levels,
-                                                                     "shrink"      : colorbar_shrink,
-                                                                     "aspect"      :   colorbar_aspect})    
+                                                     cbar_kwargs = {"label"        : " ", "orientation" : "horizontal","pad"         : colorbar_pad,"ticks"       : contourf_levels,"shrink"      : colorbar_shrink,"aspect"      :   colorbar_aspect})    
 
 
     contour_plot2 = precip[prec_i,:,:].plot.contour(colors     =            "cyan",
@@ -611,24 +597,27 @@ for i in range(len(times_utc)) :
         
     ax3.clabel(contour_plot3, fontsize="xx-large")
  
-     
-    ax3.set_title(time_labelp,
-                  zorder                =           99998,
-                  fontsize              =              15, 
-                  color                 =         "black",
-                  bbox = dict(facecolor =         'white', 
-                              edgecolor =         "white"))
     
-    ax3.annotate("    3-hrly Precip [in]    \n    540-hPa 1000-500-hPa Thickness [dam]    ", 
-                 [0.5,0.987], 
+    ax3.annotate("3-hrly Precip [in]", 
+                 [0.5,-0.1], 
                  xycoords              = "axes fraction", 
                  fontsize              =              15, 
                  verticalalignment     =           "top",
                  horizontalalignment   =        "center",
                  zorder                =           99999,
                  backgroundcolor       =         "white",
-                 bbox = dict(facecolor =         'white', 
-                             edgecolor =         "white"))
+                 bbox = dict(facecolor =         'white', edgecolor =         "white"))
+
+    ax3.annotate("(540-hPa 1000-500-hPa Thickness [dam] contour aslo shown)", 
+                 [0.5,-0.15], 
+                 xycoords              = "axes fraction", 
+                 fontsize              =              14, 
+                 verticalalignment     =           "top",
+                 horizontalalignment   =        "center",
+                 zorder                =           99999,
+                 backgroundcolor       =         "white",
+                 bbox = dict(facecolor =         'white', edgecolor =         "white"))
+
 
 
     #############################################################
@@ -638,12 +627,74 @@ for i in range(len(times_utc)) :
                         top=0.91, 
                         bottom=0, 
                         wspace=0)
+    
+    #plt.suptitle(plot_label,
+    #             fontsize = 20, 
+    #             color    = "black")
             
+    ax1.annotate( "NOAA-NCEP North American Model Forecast", 
+                 [0.5,1.1], 
+                 xycoords              = "axes fraction", 
+                 fontsize              =              20, 
+                 verticalalignment     =           "top",
+                 horizontalalignment   =        "center",
+                 zorder                =           99999,
+                 bbox = dict(facecolor =         'white', edgecolor =         "white"))
+
+    ax2.annotate( "NOAA-NCEP North American Model Forecast", 
+                 [0.5,1.1], 
+                 xycoords              = "axes fraction", 
+                 fontsize              =              20, 
+                 verticalalignment     =           "top",
+                 horizontalalignment   =        "center",
+                 zorder                =           99999,
+                 bbox = dict(facecolor =         'white', edgecolor =         "white"))
+
+    ax3.annotate( "NOAA-NCEP North American Model Forecast", 
+                 [0.5,1.1], 
+                 xycoords              = "axes fraction", 
+                 fontsize              =              20, 
+                 verticalalignment     =           "top",
+                 horizontalalignment   =        "center",
+                 zorder                =           99999,
+                 bbox = dict(facecolor =         'white', edgecolor =         "white"))
+
+
+    ax1.annotate(time_label,[0.5,1.05],
+                 xycoords              = "axes fraction", 
+                  verticalalignment     =           "top",
+                  horizontalalignment   =        "center",
+                  zorder                =           99999,
+                  fontsize              =              15, 
+                  color                 =         "black",
+                  bbox = dict(facecolor =         'white', edgecolor =         "white"))
+
+
+    ax2.annotate(time_label,[0.5,1.05],
+                 xycoords              = "axes fraction", 
+                  verticalalignment     =           "top",
+                  horizontalalignment   =        "center",
+                  zorder                =           99999,
+                  fontsize              =              15, 
+                  color                 =         "black",
+                  bbox = dict(facecolor =         'white', edgecolor =         "white"))
+
+
+    
+    ax3.annotate(time_labelp,[0.5,1.05],
+                 xycoords              = "axes fraction", 
+                  verticalalignment     =           "top",
+                  horizontalalignment   =        "center",
+                  zorder                =           99999,
+                  fontsize              =              15, 
+                  color                 =         "black",
+                  bbox = dict(facecolor =         'white', edgecolor =         "white"))
+
 
     
     plt.savefig(png_file_root + str(i).zfill(2) + ".png")
 
-    plt.close()
+    plt.show()
 
     
     
