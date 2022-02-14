@@ -43,7 +43,7 @@ import matplotlib.pyplot as plt
 
 # %load solutions/data_url.py
 
-total_frames = 45*2
+total_frames = int(45*2 * 0.8)
 
 png_processing_directory = "./temp_files_sat_ir_meso1/"
 
@@ -220,7 +220,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso1)
 
-os.system("convert -delay 15 " + 
+os.system("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name1)
@@ -266,7 +266,8 @@ print("completed "+ gif_file_name1)
 
 # %load solutions/data_url.py
 
-total_frames = 45*2
+total_frames = int(45*2 * 0.8)
+
 
 png_processing_directory = "./temp_files_sat_ir_meso2/"
 
@@ -335,6 +336,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
         
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
+
 
 file_names_to_retain.sort()
 file_names_to_use.sort()
@@ -507,7 +509,8 @@ print("completed "+ gif_file_name2)
 
 # %load solutions/data_url.py
 
-total_frames = 45*2
+total_frames = int(45*2 * 0.8)
+
 
 png_processing_directory = "./temp_files_sat_ir_sodak/"
 
@@ -577,6 +580,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
         
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
+
 
 file_names_to_retain.sort()
 file_names_to_use.sort()
@@ -726,7 +730,7 @@ file_names_to_use_meso12 = file_names_to_use_meso3 + file_names_to_use_meso1 + f
 
 big_string = " ".join(file_names_to_use_meso12)
 
-os.system("convert -delay 15 " + 
+os.system("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name12)
@@ -735,6 +739,36 @@ print("completed "+gif_file_name12)
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

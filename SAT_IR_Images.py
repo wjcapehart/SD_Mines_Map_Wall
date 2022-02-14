@@ -220,7 +220,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use)
 
-os.system("convert -delay 15 " + 
+os.system("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name)
