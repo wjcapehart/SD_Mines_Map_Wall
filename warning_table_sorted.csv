@@ -1,0 +1,106 @@
+s,phen,sig,color,hdln
+AS.O,AS,O,gray,Air Stagnation Outlook
+BH.S,BH,S,turquoise,Beach Hazards Statement
+CF.S,CF,S,olivedrab,Coastal Flood Statement
+FF.S,FF,S,yellowgreen,Flash Flood Statement
+HY.S,FL,S,#00ff7f,Hydrological Statement
+FL.S,FL,S,#00ff7f,Flood Statement
+HU.S,HU,S,yellow,Hurricane Statement
+LS.S,LS,S,lawngreen,Lakeshore Flood Statement
+MA.S,MA,S,peachpuff,Special Marine Statement
+RP.S,RP,S,turquoise,High Rip Current Risk
+SV.S,SV,S,aqua,Severe Weather Statement
+AF.Y,AF,Y,gray,Ashfall Advisory
+AQ.Y,AQ,Y,gray,Air Quality Alert
+AS.Y,AS,Y,gray,Air Stagnation Advisory
+BW.Y,BW,Y,thistle,Brisk Wind Advisory
+CF.Y,CF,Y,lawngreen,Coastal Flood Advisory
+DU.Y,DU,Y,darkkhaki,Blowing Dust Advisory
+FA.Y,FA,Y,seagreen,Areal Flood Advisory
+FG.Y,FG,Y,slategray,Dense Fog Advisory
+FL.Y,FL,Y,#00ff7f,Flood Advisory
+FR.Y,FR,Y,cornflowerblue,Frost Advisory
+HT.Y,HT,Y,#ff7f4e,Heat Advisory
+LE.Y,LE,Y,MediumTurquoise,Lake Effect Snow Advisory
+LO.Y,LO,Y,maroon,Low Water Advisory
+LS.Y,LS,Y,lawngreen,Lakeshore Flood Advisory
+LW.Y,LW,Y,tan,Lake Wind Advisory
+MF.Y,MF,Y,slategray,Dense Fog Advisory
+MH.Y,MH,Y,dimgray,Ashfall Advisory
+MS.Y,MS,Y,khaki,Dense Smoke Advisory
+RB.Y,RB,Y,thistle,Small Craft Advisory for rough bar
+SC.Y,SC,Y,thistle,Small Craft Advisory
+SI.Y,SI,Y,thistle,Small Craft Advisory for winds
+SM.Y,SM,Y,khaki,Dense Smoke Advisory
+SU.Y,SU,Y,mediumorchid,High Surf Advisory
+SW.Y,SW,Y,thistle,Small Craft Advisory for hazardous seas
+TS.Y,TS,Y,chocolate,Tsunami Advisory
+UP.Y,UP,Y,#00C0FF,Freezing Spray Advisory
+WC.Y,WC,Y,paleturquoise,Wind Chill Advisory
+WI.Y,WI,Y,tan,Wind Advisory
+WW.Y,WW,Y,#7b68ee,Winter Weather Advisory
+ZF.Y,ZF,Y,teal,Freezing Fog Advisory
+ZR.Y,ZR,Y,orchid,Freezing Rain Advisory
+CF.A,CF,A,mediumaquamarine,Coastal Flood Watch
+MA.A,MA,A,peachpuff,Special Marine Advisory
+GL.A,GL,A,pink,Gale Watch
+FZ.A,FZ,A,royalblue,Freeze Watch
+HW.A,HW,A,darkgoldenrod,High Wind Watch
+HZ.A,HZ,A,royalblue,Hard Freeze Watch
+LE.A,LE,A,LightSkyBlue,Lake Effect Snow Watch
+SE.A,SE,A,darkslateblue,Hazardous Seas Watch
+UP.A,UP,A,RosyBrown,Heavy Freezing Spray Watch
+WC.A,WC,A,cadetblue,Wind Chill Watch
+WS.A,WS,A,#4682b4,Winter Storm Watch
+LS.A,LS,A,MediumAquaMarine,Lakeshore Flood Watch
+FA.A,FA,A,seagreen,Flood Watch
+FL.A,FL,A,seagreen,Flood Watch
+FF.A,FF,A,limegreen,Flash Flood Watch
+FW.A,FW,A,navajowhite,Fire Weather Watch
+EH.A,EH,A,maroon,Excessive Heat Watch
+EC.A,EC,A,blue,Extreme Cold Watch
+SR.A,SR,A,violet,Storm Watch
+BZ.A,BZ,A,greenyellow,Blizzard Watch
+SV.A,SV,A,palevioletred,Severe Thunderstorm Watch
+TY.A,TY,A,fuchsia,Typhoon Watch
+TS.A,TS,A,fuchsia,Tsunami Watch
+TR.A,TR,A,#f08080,Tropical Storm Watch
+SS.A,SS,A,#DB7FF7,Storm Surge Watch
+HF.A,HF,A,darkorchid,Hurricane Force Wind Watch
+HU.A,HU,A,#ff00ff,Hurricane Watch
+TO.A,TO,A,yellow,Tornado Watch
+AF.W,AF,W,gray,Ashfall Warning
+BZ.W,BZ,W,orangered,Blizzard Warning
+MH.W,MH,W,darkgray,Ashfall Warning
+DS.W,DS,W,bisque,Dust Storm Warning
+EC.W,EC,W,blue,Extreme Cold Warning
+EH.W,EH,W,mediumvioletred,Excessive Heat Warning
+EW.W,EW,W,deeppink,Excessive Wind Warning
+FW.W,FW,W,deeppink,Red Flag Warning
+FZ.W,FZ,W,cyan,Freeze Warning
+HW.W,HW,W,goldenrod,High Wind Warning
+HZ.W,HZ,W,blue,Hard Freeze Warning
+IS.W,IS,W,darkmagenta,Ice Storm Warning
+LE.W,LE,W,DarkCyan,Lake Effect Snow Warning
+LS.W,LS,W,forestgreen,Lakeshore Flood Warning
+MA.W,MA,W,palevioletred,Special Marine Warning
+GL.W,GL,W,#dda0dd,Gale Warning
+CF.W,CF,W,forestgreen,Coastal Flood Warning
+SU.W,SU,W,forestgreen,High Surf Warning
+FA.W,FA,W,seagreen,Areal Flood Warning
+FF.W,FF,W,darkred,Flash Flood Warning
+FL.W,FL,W,green,Flood Warning
+SE.W,SE,W,thistle,Hazardous Seas Warning
+SQ.W,SQ,W,#EF2B1C,Snow Squall Warning
+SR.W,SR,W,darkorchid,Storm Warning
+SS.W,SS,W,#B524F7,Storm Surge Warning
+SV.W,SV,W,orange,Severe Thunderstorm Warning
+HU.W,HU,W,#dc143c,Hurricane Warning
+UP.W,UP,W,#00C0FF,Heavy Freezing Spray Warning
+WC.W,WC,W,lightsteelblue,Wind Chill Warning
+WS.W,WS,W,hotpink,Winter Storm Warning
+TR.W,TR,W,#b22222,Tropical Storm Warning
+HF.W,HF,W,#cd5c5c,Hurricane Force Wind Warning
+TY.W,TY,W,#FD6347,Typhoon Warning
+TS.W,TS,W,#FD6347,Tsunami Warning
+TO.W,TO,W,red,Tornado Warning
