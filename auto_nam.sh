@@ -15,7 +15,13 @@ rm -frv  /projects/SD_Mines_Map_Wall/temp_files_nam/*.png
 echo
 echo  "Firing Things Up!"
 echo 
-. source /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/NAM_3_Horizontal_Panel.py > /projects/SD_Mines_Map_Wall/__log_nam.log 2>&1
+. source /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/NAM_3_Horizontal_Panel.py > /projects/SD_Mines_Map_Wall/__log_nam3.log 2>&1
+#
+rm -frv  /projects/SD_Mines_Map_Wall/temp_files_nam/*.png
+#
+. source /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/NAM_4_Horizontal_Panel.py > /projects/SD_Mines_Map_Wall/__log_nam4.log 2>&1
+
+
 echo
 echo "Ending Script"
 echo
