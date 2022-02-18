@@ -3,7 +3,7 @@
 
 # #### NAM 3-Panel Plot
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -82,7 +82,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ###################################################
@@ -123,7 +123,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -158,7 +158,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[4]:
+# In[ ]:
 
 
 ####################################################
@@ -214,7 +214,7 @@ print(nam_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -281,7 +281,7 @@ coriolis = coriolis.magnitude
 
 # ## Fetch Data for Panel Displays
 
-# In[6]:
+# In[ ]:
 
 
 ####################################################
@@ -408,8 +408,8 @@ rain_norm = mpl.colors.BoundaryNorm(boundaries = precip_levels_in,
 prec_i = 0
 
 
-for i in range(len(times_utc)) :
-    
+#for i in [0]: #range(len(times_utc)) :
+for i in range(len(times_utc)) :    
     
     print("========================================================")
     
@@ -418,8 +418,8 @@ for i in range(len(times_utc)) :
     tz           = 'America/Denver'
     time_utc     = times_utc[i]
     valid_time   = pd.to_datetime(start_time).tz_localize(tz="UTC").strftime("%Y-%m-%d %H00 %Z")
-    local_time   = pd.to_datetime(times_utc[i]).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H00 %Z")
-    local_time_p = pd.to_datetime(times_precip_utc[prec_i]).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H00 %Z")
+    local_time   = pd.to_datetime(times_utc[i]).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%a %Y-%m-%d %H00 %Z")
+    local_time_p = pd.to_datetime(times_precip_utc[prec_i]).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%a %Y-%m-%d %H00 %Z")
 
     time_label  = valid_time + " F" + str(int( fxx[i]     )).zfill(2) + " (" + local_time   + ")"
     time_labelp = valid_time + " P" + str(int(fpxx[prec_i])).zfill(2) + " (" + local_time_p + ")"
@@ -509,7 +509,7 @@ for i in range(len(times_utc)) :
 
     #############################################################
     
-    ax2 = fig.add_subplot(    1,     4,     2, 
+    ax2 = fig.add_subplot(    1,     4,     3, 
                          projection = data_crs)
 
 
@@ -594,7 +594,7 @@ for i in range(len(times_utc)) :
 
     #############################################################
     
-    ax3 = fig.add_subplot(    1,     4,     3, 
+    ax3 = fig.add_subplot(    1,     4,     2, 
                          projection = data_crs)
  
     ax3.coastlines(resolution = 'auto',
@@ -631,6 +631,9 @@ for i in range(len(times_utc)) :
                    linewidth = lw.values,
                    color     = 'black')
     
+    humidity_mask = np.ma.masked_greater_equal(rh_850[i,:,:].values,90)
+
+    #ax3.pcolor(eastings1d, northings1d, humidity_mask, hatch='.', alpha=0.8)
    
     ax3.annotate("850-hPa Dewpoint Temperature [°F]", 
                  [0.5,-0.1], 
@@ -848,7 +851,7 @@ for i in range(len(times_utc)) :
     
     plt.savefig(png_file_root + str(i).zfill(2) + ".png")
 
-    plt.close()
+    plt.clear()
 
     
     
