@@ -851,7 +851,7 @@ for i in range(len(times_utc)) :
     
     plt.savefig(png_file_root + str(i).zfill(2) + ".png")
 
-    plt.clear()
+    plt.close()
 
     
     
