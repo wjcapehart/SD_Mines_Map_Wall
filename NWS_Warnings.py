@@ -27,12 +27,14 @@ import geopandas as gp
 
 
 
-# In[2]:
+# In[ ]:
 
 
 proj_data_text = '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
 
 gif_file_name = "./graphics_files/NWS_Warnings.png"
+xls_file_name = "./graphics_files/NWS_Warnings.xlsx"
+
 
 
 myproj = ccrs.AlbersEqualArea(central_longitude=-96, 
@@ -53,7 +55,7 @@ print(valid_time)
 print(local_time)
 
 
-# In[3]:
+# In[ ]:
 
 
 # Open the NWS API in python to get the active alerts
@@ -61,7 +63,7 @@ n = noaa_sdk.noaa.NOAA()
 alerts = n.active_alerts()
 
 
-# In[4]:
+# In[ ]:
 
 
 #injest //shapefiles/CONUS_UGC_Zones/
@@ -85,7 +87,7 @@ UGC_Shapefile = UGC_Zones_Shapefile.append(UGC_Counties_Shapefile).drop(["UGC_Te
 UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
 
-# In[6]:
+# In[ ]:
 
 
 # priority warnings table
@@ -94,7 +96,7 @@ warning_priority_table = pd.read_csv("./warning_table_sorted.csv")
 warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"})
 
 
-# In[7]:
+# In[ ]:
 
 
 
@@ -145,12 +147,12 @@ current_warnings = current_warnings.sort_values("Rank", ascending=False)
 warning_color_table = current_warnings[["event","color"]].drop_duplicates()
 
 
-current_warnings.drop(["geometry"], axis="columns").to_excel("Current_Warnings.xlsx")
+current_warnings.drop(["geometry"], axis="columns").to_excel(xls_file_name)
 
 print("done: ",i,"rows; ",len(warning_color_table),"event types")
 
 
-# In[8]:
+# In[ ]:
 
 
 legend_color_table = warning_color_table.values.tolist()
@@ -181,7 +183,7 @@ for row in warning_color_table.iterrows():
 
 
 
-# In[9]:
+# In[ ]:
 
 
 bbox=[-120,-73,22.5,50]
@@ -236,10 +238,14 @@ plt.subplots_adjust(left   = 0.01,
                     bottom = 0.01)
 
 
-
-fig.legend(handles = legend_color_table, 
-           loc     = 'right',
-           frameon = False)
+if (len(warning_color_table) >= 29) :
+    labelspacing = 0.5
+else :
+    labelspacing = 0.1
+fig.legend(handles  = legend_color_table, 
+           loc      = 'right',
+           frameon  = False,
+           labelspacing = labelspacing)
 plt.savefig(gif_file_name)
 
 
@@ -247,6 +253,18 @@ plt.close()
 
 
 print("done")
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
