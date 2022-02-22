@@ -150,6 +150,7 @@ warning_color_table = current_warnings[["event","color"]].drop_duplicates()
 current_warnings.drop(["geometry"], axis="columns").to_excel(xls_file_name)
 
 print("done: ",i,"rows; ",len(warning_color_table),"event types")
+print()
 
 
 # In[ ]:
@@ -168,7 +169,7 @@ for row in warning_color_table.iterrows():
 # In[ ]:
 
 
-
+print(warning_color_table)
 
 
 # In[ ]:
