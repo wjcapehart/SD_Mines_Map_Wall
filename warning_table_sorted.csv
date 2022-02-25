@@ -32,6 +32,7 @@ LW.Y,LW,Y,tan,Lake Wind Advisory,83
 MF.Y,MF,Y,slategray,Dense Fog Advisory,82
 MH.Y,MH,Y,dimgray,Ashfall Advisory,81
 MS.Y,MS,Y,khaki,Dense Smoke Advisory,80
+AV.A,AV,A,#f4a460,Avalanche Advisory,79.1
 RB.Y,RB,Y,thistle,Small Craft Advisory for rough bar,79
 SC.Y,SC,Y,thistle,Small Craft Advisory,78
 SI.Y,SI,Y,thistle,Small Craft Advisory for winds,77

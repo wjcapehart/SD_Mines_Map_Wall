@@ -238,11 +238,7 @@ plt.subplots_adjust(left   = 0.01,
                     top    = 0.91, 
                     bottom = 0.01)
 
-
-if (len(warning_color_table) >= 29) :
-    labelspacing = 0.5
-else :
-    labelspacing = 0.1
+labelspacing = 0.1
 fig.legend(handles  = legend_color_table, 
            loc      = 'right',
            frameon  = False,
