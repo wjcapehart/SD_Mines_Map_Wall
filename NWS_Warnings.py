@@ -3,7 +3,7 @@
 
 # # NWS Warning Polygons
 
-# In[ ]:
+# In[1]:
 
 
 #Import the necessary packages
@@ -27,7 +27,7 @@ import geopandas as gp
 
 
 
-# In[ ]:
+# In[2]:
 
 
 proj_data_text = '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
@@ -55,7 +55,7 @@ print(valid_time)
 print(local_time)
 
 
-# In[ ]:
+# In[3]:
 
 
 # Open the NWS API in python to get the active alerts
@@ -63,7 +63,7 @@ n = noaa_sdk.noaa.NOAA()
 alerts = n.active_alerts()
 
 
-# In[ ]:
+# In[4]:
 
 
 #injest //shapefiles/CONUS_UGC_Zones/
@@ -87,7 +87,7 @@ UGC_Shapefile = UGC_Zones_Shapefile.append(UGC_Counties_Shapefile).drop(["UGC_Te
 UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
 
-# In[ ]:
+# In[5]:
 
 
 # priority warnings table
@@ -96,7 +96,7 @@ warning_priority_table = pd.read_csv("./warning_table_sorted.csv")
 warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"})
 
 
-# In[ ]:
+# In[6]:
 
 
 
@@ -153,20 +153,22 @@ print("done: ",i,"rows; ",len(warning_color_table),"event types")
 print()
 
 
-# In[ ]:
+# In[7]:
 
 
 legend_color_table = warning_color_table.values.tolist()
-
+print(legend_color_table)
 legend_color_table = []
 
 for row in warning_color_table.iterrows():
     mypatch = [mpatches.Patch(color=row[1][1], label=row[1][0])]
     legend_color_table = legend_color_table + mypatch
+    
+    
   
 
 
-# In[ ]:
+# In[8]:
 
 
 print(warning_color_table)
@@ -184,7 +186,7 @@ print(warning_color_table)
 
 
 
-# In[ ]:
+# In[9]:
 
 
 bbox=[-120,-73,22.5,50]
@@ -259,6 +261,12 @@ print("done")
 
 
 # In[ ]:
+
+
+
+
+
+# In[10]:
 
 
 

@@ -41,6 +41,7 @@ SU.Y,SU,Y,mediumorchid,High Surf Advisory,75
 SW.Y,SW,Y,thistle,Small Craft Advisory for hazardous seas,74
 TS.Y,TS,Y,chocolate,Tsunami Advisory,73
 UP.Y,UP,Y,#00C0FF,Freezing Spray Advisory,72
+UP.Y,UP,Y,#00C0FF,Heavy Freezing Spray Advisory,71.5
 WC.Y,WC,Y,paleturquoise,Wind Chill Advisory,71
 WI.Y,WI,Y,tan,Wind Advisory,70
 WW.Y,WW,Y,#7b68ee,Winter Weather Advisory,69
