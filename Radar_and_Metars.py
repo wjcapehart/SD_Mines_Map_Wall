@@ -95,6 +95,8 @@ geospatial_lat_max = 46.19018
 geospatial_lon_min = -105.70986
 geospatial_lon_max =  -99.950134
 
+RadarLatitude   =   44.125
+RadarLongitude  = -102.83
 
 
 station_id = "RAP"
@@ -192,7 +194,8 @@ for datehour in siphon_pulls_YYYYMMDD_HH:
             first = False
             metar_dataframe = indata
         else:
-            metar_dataframe = metar_dataframe.append(indata)
+            metar_dataframe = pd.concat(objs = [metar_dataframe,indata],
+                                        axis =                  "index")
             metar_dataframe = metar_dataframe.drop_duplicates()
     except ValueError:
         print("BALLS! Parse Error")
@@ -272,7 +275,8 @@ list(datasets_sorted)
 figure_counter    = 1
 number_of_figures = len(sorted(catalog.datasets))
 
-
+number_of_figures = len(sorted(catalog.datasets))
+print("Number of Radar Images=",number_of_figures)
 
 for name in datasets_sorted:
     ds = catalog.datasets[name]
@@ -291,189 +295,370 @@ for name in datasets_sorted:
 ####################################################
 ####################################################
 #
-# Create Individual Map Files
+# Create Individual Map Files for Radar
 #
 
 counter = 0
 
-
-figure_counter = 1
 number_of_figures = len(sorted(catalog.datasets))
-for name in sorted(catalog.datasets):
-    percent_done = figure_counter / number_of_figures
-    ds = catalog.datasets[name]
-    print(ds)
-    print(percent_done)
-    fig, ax = plt.subplots(1, 1, 
-                           figsize=(9, 8),
-                           facecolor = 'white')
+
+if (len(sorted(catalog.datasets)) > 0) :
+
+    figure_counter = 1
+    for name in sorted(catalog.datasets):
+        percent_done = figure_counter / number_of_figures
+        ds = catalog.datasets[name]
+        print(ds)
+        print(percent_done)
+        fig, ax = plt.subplots(1, 1, 
+                               figsize=(9, 8),
+                               facecolor = 'white')
+
+        radar    = Dataset(ds.access_urls['CdmRemote'])
+
+        rng      = radar.variables['gate'][:] 
+        az       = radar.variables['azimuth'][:]
+        ref      = radar.variables['BaseReflectivityDR'][:]
+        time_utc = datetime.strptime(radar.time_coverage_start, "%Y-%m-%dT%H:%M:%SZ")
+
+
+        metar_dataframe['staleness']     = (time_utc-metar_dataframe['date_time'])/ np.timedelta64(1, 'm')
+        metar_dataframe['abs_staleness'] =  np.abs( metar_dataframe['staleness'] )
+
+        local_metars = metar_dataframe[(metar_dataframe['abs_staleness'] < metar_time_spread/2) ].copy()
+        mystations   = local_metars["ICAO_id"].unique()
+
+        first = True
+
+        for mystation in mystations:
+            deleteme  = local_metars[local_metars["ICAO_id"] == mystation].copy().sort_values("abs_staleness")
+            deleteme2 = deleteme[deleteme["abs_staleness"]   == np.min(deleteme["abs_staleness"]) ]
+            if (first) :
+                first = False
+                recent_local_metars = deleteme2
+            else:
+                recent_local_metars = pd.concat([recent_local_metars,deleteme2])
+
+            del deleteme2
+            del deleteme
+
+        del local_metars
+        del mystations
+
+        recent_local_metars = recent_local_metars.sort_values(["abs_staleness"],ascending=False).reset_index()
+
+        alpha_array = 1-(np.abs(recent_local_metars['abs_staleness'])/metar_time_spread*2).to_numpy()
+        alpha_array[ alpha_array<0] = 0
+        alpha_array[ alpha_array>1] = 1
+
+        recent_local_metars['alpha'] = alpha_array
+
+        valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H:%M:%S %Z")
+        local_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H:%M:%S %Z")
+
+        print(valid_time + "  (" + local_time+")")
+
+        x   = rng * np.sin(np.deg2rad(az))[:, None]
+        y   = rng * np.cos(np.deg2rad(az))[:, None]
+        ref = np.ma.array(ref, mask=np.isnan(ref))
+
+        RadarLatitude      = radar.RadarLatitude
+        RadarLongitude     = radar.RadarLongitude
+        geospatial_lat_min = radar.geospatial_lat_min
+        geospatial_lat_max = radar.geospatial_lat_max
+        geospatial_lon_min = radar.geospatial_lon_min
+        geospatial_lon_max = radar.geospatial_lon_max
+
+        #
+        ###################################
+
+        ###################################
+        #
+        # Render Image
+        #
+
+        ax = plt.subplot(111, 
+                         projection=ccrs.Stereographic(central_latitude    = RadarLatitude, 
+                                                       central_longitude   = RadarLongitude, 
+                                                       false_easting       = 0.0, 
+                                                       false_northing      = 0.0, 
+                                                       true_scale_latitude = None, 
+                                                       globe=None))
+
+        plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
+                    fontsize=20, color="black")
+
+        ax.set_title(valid_time + "  (" + local_time+")",
+                        fontsize=15, color="black")
+
+        ax.set_extent([geospatial_lon_min, 
+                       geospatial_lon_max, 
+                       geospatial_lat_min, 
+                       geospatial_lat_max], crs=ccrs.PlateCarree())
+        ax.add_feature(feature    = cfeature.STATES,
+                       edgecolor  = 'black',
+                       facecolor  = 'none')
+        ax.add_feature(feature    = cfeature.COASTLINE,
+                       edgecolor  = 'black',
+                       facecolor  = 'none')
+        ax.add_feature(feature    = USCOUNTIES, 
+                       linewidths = 0.5,
+                       edgecolor  = 'black',
+                       facecolor  = 'none')
+        filled_cm = ax.pcolormesh(x, 
+                                  y, 
+                                  ref,
+                                  norm = norm, 
+                                  cmap = cmap)
+        ax.set_aspect('equal', 'datalim')
+
+        color_bar = plt.colorbar(filled_cm, 
+                     label  = "Reflectivity (dbZ)",
+                     shrink = 0.8,
+                     pad    = 0.012)
+        cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
+        plt.setp(cbytick_obj, color='black')
+
+        # Metar Plots
+
+        print("number of obs",len(recent_local_metars))
+
+        for i in range(0,len(recent_local_metars)) :
+            single_row = recent_local_metars.loc[i]
+
+            stationplot = StationPlot(ax, 
+                                      single_row['longitude'], 
+                                      single_row['latitude'], 
+                                      transform = ccrs.PlateCarree(),
+                                      fontsize  = 12,
+                                      alpha     = single_row["alpha"])
+
+            stationplot.plot_parameter('NW', 
+                                       np.array([single_row['air_temperature']]), 
+                                       color='black')
+            stationplot.plot_parameter('SW', 
+                                       np.array([single_row['dew_point_temperature']]), 
+                                       color='black')
+            stationplot.plot_parameter('NE', 
+                                       np.array([single_row['air_pressure_at_sea_level']]),  
+                                       color='black')
+            stationplot.plot_parameter('SE',
+                                       np.array([single_row['staleness']]),
+                                       color='black')
+
+            stationplot.plot_symbol('C', 
+                                    np.array([single_row['cloud_eights']]), 
+                                    sky_cover,color='black')
+            stationplot.plot_symbol('W', 
+                                    np.array([single_row['current_wx1_symbol']]), 
+                                    current_weather,color='black')
+
+            stationplot.plot_text((2, 0), 
+                                  np.array([single_row['ICAO_id']]), 
+                                  color='black')
+            stationplot.plot_barb(np.array([single_row['eastward_wind']]), 
+                                  np.array([single_row['northward_wind']]),
+                                 color='black')
+
+            del single_row
+
+        del recent_local_metars 
+
+
+        #. plt.tight_layout()
+        plt.subplots_adjust(left   = 0.01, 
+                                right  = 0.99, 
+                                top    = 0.91, 
+                                bottom = .01, 
+                                wspace = 0)
+
+
+        plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
+        counter = counter + 1
+        figure_counter = figure_counter + 1
+
+
+        plt.close()
+        print("=====================")
+
+#
+####################################################
+####################################################
+####################################################
+
+
+# In[ ]:
+
+
+####################################################
+####################################################
+####################################################
+#
+# Create Individual Map Files for No Radar
+#
+
+counter = 0
+
+if (len(sorted(catalog.datasets)) == 0) :
     
-    radar    = Dataset(ds.access_urls['CdmRemote'])
+    radarless_time_series       = pd.date_range(time_start-timedelta(hours=1), time_now,freq='5min')
 
-    rng      = radar.variables['gate'][:] 
-    az       = radar.variables['azimuth'][:]
-    ref      = radar.variables['BaseReflectivityDR'][:]
-    time_utc = datetime.strptime(radar.time_coverage_start, "%Y-%m-%dT%H:%M:%SZ")
+    number_of_figures = len(radarless_time_series)
 
-    
-    metar_dataframe['staleness']     = (time_utc-metar_dataframe['date_time'])/ np.timedelta64(1, 'm')
-    metar_dataframe['abs_staleness'] =  np.abs( metar_dataframe['staleness'] )
-    
-    local_metars = metar_dataframe[(metar_dataframe['abs_staleness'] < metar_time_spread/2) ].copy()
-    mystations   = local_metars["ICAO_id"].unique()
+    figure_counter = 1
+    for time in radarless_time_series:
+        percent_done = figure_counter / number_of_figures
 
-    first = True
+        print(time, percent_done)
+        fig, ax = plt.subplots(1, 1, 
+                               figsize=(9, 8),
+                               facecolor = 'white')
 
-    for mystation in mystations:
-        deleteme  = local_metars[local_metars["ICAO_id"] == mystation].copy().sort_values("abs_staleness")
-        deleteme2 = deleteme[deleteme["abs_staleness"]   == np.min(deleteme["abs_staleness"]) ]
-        if (first) :
-            first = False
-            recent_local_metars = deleteme2
-        else:
-            recent_local_metars = pd.concat([recent_local_metars,deleteme2])
 
-        del deleteme2
-        del deleteme
+        time_utc = time
 
-    del local_metars
-    del mystations
 
-    recent_local_metars = recent_local_metars.sort_values(["abs_staleness"],ascending=False).reset_index()
+        metar_dataframe['staleness']     = (time_utc-metar_dataframe['date_time'])/ np.timedelta64(1, 'm')
+        metar_dataframe['abs_staleness'] =  np.abs( metar_dataframe['staleness'] )
 
-    alpha_array = 1-(np.abs(recent_local_metars['abs_staleness'])/metar_time_spread*2).to_numpy()
-    alpha_array[ alpha_array<0] = 0
-    alpha_array[ alpha_array>1] = 1
+        local_metars = metar_dataframe[(metar_dataframe['abs_staleness'] < metar_time_spread/2) ].copy()
+        mystations   = local_metars["ICAO_id"].unique()
 
-    recent_local_metars['alpha'] = alpha_array
+        first = True
 
-    valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H:%M:%S %Z")
-    local_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H:%M:%S %Z")
+        for mystation in mystations:
+            deleteme  = local_metars[local_metars["ICAO_id"] == mystation].copy().sort_values("abs_staleness")
+            deleteme2 = deleteme[deleteme["abs_staleness"]   == np.min(deleteme["abs_staleness"]) ]
+            if (first) :
+                first = False
+                recent_local_metars = deleteme2
+            else:
+                recent_local_metars = pd.concat([recent_local_metars,deleteme2])
 
-    print(valid_time + "  (" + local_time+")")
+            del deleteme2
+            del deleteme
 
-    x   = rng * np.sin(np.deg2rad(az))[:, None]
-    y   = rng * np.cos(np.deg2rad(az))[:, None]
-    ref = np.ma.array(ref, mask=np.isnan(ref))
+        del local_metars
+        del mystations
 
-    RadarLatitude      = radar.RadarLatitude
-    RadarLongitude     = radar.RadarLongitude
-    geospatial_lat_min = radar.geospatial_lat_min
-    geospatial_lat_max = radar.geospatial_lat_max
-    geospatial_lon_min = radar.geospatial_lon_min
-    geospatial_lon_max = radar.geospatial_lon_max
+        recent_local_metars = recent_local_metars.sort_values(["abs_staleness"],ascending=False).reset_index()
 
-    #
-    ###################################
+        alpha_array = 1-(np.abs(recent_local_metars['abs_staleness'])/metar_time_spread*2).to_numpy()
+        alpha_array[ alpha_array<0] = 0
+        alpha_array[ alpha_array>1] = 1
 
-    ###################################
-    #
-    # Render Image
-    #
-    
-    ax = plt.subplot(111, 
-                     projection=ccrs.Stereographic(central_latitude    = RadarLatitude, 
-                                                   central_longitude   = RadarLongitude, 
-                                                   false_easting       = 0.0, 
-                                                   false_northing      = 0.0, 
-                                                   true_scale_latitude = None, 
-                                                   globe=None))
+        recent_local_metars['alpha'] = alpha_array
 
-    plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
-                fontsize=20, color="black")
+        valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H:%M:%S %Z")
+        local_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H:%M:%S %Z")
 
-    ax.set_title(valid_time + "  (" + local_time+")",
-                    fontsize=15, color="black")
+        print(valid_time + "  (" + local_time+")")
 
-    ax.set_extent([geospatial_lon_min, 
-                   geospatial_lon_max, 
-                   geospatial_lat_min, 
-                   geospatial_lat_max], crs=ccrs.PlateCarree())
-    ax.add_feature(feature    = cfeature.STATES,
-                   edgecolor  = 'black',
-                   facecolor  = 'none')
-    ax.add_feature(feature    = cfeature.COASTLINE,
-                   edgecolor  = 'black',
-                   facecolor  = 'none')
-    ax.add_feature(feature    = USCOUNTIES, 
-                   linewidths = 0.5,
-                   edgecolor  = 'black',
-                   facecolor  = 'none')
-    filled_cm = ax.pcolormesh(x, 
-                              y, 
-                              ref,
-                              norm = norm, 
-                              cmap = cmap)
-    ax.set_aspect('equal', 'datalim')
-    
-    color_bar = plt.colorbar(filled_cm, 
-                 label  = "Reflectivity (dbZ)",
-                 shrink = 0.8,
-                 pad    = 0.012)
-    cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
-    plt.setp(cbytick_obj, color='black')
 
-    # Metar Plots
-        
-    print("number of obs",len(recent_local_metars))
-    
-    for i in range(0,len(recent_local_metars)) :
-        single_row = recent_local_metars.loc[i]
-    
-        stationplot = StationPlot(ax, 
-                                  single_row['longitude'], 
-                                  single_row['latitude'], 
-                                  transform = ccrs.PlateCarree(),
-                                  fontsize  = 12,
-                                  alpha     = single_row["alpha"])
 
-        stationplot.plot_parameter('NW', 
-                                   np.array([single_row['air_temperature']]), 
-                                   color='black')
-        stationplot.plot_parameter('SW', 
-                                   np.array([single_row['dew_point_temperature']]), 
-                                   color='black')
-        stationplot.plot_parameter('NE', 
-                                   np.array([single_row['air_pressure_at_sea_level']]),  
-                                   color='black')
-        stationplot.plot_parameter('SE',
-                                   np.array([single_row['staleness']]),
-                                   color='black')
 
-        stationplot.plot_symbol('C', 
-                                np.array([single_row['cloud_eights']]), 
-                                sky_cover,color='black')
-        stationplot.plot_symbol('W', 
-                                np.array([single_row['current_wx1_symbol']]), 
-                                current_weather,color='black')
 
-        stationplot.plot_text((2, 0), 
-                              np.array([single_row['ICAO_id']]), 
-                              color='black')
-        stationplot.plot_barb(np.array([single_row['eastward_wind']]), 
-                              np.array([single_row['northward_wind']]),
-                             color='black')
-        
-        del single_row
-            
-    del recent_local_metars 
+        #
+        ###################################
 
-        
-    #. plt.tight_layout()
-    plt.subplots_adjust(left   = 0.01, 
-                            right  = 0.99, 
-                            top    = 0.91, 
-                            bottom = .01, 
-                            wspace = 0)
+        ###################################
+        #
+        # Render Image
+        #
+
+        ax = plt.subplot(111, 
+                         projection=ccrs.Stereographic(central_latitude    = RadarLatitude, 
+                                                       central_longitude   = RadarLongitude, 
+                                                       false_easting       = 0.0, 
+                                                       false_northing      = 0.0, 
+                                                       true_scale_latitude = None, 
+                                                       globe=None))
+
+        plt.suptitle("Western South Dakota Surface Obs (Radar Services Down)",
+                     fontsize=20, color="black")
+
+        ax.set_title(valid_time + "  (" + local_time+")",
+                        fontsize=15, color="black")
+
+        ax.set_extent([geospatial_lon_min, 
+                       geospatial_lon_max, 
+                       geospatial_lat_min, 
+                       geospatial_lat_max], crs=ccrs.PlateCarree())
+        ax.add_feature(feature    = cfeature.STATES,
+                       edgecolor  = 'black',
+                       facecolor  = 'none')
+        ax.add_feature(feature    = cfeature.COASTLINE,
+                       edgecolor  = 'black',
+                       facecolor  = 'none')
+        ax.add_feature(feature    = USCOUNTIES, 
+                       linewidths = 0.5,
+                       edgecolor  = 'black',
+                       facecolor  = 'none')
+
+        ax.set_aspect('equal', 'datalim')
+
  
-     
-    plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
-    counter = counter + 1
-    figure_counter = figure_counter + 1
+        # Metar Plots
+
+        print("number of obs",len(recent_local_metars))
+
+        for i in range(0,len(recent_local_metars)) :
+            single_row = recent_local_metars.loc[i]
+
+            stationplot = StationPlot(ax, 
+                                      single_row['longitude'], 
+                                      single_row['latitude'], 
+                                      transform = ccrs.PlateCarree(),
+                                      fontsize  = 12,
+                                      alpha     = single_row["alpha"])
+
+            stationplot.plot_parameter('NW', 
+                                       np.array([single_row['air_temperature']]), 
+                                       color='black')
+            stationplot.plot_parameter('SW', 
+                                       np.array([single_row['dew_point_temperature']]), 
+                                       color='black')
+            stationplot.plot_parameter('NE', 
+                                       np.array([single_row['air_pressure_at_sea_level']]),  
+                                       color='black')
+            stationplot.plot_parameter('SE',
+                                       np.array([single_row['staleness']]),
+                                       color='black')
+
+            stationplot.plot_symbol('C', 
+                                    np.array([single_row['cloud_eights']]), 
+                                    sky_cover,color='black')
+            stationplot.plot_symbol('W', 
+                                    np.array([single_row['current_wx1_symbol']]), 
+                                    current_weather,color='black')
+
+            stationplot.plot_text((2, 0), 
+                                  np.array([single_row['ICAO_id']]), 
+                                  color='black')
+            stationplot.plot_barb(np.array([single_row['eastward_wind']]), 
+                                  np.array([single_row['northward_wind']]),
+                                 color='black')
+
+            del single_row
+
+        del recent_local_metars 
 
 
-    plt.close()
-    print("=====================")
+        #. plt.tight_layout()
+        plt.subplots_adjust(left   = 0.01, 
+                                right  = 0.99, 
+                                top    = 0.91, 
+                                bottom = .01, 
+                                wspace = 0)
+
+
+        plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
+        counter = counter + 1
+        figure_counter = figure_counter + 1
+
+
+        plt.close()
+        print("=====================")
 
 #
 ####################################################
@@ -497,12 +682,6 @@ os.system("convert -delay 25 " +
 
 #
 ##################################################
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
