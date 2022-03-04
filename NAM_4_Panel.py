@@ -17,6 +17,7 @@ import numpy             as np
 import datetime          as dt
 import matplotlib        as mpl
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 import ftplib            as ftplib
 import urllib.request    as urllibreq
 import datetime          as datetime
@@ -408,7 +409,10 @@ rain_norm = mpl.colors.BoundaryNorm(boundaries = precip_levels_in,
 
 prec_i = 0
 
+total_slides = len(times_utc)
 
+
+frat_done = 0
 #for i in [0]: #range(len(times_utc)) :
 for i in range(len(times_utc)) :    
     
@@ -804,12 +808,43 @@ for i in range(len(times_utc)) :
     
 
  
-    plt.subplots_adjust(left=0.005, 
-                        right=.995, 
-                        top=0.99, 
-                        bottom=-0.01, 
-                        wspace=0.01,
-                        hspace=0)
+    plt.subplots_adjust(left   = 0.005, 
+                        right  =  .995, 
+                        top    =  0.99, 
+                        bottom = -0.01, 
+                        wspace =  0.01,
+                        hspace =     0)
+    
+    percent_done = (i+1)/total_slides
+    
+    rect1 = patches.Rectangle(xy        = (0, 0),
+                         width     = percent_done,
+                         height    = 0.01, 
+                         edgecolor = 'black', 
+                         facecolor = "black",
+                         transform = ax1.transAxes)
+    rect2 = patches.Rectangle(xy        = (0, 0),
+                     width     = percent_done,
+                     height    = 0.01, 
+                     edgecolor = 'black', 
+                     facecolor = "black",
+                     transform = ax2.transAxes)
+    rect3 = patches.Rectangle(xy        = (0, 0),
+                 width     = percent_done,
+                 height    = 0.01, 
+                 edgecolor = 'black', 
+                 facecolor = "black",
+                 transform = ax3.transAxes)
+    rect4 = patches.Rectangle(xy        = (0, 0),
+             width     = percent_done,
+             height    = 0.01, 
+             edgecolor = 'black', 
+             facecolor = "black",
+             transform = ax4.transAxes)
+    ax1.add_patch(rect1)
+    ax2.add_patch(rect2)
+    ax3.add_patch(rect3)
+    ax4.add_patch(rect4)
 
     
     plt.savefig(png_file_root + str(i).zfill(2) + ".png")

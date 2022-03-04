@@ -17,8 +17,9 @@
 
 from datetime            import datetime, timedelta
 
-import matplotlib.pyplot as plt
-import numpy             as np
+import numpy              as np
+import matplotlib.pyplot  as plt
+
 
 import cartopy.crs       as ccrs
 import cartopy.feature   as cfeature
@@ -472,6 +473,15 @@ if (len(sorted(catalog.datasets)) > 0) :
                                 bottom = .01, 
                                 wspace = 0)
 
+        rect = patches.Rectangle(xy        = (0, 0),
+                                 width     = percent_done,
+                                 height    = 0.01, 
+                                 edgecolor = 'black', 
+                                 facecolor = "black",
+                                 transform = ax.transAxes)
+        ax.add_patch(rect)
+
+
 
         plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
         counter = counter + 1
@@ -650,7 +660,14 @@ if (len(sorted(catalog.datasets)) == 0) :
                                 top    = 0.91, 
                                 bottom = .01, 
                                 wspace = 0)
-
+        
+        rect = patches.Rectangle(xy        = (0, 0),
+                                 width     = percent_done,
+                                 height    = 0.01, 
+                                 edgecolor = 'black', 
+                                 facecolor = "black",
+                                 transform = ax.transAxes)
+        ax.add_patch(rect)
 
         plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
         counter = counter + 1
