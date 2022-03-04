@@ -75,7 +75,7 @@ import airportsdata as airpt
 os.system("rm -v ./temp_files_radar/*")
 
 time_now   = datetime.utcnow()
-time_start = time_now - timedelta(hours=2)
+time_start = time_now - timedelta(hours=3)
 
 print(time_start)
 print(time_now)
@@ -262,7 +262,7 @@ rs  = RadarServer(url)
 query = rs.query()
 
 query.stations(radar_id).time_range(time_start,
-                                    time_now).variables('N0Q')
+                                    time_now).variables('N0B') # n0q
 
 rs.validate_query(query)
 
