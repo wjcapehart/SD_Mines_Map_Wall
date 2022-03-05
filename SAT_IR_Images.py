@@ -3,7 +3,7 @@
 
 # # Infrared CONUS
 
-# In[ ]:
+# In[1]:
 
 
 ##################################################
@@ -28,12 +28,15 @@ import cartopy.crs       as ccrs
 import cartopy.feature   as cfeature
 import matplotlib.pyplot as plt
 
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+
+
 
 #
 ##################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ##################################################
@@ -75,7 +78,7 @@ print(data_url)
 ##################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ##################################################
@@ -89,7 +92,7 @@ cat = TDSCatalog(data_url)
 ##################################################
 
 
-# In[ ]:
+# In[4]:
 
 
 ##################################################
@@ -100,24 +103,21 @@ cat = TDSCatalog(data_url)
 file_names_to_retain = list()
 file_names_to_use    = list()
 
-
 for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
     filename = png_processing_directory + cat.datasets[i].name.replace(".nc",".png")
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-
         
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
 
 file_names_to_retain.sort()
 file_names_to_use.sort()
 
-
 #
 ##################################################    
 
 
-# In[ ]:
+# In[5]:
 
 
 ##################################################
@@ -149,7 +149,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
     
     dataset_png_file_name = png_processing_directory + dataset.name.replace(".nc", ".png")
     
-    if (not pathlib.Path(dataset_png_file_name).is_file() ):
+    if (1>0): #(not pathlib.Path(dataset_png_file_name).is_file() ):
 
         ds = dataset.remote_access(use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
@@ -198,7 +198,48 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
                             top    = 0.91, 
                             bottom = 0, 
                             wspace = 0)
- 
+        
+        #########################################
+        #
+        # Insert a Clock
+        #
+        
+        axins = fig.add_axes(rect     =    [0.01,
+                                            0.81,
+                                            0.12*0.65306121,
+                                            0.12],
+                              projection  =  "polar")
+        
+        time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+
+        hour   = time_for_clock.hour
+        minute = time_for_clock.minute
+        second = time_for_clock.second
+        
+        if (hour > 12) :
+            hour = hour - 12
+        
+        angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+        angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+        
+        print(time_for_clock)
+        print(hour,   np.rad2deg(angles_h))
+        print(minute, np.rad2deg(angles_m))
+
+        
+        plt.setp(axins.get_yticklabels(), visible=False)
+        plt.setp(axins.get_xticklabels(), visible=False)
+        axins.spines['polar'].set_visible(False)
+        axins.set_ylim(0,1)
+        axins.set_theta_zero_location('N')
+        axins.set_theta_direction(-1)
+        axins.grid(False)
+        
+        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,1.0], color="black", linewidth=1.5)
+        
+        #
+        #########################################
          
         plt.savefig( dataset_png_file_name)
         plt.close()
