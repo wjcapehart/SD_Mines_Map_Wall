@@ -212,6 +212,9 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         minute = time_for_clock.minute
         second = time_for_clock.second
         
+        circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+        circle_radius = circle_theta * 0 + 1
+        
         if (hour > 12) :
             hour = hour - 12
         
@@ -229,10 +232,14 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         axins.set_ylim(0,1)
         axins.set_theta_zero_location('N')
         axins.set_theta_direction(-1)
+        axins.set_facecolor("white")
         axins.grid(False)
         
         axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,1.0], color="black", linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+
+
         
         #
         #########################################

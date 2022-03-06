@@ -3,7 +3,7 @@
 
 # # Infrared CONUS
 
-# In[1]:
+# In[ ]:
 
 
 ##################################################
@@ -36,7 +36,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 ##################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ##################################################
@@ -78,7 +78,7 @@ print(data_url)
 ##################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ##################################################
@@ -92,7 +92,7 @@ cat = TDSCatalog(data_url)
 ##################################################
 
 
-# In[4]:
+# In[ ]:
 
 
 ##################################################
@@ -117,7 +117,7 @@ file_names_to_use.sort()
 ##################################################    
 
 
-# In[5]:
+# In[ ]:
 
 
 ##################################################
@@ -149,7 +149,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
     
     dataset_png_file_name = png_processing_directory + dataset.name.replace(".nc", ".png")
     
-    if (1>0): #(not pathlib.Path(dataset_png_file_name).is_file() ):
+    if (not pathlib.Path(dataset_png_file_name).is_file() ):
 
         ds = dataset.remote_access(use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
@@ -216,6 +216,9 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         minute = time_for_clock.minute
         second = time_for_clock.second
         
+        circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+        circle_radius = circle_theta * 0 + 1
+        
         if (hour > 12) :
             hour = hour - 12
         
@@ -233,10 +236,14 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         axins.set_ylim(0,1)
         axins.set_theta_zero_location('N')
         axins.set_theta_direction(-1)
+        axins.set_facecolor("white")
         axins.grid(False)
         
         axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,1.0], color="black", linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+
+
         
         #
         #########################################

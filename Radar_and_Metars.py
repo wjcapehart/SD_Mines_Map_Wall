@@ -464,6 +464,55 @@ if (len(sorted(catalog.datasets)) > 0) :
             del single_row
 
         del recent_local_metars 
+        
+        
+        #########################################
+        #
+        # Insert a Clock
+        #
+        
+        axins = fig.add_axes(rect     =    [0.015,
+                                            0.785,
+                                            0.12*8/9,
+                                            0.12],
+                              projection  =  "polar")
+        
+        time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+
+        hour   = time_for_clock.hour
+        minute = time_for_clock.minute
+        second = time_for_clock.second
+        
+        circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+        circle_radius = circle_theta * 0 + 1
+        
+        if (hour > 12) :
+            hour = hour - 12
+        
+        angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+        angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+        
+        print(time_for_clock)
+        print(hour,   np.rad2deg(angles_h))
+        print(minute, np.rad2deg(angles_m))
+
+        
+        plt.setp(axins.get_yticklabels(), visible=False)
+        plt.setp(axins.get_xticklabels(), visible=False)
+        axins.spines['polar'].set_visible(False)
+        axins.set_ylim(0,1)
+        axins.set_theta_zero_location('N')
+        axins.set_theta_direction(-1)
+        axins.set_facecolor("white")
+        axins.grid(False)
+        
+        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+
+        
+        #
+        #########################################
 
 
         #. plt.tight_layout()
@@ -510,7 +559,7 @@ if (len(sorted(catalog.datasets)) > 0) :
 counter = 0
 
 if (len(sorted(catalog.datasets)) == 0) :
-    
+
     radarless_time_series       = pd.date_range(time_start-timedelta(hours=1), time_now,freq='5min')
 
     number_of_figures = len(radarless_time_series)
@@ -652,6 +701,55 @@ if (len(sorted(catalog.datasets)) == 0) :
             del single_row
 
         del recent_local_metars 
+        
+        #########################################
+        #
+        # Insert a Clock
+        #
+        
+        axins = fig.add_axes(rect     =    [0.015,
+                                            0.785,
+                                            0.12*8/9,
+                                            0.12],
+                              projection  =  "polar")
+        
+        time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+
+        hour   = time_for_clock.hour
+        minute = time_for_clock.minute
+        second = time_for_clock.second
+        
+        circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+        circle_radius = circle_theta * 0 + 1
+        
+        if (hour > 12) :
+            hour = hour - 12
+        
+        angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+        angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+        
+        print(time_for_clock)
+        print(hour,   np.rad2deg(angles_h))
+        print(minute, np.rad2deg(angles_m))
+
+        
+        plt.setp(axins.get_yticklabels(), visible=False)
+        plt.setp(axins.get_xticklabels(), visible=False)
+        axins.spines['polar'].set_visible(False)
+        axins.set_ylim(0,1)
+        axins.set_theta_zero_location('N')
+        axins.set_theta_direction(-1)
+        axins.set_facecolor("white")
+        axins.grid(False)
+        
+        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+
+
+        
+        #
+        #########################################
 
 
         #. plt.tight_layout()
