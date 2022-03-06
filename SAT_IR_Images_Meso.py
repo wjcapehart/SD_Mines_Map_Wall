@@ -27,11 +27,18 @@ import metpy
 import cartopy.crs       as ccrs
 import cartopy.feature   as cfeature
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+
+import matplotlib.patches as patches
+
+
 
 
 #
 ##################################################
 
+
+# ## Meso Floater 1
 
 # In[ ]:
 
@@ -196,7 +203,54 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         im.set_cmap(wv_cmap)
         im.set_norm(wv_norm)
 
+        #########################################
+        #
+        # Insert a Clock
+        #
         
+        axins = fig.add_axes(rect     =    [0.065,
+                                            0.795,
+                                            0.12*0.65306121,
+                                            0.12],
+                              projection  =  "polar")
+        
+        time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+
+        hour   = time_for_clock.hour
+        minute = time_for_clock.minute
+        second = time_for_clock.second
+        
+        circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+        circle_radius = circle_theta * 0 + 1
+        
+        if (hour > 12) :
+            hour = hour - 12
+        
+        angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+        angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+        
+        print(time_for_clock)
+        print(hour,   np.rad2deg(angles_h))
+        print(minute, np.rad2deg(angles_m))
+
+        
+        plt.setp(axins.get_yticklabels(), visible=False)
+        plt.setp(axins.get_xticklabels(), visible=False)
+        axins.spines['polar'].set_visible(False)
+        axins.set_ylim(0,1)
+        axins.set_theta_zero_location('N')
+        axins.set_theta_direction(-1)
+        axins.set_facecolor("white")
+        axins.grid(False)
+        
+        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+
+
+        
+        #
+        #########################################             
         plt.tight_layout()
         
         plt.savefig( dataset_png_file_name)
@@ -250,11 +304,7 @@ print("completed "+ gif_file_name1)
 
 
 
-# In[ ]:
-
-
-
-
+# ## Meso Floater 2
 
 # In[ ]:
 
@@ -420,6 +470,57 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
         im.set_cmap(wv_cmap)
         im.set_norm(wv_norm)
+        
+        
+        #########################################
+        #
+        # Insert a Clock
+        #
+        
+        axins = fig.add_axes(rect     =    [0.065,
+                                            0.795,
+                                            0.12*0.65306121,
+                                            0.12],
+                              projection  =  "polar")
+        
+        time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+
+        hour   = time_for_clock.hour
+        minute = time_for_clock.minute
+        second = time_for_clock.second
+        
+        circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+        circle_radius = circle_theta * 0 + 1
+        
+        if (hour > 12) :
+            hour = hour - 12
+        
+        angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+        angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+        
+        print(time_for_clock)
+        print(hour,   np.rad2deg(angles_h))
+        print(minute, np.rad2deg(angles_m))
+
+        
+        plt.setp(axins.get_yticklabels(), visible=False)
+        plt.setp(axins.get_xticklabels(), visible=False)
+        axins.spines['polar'].set_visible(False)
+        axins.set_ylim(0,1)
+        axins.set_theta_zero_location('N')
+        axins.set_theta_direction(-1)
+        axins.set_facecolor("white")
+        axins.grid(False)
+        
+        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+
+
+        
+        #
+        #########################################        
+        
 
         
         plt.tight_layout()
@@ -493,11 +594,7 @@ print("completed "+ gif_file_name2)
 
 
 
-# In[ ]:
-
-
-
-
+# ## South Dakota Images
 
 # In[ ]:
 
@@ -675,6 +772,55 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
         im.set_cmap(wv_cmap)
         im.set_norm(wv_norm)
+        
+        #########################################
+        #
+        # Insert a Clock
+        #
+        
+        axins = fig.add_axes(rect     =    [0.02,
+                                            0.81,
+                                            0.12*0.65306121,
+                                            0.12],
+                              projection  =  "polar")
+        
+        time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+
+        hour   = time_for_clock.hour
+        minute = time_for_clock.minute
+        second = time_for_clock.second
+        
+        circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+        circle_radius = circle_theta * 0 + 1
+        
+        if (hour > 12) :
+            hour = hour - 12
+        
+        angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+        angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+        
+        print(time_for_clock)
+        print(hour,   np.rad2deg(angles_h))
+        print(minute, np.rad2deg(angles_m))
+
+        
+        plt.setp(axins.get_yticklabels(), visible=False)
+        plt.setp(axins.get_xticklabels(), visible=False)
+        axins.spines['polar'].set_visible(False)
+        axins.set_ylim(0,1)
+        axins.set_theta_zero_location('N')
+        axins.set_theta_direction(-1)
+        axins.set_facecolor("white")
+        axins.grid(False)
+        
+        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+
+
+        
+        #
+        #########################################             
 
         
         plt.tight_layout()
