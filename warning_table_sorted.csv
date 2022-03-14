@@ -19,6 +19,7 @@ AQ.Y,AQ,Y,gray,Air Quality Alert,96
 AS.Y,AS,Y,gray,Air Stagnation Advisory,95
 BW.Y,BW,Y,thistle,Brisk Wind Advisory,94
 CF.Y,CF,Y,lawngreen,Coastal Flood Advisory,93
+DU.Y,DU,Y,darkkhaki,Dust Advisory,92.5
 DU.Y,DU,Y,darkkhaki,Blowing Dust Advisory,92
 FA.Y,FA,Y,seagreen,Areal Flood Advisory,91
 FG.Y,FG,Y,slategray,Dense Fog Advisory,90
@@ -79,6 +80,7 @@ TO.A,TO,A,yellow,Tornado Watch,38
 AF.W,AF,W,gray,Ashfall Warning,37
 LC.W,LC,W,gray,Local Area Emergency,36
 MH.W,MH,W,darkgray,Ashfall Warning,35
+DS.W,DS,W,bisque,Dust Warning,34.5
 DS.W,DS,W,bisque,Dust Storm Warning,34
 EC.W,EC,W,blue,Extreme Cold Warning,33
 EH.W,EH,W,mediumvioletred,Excessive Heat Warning,32
