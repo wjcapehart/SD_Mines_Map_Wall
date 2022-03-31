@@ -3,7 +3,7 @@
 
 # #### NAM 4-panel
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -84,7 +84,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ###################################################
@@ -125,7 +125,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ####################################################
@@ -160,7 +160,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[ ]:
+# In[4]:
 
 
 ####################################################
@@ -216,7 +216,7 @@ print(nam_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[ ]:
+# In[5]:
 
 
 ####################################################
@@ -283,7 +283,7 @@ coriolis = coriolis.magnitude
 
 # ## Fetch Data for Panel Displays
 
-# In[ ]:
+# In[6]:
 
 
 ####################################################
@@ -383,7 +383,7 @@ precip.attrs['units'] = 'in'
 
 
 
-# In[ ]:
+# In[7]:
 
 
 ####################################################
@@ -815,7 +815,7 @@ for i in range(len(times_utc)) :
                         wspace =  0.01,
                         hspace =     0)
     
-    percent_done = (i+1)/total_slides
+    percent_done = fxx[i]/np.max(fxx)
     
     rect1 = patches.Rectangle(xy        = (0, 0),
                          width     = percent_done,
@@ -865,7 +865,7 @@ for i in range(len(times_utc)) :
 ####################################################
 
 
-# In[ ]:
+# In[8]:
 
 
 ##################################################
