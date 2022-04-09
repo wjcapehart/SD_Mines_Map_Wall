@@ -114,31 +114,33 @@ i = 0
 for alert in alerts['features']:
     event = alert['properties']['event']
     if (event != "Test Message"): 
-
-        ugc_codes = alert['properties']['geocode']['UGC']
-        message   = alert['properties']['@id']
         
-        for ugc_code in ugc_codes:
-            if ugc_code in UGC_Zone_County_List: 
-                if (ugc_code[2] == 'C'):
-                    coverage = "County"
-                else:
-                    coverage = "Zones"
+        try:
 
-                deleteme = pd.DataFrame([[event,
-                          ugc_code,
-                          coverage,
-                          message]], 
-                          columns = ['event',
-                                     'UGC',
-                                     'coverage',
-                                     'message'])
-                current_warnings = pd.concat([current_warnings, 
-                                              deleteme]) 
+            ugc_codes = alert['properties']['geocode']['UGC']
+            message   = alert['properties']['@id']
 
- 
+            for ugc_code in ugc_codes:
+                if ugc_code in UGC_Zone_County_List: 
+                    if (ugc_code[2] == 'C'):
+                        coverage = "County"
+                    else:
+                        coverage = "Zones"
 
-                i = i + 1
+                    deleteme = pd.DataFrame([[event,
+                              ugc_code,
+                              coverage,
+                              message]], 
+                              columns = ['event',
+                                         'UGC',
+                                         'coverage',
+                                         'message'])
+                    current_warnings = pd.concat([current_warnings, 
+                                                  deleteme]) 
+                    i = i + 1
+        except KeyError:
+            print("poopie:")
+            print(ugc_code)
     
 current_warnings = current_warnings.merge(warning_priority_table, how='left', on='event')
 current_warnings = UGC_Shapefile.merge(current_warnings, how='right', on='UGC')
@@ -201,9 +203,6 @@ fig = plt.figure(figsize   = (11, 6),
 ax = fig.add_subplot(1, 1, 1, 
                      projection=myproj)
 
-
-
-
 plt.suptitle("NWS Watches and Warnings",
              fontsize = 20, 
              color    = "black")
@@ -216,7 +215,6 @@ current_warnings.plot(ax = ax,aspect='equal',
                       facecolor=current_warnings["color"],
                       transform=ccrs.PlateCarree(),
                       edgecolor='None', linewidth=0)
-
 
 ax.add_feature(cfeature.COASTLINE.with_scale('50m'), 
                linewidth = 0.5)
@@ -231,7 +229,6 @@ ax.add_feature(feature    = USCOUNTIES,
                    linewidths = 0.1,
                    edgecolor  = 'black',
                    facecolor  = 'none')
-
 
 ax.set_frame_on(False)
 
@@ -252,24 +249,6 @@ plt.close()
 
 
 print("done")
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[10]:
-
-
-
 
 
 # In[ ]:
