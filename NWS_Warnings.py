@@ -72,17 +72,18 @@ alerts = n.active_alerts()
 UGC_Zones_Shapefile    = gp.read_file('./shapefiles/CONUS_UGC_Zones/CONUS_UGC_Zones.shp')
 UGC_Counties_Shapefile = gp.read_file('./shapefiles/CONUS_UGC_Counties/CONUS_UGC_Counties.shp')
  
-UGC_Shapefile = UGC_Zones_Shapefile.append(UGC_Counties_Shapefile).drop(["UGC_Temp",
-                                                                         "Shape_Leng",
-                                                                         "Shape_Le_1",
-                                                                         "Shape_Area",
-                                                                         "STATE",
-                                                                         "CWA",
-                                                                         "COUNTYNAME",
-                                                                         "FIPS",
-                                                                         "TIME_ZONE",
-                                                                         "FE_AREA"],
-                                                                       axis = 'columns').reset_index(drop=True)  
+UGC_Shapefile = pd.concat([UGC_Zones_Shapefile, 
+                           UGC_Counties_Shapefile]).drop(["UGC_Temp",
+                                                          "Shape_Leng",
+                                                          "Shape_Le_1",
+                                                          "Shape_Area",
+                                                          "STATE",
+                                                          "CWA",
+                                                          "COUNTYNAME",
+                                                          "FIPS",
+                                                          "TIME_ZONE",
+                                                          "FE_AREA"],
+                                                          axis = 'columns').reset_index(drop=True)  
     
 UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
@@ -96,7 +97,7 @@ warning_priority_table = pd.read_csv("./warning_table_sorted.csv")
 warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"})
 
 
-# In[6]:
+# In[10]:
 
 
 
@@ -140,7 +141,7 @@ for alert in alerts['features']:
                     i = i + 1
         except KeyError:
             print("poopie:")
-            print(ugc_code)
+            print(event, ugc_code)
     
 current_warnings = current_warnings.merge(warning_priority_table, how='left', on='event')
 current_warnings = UGC_Shapefile.merge(current_warnings, how='right', on='UGC')
@@ -155,7 +156,7 @@ print("done: ",i,"rows; ",len(warning_color_table),"event types")
 print()
 
 
-# In[7]:
+# In[11]:
 
 
 legend_color_table = warning_color_table.values.tolist()
@@ -170,7 +171,7 @@ for row in warning_color_table.iterrows():
   
 
 
-# In[8]:
+# In[12]:
 
 
 print(warning_color_table)
@@ -188,7 +189,7 @@ print(warning_color_table)
 
 
 
-# In[9]:
+# In[13]:
 
 
 bbox=[-120,-73,22.5,50]
@@ -249,6 +250,12 @@ plt.close()
 
 
 print("done")
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

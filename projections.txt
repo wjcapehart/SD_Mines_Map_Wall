@@ -1,0 +1,85 @@
+### Georeference Data
+
+###### NAM Projection WMOGrid 212 (40km)
+
+Extent
+
+(-4226108.5, 3250731.25, -832697.8125, 4368582.0)
+
+WKT
+
+'PROJCRS["unknown",BASEGEOGCRS["unknown",DATUM["unknown",ELLIPSOID["unknown",6371229,0,LENGTHUNIT["metre",1,ID["EPSG",9001]]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8901]]],CONVERSION["unknown",METHOD["Lambert Conic Conformal (1SP)",ID["EPSG",9801]],PARAMETER["Latitude of natural origin",25,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",265,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",1,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["(E)",east,ORDER[1],LENGTHUNIT["metre",1,ID["EPSG",9001]]],AXIS["(N)",north,ORDER[2],LENGTHUNIT["metre",1,ID["EPSG",9001]]]]'
+
+
+
+###### NARR Projection
+
+
+Extent
+
+(-5632668.0, 5664456.5, -4612566.5, 4347221.5)
+
+WKT
+
+'PROJCRS["unknown",BASEGEOGCRS["unknown",DATUM["unknown",ELLIPSOID["unknown",6371229,0,LENGTHUNIT["metre",1,ID["EPSG",9001]]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8901]]],CONVERSION["unknown",METHOD["Lambert Conic Conformal (1SP)",ID["EPSG",9801]],PARAMETER["Latitude of natural origin",50,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",253,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",1,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["(E)",east,ORDER[1],LENGTHUNIT["metre",1,ID["EPSG",9001]]],AXIS["(N)",north,ORDER[2],LENGTHUNIT["metre",1,ID["EPSG",9001]]]]'
+
+
+
+
+######  SODAK GOES East Projection
+
+PROJCRS["unknown",BASEGEOGCRS["unknown",DATUM["unknown",ELLIPSOID["GRS 1980",6378137,298.257222096042,LENGTHUNIT["metre",1,ID["EPSG",9001]]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8901]]],CONVERSION["unknown",METHOD["Geostationary Satellite (Sweep X)"],PARAMETER["Longitude of natural origin",-75,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Satellite Height",35786023,LENGTHUNIT["metre",1,ID["EPSG",9001]]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["(E)",east,ORDER[1],LENGTHUNIT["metre",1,ID["EPSG",9001]]],AXIS["(N)",north,ORDER[2],LENGTHUNIT["metre",1,ID["EPSG",9001]]],REMARK["PROJ CRS string: +proj=geos +a=6378137.0 +b=6356752.31414 +lon_0=-75.00000000000001 +lat_0=0.0 +h=35786023.0 +x_0=0 +y_0=0 +units=m +sweep=x +no_defs"]]
+
+
+#### WMO GRID 215
+
+VALUE	 GRID DESCRIPTIONS
+215 (U)[U]	 grid over the contiguous United States - Quadruple Resolution (used by the 29-km NAM model)(Lambert Conformal)
+
+
+Nx	369
+Ny	257
+La1	12.190N
+Lo1	226.541E = 133.459W
+Res. & Comp. Flag	0 0 0 0 1 0 0 0
+Lov	265.000E = 95.000W
+Dx	20.317625 km
+Dy	20.317625 km
+Projection Flag	0 (not biPolar)
+Scanning Mode (bits 1 2 3)	0 1 0
+Latin1	25.000N
+Latin2	25.000N (tangent cone)
+Lat/Lon values of the corners of the grid
+(001,001)	12.190N, 133.459W
+(001,257)	54.536N, 152.856W
+(369,257)	57.290N, 49.385W
+(369,001)	14.335N, 65.091W
+Pole point
+(I,J)	(209.000, 711.980)
+
+
+#### WMO GRID 211
+
+
+VALUE	 GRID DESCRIPTIONS
+211 (Q)	
+
+Nx	93
+Ny	65
+La1	12.190N
+Lo1	226.541E = 133.459W
+Res. & Comp. Flag	0 0 0 0 1 0 0 0
+Lov	265.000E = 95.000W
+Dx	81.2705 km
+Dy	81.2705 km
+Projection Flag	0 (not biPolar)
+Scanning Mode (bits 1 2 3)	0 1 0
+Latin1	25.000N
+Latin2	25.000N (tangent cone)
+Lat/Lon values of the corners of the grid
+(01,01)	12.190N, 133.459W
+(01,65)	54.536N, 152.856W
+(93,65)	57.290N, 49.385W
+(93,01)	14.335N, 65.091W
+Pole point
+(I,J)	(53.000, 178.745)
