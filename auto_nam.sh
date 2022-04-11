@@ -2,7 +2,7 @@
 echo on
 echo
 echo "Starting NAM 3-Panel on Cyclone"
-echo "Date: `date`"
+echo "Date:  `date`"
 echo
 echo
 DATESTRING=`date +"%Y-%m-%d_%H%M"`
