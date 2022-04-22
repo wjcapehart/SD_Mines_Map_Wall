@@ -7,6 +7,7 @@
 
 
 #Import the necessary packages
+import numpy as np
 import datetime as dt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
@@ -16,6 +17,11 @@ import noaa_sdk as noaa_sdk
 import pandas as pd
 import shapely as shapely
 from   metpy.plots       import  USCOUNTIES
+
+
+
+import timezonefinder    as tzf
+import pytz              as pytz
 
 
 import geopandas as gp
@@ -97,7 +103,7 @@ warning_priority_table = pd.read_csv("./warning_table_sorted.csv")
 warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"})
 
 
-# In[10]:
+# In[6]:
 
 
 
@@ -147,6 +153,19 @@ current_warnings = current_warnings.merge(warning_priority_table, how='left', on
 current_warnings = UGC_Shapefile.merge(current_warnings, how='right', on='UGC')
 current_warnings = current_warnings.sort_values("Rank", ascending=False)
 
+
+if (current_warnings['color'].isnull().values.any()):
+    print("Missing Colors Found")
+    locs_missing = current_warnings.index[current_warnings['color'].isnull()].tolist()
+    print(current_warnings.loc[locs_missing])
+
+  
+    for loc_missing in locs_missing:
+        current_warnings.loc[loc_missing,"color"] = 'red'
+    
+print("replaced")
+
+
 warning_color_table = current_warnings[["event","color"]].drop_duplicates()
 
 
@@ -156,7 +175,23 @@ print("done: ",i,"rows; ",len(warning_color_table),"event types")
 print()
 
 
-# In[11]:
+# In[7]:
+
+
+# check for missing colors.
+
+if (warning_color_table['color'].isnull().values.any()):
+    print("Missing Colors Found")
+    loc_missing = warning_color_table.index[warning_color_table['color'].isnull()].tolist()
+    print(loc_missing)
+    print(warning_color_table.loc[loc_missing])
+    warning_color_table.loc[loc_missing,"color"] = '#ffffff'
+    
+print("replaced")
+print(warning_color_table)
+
+
+# In[8]:
 
 
 legend_color_table = warning_color_table.values.tolist()
@@ -171,25 +206,13 @@ for row in warning_color_table.iterrows():
   
 
 
-# In[12]:
+# In[9]:
 
 
 print(warning_color_table)
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[13]:
+# In[10]:
 
 
 bbox=[-120,-73,22.5,50]
@@ -243,6 +266,60 @@ fig.legend(handles  = legend_color_table,
            loc      = 'right',
            frameon  = False,
            labelspacing = labelspacing)
+
+
+
+
+#########################################
+#
+# Insert a Clock
+#
+
+axins = fig.add_axes(rect     =    [0.015,
+                                    0.015,
+                                    0.12*8/9,
+                                    0.12],
+                      projection  =  "polar")
+
+time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+
+hour   = time_for_clock.hour
+minute = time_for_clock.minute
+second = time_for_clock.second
+
+circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+circle_radius = circle_theta * 0 + 1
+
+if (hour > 12) :
+    hour = hour - 12
+
+angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+
+print(time_for_clock)
+print(hour,   np.rad2deg(angles_h))
+print(minute, np.rad2deg(angles_m))
+
+
+plt.setp(axins.get_yticklabels(), visible=False)
+plt.setp(axins.get_xticklabels(), visible=False)
+axins.spines['polar'].set_visible(False)
+axins.set_ylim(0,1)
+axins.set_theta_zero_location('N')
+axins.set_theta_direction(-1)
+axins.set_facecolor("white")
+axins.grid(False)
+
+axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+
+display(axins)
+
+#
+#########################################
+        
+        
 plt.savefig(gif_file_name)
 
 
@@ -250,6 +327,18 @@ plt.close()
 
 
 print("done")
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
