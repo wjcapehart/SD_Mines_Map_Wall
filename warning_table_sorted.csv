@@ -101,6 +101,7 @@ FA.W,FA,W,seagreen,Areal Flood Warning,19
 FF.W,FF,W,darkred,Flash Flood Warning,18
 FL.W,FL,W,green,Flood Warning,17
 SE.W,SE,W,thistle,Hazardous Seas Warning,16
+FW.W,FW,W,darkred,Fire Warning,16.5
 SQ.W,SQ,W,#EF2B1C,Snow Squall Warning,15
 BZ.W,BZ,W,orangered,Blizzard Warning,14
 SR.W,SR,W,darkorchid,Storm Warning,13

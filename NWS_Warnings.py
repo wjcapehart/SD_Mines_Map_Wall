@@ -275,8 +275,8 @@ fig.legend(handles  = legend_color_table,
 # Insert a Clock
 #
 
-axins = fig.add_axes(rect     =    [0.015,
-                                    0.015,
+axins = fig.add_axes(rect     =    [0, # 0.015,
+                                    1-0.12, #0.015,
                                     0.12*8/9,
                                     0.12],
                       projection  =  "polar")
@@ -326,6 +326,18 @@ plt.close()
 
 
 print("done")
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
