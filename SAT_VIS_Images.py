@@ -57,7 +57,7 @@ image_header_label = "GOES 16 Band 2 [0.64 µm Visible Red]"
 
 image_date = datetime.utcnow().date()
 region = 'CONUS'
-channel = 2
+channel = 3
 
 # We want to match something like:
 # https://thredds-test.unidata.ucar.edu/thredds/catalog/satellite/goes16/GOES16/Mesoscale-1/Channel08/20181113/catalog.html
@@ -154,6 +154,13 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         ds = dataset.remote_access(use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
         proj = dat.metpy.cartopy_crs
+        
+        
+        frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
+        print("Fraction of Missings : ", frac_missing)
+        
+        # critical missing fraction for CONUS GOES = 0.012590883333333334
+        
         x = dat['x']
         y = dat['y']
 
@@ -184,7 +191,13 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
         
 
-        im = ax.imshow(np.sqrt(dat), extent=(x.min(), x.max(), y.min(), y.max()), origin='upper',cmap='Greys_r',vmax=np.sqrt(.7),vmin=np.sqrt(0))
+        im = ax.imshow(             np.sqrt(dat), 
+                       extent=(x.min(), x.max(), 
+                               y.min(), y.max()), 
+                       origin =          'upper',
+                       cmap   =        'Greys_r',
+                       vmax   =     np.sqrt(1.0),
+                       vmin   =     np.sqrt(0.0))
 
         #wv_cmap = colortables.get_colortable('WVCIMSS_r')
         #im.set_cmap(wv_cmap)

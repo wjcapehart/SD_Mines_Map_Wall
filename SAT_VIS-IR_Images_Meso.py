@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Infrared Meso 1 & 2 + SODAK
+# # Blended Meso 1 & 2 + SODAK
 
 # In[ ]:
 
@@ -17,6 +17,7 @@ from metpy.plots    import add_timestamp
 from datetime       import datetime
 from siphon.catalog import TDSCatalog
 from datetime       import datetime
+
 
 import numpy             as np
 import os                as os
@@ -38,6 +39,57 @@ import matplotlib.patches as patches
 ##################################################
 
 
+# In[ ]:
+
+
+##################################################
+#
+# Channel Labels
+#
+
+channel_vis =                        3
+channel_tir =                       13
+
+channel_lab = [' Channel Zero',                     #  0
+               ' [0.47 µm Blue-Visible]',           #  1
+               ' [0.64 µm Red-Visible]',            #  2
+               ' [0.86 µm Vegetation Near-IR]',     #  3
+               ' [1.37 µm Cirrus Near-IR]',         #  4
+               ' [1.6 µm Snow/Ice Near-IR]',        #  5
+               ' [2.2 µm Cloud Particle Near-IR]',  #  6
+               ' [3.9 µm Middle Infrared]',         #  7
+               ' [6.2 µm Upper-Level Water Vapor]', #  8
+               ' [6.9 µm Mid-Level Water Vapor]',   #  9
+               ' [7.3 µm Low-Level Water Vapor]',   # 10
+               ' [8.4 µm Cloud-Top Infrared]',      # 11
+               ' [9.6 µm Ozone Infrared]',          # 12
+               ' [10.3 µm Clean IR Window]',        # 13
+               ' [11.2 µm Middle IR Window]',       # 14
+               ' [12.3 µm Dirty IR Window]',        # 15
+               ' [13.3 µm CO₂ Infrared]']           # 16
+
+gif_file_name1  = "./graphics_files/RealTime_SAT_IR_Meso1_Loop.gif"
+gif_file_name2  = "./graphics_files/RealTime_SAT_IR_Meso2_Loop.gif"
+gif_file_name3  = "./graphics_files/RealTime_SAT_IR_SODAK_Loop.gif"
+gif_file_name12 = "./graphics_files/RealTime_SAT_IR_Meso12_Loop.gif"
+
+i_rap_t      =  801
+j_rap_t      =  231
+
+imin_rap_tir =  551 # i_rap-250
+imax_rap_tir = 1051 # i_rap+250
+jmin_rap_tir =    0 # j_rap-250+19
+jmax_rap_tir =  500 # j_rap+250-19
+
+imin_rap_vis = 1103 # np.argmin(np.abs(x_vis-x_min_t).values)
+imax_rap_vis = 2102 # np.argmin(np.abs(x_vis-x_max_t).values)
+jmin_rap_vis =    0 # np.argmin(np.abs(y_vis-y_min_t).values)
+jmax_rap_vis = 1000 # np.argmin(np.abs(y_vis-y_max_t).values)
+
+#
+##################################################
+
+
 # ## Meso Floater 1
 
 # In[ ]:
@@ -52,35 +104,45 @@ import matplotlib.patches as patches
 
 total_frames = int(45*2 * 0.8)
 
-png_processing_directory = "./temp_files_sat_ir_meso1/"
-
-gif_file_name1 = "./graphics_files/RealTime_SAT_IR_Meso1_Loop.gif"
-gif_file_name2 = "./graphics_files/RealTime_SAT_IR_Meso2_Loop.gif"
-gif_file_name3 = "./graphics_files/RealTime_SAT_IR_SODAK_Loop.gif"
-gif_file_name12 = "./graphics_files/RealTime_SAT_IR_Meso12_Loop.gif"
-
-
-image_header_label = "GOES 16 Meso1 Band 13 [10.3 µm Clean LW IR Window]"
-
 # Cell content replaced by load magic replacement.
 
 # Create variables for URL generation
 
-image_date = datetime.utcnow().date()
-region = 'Mesoscale-1'
-channel = 13
+image_date  = datetime.utcnow().date()
+region      =            'Mesoscale-1'
+
+if (region == 'Mesoscale-1') :
+    region_lab               = " Meso-1 Band "
+    png_processing_directory = "./temp_files_sat_meso1/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_Meso1_Loop.gif"
+
+if (region == 'Mesoscale-2') :
+    region_lab               = ' Meso-2 Band '
+    png_processing_directory = "./temp_files_sat_meso2/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_Meso2_Loop.gif"
+
+    
+if (region == 'CONUS') :
+    region_lab               = ' SODAK Band '
+    png_processing_directory = "./temp_files_sat_sodak/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_SODAK_Loop.gif"
 
 # We want to match something like:
 # https://thredds-test.unidata.ucar.edu/thredds/catalog/satellite/goes16/GOES16/Mesoscale-1/Channel08/20181113/catalog.html
 
 # Construct the data_url string
 
-data_url = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
-            f'CloudAndMoistureImagery/{region}/Channel{channel:02d}/current/catalog.xml')
+data_url_vis = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
+                f'CloudAndMoistureImagery/{region}/Channel{channel_vis:02d}/current/catalog.xml')
+
+data_url_tir = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
+                f'CloudAndMoistureImagery/{region}/Channel{channel_tir:02d}/current/catalog.xml')
+
 
 # Print out your URL and verify it works!
 
-print(data_url)
+print(data_url_vis)
+print(data_url_tir)
 
 #
 ##################################################
@@ -94,7 +156,8 @@ print(data_url)
 # Pull Catalog
 #
 
-cat = TDSCatalog(data_url)
+cat_vis = TDSCatalog(data_url_vis)
+cat_tir = TDSCatalog(data_url_tir)
 
 #
 ##################################################
@@ -112,11 +175,12 @@ file_names_to_retain = list()
 file_names_to_use    = list()
 
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
-    filename = png_processing_directory + cat.datasets[i].name.replace(".nc",".png")
+for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+    filename = cat_vis.datasets[i].name.replace(".nc",".png")
+    filename = filename[:20] + "xx" + filename[22:]
+    filename = png_processing_directory + filename
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-
         
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
 
@@ -124,7 +188,6 @@ file_names_to_retain.sort()
 file_names_to_use.sort()
 
 file_names_to_use_meso1 = file_names_to_use.copy()
-
 
 #
 ##################################################    
@@ -156,31 +219,54 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
+for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
 
-    dataset = cat.datasets[i]
+    dataset_vis = cat_vis.datasets[i]
+    dataset_tir = cat_tir.datasets[i]
+
     
-    dataset_png_file_name = png_processing_directory + dataset.name.replace(".nc", ".png")
+    filename = dataset_vis.name.replace(".nc", ".png")
+    filename = filename[:20] + "xx" + filename[22:]
+    dataset_png_file_name = png_processing_directory + filename
+    
+    
     
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
+        
+        channel = channel_vis
 
-        ds = dataset.remote_access(use_xarray=True)
+        ds  = dataset_vis.remote_access(use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
+        
+        print("pixels : ",channel,dat.values.shape)
+        
+        frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
+        print("Fraction of Missings : ", frac_missing)
+        
+        if(frac_missing > 0.05):
+            print("Switching to IR")
+            channel = channel_tir
+            ds      = dataset_tir.remote_access(use_xarray=True)
+            dat     = ds.metpy.parse_cf('Sectorized_CMI')
+        
         proj = dat.metpy.cartopy_crs
         x = dat['x']
         y = dat['y']
+        
+        #if(any(dat == np.nan):
+        
 
 
-        tz='America/Denver'
+        tz         = 'America/Denver'
         time_utc   = datetime.strptime(ds.start_date_time, '%Y%j%H%M%S')
         valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H:%M:%S %Z")
         local_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H:%M:%S %Z")
 
         file_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d_%H%M")
 
-
         print(valid_time,local_time)
 
+        image_header_label = "GOES 16" + region_lab + str(channel)+ channel_lab[channel]
 
 
         fig = plt.figure(figsize=(8, 8), facecolor = 'white')
@@ -190,18 +276,34 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
                      color    = "black")
         ax = fig.add_subplot(1, 1, 1, projection=proj)
         ax.set_title(valid_time + "  (" + local_time+")",
-                        fontsize=15, color="black")
-        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2)
+                     fontsize =      15, 
+                     color    = "black")
+        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
-        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=2, edgecolor='black')
+        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor='black')
         
+        
+        if (channel >= 7):
 
-        # print("range dat = ",np.nanmin(dat.values),np.nanmax(dat.values))
-        im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper')
+            im = ax.imshow(                        dat, 
+                           extent = [x.min(), x.max(), 
+                                     y.min(), y.max()], 
+                           origin =            'upper')
 
-        wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
-        im.set_cmap(wv_cmap)
-        im.set_norm(wv_norm)
+            wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
+
+            im.set_cmap(wv_cmap)
+            im.set_norm(wv_norm)
+        else:
+            im = ax.imshow(              np.sqrt(dat), 
+                           extent = (x.min(), x.max(), 
+                                     y.min(), y.max()), 
+                           origin =            'upper',
+                           cmap   =          'Greys_r',
+                           vmin   =        np.sqrt(0),
+                           vmax   =        np.sqrt(1))
+
+
 
         #########################################
         #
@@ -243,7 +345,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         axins.set_facecolor("white")
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 
@@ -279,11 +381,17 @@ os.system("convert -delay 10 " +
           " " + 
           gif_file_name1)
 
-print("completed "+ gif_file_name1)
+print("completed "+ gif_file_name)
 
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -318,36 +426,49 @@ print("completed "+ gif_file_name1)
 
 total_frames = int(45*2 * 0.8)
 
-
-png_processing_directory = "./temp_files_sat_ir_meso2/"
-
-gif_file_name1  = "./graphics_files/RealTime_SAT_IR_Meso1_Loop.gif"
-gif_file_name2  = "./graphics_files/RealTime_SAT_IR_Meso2_Loop.gif"
-gif_file_name3  = "./graphics_files/RealTime_SAT_IR_SODAK_Loop.gif"
-gif_file_name12 = "./graphics_files/RealTime_SAT_IR_Meso12_Loop.gif"
-
-
-image_header_label = "GOES 16 Meso2 Band 13 [10.3 µm Clean LW IR Window]"
-
 # Cell content replaced by load magic replacement.
 
 # Create variables for URL generation
 
-image_date = datetime.utcnow().date()
-region = 'Mesoscale-2'
-channel = 13
+image_date  = datetime.utcnow().date()
+region      =            'Mesoscale-2'
+
+if (region == 'Mesoscale-1') :
+    region_lab               = " Meso-1 Band "
+    png_processing_directory = "./temp_files_sat_meso1/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_Meso1_Loop.gif"
+
+if (region == 'Mesoscale-2') :
+    region_lab               = ' Meso-2 Band '
+    png_processing_directory = "./temp_files_sat_meso2/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_Meso2_Loop.gif"
+
+    
+if (region == 'CONUS') :
+    region_lab               = ' SODAK Band '
+    png_processing_directory = "./temp_files_sat_sodak/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_SODAK_Loop.gif"
+
+
+
+
 
 # We want to match something like:
 # https://thredds-test.unidata.ucar.edu/thredds/catalog/satellite/goes16/GOES16/Mesoscale-1/Channel08/20181113/catalog.html
 
 # Construct the data_url string
 
-data_url = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
-            f'CloudAndMoistureImagery/{region}/Channel{channel:02d}/current/catalog.xml')
+data_url_vis = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
+                f'CloudAndMoistureImagery/{region}/Channel{channel_vis:02d}/current/catalog.xml')
+
+data_url_tir = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
+                f'CloudAndMoistureImagery/{region}/Channel{channel_tir:02d}/current/catalog.xml')
+
 
 # Print out your URL and verify it works!
 
-print(data_url)
+print(data_url_vis)
+print(data_url_tir)
 
 #
 ##################################################
@@ -361,7 +482,8 @@ print(data_url)
 # Pull Catalog
 #
 
-cat = TDSCatalog(data_url)
+cat_vis = TDSCatalog(data_url_vis)
+cat_tir = TDSCatalog(data_url_tir)
 
 #
 ##################################################
@@ -379,14 +501,14 @@ file_names_to_retain = list()
 file_names_to_use    = list()
 
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
-    filename = png_processing_directory + cat.datasets[i].name.replace(".nc",".png")
+for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+    filename = cat_vis.datasets[i].name.replace(".nc",".png")
+    filename = filename[:20] + "xx" + filename[22:]
+    filename = png_processing_directory + filename
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-
         
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
-
 
 file_names_to_retain.sort()
 file_names_to_use.sort()
@@ -395,7 +517,7 @@ file_names_to_use_meso2 = file_names_to_use.copy()
 
 
 #
-##################################################   
+##################################################  
 
 
 # In[ ]:
@@ -413,7 +535,7 @@ for filename in files_on_hand:
     else:
         print("Keeping ", filename )
 #
-##################################################  
+##################################################
 
 
 # In[ ]:
@@ -424,31 +546,52 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
+for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
 
-    dataset = cat.datasets[i]
+    dataset_vis = cat_vis.datasets[i]
+    dataset_tir = cat_tir.datasets[i]
+
     
-    dataset_png_file_name = png_processing_directory + dataset.name.replace(".nc", ".png")
+    filename = dataset_vis.name.replace(".nc", ".png")
+    filename = filename[:20] + "xx" + filename[22:]
+    dataset_png_file_name = png_processing_directory + filename
+    
+    
     
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
+        
+        channel = channel_vis
 
-        ds = dataset.remote_access(use_xarray=True)
+        ds  = dataset_vis.remote_access(use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
+        
+        frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
+        print("Fraction of Missings : ", frac_missing)
+        
+        if(frac_missing > 0.05):
+            print("Switching to IR")
+            channel = channel_tir
+            ds      = dataset_tir.remote_access(use_xarray=True)
+            dat     = ds.metpy.parse_cf('Sectorized_CMI')
+        
         proj = dat.metpy.cartopy_crs
         x = dat['x']
         y = dat['y']
+        
+        #if(any(dat == np.nan):
+        
 
 
-        tz='America/Denver'
+        tz         = 'America/Denver'
         time_utc   = datetime.strptime(ds.start_date_time, '%Y%j%H%M%S')
         valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H:%M:%S %Z")
         local_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H:%M:%S %Z")
 
         file_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d_%H%M")
 
-
         print(valid_time,local_time)
 
+        image_header_label = "GOES 16" + region_lab + str(channel)+ channel_lab[channel]
 
 
         fig = plt.figure(figsize=(8, 8), facecolor = 'white')
@@ -458,20 +601,35 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
                      color    = "black")
         ax = fig.add_subplot(1, 1, 1, projection=proj)
         ax.set_title(valid_time + "  (" + local_time+")",
-                        fontsize=15, color="black")
-        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2)
+                     fontsize =      15, 
+                     color    = "black")
+        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
-        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=2, edgecolor='black')
+        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor='black')
         
+        
+        if (channel >= 7):
 
-        #print("range dat = ",np.nanmin(dat.values),np.nanmax(dat.values))
-        im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper')
+            im = ax.imshow(                        dat, 
+                           extent = [x.min(), x.max(), 
+                                     y.min(), y.max()], 
+                           origin =            'upper')
 
-        wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
-        im.set_cmap(wv_cmap)
-        im.set_norm(wv_norm)
-        
-        
+            wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
+
+            im.set_cmap(wv_cmap)
+            im.set_norm(wv_norm)
+        else:
+            im = ax.imshow(              np.sqrt(dat), 
+                           extent = (x.min(), x.max(), 
+                                     y.min(), y.max()), 
+                           origin =            'upper',
+                           cmap   =          'Greys_r',
+                           vmin   =        np.sqrt(0),
+                           vmax   =        np.sqrt(1))
+
+
+
         #########################################
         #
         # Insert a Clock
@@ -512,17 +670,14 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         axins.set_facecolor("white")
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 
 
         
         #
-        #########################################        
-        
-
-        
+        #########################################             
         plt.tight_layout()
         
         plt.savefig( dataset_png_file_name)
@@ -546,12 +701,12 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso2)
 
-os.system("convert -delay 15 " + 
+os.system("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name2)
 
-print("completed "+ gif_file_name2)
+print("completed "+ gif_file_name)
 
 
 #
@@ -588,13 +743,7 @@ print("completed "+ gif_file_name2)
 
 
 
-# In[ ]:
-
-
-
-
-
-# ## South Dakota Images
+# # SODAK Subset form 
 
 # In[ ]:
 
@@ -608,39 +757,51 @@ print("completed "+ gif_file_name2)
 
 total_frames = int(45*2 * 0.8)
 
-
-png_processing_directory = "./temp_files_sat_ir_sodak/"
-
-gif_file_name1 = "./graphics_files/RealTime_SAT_IR_Meso1_Loop.gif"
-gif_file_name2 = "./graphics_files/RealTime_SAT_IR_Meso2_Loop.gif"
-gif_file_name3 = "./graphics_files/RealTime_SAT_IR_SODAK_Loop.gif"
-gif_file_name12 = "./graphics_files/RealTime_SAT_IR_Meso12_Loop.gif"
-
-
-image_header_label = "GOES 16 SODAK Band 13 [10.3 µm Clean LW IR Window]"
-
-
 # Cell content replaced by load magic replacement.
 
 # Create variables for URL generation
 
-image_date = datetime.utcnow().date()
-region = 'CONUS'
-channel = 13
+image_date  = datetime.utcnow().date()
+region      =                   'CONUS'
+
+if (region == 'Mesoscale-1') :
+    region_lab               = " Meso-1 Band "
+    png_processing_directory = "./temp_files_sat_meso1/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_Meso1_Loop.gif"
+
+if (region == 'Mesoscale-2') :
+    region_lab               = ' Meso-2 Band '
+    png_processing_directory = "./temp_files_sat_meso2/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_Meso2_Loop.gif"
+
+    
+if (region == 'CONUS') :
+    region_lab               = ' SODAK Band '
+    png_processing_directory = "./temp_files_sat_sodak/"
+    gif_file_name            = "./graphics_files/RealTime_SAT_SODAK_Loop.gif"
+
+
+
+
 
 # We want to match something like:
 # https://thredds-test.unidata.ucar.edu/thredds/catalog/satellite/goes16/GOES16/Mesoscale-1/Channel08/20181113/catalog.html
 
 # Construct the data_url string
 
-data_url = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
-            f'CloudAndMoistureImagery/{region}/Channel{channel:02d}/current/catalog.xml')
+data_url_vis = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
+                f'CloudAndMoistureImagery/{region}/Channel{channel_vis:02d}/current/catalog.xml')
+
+data_url_tir = ('https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/'
+                f'CloudAndMoistureImagery/{region}/Channel{channel_tir:02d}/current/catalog.xml')
+
 
 # Print out your URL and verify it works!
 
-print(data_url)
+print(data_url_vis)
+print(data_url_tir)
 
-#
+
 ##################################################
 
 
@@ -652,7 +813,9 @@ print(data_url)
 # Pull Catalog
 #
 
-cat = TDSCatalog(data_url)
+cat_vis = TDSCatalog(data_url_vis)
+cat_tir = TDSCatalog(data_url_tir)
+
 
 #
 ##################################################
@@ -670,14 +833,14 @@ file_names_to_retain = list()
 file_names_to_use    = list()
 
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
-    filename = png_processing_directory + cat.datasets[i].name.replace(".nc",".png")
+for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+    filename = cat_vis.datasets[i].name.replace(".nc",".png")
+    filename = filename[:19] + "xx" + filename[21:]
+    filename = png_processing_directory + filename
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-
         
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
-
 
 file_names_to_retain.sort()
 file_names_to_use.sort()
@@ -704,7 +867,7 @@ for filename in files_on_hand:
     else:
         print("Keeping ", filename )
 #
-##################################################  
+##################################################
 
 
 # In[ ]:
@@ -715,40 +878,54 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-i_rap    = 801
-j_rap    = 231
-imin_rap = i_rap-250
-imax_rap = i_rap+250
-jmin_rap = j_rap-250+19
-jmax_rap = j_rap+250-19
+for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
 
+    dataset_vis = cat_vis.datasets[i]
+    dataset_tir = cat_tir.datasets[i]
 
-
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
-
-    dataset = cat.datasets[i]
     
-    dataset_png_file_name = png_processing_directory + dataset.name.replace(".nc", ".png")
+    filename = dataset_vis.name.replace(".nc", ".png")
+    filename = filename[:19] + "xx" + filename[21:]
+    dataset_png_file_name = png_processing_directory + filename
+    
+    
     
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
+        
+        channel  = channel_vis
 
-        ds = dataset.remote_access(use_xarray=True)
-        dat = ds.metpy.parse_cf('Sectorized_CMI')
+
+        ds  = dataset_vis.remote_access(use_xarray=True)
+        dat = ds.metpy.parse_cf('Sectorized_CMI')[jmin_rap_vis : jmax_rap_vis,
+                                                  imin_rap_vis : imax_rap_vis]
+        
+
+        
+        frac_missing = np.isnan(dat.values).sum() / np.isnan(dat.values).size
+            
+        print("Fraction of Missings : ", frac_missing)
+        
+        if(frac_missing > 0.05):
+            print("Switching to IR")
+            channel = channel_tir
+            ds      = dataset_tir.remote_access(use_xarray=True)
+            dat     = ds.metpy.parse_cf('Sectorized_CMI')[jmin_rap_tir : jmax_rap_tir,
+                                                          imin_rap_tir : imax_rap_tir] 
+
+        x    = dat['x']       
+        y    = dat['y']
         proj = dat.metpy.cartopy_crs
-        x = dat['x'][imin_rap:imax_rap]
-        y = dat['y'][jmin_rap:jmax_rap]
-
-
-        tz='America/Denver'
+        
+        tz         = 'America/Denver'
         time_utc   = datetime.strptime(ds.start_date_time, '%Y%j%H%M%S')
         valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H:%M:%S %Z")
         local_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H:%M:%S %Z")
 
         file_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d_%H%M")
 
-
         print(valid_time,local_time)
 
+        image_header_label = "GOES 16" + region_lab + str(channel)+ channel_lab[channel]
 
 
         fig = plt.figure(figsize=(8, 8), facecolor = 'white')
@@ -758,28 +935,42 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
                      color    = "black")
         ax = fig.add_subplot(1, 1, 1, projection=proj)
         ax.set_title(valid_time + "  (" + local_time+")",
-                        fontsize=15, color="black")
-        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2)
+                     fontsize =      15, 
+                     color    = "black")
+        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
-        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=2, edgecolor='black')
+        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor='black')
         
-
-        #print("range dat = ",np.nanmin(dat.values),np.nanmax(dat.values))
-        im = ax.imshow(dat[jmin_rap:jmax_rap,imin_rap:imax_rap], 
-                       extent = (x.min(), x.max(), y.min(), y.max()), 
-                       origin = 'upper')
-
-        wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
-        im.set_cmap(wv_cmap)
-        im.set_norm(wv_norm)
         
+        if (channel >= 7):
+
+            im = ax.imshow(                       dat, 
+                           extent = [x.min(), x.max(), 
+                                     y.min(), y.max()], 
+                           origin =            'upper')
+
+            wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
+
+            im.set_cmap(wv_cmap)
+            im.set_norm(wv_norm)
+        else:
+            im = ax.imshow(              np.sqrt(dat), 
+                           extent = (x.min(), x.max(), 
+                                     y.min(), y.max()), 
+                           origin =            'upper',
+                           cmap   =          'Greys_r',
+                           vmin   =        np.sqrt(0),
+                           vmax   =        np.sqrt(1))
+
+
+
         #########################################
         #
         # Insert a Clock
         #
         
-        axins = fig.add_axes(rect     =    [0.02,
-                                            0.81,
+        axins = fig.add_axes(rect     =    [0.065,
+                                            0.795,
                                             0.12*0.65306121,
                                             0.12],
                               projection  =  "polar")
@@ -813,7 +1004,7 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         axins.set_facecolor("white")
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
+        axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 
@@ -821,8 +1012,6 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         
         #
         #########################################             
-
-        
         plt.tight_layout()
         
         plt.savefig( dataset_png_file_name)
@@ -846,12 +1035,12 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso3)
 
-os.system("convert -delay 15 " + 
+os.system("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name3)
 
-print("completed "+ gif_file_name3)
+print("completed "+ gif_file_name)
 
 
 #
@@ -863,6 +1052,14 @@ print("completed "+ gif_file_name3)
 
 
 
+
+# In[ ]:
+
+
+
+
+
+# ## Aggregate
 
 # In[ ]:
 
@@ -872,7 +1069,7 @@ print("completed "+ gif_file_name3)
 # Convert PNGs into an Animated GIF
 #
 
-file_names_to_use_meso12 = file_names_to_use_meso3 + file_names_to_use_meso1 + file_names_to_use_meso2
+file_names_to_use_meso12 = file_names_to_use_meso1 + file_names_to_use_meso2 + file_names_to_use_meso3
 
 big_string = " ".join(file_names_to_use_meso12)
 
@@ -885,15 +1082,6 @@ print("completed "+gif_file_name12)
 
 #
 ##################################################
-
-
-# In[ ]:
-
-
-print("--- GOES SD WKT" )
-print(proj.to_wkt())
-print("--- GOES SD Extent")
-print(ax.get_aspect())
 
 
 # In[ ]:

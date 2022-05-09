@@ -15,7 +15,7 @@ echo
 echo  "Firing Things Up!"
 echo
 . source /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/SAT_WV_Images.py > /projects/SD_Mines_Map_Wall/__log_sat_wv.log 2>&1
-. source /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/SAT_IR_Images_Meso.py > /projects/SD_Mines_Map_Wall/__log_sat_ir_Meso.log 2>&1
+. source /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/SAT_VIS-IR_Images_Meso.py > /projects/SD_Mines_Map_Wall/__log_sat_Meso.log 2>&1
 echo
 echo "Ending Script"
 echo
