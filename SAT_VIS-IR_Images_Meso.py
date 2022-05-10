@@ -81,10 +81,10 @@ imax_rap_tir = 1051 # i_rap+250
 jmin_rap_tir =    0 # j_rap-250+19
 jmax_rap_tir =  500 # j_rap+250-19
 
-imin_rap_vis = 1103 # np.argmin(np.abs(x_vis-x_min_t).values)
-imax_rap_vis = 2102 # np.argmin(np.abs(x_vis-x_max_t).values)
-jmin_rap_vis =    0 # np.argmin(np.abs(y_vis-y_min_t).values)
-jmax_rap_vis = 1000 # np.argmin(np.abs(y_vis-y_max_t).values)
+imin_rap_vis = 1103*2 # np.argmin(np.abs(x_vis-x_min_t).values)
+imax_rap_vis = 2102*2 # np.argmin(np.abs(x_vis-x_max_t).values)
+jmin_rap_vis =    0*2 # np.argmin(np.abs(y_vis-y_min_t).values)
+jmax_rap_vis = 1000*2 # np.argmin(np.abs(y_vis-y_max_t).values)
 
 #
 ##################################################
