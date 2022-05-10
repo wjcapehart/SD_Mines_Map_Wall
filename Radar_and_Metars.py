@@ -289,6 +289,7 @@ for name in datasets_sorted:
 ####################################################
 
 
+
 # In[ ]:
 
 
@@ -532,7 +533,7 @@ if (len(sorted(catalog.datasets)) > 0) :
 
 
 
-        plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
+        plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(3)+".png")
         counter = counter + 1
         figure_counter = figure_counter + 1
 
@@ -767,7 +768,7 @@ if (len(sorted(catalog.datasets)) == 0) :
                                  transform = ax.transAxes)
         ax.add_patch(rect)
 
-        plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(2)+".png")
+        plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(counter).zfill(3)+".png")
         counter = counter + 1
         figure_counter = figure_counter + 1
 
