@@ -76,7 +76,7 @@ import airportsdata as airpt
 os.system("rm -v ./temp_files_radar/*")
 
 time_now   = datetime.utcnow()
-time_start = time_now - timedelta(hours=3)
+time_start = time_now - timedelta(hours=2)
 
 print(time_start)
 print(time_now)
@@ -90,8 +90,8 @@ siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 print(siphon_pulls_YYYYMMDD_HH)
 
 
-geospatial_lat_min =  42.05982
-geospatial_lat_max = 46.19018
+geospatial_lat_min =   42.05982
+geospatial_lat_max =   46.19018
 
 geospatial_lon_min = -105.70986
 geospatial_lon_max =  -99.950134
