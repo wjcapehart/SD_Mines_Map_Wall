@@ -47,7 +47,7 @@ import matplotlib.patches as patches
 # Channel Labels
 #
 
-channel_vis =                        3
+channel_vis =                        2
 channel_tir =                       13
 
 channel_lab = [' Channel Zero',                     #  0
