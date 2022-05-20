@@ -11,8 +11,6 @@
 # Libraries
 #
 
-MAINDIR = os.getcwd()
-print(MAINDIR)
 
 
 
@@ -51,6 +49,9 @@ import matplotlib.patches as patches
 #
 # Channel Labels
 #
+
+MAINDIR = os.getcwd()
+print(MAINDIR)
 
 channel_vis =                        2
 channel_tir =                       13
