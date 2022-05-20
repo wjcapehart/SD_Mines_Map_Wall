@@ -376,7 +376,7 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso1)
 
-os.system("convert -delay 10 " + 
+os.system(". ~/.bashrc; convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name1)
@@ -701,7 +701,7 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso2)
 
-os.system("convert -delay 10 " + 
+os.system(". ~/.bashrc; convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name2)
@@ -1035,7 +1035,7 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso3)
 
-os.system("convert -delay 10 " + 
+os.system(". ~/.bashrc; convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name3)
@@ -1073,7 +1073,7 @@ file_names_to_use_meso12 = file_names_to_use_meso1 + file_names_to_use_meso2 + f
 
 big_string = " ".join(file_names_to_use_meso12)
 
-os.system("convert -delay 10 " + 
+os.system(". ~/.bashrc; convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name12)

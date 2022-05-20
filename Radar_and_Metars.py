@@ -5,7 +5,7 @@
 # 
 # Creates an Animated Plot for Radar and Station Models
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -66,7 +66,7 @@ from joblib import Parallel, delayed
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ####################################################
@@ -124,7 +124,7 @@ norm, cmap = colortables.get_with_steps("NWSStormClearReflectivity",
 ####################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -151,13 +151,13 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 ####################################################
 
 
-# In[4]:
+# In[ ]:
 
 
 tz
 
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -251,7 +251,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 ####################################################
 
 
-# In[6]:
+# In[ ]:
 
 
 ####################################################
@@ -284,9 +284,25 @@ number_of_figures = len(sorted(catalog.datasets))
 number_of_figures = len(sorted(catalog.datasets))
 print("Number of Radar Images=",number_of_figures)
 
+dates_for_radar  = []
+
+
+print("start time: ",time_start)
+
 for name in datasets_sorted:
-    ds = catalog.datasets[name]
-    print(ds)
+    
+    datetime_string = datetime.strptime(name[15:28], "%Y%m%d_%H%M")
+    dates_for_radar.append(datetime_string)
+
+    if (name == datasets_sorted[0]):
+        print(" - ",datetime_string, dates_for_radar[-1]-time_start)
+    else:
+        print(" - ",datetime_string, (dates_for_radar[-1]-dates_for_radar[-2]))
+        
+print("  end time: ",time_now)
+
+    
+    
     
 #
 ####################################################
@@ -301,7 +317,7 @@ for name in datasets_sorted:
 
 
 
-# In[7]:
+# In[ ]:
 
 
 def radar_plotting_func(name_index):
@@ -553,7 +569,7 @@ def radar_plotting_func(name_index):
 
 
 
-# In[8]:
+# In[ ]:
 
 
 ####################################################
@@ -591,7 +607,7 @@ print("Done")
 #####################################################
 
 
-# In[9]:
+# In[ ]:
 
 
 #####################################################
@@ -822,7 +838,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 ####################################################
 
 
-# In[10]:
+# In[ ]:
 
 
 ##################################################
@@ -830,7 +846,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 # Convert PNGs into an Animated GIF
 #
 
-os.system("convert -delay 25 " + 
+os.system(". ~/bashrc; convert -delay 25 " + 
           "./temp_files_radar/Radar_Loop_Image_*.png"  + 
           " " + 
           "./graphics_files/RealTime_Radar_Loop.gif")

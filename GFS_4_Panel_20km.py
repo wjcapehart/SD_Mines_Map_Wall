@@ -914,7 +914,7 @@ for i in range(len(times_utc)) :
 # Convert PNGs into an Animated GIF
 #
 
-os.system("convert -delay 25 " + 
+os.system(". ~/.bashrc; convert -delay 25 " + 
           png_file_root + "*.png"  + 
           " " + 
           gif_file_name)

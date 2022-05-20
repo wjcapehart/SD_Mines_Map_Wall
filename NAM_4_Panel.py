@@ -3,7 +3,7 @@
 
 # #### NAM 4-panel
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -74,7 +74,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
                 clip_on=True, horizontalalignment='center', verticalalignment='center',
                 transform=transform)
         ax2.text(lon[mxy[i], mxx[i]], lat[mxy[i], mxx[i]],
-                '\n' + str(np.int(data[mxy[i], mxx[i]])),
+                '\n' + str(int(data[mxy[i], mxx[i]])),
                 color=color, size=12, clip_on=True, fontweight='bold',
                 horizontalalignment='center', verticalalignment='top', transform=transform)
 
@@ -84,7 +84,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ###################################################
@@ -125,7 +125,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -160,7 +160,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[4]:
+# In[ ]:
 
 
 ####################################################
@@ -216,7 +216,7 @@ print(nam_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -230,7 +230,7 @@ nam_model = xr.open_dataset(nam_opendap_url)
 
 nam_model = nam_model.metpy.parse_cf()
 
-data_crs = nam_model.metpy_crs.metpy.cartopy_crs
+nam_crs = nam_model.metpy_crs.metpy.cartopy_crs
 
 eastings1d  = nam_model["x"]
 northings1d = nam_model["y"]
@@ -240,14 +240,11 @@ eastings2d, northings2d = np.meshgrid(eastings1d,northings1d)
 eastings_range  = [np.min(eastings1d),  np.max(eastings1d)]
 northings_range = [np.min(northings1d), np.max(northings1d)]
 
-pyproj_nam = pyproj.Proj(data_crs)
+pyproj_nam = pyproj.Proj(nam_crs)
 
 lon2d, lat2d = pyproj_nam(eastings2d,
                           northings2d,
                           inverse=True)
-
-
-
 
 coriolis = metpy.calc.coriolis_parameter(lat2d*np.pi/180)
 coriolis = coriolis.magnitude
@@ -283,7 +280,7 @@ coriolis = coriolis.magnitude
 
 # ## Fetch Data for Panel Displays
 
-# In[6]:
+# In[ ]:
 
 
 ####################################################
@@ -383,7 +380,7 @@ precip.attrs['units'] = 'in'
 
 
 
-# In[7]:
+# In[ ]:
 
 
 ####################################################
@@ -453,7 +450,7 @@ for i in range(len(times_utc)) :
     #############################################################
     
     ax1 = fig.add_subplot(    2,     2,     1, 
-                         projection = data_crs)
+                         projection = nam_crs)
     
     
 
@@ -515,7 +512,7 @@ for i in range(len(times_utc)) :
     #############################################################
     
     ax2 = fig.add_subplot(    2,     2,     2, 
-                         projection = data_crs)
+                         projection = nam_crs)
 
 
     ax2.coastlines(resolution = 'auto',
@@ -600,7 +597,7 @@ for i in range(len(times_utc)) :
     #############################################################
     
     ax3 = fig.add_subplot(    2,     2,     3, 
-                         projection = data_crs)
+                         projection = nam_crs)
  
     ax3.coastlines(resolution = 'auto',
                    linewidths =  0.75)
@@ -664,7 +661,7 @@ for i in range(len(times_utc)) :
     #############################################################
     
     ax4 = fig.add_subplot(    2,     2,     4, 
-                         projection = data_crs)
+                         projection = nam_crs)
 
 
     ax4.coastlines(resolution = 'auto',
@@ -847,7 +844,8 @@ for i in range(len(times_utc)) :
     ax4.add_patch(rect4)
 
     
-    plt.savefig(png_file_root + str(i).zfill(2) + ".png")
+    plt.savefig(png_file_root + "F" + str(int( fxx[i])).zfill(3) + ".png")
+
 
     plt.close()
 
@@ -865,7 +863,7 @@ for i in range(len(times_utc)) :
 ####################################################
 
 
-# In[8]:
+# In[ ]:
 
 
 ##################################################
@@ -873,7 +871,7 @@ for i in range(len(times_utc)) :
 # Convert PNGs into an Animated GIF
 #
 
-os.system("convert -delay 25 " + 
+os.system(". ~/.bashrc; convert -delay 25 " + 
           png_file_root + "*.png"  + 
           " " + 
           gif_file_name)
@@ -881,10 +879,4 @@ os.system("convert -delay 25 " +
 
 #
 ##################################################
-
-
-# In[ ]:
-
-
-
 
