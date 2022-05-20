@@ -3,7 +3,7 @@
 
 # # Blended Meso 1 & 2 + SODAK
 
-# In[ ]:
+# In[1]:
 
 
 ##################################################
@@ -42,7 +42,7 @@ import matplotlib.patches as patches
 ##################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ##################################################
@@ -50,7 +50,7 @@ import matplotlib.patches as patches
 # Channel Labels
 #
 
-MAINDIR = os.getcwd()
+MAINDIR = os.getcwd() +"/"
 print(MAINDIR)
 
 channel_vis =                        2

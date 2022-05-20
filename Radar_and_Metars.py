@@ -75,7 +75,8 @@ from joblib import Parallel, delayed
 #
 # System Control
 #
-MAINDIR = os.getcwd()
+MAINDIR = os.getcwd() +"/"
+
 print(MAINDIR)
 
 
