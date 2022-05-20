@@ -16,7 +16,7 @@ rm -frv  /projects/SD_Mines_Map_Wall/temp_files_radar/*.txt
 echo
 echo  "Firing Things Up!"
 echo
-. source /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/Radar_and_Metars.py > /projects/SD_Mines_Map_Wall/__log_radar.log 2>&1
+.  /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/Radar_and_Metars.py > /projects/SD_Mines_Map_Wall/__log_radar.log 2>&1
 echo
 echo "Ending Script"
 echo
