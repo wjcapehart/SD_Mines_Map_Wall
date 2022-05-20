@@ -73,6 +73,10 @@ gif_file_name2  = "./graphics_files/RealTime_SAT_IR_Meso2_Loop.gif"
 gif_file_name3  = "./graphics_files/RealTime_SAT_IR_SODAK_Loop.gif"
 gif_file_name12 = "./graphics_files/RealTime_SAT_IR_Meso12_Loop.gif"
 
+png_file_dir1  = "./temp_files_sat_meso1/"
+png_file_dir2  = "./temp_files_sat_meso2/"
+png_file_dir3  = "./temp_files_sat_sodak/"
+
 i_rap_t      =  801
 j_rap_t      =  231
 
@@ -113,19 +117,19 @@ region      =            'Mesoscale-1'
 
 if (region == 'Mesoscale-1') :
     region_lab               = " Meso-1 Band "
-    png_processing_directory = "./temp_files_sat_meso1/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_Meso1_Loop.gif"
+    png_processing_directory = png_file_dir1
+    gif_file_name            = gif_file_name1
 
 if (region == 'Mesoscale-2') :
     region_lab               = ' Meso-2 Band '
-    png_processing_directory = "./temp_files_sat_meso2/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_Meso2_Loop.gif"
+    png_processing_directory = png_file_dir2
+    gif_file_name            = gif_file_name2
 
     
 if (region == 'CONUS') :
     region_lab               = ' SODAK Band '
-    png_processing_directory = "./temp_files_sat_sodak/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_SODAK_Loop.gif"
+    png_processing_directory = png_file_dir3
+    gif_file_name            = gif_file_name3
 
 # We want to match something like:
 # https://thredds-test.unidata.ucar.edu/thredds/catalog/satellite/goes16/GOES16/Mesoscale-1/Channel08/20181113/catalog.html
@@ -376,10 +380,15 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso1)
 
+print(". ~/.bashrc; convert -delay 10 " + 
+          big_string + 
+          " " + 
+          gif_file_name)
+
 os.system(". ~/.bashrc; convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name1)
+          gif_file_name)
 
 print("completed "+ gif_file_name)
 
@@ -435,19 +444,19 @@ region      =            'Mesoscale-2'
 
 if (region == 'Mesoscale-1') :
     region_lab               = " Meso-1 Band "
-    png_processing_directory = "./temp_files_sat_meso1/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_Meso1_Loop.gif"
+    png_processing_directory = png_file_dir1
+    gif_file_name            = gif_file_name1
 
 if (region == 'Mesoscale-2') :
     region_lab               = ' Meso-2 Band '
-    png_processing_directory = "./temp_files_sat_meso2/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_Meso2_Loop.gif"
+    png_processing_directory = png_file_dir2
+    gif_file_name            = gif_file_name2
 
     
 if (region == 'CONUS') :
     region_lab               = ' SODAK Band '
-    png_processing_directory = "./temp_files_sat_sodak/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_SODAK_Loop.gif"
+    png_processing_directory = png_file_dir3
+    gif_file_name            = gif_file_name3
 
 
 
@@ -701,10 +710,15 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso2)
 
+print(". ~/.bashrc; convert -delay 10 " + 
+          big_string + 
+          " " + 
+          gif_file_name)
+
 os.system(". ~/.bashrc; convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name2)
+          gif_file_name)
 
 print("completed "+ gif_file_name)
 
@@ -766,19 +780,19 @@ region      =                   'CONUS'
 
 if (region == 'Mesoscale-1') :
     region_lab               = " Meso-1 Band "
-    png_processing_directory = "./temp_files_sat_meso1/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_Meso1_Loop.gif"
+    png_processing_directory = png_file_dir1
+    gif_file_name            = gif_file_name1
 
 if (region == 'Mesoscale-2') :
     region_lab               = ' Meso-2 Band '
-    png_processing_directory = "./temp_files_sat_meso2/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_Meso2_Loop.gif"
+    png_processing_directory = png_file_dir2
+    gif_file_name            = gif_file_name2
 
     
 if (region == 'CONUS') :
     region_lab               = ' SODAK Band '
-    png_processing_directory = "./temp_files_sat_sodak/"
-    gif_file_name            = "./graphics_files/RealTime_SAT_SODAK_Loop.gif"
+    png_processing_directory = png_file_dir3
+    gif_file_name            = gif_file_name3
 
 
 
@@ -1035,10 +1049,15 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso3)
 
+print(". ~/.bashrc; convert -delay 10 " + 
+          big_string + 
+          " " + 
+          gif_file_name)
+
 os.system(". ~/.bashrc; convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name3)
+          gif_file_name)
 
 print("completed "+ gif_file_name)
 
@@ -1072,6 +1091,11 @@ print("completed "+ gif_file_name)
 file_names_to_use_meso12 = file_names_to_use_meso1 + file_names_to_use_meso2 + file_names_to_use_meso3
 
 big_string = " ".join(file_names_to_use_meso12)
+
+print(". ~/.bashrc; convert -delay 10 " + 
+          big_string + 
+          " " + 
+          gif_file_name12)
 
 os.system(". ~/.bashrc; convert -delay 10 " + 
           big_string + 
