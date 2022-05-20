@@ -5,7 +5,7 @@
 # 
 # Creates an Animated Plot for Radar and Station Models
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -66,7 +66,7 @@ from joblib import Parallel, delayed
 ####################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ####################################################
@@ -75,6 +75,9 @@ from joblib import Parallel, delayed
 #
 # System Control
 #
+MAINDIR = os.getcwd()
+print(MAINDIR)
+
 
 os.system("rm -v ./temp_files_radar/*")
 
@@ -838,7 +841,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 ####################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ##################################################
@@ -846,12 +849,38 @@ if (len(sorted(catalog.datasets)) == 0) :
 # Convert PNGs into an Animated GIF
 #
 
-os.system(". ~/bashrc; convert -delay 25 " + 
+
+
+
+print("creating " + MAINDIR + "./processing_radar_gif.sh")
+with open(MAINDIR + "./processing_radar_gif.sh", 'w') as f:
+    print("#!/bin/bash", file =  f)
+    print("ulimit -s unlimited", file = f)
+    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
+    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print("cd " + MAINDIR, file =  f) 
+    print("convert -delay 25 " + 
           "./temp_files_radar/Radar_Loop_Image_*.png"  + 
           " " + 
-          "./graphics_files/RealTime_Radar_Loop.gif")
+          "./graphics_files/RealTime_Radar_Loop.gif", file =  f) 
+    print("echo MAIN:RADAR::: We\'re Outahere Like Vladimir", file =  f) 
+
+os.system("chmod a+x " + MAINDIR + "./processing_radar_gif.sh")
+os.system(MAINDIR + "./processing_radar_gif.sh > ./processing_radar_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system("date")
+print()
+        
+
+
+
 
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
 

@@ -11,6 +11,11 @@
 # Libraries
 #
 
+MAINDIR = os.getcwd()
+print(MAINDIR)
+
+
+
 
 from metpy.plots    import colortables
 from metpy.plots    import add_timestamp
@@ -380,15 +385,27 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso1)
 
-print(". ~/.bashrc; convert -delay 10 " + 
-          big_string + 
-          " " + 
-          gif_file_name)
 
-os.system(". ~/.bashrc; convert -delay 10 " + 
+
+print("creating " + MAINDIR + "./processing_sat_meso1_gif.sh")
+with open(MAINDIR + "./processing_sat_meso1_gif.sh", 'w') as f:
+    print("#!/bin/bash", file =  f)
+    print("ulimit -s unlimited", file = f)
+    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
+    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print("cd " + MAINDIR, file =  f) 
+    print("convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name)
+          gif_file_name, file =  f) 
+    print("echo MAIN:MESO1::: We\'re Outahere Like Vladimir", file =  f) 
+
+os.system("chmod a+x " + MAINDIR + "./processing_sat_meso1_gif.sh")
+os.system(MAINDIR + "./processing_sat_meso1_gif.sh > ./processing_sat_meso1_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system("date")
+print()
+
+
 
 print("completed "+ gif_file_name)
 
@@ -710,15 +727,29 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso2)
 
-print(". ~/.bashrc; convert -delay 10 " + 
-          big_string + 
-          " " + 
-          gif_file_name)
 
-os.system(". ~/.bashrc; convert -delay 10 " + 
+
+
+
+print("creating " + MAINDIR + "./processing_sat_meso2_gif.sh")
+with open(MAINDIR + "./processing_sat_meso2_gif.sh", 'w') as f:
+    print("#!/bin/bash", file =  f)
+    print("ulimit -s unlimited", file = f)
+    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
+    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print("cd " + MAINDIR, file =  f) 
+    print("convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name)
+          gif_file_name, file =  f) 
+    print("echo MAIN:MESO2::: We\'re Outahere Like Vladimir", file =  f) 
+
+os.system("chmod a+x " + MAINDIR + "./processing_sat_meso2_gif.sh")
+os.system(MAINDIR + "./processing_sat_meso2_gif.sh > ./processing_sat_meso2_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system("date")
+print()
+
+
 
 print("completed "+ gif_file_name)
 
@@ -1049,15 +1080,27 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use_meso3)
 
-print(". ~/.bashrc; convert -delay 10 " + 
-          big_string + 
-          " " + 
-          gif_file_name)
 
-os.system(". ~/.bashrc; convert -delay 10 " + 
+
+
+
+print("creating " + MAINDIR + "./processing_sat_mesoSD_gif.sh")
+with open(MAINDIR + "./processing_sat_mesoSD_gif.sh", 'w') as f:
+    print("#!/bin/bash", file =  f)
+    print("ulimit -s unlimited", file = f)
+    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
+    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print("cd " + MAINDIR, file =  f) 
+    print("convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name)
+          gif_file_name, file =  f) 
+    print("echo MAIN:MESO3::: We\'re Outahere Like Vladimir", file =  f) 
+
+os.system("chmod a+x " + MAINDIR + "./processing_sat_mesoSD_gif.sh")
+os.system(MAINDIR + "./processing_sat_mesoSD_gif.sh > ./processing_sat_mesoSD_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system("date")
+print()
 
 print("completed "+ gif_file_name)
 
@@ -1078,7 +1121,7 @@ print("completed "+ gif_file_name)
 
 
 
-# ## Aggregate
+# ## Aggregate All Three Into One
 
 # In[ ]:
 
@@ -1092,15 +1135,31 @@ file_names_to_use_meso12 = file_names_to_use_meso1 + file_names_to_use_meso2 + f
 
 big_string = " ".join(file_names_to_use_meso12)
 
-print(". ~/.bashrc; convert -delay 10 " + 
-          big_string + 
-          " " + 
-          gif_file_name12)
 
-os.system(". ~/.bashrc; convert -delay 10 " + 
+
+
+
+
+print("creating " + MAINDIR + "./processing_sat_all_mesos_gif.sh")
+with open(MAINDIR + "./processing_sat_all_mesos_gif.sh", 'w') as f:
+    print("#!/bin/bash", file =  f)
+    print("ulimit -s unlimited", file = f)
+    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
+    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print("cd " + MAINDIR, file =  f) 
+    print("convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name12)
+          gif_file_name12, file =  f) 
+    print("echo MAIN:SAT123MESO::: We\'re Outahere Like Vladimir", file =  f) 
+
+os.system("chmod a+x " + MAINDIR + "./processing_sat_all_mesos_gif.sh")
+os.system(MAINDIR + "./processing_sat_all_mesos_gif.sh > ./processing_sat_all_mesos_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system("date")
+print()
+
+
+
 
 print("completed "+gif_file_name12)
 
