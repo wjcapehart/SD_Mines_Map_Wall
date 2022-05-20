@@ -75,8 +75,7 @@ from joblib import Parallel, delayed
 #
 # System Control
 #
-MAINDIR = os.getcwd() +"/"
-
+MAINDIR = os.getcwd() + "/"
 print(MAINDIR)
 
 
@@ -867,7 +866,7 @@ with open(MAINDIR + "./processing_radar_gif.sh", 'w') as f:
     print("echo MAIN:RADAR::: We\'re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_radar_gif.sh")
-os.system(MAINDIR + "./processing_radar_gif.sh > ./processing_radar_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system(MAINDIR + "./processing_radar_gif.sh > ./processing_radar_gif.LOG 2>&1 ")
 os.system("date")
 print()
         

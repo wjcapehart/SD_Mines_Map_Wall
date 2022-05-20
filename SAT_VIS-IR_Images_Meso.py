@@ -402,7 +402,7 @@ with open(MAINDIR + "./processing_sat_meso1_gif.sh", 'w') as f:
     print("echo MAIN:MESO1::: We\'re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_meso1_gif.sh")
-os.system(MAINDIR + "./processing_sat_meso1_gif.sh > ./processing_sat_meso1_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system(MAINDIR + "./processing_sat_meso1_gif.sh > ./processing_sat_meso1_gif.LOG 2>&1 ")
 os.system("date")
 print()
 
@@ -746,7 +746,7 @@ with open(MAINDIR + "./processing_sat_meso2_gif.sh", 'w') as f:
     print("echo MAIN:MESO2::: We\'re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_meso2_gif.sh")
-os.system(MAINDIR + "./processing_sat_meso2_gif.sh > ./processing_sat_meso2_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system(MAINDIR + "./processing_sat_meso2_gif.sh > ./processing_sat_meso2_gif.LOG 2>&1 ")
 os.system("date")
 print()
 
@@ -1099,7 +1099,7 @@ with open(MAINDIR + "./processing_sat_mesoSD_gif.sh", 'w') as f:
     print("echo MAIN:MESO3::: We\'re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_mesoSD_gif.sh")
-os.system(MAINDIR + "./processing_sat_mesoSD_gif.sh > ./processing_sat_mesoSD_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system(MAINDIR + "./processing_sat_mesoSD_gif.sh > ./processing_sat_mesoSD_gif.LOG 2>&1 ")
 os.system("date")
 print()
 
@@ -1155,7 +1155,7 @@ with open(MAINDIR + "./processing_sat_all_mesos_gif.sh", 'w') as f:
     print("echo MAIN:SAT123MESO::: We\'re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_all_mesos_gif.sh")
-os.system(MAINDIR + "./processing_sat_all_mesos_gif.sh > ./processing_sat_all_mesos_gif." + model_start_date_YYYY_MM_DD_HH + ".LOG 2>&1 ")
+os.system(MAINDIR + "./processing_sat_all_mesos_gif.sh > ./processing_sat_all_mesos_gif.LOG 2>&1 ")
 os.system("date")
 print()
 
