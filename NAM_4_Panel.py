@@ -92,6 +92,12 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 # NWS Rainfall Color Table.
 #
 
+
+MAINDIR = os.getcwd() + "/"
+print(MAINDIR)
+
+
+
 nws_precip_colors = [
     "#04e9e7",  # 0.01 - 0.10 inches
     "#019ff4",  # 0.10 - 0.25 inches
@@ -871,10 +877,26 @@ for i in range(len(times_utc)) :
 # Convert PNGs into an Animated GIF
 #
 
-os.system(". ~/.bashrc; convert -delay 25 " + 
+
+
+print("creating " + MAINDIR + "./processing_NAM_gif.sh")
+with open(MAINDIR + "./processing_NAM_gif.sh", 'w') as f:
+    print("#!/bin/bash", file =  f)
+    print("ulimit -s unlimited", file = f)
+    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
+    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print("cd " + MAINDIR, file =  f) 
+    print("convert -delay 10 " + 
           png_file_root + "*.png"  + 
           " " + 
-          gif_file_name)
+          gif_file_nam, file =  f) 
+    print("echo MAIN:NAM::: We\'re Outahere Like Vladimir", file =  f) 
+
+os.system("chmod a+x " + MAINDIR + "./processing_NAM_gif.sh")
+os.system(MAINDIR + "./processing_NAM_gif.sh > ./processing_NAM_gif.LOG 2>&1 ")
+os.system("date")
+print()
+
 
 
 #

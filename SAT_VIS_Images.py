@@ -43,6 +43,12 @@ from joblib import Parallel, delayed
 # Control Setup
 #
 
+MAINDIR = os.getcwd() + "/"
+print(MAINDIR)
+
+
+
+
 # %load solutions/data_url.py
 
 total_frames = 45*2
@@ -282,10 +288,27 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
 
 big_string = " ".join(file_names_to_use)
 
-os.system(". ~/.bashrc; convert -delay 10 " + 
+
+
+print("creating " + MAINDIR + "./processing_sat_VIS_gif.sh")
+with open(MAINDIR + "./processing_sat_VIS_gif.sh", 'w') as f:
+    print("#!/bin/bash", file =  f)
+    print("ulimit -s unlimited", file = f)
+    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
+    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print("cd " + MAINDIR, file =  f) 
+    print("convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name)
+          gif_file_name, file =  f) 
+    print("echo MAIN:SAT_VIS::: We\'re Outahere Like Vladimir", file =  f) 
+
+os.system("chmod a+x " + MAINDIR + "./processing_sat_VIS_gif.sh")
+os.system(MAINDIR + "./processing_sat_VIS_gif.sh > ./processing_sat_VIS_gif.LOG 2>&1 ")
+os.system("date")
+print()
+
+
 
 #
 ##################################################
