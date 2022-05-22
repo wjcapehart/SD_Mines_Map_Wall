@@ -855,15 +855,13 @@ if (len(sorted(catalog.datasets)) == 0) :
 print("creating " + MAINDIR + "./processing_radar_gif.sh")
 with open(MAINDIR + "./processing_radar_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
-    print("ulimit -s unlimited", file = f)
-    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
-    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
     print("convert -delay 25 " + 
           "./temp_files_radar/Radar_Loop_Image_*.png"  + 
           " " + 
           "./graphics_files/RealTime_Radar_Loop.gif", file =  f) 
-    print("echo MAIN:RADAR::: We\'re Outahere Like Vladimir", file =  f) 
+    print("echo MAIN:RADAR::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_radar_gif.sh")
 os.system(MAINDIR + "./processing_radar_gif.sh > ./processing_radar_gif.LOG 2>&1 ")

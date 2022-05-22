@@ -391,15 +391,13 @@ big_string = " ".join(file_names_to_use_meso1)
 print("creating " + MAINDIR + "./processing_sat_meso1_gif.sh")
 with open(MAINDIR + "./processing_sat_meso1_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
-    print("ulimit -s unlimited", file = f)
-    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
-    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
     print("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name, file =  f) 
-    print("echo MAIN:MESO1::: We\'re Outahere Like Vladimir", file =  f) 
+    print("echo MAIN:MESO1::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_meso1_gif.sh")
 os.system(MAINDIR + "./processing_sat_meso1_gif.sh > ./processing_sat_meso1_gif.LOG 2>&1 ")
@@ -735,15 +733,12 @@ big_string = " ".join(file_names_to_use_meso2)
 print("creating " + MAINDIR + "./processing_sat_meso2_gif.sh")
 with open(MAINDIR + "./processing_sat_meso2_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
-    print("ulimit -s unlimited", file = f)
-    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
-    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
     print("cd " + MAINDIR, file =  f) 
     print("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name, file =  f) 
-    print("echo MAIN:MESO2::: We\'re Outahere Like Vladimir", file =  f) 
+    print("echo MAIN:MESO2::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_meso2_gif.sh")
 os.system(MAINDIR + "./processing_sat_meso2_gif.sh > ./processing_sat_meso2_gif.LOG 2>&1 ")
@@ -1088,15 +1083,13 @@ big_string = " ".join(file_names_to_use_meso3)
 print("creating " + MAINDIR + "./processing_sat_mesoSD_gif.sh")
 with open(MAINDIR + "./processing_sat_mesoSD_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
-    print("ulimit -s unlimited", file = f)
-    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
-    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
     print("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name, file =  f) 
-    print("echo MAIN:MESO3::: We\'re Outahere Like Vladimir", file =  f) 
+    print("echo MAIN:MESO3::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_mesoSD_gif.sh")
 os.system(MAINDIR + "./processing_sat_mesoSD_gif.sh > ./processing_sat_mesoSD_gif.LOG 2>&1 ")
@@ -1144,15 +1137,13 @@ big_string = " ".join(file_names_to_use_meso12)
 print("creating " + MAINDIR + "./processing_sat_all_mesos_gif.sh")
 with open(MAINDIR + "./processing_sat_all_mesos_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
-    print("ulimit -s unlimited", file = f)
-    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
-    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
     print("convert -delay 10 " + 
           big_string + 
           " " + 
           gif_file_name12, file =  f) 
-    print("echo MAIN:SAT123MESO::: We\'re Outahere Like Vladimir", file =  f) 
+    print("echo MAIN:SAT123MESO::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_all_mesos_gif.sh")
 os.system(MAINDIR + "./processing_sat_all_mesos_gif.sh > ./processing_sat_all_mesos_gif.LOG 2>&1 ")

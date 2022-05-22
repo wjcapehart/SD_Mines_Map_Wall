@@ -926,9 +926,7 @@ for i in range(len(times_utc)) :
 print("creating " + MAINDIR + "./processing_GFS_gif.sh")
 with open(MAINDIR + "./processing_GFS_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
-    print("ulimit -s unlimited", file = f)
-    print(". /opt/intel/oneapi/setvars.sh --force", file = f)
-    print("export LD_LIBRARY_PATH=/usr/local/lib/::${LD_LIBRARY_PATH}", file = f)
+    print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
     print("convert -delay 10 " + 
           png_file_root + "*.png"  + 
@@ -946,5 +944,5 @@ print()
 
 
 #
-##################################################
+#################################################
 
