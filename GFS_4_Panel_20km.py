@@ -928,10 +928,10 @@ with open(MAINDIR + "./processing_GFS_gif.sh", 'w') as f:
     print("#!/bin/bash",         file =  f)
     print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR,       file =  f) 
-    print("convert -delay 10 " + 
-          png_file_root + 
-          "*.png " + 
-          gif_file_nam,          file =  f) 
+    print("convert -delay 10 " + \
+          png_file_root        + \
+          "*.png "             + \
+          gif_file_name,          file =  f) 
     print("echo MAIN:GFS:: We\'re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_GFS_gif.sh")
@@ -945,4 +945,10 @@ print()
 
 #
 #################################################
+
+
+# In[ ]:
+
+
+
 

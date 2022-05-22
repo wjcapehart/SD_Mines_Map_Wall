@@ -183,7 +183,7 @@ current_datetime = datetime.datetime.utcnow()
 current_datetime_lag3 = current_datetime - datetime.timedelta(hours=lag_hours)
 
 if (current_datetime.day == current_datetime_lag3.day):
-    if (current_datetime_lag3.hour   <  6):
+    if (current_datetime_lag3.hour < 6):
         fx_hour =  0
     elif (current_datetime_lag3.hour < 12):
         fx_hour =  6
@@ -884,10 +884,10 @@ with open(MAINDIR + "./processing_NAM_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
     print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
-    print("convert -delay 10 " + 
-          png_file_root + "*.png"  + 
-          " " + 
-          gif_file_nam, file =  f) 
+    print("convert -delay 10 "     + \
+          png_file_root + "*.png"  + \
+          " "                      + \
+          gif_file_name,           file =  f) 
     print("echo MAIN:NAM::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_NAM_gif.sh")
