@@ -183,7 +183,7 @@ current_datetime = datetime.datetime.utcnow()
 current_datetime_lag3 = current_datetime - datetime.timedelta(hours=lag_hours)
 
 if (current_datetime.day == current_datetime_lag3.day):
-    if (current_datetime_lag3.hour < 6):
+    if (current_datetime_lag3.hour   <  6):
         fx_hour =  0
     elif (current_datetime_lag3.hour < 12):
         fx_hour =  6
