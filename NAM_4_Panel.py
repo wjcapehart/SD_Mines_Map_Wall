@@ -881,9 +881,9 @@ for i in range(len(times_utc)) :
 
 print("creating " + MAINDIR + "./processing_NAM_gif.sh")
 with open(MAINDIR + "./processing_NAM_gif.sh", 'w') as f:
-    print("#!/bin/bash", file =  f)
-    print(". /home/wjc/.bashrc", file = f)
-    print("cd " + MAINDIR, file =  f) 
+    print("#!/bin/bash",           file =  f)
+    print(". /home/wjc/.bashrc",   file = f)
+    print("cd " + MAINDIR,         file =  f) 
     print("convert -delay 10 "     + \
           png_file_root + "*.png"  + \
           " "                      + \
