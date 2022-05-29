@@ -3,7 +3,7 @@
 
 # #### NAM 4-panel
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -84,7 +84,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ###################################################
@@ -131,7 +131,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ####################################################
@@ -166,7 +166,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[ ]:
+# In[4]:
 
 
 ####################################################
@@ -222,7 +222,7 @@ print(nam_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[ ]:
+# In[5]:
 
 
 ####################################################
@@ -286,7 +286,7 @@ coriolis = coriolis.magnitude
 
 # ## Fetch Data for Panel Displays
 
-# In[ ]:
+# In[6]:
 
 
 ####################################################
@@ -386,7 +386,7 @@ precip.attrs['units'] = 'in'
 
 
 
-# In[ ]:
+# In[8]:
 
 
 ####################################################
@@ -862,20 +862,31 @@ for i in range(len(times_utc)) :
     if(times_precip_utc[prec_i] == times_utc[i]):
         prec_i = prec_i+1
 
-
 #
 ####################################################
 ####################################################
 ####################################################
 
 
-# In[ ]:
+# In[34]:
 
 
 ##################################################
 #
 # Convert PNGs into an Animated GIF
 #
+
+# 0 to 36 = 20
+# 41 to 84 = 60
+
+all_files = sorted(os.listdir(png_processing_directory))
+
+append_str = png_processing_directory + "/"
+all_files = [append_str + sub for sub in all_files]
+
+short_files = " ".join(all_files[0:36+1])
+long_files = " ".join(all_files[37:])
+
 
 
 
@@ -884,8 +895,12 @@ with open(MAINDIR + "./processing_NAM_gif.sh", 'w') as f:
     print("#!/bin/bash",           file =  f)
     print(". /home/wjc/.bashrc",   file = f)
     print("cd " + MAINDIR,         file =  f) 
-    print("convert -delay 20 "     + \
-          png_file_root + "*.png"  + \
+    print("convert "               + \
+          "-delay 20 "             + \
+          short_files              + \
+          " "                      + \
+          "-delay 60 "             + \
+          long_files              + \
           " "                      + \
           gif_file_name,           file =  f) 
     print("echo MAIN:NAM::: We^re Outahere Like Vladimir", file =  f) 
@@ -899,4 +914,28 @@ print()
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[33]:
+
+
+# Append suffix / prefix to strings in list
+
+
+# In[ ]:
+
+
+
 
