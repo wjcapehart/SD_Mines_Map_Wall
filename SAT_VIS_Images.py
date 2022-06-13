@@ -268,7 +268,9 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         #########################################
  
  
-        plt.savefig( dataset_png_file_name)
+        plt.savefig( dataset_png_file_name,
+                        facecolor   = 'white', 
+                        transparent =   False)
         plt.close()
     else:
         print("We already have this one!")

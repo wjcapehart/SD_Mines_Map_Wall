@@ -94,6 +94,7 @@ UGC_Shapefile = pd.concat([UGC_Zones_Shapefile,
 UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
 
+
 # In[ ]:
 
 
@@ -103,8 +104,8 @@ warning_priority_table = pd.read_csv("./warning_table_sorted.csv")
 warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"})
 
 
-# In[ ]:
 
+# In[ ]:
 
 
 current_warnings = pd.DataFrame(columns = ['event',
@@ -319,7 +320,9 @@ axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 #########################################
         
         
-plt.savefig(gif_file_name)
+plt.savefig(gif_file_name,
+                        facecolor   = 'white', 
+                        transparent =   False)
 
 
 plt.close()

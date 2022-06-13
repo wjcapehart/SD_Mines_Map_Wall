@@ -3,7 +3,7 @@
 
 # #### GFS 4-panel
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -85,7 +85,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ###################################################
@@ -134,7 +134,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ####################################################
@@ -169,7 +169,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[ ]:
+# In[4]:
 
 
 ####################################################
@@ -226,7 +226,7 @@ print(gfs_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[ ]:
+# In[5]:
 
 
 ####################################################
@@ -299,7 +299,7 @@ dt_prec = (prectime_bounds[:,1]-prectime_bounds[:,0])/ np.timedelta64(1, 'h')
 
 # ## Fetch Data for Panel Displays
 
-# In[ ]:
+# In[6]:
 
 
 zz = np.array([ 10000.,  15000.,  20000.,  25000.,  30000.,  35000.,  40000.,  45000.,
@@ -309,7 +309,7 @@ zz = np.array([ 10000.,  15000.,  20000.,  25000.,  30000.,  35000.,  40000.,  4
 np.where(zz==700)
 
 
-# In[ ]:
+# In[7]:
 
 
 ####################################################
@@ -461,6 +461,10 @@ rain_norm = mpl.colors.BoundaryNorm(boundaries = precip_levels_in,
 prec_i = 0
 
 total_slides = len(times_utc)
+
+prec_i = 0
+
+prec_i_array = np.empty( len(times_utc) )
 
 
 frat_done = 0
@@ -893,17 +897,17 @@ for i in range(len(times_utc)) :
     ax4.add_patch(rect4)
 
     
-    plt.savefig(png_file_root + "F" + str(int( fxx[i])).zfill(3) + ".png")
+    plt.savefig(png_file_root + "F" + str(int( fxx[i])).zfill(3) + ".png",
+                        facecolor   = 'white', 
+                        transparent =   False)
 
 
 
 
     plt.close()
-
     
+    prec_i_array[i] = int(prec_i)
     
- 
-
     if (times_precip_utc[prec_i] == times_utc[i]):
         prec_i = prec_i+1
 
@@ -945,6 +949,12 @@ print()
 
 #
 #################################################
+
+
+# In[ ]:
+
+
+prec_i_array
 
 
 # In[ ]:

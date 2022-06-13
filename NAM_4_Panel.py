@@ -412,6 +412,8 @@ rain_norm = mpl.colors.BoundaryNorm(boundaries = precip_levels_in,
 
 prec_i = 0
 
+prec_i_array = np.empty( len(times_utc) )
+
 total_slides = len(times_utc)
 
 
@@ -850,17 +852,19 @@ for i in range(len(times_utc)) :
     ax4.add_patch(rect4)
 
     
-    plt.savefig(png_file_root + "F" + str(int( fxx[i])).zfill(3) + ".png")
+    plt.savefig(png_file_root + "F" + str(int( fxx[i])).zfill(3) + ".png",
+                        facecolor   = 'white', 
+                        transparent =   False)
 
 
     plt.close()
-
     
-    
- 
+    prec_i_array[i] = int(i)
 
     if(times_precip_utc[prec_i] == times_utc[i]):
         prec_i = prec_i+1
+        
+
 
 #
 ####################################################

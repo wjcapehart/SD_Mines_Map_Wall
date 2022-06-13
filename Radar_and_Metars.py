@@ -830,7 +830,9 @@ if (len(sorted(catalog.datasets)) == 0) :
                                  transform = ax.transAxes)
         ax.add_patch(rect)
 
-        plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(time_index).zfill(3)+".png")
+        plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(time_index).zfill(3)+".png",
+                        facecolor   = 'white', 
+                        transparent =   False)
 
         plt.close()
         print("=====================")
