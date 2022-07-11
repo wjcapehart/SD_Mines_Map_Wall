@@ -3,7 +3,7 @@
 
 # #### NAM 4-panel
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -84,7 +84,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ###################################################
@@ -131,7 +131,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -166,7 +166,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[4]:
+# In[ ]:
 
 
 ####################################################
@@ -222,7 +222,7 @@ print(nam_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -286,7 +286,7 @@ coriolis = coriolis.magnitude
 
 # ## Fetch Data for Panel Displays
 
-# In[6]:
+# In[ ]:
 
 
 ####################################################
@@ -386,7 +386,7 @@ precip.attrs['units'] = 'in'
 
 
 
-# In[8]:
+# In[ ]:
 
 
 ####################################################
@@ -490,9 +490,9 @@ for i in range(len(times_utc)) :
     contour_levels = np.arange(480,612, 6)
 
     contour_plot = heights_500[i,:,:].plot.contour(colors     = "black",
-                                                        ax = ax1,
-                                   linewidths = 1, 
-                                    levels     = contour_levels)
+                                                   ax = ax1,
+                                                   linewidths = 1.5, 
+                                                   levels     = contour_levels)
 
     ax1.clabel(contour_plot)
     
@@ -572,7 +572,7 @@ for i in range(len(times_utc)) :
     smoothed.values = ndimage.gaussian_filter( mslp[i,:,:].values, sigma=0.75, order=0)
 
     contour_plot = smoothed[:,:].plot.contour(colors     =        "black",
-                                            linewidths =           0.75, 
+                                            linewidths =           1.5, 
                                             levels     = contour_levels)
 
 
@@ -872,7 +872,7 @@ for i in range(len(times_utc)) :
 ####################################################
 
 
-# In[34]:
+# In[ ]:
 
 
 ##################################################
@@ -924,18 +924,6 @@ print()
 
 
 
-
-
-# In[ ]:
-
-
-
-
-
-# In[33]:
-
-
-# Append suffix / prefix to strings in list
 
 
 # In[ ]:

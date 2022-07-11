@@ -3,7 +3,7 @@
 
 # #### GFS 4-panel
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -85,7 +85,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ###################################################
@@ -134,7 +134,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -169,7 +169,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[4]:
+# In[ ]:
 
 
 ####################################################
@@ -226,7 +226,7 @@ print(gfs_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -299,7 +299,7 @@ dt_prec = (prectime_bounds[:,1]-prectime_bounds[:,0])/ np.timedelta64(1, 'h')
 
 # ## Fetch Data for Panel Displays
 
-# In[6]:
+# In[ ]:
 
 
 zz = np.array([ 10000.,  15000.,  20000.,  25000.,  30000.,  35000.,  40000.,  45000.,
@@ -309,7 +309,7 @@ zz = np.array([ 10000.,  15000.,  20000.,  25000.,  30000.,  35000.,  40000.,  4
 np.where(zz==700)
 
 
-# In[7]:
+# In[ ]:
 
 
 ####################################################
@@ -541,7 +541,7 @@ for i in range(len(times_utc)) :
 
     contour_plot = heights_500[i,:,:].plot.contour(colors     = "black",
                                                         ax = ax1,
-                                   linewidths = 1, 
+                                   linewidths = 1.5, 
                                     levels     = contour_levels)
 
     ax1.clabel(contour_plot)
@@ -620,9 +620,9 @@ for i in range(len(times_utc)) :
     smoothed = mslp[i,:,:].copy()
     
 
-    contour_plot = smoothed[:,:].plot.contour(colors     =        "black",
-                                            linewidths =           0.75, 
-                                            levels     = contour_levels)
+    contour_plot = smoothed[:,:].plot.contour(colors    =        "black",
+                                             linewidths =           1.5, 
+                                             levels     = contour_levels)
 
 
     ax2.clabel(contour_plot)
@@ -954,7 +954,7 @@ print()
 # In[ ]:
 
 
-prec_i_array
+
 
 
 # In[ ]:
