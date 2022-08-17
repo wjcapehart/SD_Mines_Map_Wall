@@ -107,7 +107,7 @@ file_names_to_retain = list()
 file_names_to_use    = list()
 
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
     filename = png_processing_directory + cat.datasets[i].name.replace(".nc",".png")
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
@@ -149,7 +149,7 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
 
     dataset = cat.datasets[i]
     

@@ -94,6 +94,11 @@ print(data_url)
 
 cat = TDSCatalog(data_url)
 
+
+print("i start = ",len(cat.datasets)-total_frames)
+print("  i end = ",len(cat.datasets))
+print("I = ", range(len(cat.datasets)-total_frames,len(cat.datasets),1))
+
 #
 ##################################################
 
@@ -109,7 +114,7 @@ cat = TDSCatalog(data_url)
 file_names_to_retain = list()
 file_names_to_use    = list()
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) : 
     filename = png_processing_directory + cat.datasets[i].name.replace(".nc",".png")
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
@@ -118,6 +123,8 @@ files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing
 
 file_names_to_retain.sort()
 file_names_to_use.sort()
+
+# display(file_names_to_use)
 
 #
 ##################################################    
@@ -149,7 +156,7 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) : 
 
     dataset = cat.datasets[i]
     
@@ -232,8 +239,8 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
         
         print(time_for_clock)
-        print(hour,   np.rad2deg(angles_h))
-        print(minute, np.rad2deg(angles_m))
+        #print(hour,   np.rad2deg(angles_h))
+        #print(minute, np.rad2deg(angles_m))
 
         
         plt.setp(axins.get_yticklabels(), visible=False)
@@ -298,4 +305,16 @@ print()
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
