@@ -3,7 +3,7 @@
 
 # # Blended Meso 1 & 2 + SODAK
 
-# In[1]:
+# In[ ]:
 
 
 ##################################################
@@ -33,7 +33,6 @@ import cartopy.feature   as cfeature
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-import matplotlib.patches as patches
 
 
 
@@ -42,7 +41,7 @@ import matplotlib.patches as patches
 ##################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ##################################################
@@ -185,7 +184,7 @@ file_names_to_retain = list()
 file_names_to_use    = list()
 
 
-for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     filename = cat_vis.datasets[i].name.replace(".nc",".png")
     filename = filename[:20] + "xx" + filename[22:]
     filename = png_processing_directory + filename
@@ -229,7 +228,7 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
     dataset_vis = cat_vis.datasets[i]
     dataset_tir = cat_tir.datasets[i]
@@ -528,7 +527,7 @@ file_names_to_retain = list()
 file_names_to_use    = list()
 
 
-for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     filename = cat_vis.datasets[i].name.replace(".nc",".png")
     filename = filename[:20] + "xx" + filename[22:]
     filename = png_processing_directory + filename
@@ -573,7 +572,7 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
     dataset_vis = cat_vis.datasets[i]
     dataset_tir = cat_tir.datasets[i]
@@ -683,9 +682,9 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
         
-        print(time_for_clock)
-        print(hour,   np.rad2deg(angles_h))
-        print(minute, np.rad2deg(angles_m))
+        #print(time_for_clock)
+        #print(hour,   np.rad2deg(angles_h))
+        #print(minute, np.rad2deg(angles_m))
 
         
         plt.setp(axins.get_yticklabels(), visible=False)
@@ -878,7 +877,7 @@ file_names_to_retain = list()
 file_names_to_use    = list()
 
 
-for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     filename = cat_vis.datasets[i].name.replace(".nc",".png")
     filename = filename[:19] + "xx" + filename[21:]
     filename = png_processing_directory + filename
@@ -923,7 +922,7 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
     dataset_vis = cat_vis.datasets[i]
     dataset_tir = cat_tir.datasets[i]
@@ -1035,9 +1034,9 @@ for i in range(0,len(cat_vis.datasets[0:total_frames])+1,1) :
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
         
-        print(time_for_clock)
-        print(hour,   np.rad2deg(angles_h))
-        print(minute, np.rad2deg(angles_m))
+        #print(time_for_clock)
+        #print(hour,   np.rad2deg(angles_h))
+        #print(minute, np.rad2deg(angles_m))
 
         
         plt.setp(axins.get_yticklabels(), visible=False)
