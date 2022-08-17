@@ -120,7 +120,6 @@ files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing
 file_names_to_retain.sort()
 file_names_to_use.sort()
 
-display(cat.datasets[0:total_frames])
 
 #
 ##################################################    
