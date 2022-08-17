@@ -65,7 +65,7 @@ image_header_label = "GOES 16 Band 2 [0.64 µm Visible Red]"
 
 image_date = datetime.utcnow().date()
 region = 'CONUS'
-channel = 3
+channel = 2
 
 # We want to match something like:
 # https://thredds-test.unidata.ucar.edu/thredds/catalog/satellite/goes16/GOES16/Mesoscale-1/Channel08/20181113/catalog.html
@@ -109,7 +109,7 @@ file_names_to_retain = list()
 file_names_to_use    = list()
 
 
-for i in range(1,len(cat.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) : 
     filename = png_processing_directory + cat.datasets[i].name.replace(".nc",".png")
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
@@ -119,6 +119,8 @@ files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing
 
 file_names_to_retain.sort()
 file_names_to_use.sort()
+
+display(cat.datasets[0:total_frames])
 
 #
 ##################################################    
@@ -151,7 +153,7 @@ for filename in files_on_hand:
 # Create PNGs
 #
 
-for i in range(0,len(cat.datasets[0:total_frames])+1,1) : 
+for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) : 
 
     dataset = cat.datasets[i]
     
@@ -244,9 +246,9 @@ for i in range(0,len(cat.datasets[0:total_frames])+1,1) :
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
         
-        print(time_for_clock)
-        print(hour,   np.rad2deg(angles_h))
-        print(minute, np.rad2deg(angles_m))
+        #print(time_for_clock)
+        #print(hour,   np.rad2deg(angles_h))
+        #print(minute, np.rad2deg(angles_m))
 
         
         plt.setp(axins.get_yticklabels(), visible=False)
