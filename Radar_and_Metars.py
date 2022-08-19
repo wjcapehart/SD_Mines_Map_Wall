@@ -5,7 +5,7 @@
 # 
 # Creates an Animated Plot for Radar and Station Models
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -66,7 +66,7 @@ from joblib import Parallel, delayed
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ####################################################
@@ -172,7 +172,7 @@ tz
 
 # https://thredds-test.unidata.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_20210924_0000.txt
 
-cat = siphcat.TDSCatalog('https://thredds-test.unidata.ucar.edu/thredds/catalog/noaaport/text/metar/catalog.xml')
+cat = siphcat.TDSCatalog('https://thredds-dev.unidata.ucar.edu/thredds/catalog/noaaport/text/metar/catalog.xml')
 
 
 
@@ -181,7 +181,7 @@ for datehour in siphon_pulls_YYYYMMDD_HH:
     
 
     
-    metar_url  = "https://thredds-test.unidata.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_"+datehour+".txt"
+    metar_url  = "https://thredds-dev.unidata.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_"+datehour+".txt"
     metar_file = "./temp_files_radar/metar_"+datehour+".txt"
     
     
@@ -326,8 +326,9 @@ print("  end time: ",time_now)
 def radar_plotting_func(name_index):
 
 
+
     percent_done = (name_index+1.) / number_of_figures
-    
+
     name = sorted(catalog.datasets)[name_index]
 
 
@@ -338,12 +339,29 @@ def radar_plotting_func(name_index):
                            figsize=(9, 8),
                            facecolor = 'white')
 
-    radar    = Dataset(ds.access_urls['CdmRemote'])
+    try:
 
-    rng      = radar.variables['gate'][:] 
-    az       = radar.variables['azimuth'][:]
-    ref      = radar.variables['BaseReflectivityDR'][:]
-    time_utc = datetime.strptime(radar.time_coverage_start, "%Y-%m-%dT%H:%M:%SZ")
+
+        radar    = Dataset(ds.access_urls['CdmRemote'])
+
+        rng      = radar.variables['gate'][:] 
+        az       = radar.variables['azimuth'][:]
+        ref      = radar.variables['BaseReflectivityDR'][:]
+        time_utc = datetime.strptime(radar.time_coverage_start, "%Y-%m-%dT%H:%M:%SZ")
+        x   = rng * np.sin(np.deg2rad(az))[:, None]
+        y   = rng * np.cos(np.deg2rad(az))[:, None]
+        ref = np.ma.array(ref, mask=np.isnan(ref))
+
+    except:
+        print("poopie: ", name, name[15:-5])
+                                            #Level3_UDX_N0B_20220819_0415.nids
+        time_utc = datetime.strptime(name[15:-5],"%Y%m%d_%H%M")
+
+
+
+
+        
+        
 
 
     metar_dataframe['staleness']     = (time_utc-metar_dataframe['date_time'])/ np.timedelta64(1, 'm')
@@ -382,17 +400,22 @@ def radar_plotting_func(name_index):
 
     print(valid_time + "  (" + local_time+")")
 
-    x   = rng * np.sin(np.deg2rad(az))[:, None]
-    y   = rng * np.cos(np.deg2rad(az))[:, None]
-    ref = np.ma.array(ref, mask=np.isnan(ref))
+    try:
+        RadarLatitude      = radar.RadarLatitude
+        RadarLongitude     = radar.RadarLongitude
+        geospatial_lat_min = radar.geospatial_lat_min
+        geospatial_lat_max = radar.geospatial_lat_max
+        geospatial_lon_min = radar.geospatial_lon_min
+        geospatial_lon_max = radar.geospatial_lon_max
+    except:
+        RadarLatitude      = 44.125
+        RadarLongitude     = -102.83
+        geospatial_lat_min =  42.05982
+        geospatial_lat_max = 46.19018
+        geospatial_lon_min =-99.950134
+        geospatial_lon_max = -105.70986
 
-    RadarLatitude      = radar.RadarLatitude
-    RadarLongitude     = radar.RadarLongitude
-    geospatial_lat_min = radar.geospatial_lat_min
-    geospatial_lat_max = radar.geospatial_lat_max
-    geospatial_lon_min = radar.geospatial_lon_min
-    geospatial_lon_max = radar.geospatial_lon_max
-
+ 
     #
     ###################################
 
@@ -409,8 +432,15 @@ def radar_plotting_func(name_index):
                                                    true_scale_latitude = None, 
                                                    globe=None))
 
-    plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
-                fontsize=20, color="black")
+    try:
+        plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
+                    fontsize=20, color="black")
+    except:
+        plt.suptitle("Western South Dakota Surface Obs (Radar Services Down)",
+                     fontsize=20, color="black")
+
+
+       
 
     ax.set_title(valid_time + "  (" + local_time+")",
                     fontsize=15, color="black")
@@ -429,19 +459,25 @@ def radar_plotting_func(name_index):
                    linewidths = 0.5,
                    edgecolor  = 'black',
                    facecolor  = 'none')
-    filled_cm = ax.pcolormesh(x, 
-                              y, 
-                              ref,
-                              norm = norm, 
-                              cmap = cmap)
+    
+    try:
+        filled_cm = ax.pcolormesh(x, 
+                                  y, 
+                                  ref,
+                                  norm = norm, 
+                                  cmap = cmap)
+        color_bar = plt.colorbar(filled_cm, 
+                     label  = "Reflectivity (dbZ)",
+                     shrink = 0.8,
+                     pad    = 0.012)
+        cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
+        plt.setp(cbytick_obj, color='black')
+
+
+    except:
+        print("blank map")
     ax.set_aspect('equal', 'datalim')
 
-    color_bar = plt.colorbar(filled_cm, 
-                 label  = "Reflectivity (dbZ)",
-                 shrink = 0.8,
-                 pad    = 0.012)
-    cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
-    plt.setp(cbytick_obj, color='black')
 
     # Metar Plots
 
@@ -562,6 +598,7 @@ def radar_plotting_func(name_index):
     plt.close()
     print("=====================")
 
+        
 
     
 
@@ -569,7 +606,7 @@ def radar_plotting_func(name_index):
 # In[ ]:
 
 
-
+#radar_plotting_func(18)
 
 
 # In[ ]:
@@ -843,7 +880,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 ####################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ##################################################
@@ -877,6 +914,18 @@ print()
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
