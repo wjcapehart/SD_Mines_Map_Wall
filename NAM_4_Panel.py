@@ -403,13 +403,14 @@ times_utc  = mslp.coords[time_dim].to_numpy()
 fxx        = (times_utc-start_time)/ np.timedelta64(1, 'h')
 
 time_precip_dim    = precip.dims[0]
-times_precip_utc   = precip.coords[time_precip_dim].to_numpy()
+times_precip_utc   = precip.coords[time_precip_dim].to_numpy()- np.timedelta64(30, 'm')
 fpxx               = (times_precip_utc-start_time)/ np.timedelta64(1, 'h')
 
 rain_norm = mpl.colors.BoundaryNorm(boundaries = precip_levels_in, 
                                                 ncolors    = 15)
 
-
+print(times_utc)
+print(times_precip_utc)
 prec_i = 0
 
 prec_i_array = np.empty( len(times_utc) )
@@ -861,7 +862,7 @@ for i in range(len(times_utc)) :
     
     prec_i_array[i] = int(i)
 
-    if(times_precip_utc[prec_i] == times_utc[i]):
+    if(times_precip_utc[prec_i] <= times_utc[i]):
         prec_i = prec_i+1
         
 
@@ -918,6 +919,24 @@ print()
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
