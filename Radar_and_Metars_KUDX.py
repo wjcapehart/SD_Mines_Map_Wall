@@ -98,16 +98,18 @@ siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 print(siphon_pulls_YYYYMMDD_HH)
 
 
-RadarLatitude      =  25.611
-RadarLongitude     =  -80.413
-geospatial_lat_min =  23.54582
-geospatial_lat_max =  27.67618
-geospatial_lon_max =  -78.12054
-geospatial_lon_min =  -82.70547
+geospatial_lat_min =   42.05982
+geospatial_lat_max =   46.19018
+
+geospatial_lon_min = -105.70986
+geospatial_lon_max =  -99.950134
+
+RadarLatitude   =   44.125
+RadarLongitude  = -102.83
 
 
-station_id = "MIA"
-radar_id   = "AMX"
+station_id = "RAP"
+radar_id   = "UDX"
 
 
 
@@ -158,7 +160,7 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 tz
 
 
-# In[ ]:
+# In[5]:
 
 
 ####################################################
@@ -252,7 +254,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 ####################################################
 
 
-# In[ ]:
+# In[6]:
 
 
 ####################################################
@@ -318,7 +320,7 @@ print("  end time: ",time_now)
 
 
 
-# In[ ]:
+# In[12]:
 
 
 def radar_plotting_func(name_index):
@@ -412,12 +414,12 @@ def radar_plotting_func(name_index):
         print("geospatial_lon_max = ", geospatial_lon_min)
         print("geospatial_lon_min = ", geospatial_lon_max)
     except:
-        RadarLatitude      =  25.611
-        RadarLongitude     =  -80.413
-        geospatial_lat_min =  23.54582
-        geospatial_lat_max =  27.67618
-        geospatial_lon_max =  -78.12054
-        geospatial_lon_min =  -82.70547
+        RadarLatitude      = 44.125
+        RadarLongitude     = -102.83
+        geospatial_lat_min =  42.05982
+        geospatial_lat_max = 46.19018
+        geospatial_lon_min =-99.950134
+        geospatial_lon_max = -105.70986
 
  
     #
@@ -440,7 +442,7 @@ def radar_plotting_func(name_index):
         plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
                     fontsize=20, color="black")
     except:
-        plt.suptitle("Surface Obs (Radar Services Down)",
+        plt.suptitle("Western South Dakota Surface Obs (Radar Services Down)",
                      fontsize=20, color="black")
 
 
@@ -579,11 +581,11 @@ def radar_plotting_func(name_index):
 
 
     #. plt.tight_layout()
-    #plt.subplots_adjust(left   = 0.01, 
-    #                        right  = 0.99, 
-    #                        top    = 0.91, 
-    #                        bottom = .01, 
-    #                        wspace = 0)
+    plt.subplots_adjust(left   = 0.01, 
+                            right  = 0.99, 
+                            top    = 0.91, 
+                            bottom = .01, 
+                            wspace = 0)
 
     rect = patches.Rectangle(xy        = (0, 0),
                              width     = percent_done,
@@ -593,10 +595,8 @@ def radar_plotting_func(name_index):
                              transform = ax.transAxes)
     ax.add_patch(rect)
 
-    print(ax.get_position().bounds)
-    ax.set_position([0.01, 0.01, 0.82124, 0.9])
-    print(ax.get_position().bounds)
-    
+
+
     plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(name_index).zfill(3)+".png")
 
 
@@ -609,13 +609,13 @@ def radar_plotting_func(name_index):
     
 
 
-# In[ ]:
+# In[14]:
 
 
-radar_plotting_func(99)
+radar_plotting_func(18)
 
 
-# In[ ]:
+# In[9]:
 
 
 ####################################################
@@ -653,7 +653,7 @@ print("Done")
 #####################################################
 
 
-# In[ ]:
+# In[10]:
 
 
 #####################################################
@@ -875,7 +875,7 @@ if (len(sorted(catalog.datasets)) == 0) :
         
         print(ax.get_position().bounds)
         ax.set_position([0.01, 0.01, 0.82124, 0.9])
-        print(ax.get_position().bounds)                
+        print(ax.get_position().bounds)        
 
         plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(time_index).zfill(3)+".png",
                         facecolor   = 'white', 
@@ -890,7 +890,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 ####################################################
 
 
-# In[ ]:
+# In[11]:
 
 
 ##################################################

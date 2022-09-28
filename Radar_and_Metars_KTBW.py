@@ -97,17 +97,16 @@ siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 
 print(siphon_pulls_YYYYMMDD_HH)
 
-
 RadarLatitude      =  25.611
 RadarLongitude     =  -80.413
-geospatial_lat_min =  23.54582
-geospatial_lat_max =  27.67618
-geospatial_lon_max =  -78.12054
-geospatial_lon_min =  -82.70547
+geospatial_lat_min =  25.63982
+geospatial_lat_max =  29.77018
+geospatial_lon_max = -80.06708
+geospatial_lon_min =  -84.73692
 
 
-station_id = "MIA"
-radar_id   = "AMX"
+station_id = "TPA"
+radar_id   = "TBW"
 
 
 
@@ -158,7 +157,7 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 tz
 
 
-# In[ ]:
+# In[5]:
 
 
 ####################################################
@@ -414,10 +413,10 @@ def radar_plotting_func(name_index):
     except:
         RadarLatitude      =  25.611
         RadarLongitude     =  -80.413
-        geospatial_lat_min =  23.54582
-        geospatial_lat_max =  27.67618
-        geospatial_lon_max =  -78.12054
-        geospatial_lon_min =  -82.70547
+        geospatial_lat_min =  25.63982
+        geospatial_lat_max =  29.77018
+        geospatial_lon_max = -80.06708
+        geospatial_lon_min =  -84.73692
 
  
     #
@@ -578,12 +577,11 @@ def radar_plotting_func(name_index):
     #########################################
 
 
-    #. plt.tight_layout()
-    #plt.subplots_adjust(left   = 0.01, 
-    #                        right  = 0.99, 
-    #                        top    = 0.91, 
-    #                        bottom = .01, 
-    #                        wspace = 0)
+    #plt.tight_layout()
+    plt.subplots_adjust(left   = 0.01, 
+                            right  = 0.99, 
+                           top    = 0.91, 
+                           bottom = .01, 
 
     rect = patches.Rectangle(xy        = (0, 0),
                              width     = percent_done,
@@ -612,7 +610,7 @@ def radar_plotting_func(name_index):
 # In[ ]:
 
 
-radar_plotting_func(99)
+radar_plotting_func(20)
 
 
 # In[ ]:
@@ -872,10 +870,6 @@ if (len(sorted(catalog.datasets)) == 0) :
                                  facecolor = "black",
                                  transform = ax.transAxes)
         ax.add_patch(rect)
-        
-        print(ax.get_position().bounds)
-        ax.set_position([0.01, 0.01, 0.82124, 0.9])
-        print(ax.get_position().bounds)                
 
         plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(time_index).zfill(3)+".png",
                         facecolor   = 'white', 
