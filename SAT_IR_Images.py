@@ -260,7 +260,8 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         
         #
         #########################################
-         
+        ax.set_frame_on(False)
+
         plt.savefig( dataset_png_file_name,
                         facecolor   = 'white', 
                         transparent =   False)

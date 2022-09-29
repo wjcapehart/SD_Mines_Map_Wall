@@ -897,6 +897,11 @@ for i in range(len(times_utc)) :
     ax4.add_patch(rect4)
 
     
+    ax1.set_frame_on(False)
+    ax2.set_frame_on(False)
+    ax3.set_frame_on(False)
+    ax4.set_frame_on(False)
+    
     plt.savefig(png_file_root + "F" + str(int( fxx[i])).zfill(3) + ".png",
                         facecolor   = 'white', 
                         transparent =   False)

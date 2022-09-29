@@ -3,7 +3,7 @@
 
 # #### NAM 4-panel
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -84,7 +84,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ###################################################
@@ -131,7 +131,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ####################################################
@@ -166,7 +166,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[ ]:
+# In[4]:
 
 
 ####################################################
@@ -222,7 +222,7 @@ print(nam_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[ ]:
+# In[5]:
 
 
 ####################################################
@@ -286,7 +286,7 @@ coriolis = coriolis.magnitude
 
 # ## Fetch Data for Panel Displays
 
-# In[ ]:
+# In[6]:
 
 
 ####################################################
@@ -371,7 +371,8 @@ precip = nam_model["Total_precipitation_surface_3_Hour_Accumulation"]
 precip.values         = precip.values / 25.4
 precip.attrs['units'] = 'in'
 
-
+display(mslp)
+display(precip)
 
 
 #
@@ -386,7 +387,7 @@ precip.attrs['units'] = 'in'
 
 
 
-# In[ ]:
+# In[7]:
 
 
 ####################################################
@@ -812,7 +813,10 @@ for i in range(len(times_utc)) :
     ax4.set_xlim(eastings_range)
     ax4.set_ylim(northings_range)
     
-
+    ax1.set_frame_on(False)
+    ax2.set_frame_on(False)
+    ax3.set_frame_on(False)
+    ax4.set_frame_on(False)
  
     plt.subplots_adjust(left   = 0.005, 
                         right  =  .995, 
@@ -862,7 +866,7 @@ for i in range(len(times_utc)) :
     
     prec_i_array[i] = int(i)
 
-    if(times_precip_utc[prec_i] <= times_utc[i]):
+    if(times_precip_utc[prec_i] == times_utc[i]):
         prec_i = prec_i+1
         
 

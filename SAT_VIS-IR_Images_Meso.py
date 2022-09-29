@@ -361,7 +361,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         
         #
-        #########################################             
+        #########################################
+        ax.set_frame_on(False)
         plt.tight_layout()
         
         plt.savefig( dataset_png_file_name,
@@ -703,7 +704,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         
         #
-        #########################################             
+        #########################################    
+        ax.set_frame_on(False)
         plt.tight_layout()
         
         plt.savefig( dataset_png_file_name,
@@ -1055,7 +1057,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         
         #
-        #########################################             
+        #########################################   
+        ax.set_frame_on(False)
         plt.tight_layout()
         
         plt.savefig( dataset_png_file_name,
