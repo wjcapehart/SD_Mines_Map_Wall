@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Radar
+# # UDX Radar
 # 
 # Creates an Animated Plot for Radar and Station Models
 
@@ -98,16 +98,22 @@ siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 print(siphon_pulls_YYYYMMDD_HH)
 
 
-geospatial_lat_min =   42.05982
-geospatial_lat_max =   46.19018
+Fixed_geospatial_lat_min =   42.05982
+Fixed_geospatial_lat_max =   46.19018
 
-geospatial_lon_min = -105.70986
-geospatial_lon_max =  -99.950134
+Fixed_geospatial_lon_min = -105.70986
+Fixed_geospatial_lon_max =  -99.950134
 
-RadarLatitude   =   44.125
-RadarLongitude  = -102.83
+Fixed_RadarLatitude   =   44.125
+Fixed_RadarLongitude  = -102.83
 
-
+RadarLatitude= Fixed_RadarLatitude
+RadarLongitude= Fixed_RadarLongitude
+geospatial_lat_min= Fixed_geospatial_lat_min
+geospatial_lat_max= Fixed_geospatial_lat_max
+geospatial_lon_max= Fixed_geospatial_lon_max
+geospatial_lon_min= Fixed_geospatial_lon_min
+        
 station_id = "RAP"
 radar_id   = "UDX"
 
@@ -320,7 +326,7 @@ print("  end time: ",time_now)
 
 
 
-# In[12]:
+# In[7]:
 
 
 def radar_plotting_func(name_index):
@@ -401,6 +407,7 @@ def radar_plotting_func(name_index):
     print(valid_time + "  (" + local_time+")")
 
     try:
+        noradar = False
         RadarLatitude      = radar.RadarLatitude
         RadarLongitude     = radar.RadarLongitude
         geospatial_lat_min = radar.geospatial_lat_min
@@ -414,13 +421,13 @@ def radar_plotting_func(name_index):
         print("geospatial_lon_max = ", geospatial_lon_min)
         print("geospatial_lon_min = ", geospatial_lon_max)
     except:
-        RadarLatitude      = 44.125
-        RadarLongitude     = -102.83
-        geospatial_lat_min =  42.05982
-        geospatial_lat_max = 46.19018
-        geospatial_lon_min =-99.950134
-        geospatial_lon_max = -105.70986
-
+        noradar = True
+        RadarLatitude= Fixed_RadarLatitude
+        RadarLongitude= Fixed_RadarLongitude
+        geospatial_lat_min= Fixed_geospatial_lat_min
+        geospatial_lat_max= Fixed_geospatial_lat_max
+        geospatial_lon_max= Fixed_geospatial_lon_max
+        geospatial_lon_min= Fixed_geospatial_lon_min
  
     #
     ###################################
@@ -442,7 +449,7 @@ def radar_plotting_func(name_index):
         plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
                     fontsize=20, color="black")
     except:
-        plt.suptitle("Western South Dakota Surface Obs (Radar Services Down)",
+        plt.suptitle("Surface Obs (Radar Services Down)",
                      fontsize=20, color="black")
 
 
@@ -478,10 +485,14 @@ def radar_plotting_func(name_index):
                      pad    = 0.012)
         cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
         plt.setp(cbytick_obj, color='black')
+        noradar = False
+
 
 
     except:
         print("blank map")
+        noradar = True
+
     ax.set_aspect('equal', 'datalim')
 
 
@@ -581,11 +592,15 @@ def radar_plotting_func(name_index):
 
 
     #. plt.tight_layout()
-    plt.subplots_adjust(left   = 0.01, 
-                            right  = 0.99, 
-                            top    = 0.91, 
-                            bottom = .01, 
-                            wspace = 0)
+    ax.set_frame_on(False)
+    if (not noradar):
+        plt.subplots_adjust(left   = 0.01, 
+                                right  = 0.99, 
+                                top    = 0.91, 
+                                bottom = .01, 
+                                wspace = 0)
+    else:
+        ax.set_position([0.01, 0.01, 0.82124, 0.9])
 
     rect = patches.Rectangle(xy        = (0, 0),
                              width     = percent_done,
@@ -597,6 +612,7 @@ def radar_plotting_func(name_index):
 
 
 
+    
     plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(name_index).zfill(3)+".png")
 
 
@@ -604,15 +620,16 @@ def radar_plotting_func(name_index):
     plt.close()
     print("=====================")
 
-        
-
-    
+  
 
 
-# In[14]:
+# In[8]:
 
 
-#radar_plotting_func(18)
+try: 
+    radar_plotting_func(0)
+except:
+    print("## No radar files to plot")
 
 
 # In[9]:
@@ -872,7 +889,8 @@ if (len(sorted(catalog.datasets)) == 0) :
                                  facecolor = "black",
                                  transform = ax.transAxes)
         ax.add_patch(rect)
-        
+        ax.set_frame_on(False)
+
         print(ax.get_position().bounds)
         ax.set_position([0.01, 0.01, 0.82124, 0.9])
         print(ax.get_position().bounds)        

@@ -97,16 +97,24 @@ siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 
 print(siphon_pulls_YYYYMMDD_HH)
 
-RadarLatitude =  32.655
-RadarLongitude =  -81.042
+Fixed_RadarLatitude= 30.485
+Fixed_RadarLongitude= -81.702
+Fixed_RadarAltitude= 48.4632
+Fixed_geospatial_lat_min= 28.419819
+Fixed_geospatial_lat_max= 32.550182
+Fixed_geospatial_lon_max= -79.30316
+Fixed_geospatial_lon_min= -84.10084
 
-geospatial_lat_min = 30.589819
-geospatial_lat_max = 34.72018
-geospatial_lon_max = -78.58667
-geospatial_lon_min =  -83.49733
+RadarLatitude= Fixed_RadarLatitude
+RadarLongitude= Fixed_RadarLongitude
+geospatial_lat_min= Fixed_geospatial_lat_min
+geospatial_lat_max= Fixed_geospatial_lat_max
+geospatial_lon_max= Fixed_geospatial_lon_max
+geospatial_lon_min= Fixed_geospatial_lon_min
 
-station_id = "CLX"
-radar_id   = "CLX"
+
+station_id = "JAX"
+radar_id   = "JAX"
 
 
 
@@ -398,6 +406,7 @@ def radar_plotting_func(name_index):
     print(valid_time + "  (" + local_time+")")
 
     try:
+        noradar = False
         RadarLatitude      = radar.RadarLatitude
         RadarLongitude     = radar.RadarLongitude
         geospatial_lat_min = radar.geospatial_lat_min
@@ -411,15 +420,14 @@ def radar_plotting_func(name_index):
         print("geospatial_lon_max = ", geospatial_lon_min)
         print("geospatial_lon_min = ", geospatial_lon_max)
     except:
-        RadarLatitude =  32.655
-        RadarLongitude =  -81.042
-
-        geospatial_lat_min = 30.589819
-        geospatial_lat_max = 34.72018
-        geospatial_lon_max = -78.58667
-        geospatial_lon_min =  -83.49733
-        
-   
+        noradar = True
+        RadarLatitude= Fixed_RadarLatitude
+        RadarLongitude= Fixed_RadarLongitude
+        geospatial_lat_min= Fixed_geospatial_lat_min
+        geospatial_lat_max= Fixed_geospatial_lat_max
+        geospatial_lon_max= Fixed_geospatial_lon_max
+        geospatial_lon_min= Fixed_geospatial_lon_min
+ 
     #
     ###################################
 
@@ -476,10 +484,14 @@ def radar_plotting_func(name_index):
                      pad    = 0.012)
         cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
         plt.setp(cbytick_obj, color='black')
+        noradar = False
+
 
 
     except:
         print("blank map")
+        noradar = True
+
     ax.set_aspect('equal', 'datalim')
 
 
@@ -579,11 +591,15 @@ def radar_plotting_func(name_index):
 
 
     #. plt.tight_layout()
-    plt.subplots_adjust(left   = 0.01, 
-                            right  = 0.99, 
-                            top    = 0.91, 
-                            bottom = .01, 
-                            wspace = 0)
+    ax.set_frame_on(False)
+    if (not noradar):
+        plt.subplots_adjust(left   = 0.01, 
+                                right  = 0.99, 
+                                top    = 0.91, 
+                                bottom = .01, 
+                                wspace = 0)
+    else:
+        ax.set_position([0.01, 0.01, 0.82124, 0.9])
 
     rect = patches.Rectangle(xy        = (0, 0),
                              width     = percent_done,
@@ -593,9 +609,8 @@ def radar_plotting_func(name_index):
                              transform = ax.transAxes)
     ax.add_patch(rect)
 
-    print(ax.get_position().bounds)
-    ax.set_position([0.01, 0.01, 0.82124, 0.9])
-    print(ax.get_position().bounds)
+
+
     
     plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(name_index).zfill(3)+".png")
 
@@ -604,15 +619,17 @@ def radar_plotting_func(name_index):
     plt.close()
     print("=====================")
 
-        
-
+  
     
 
 
-# In[12]:
+# In[8]:
 
 
-#radar_plotting_func(0)
+try: 
+    radar_plotting_func(0)
+except:
+    print("## No radar files to plot")
 
 
 # In[9]:
@@ -859,11 +876,11 @@ if (len(sorted(catalog.datasets)) == 0) :
 
 
         #. plt.tight_layout()
-        #plt.subplots_adjust(left   = 0.01, 
-        #                        right  = 0.99, 
-        #                        top    = 0.91, 
-        #                        bottom = .01, 
-        #                        wspace = 0)
+        plt.subplots_adjust(left   = 0.01, 
+                                right  = 0.99, 
+                                top    = 0.91, 
+                                bottom = .01, 
+                                wspace = 0)
         
         rect = patches.Rectangle(xy        = (0, 0),
                                  width     = percent_done,
@@ -872,7 +889,8 @@ if (len(sorted(catalog.datasets)) == 0) :
                                  facecolor = "black",
                                  transform = ax.transAxes)
         ax.add_patch(rect)
-        
+        ax.set_frame_on(False)
+
         print(ax.get_position().bounds)
         ax.set_position([0.01, 0.01, 0.82124, 0.9])
         print(ax.get_position().bounds)                
