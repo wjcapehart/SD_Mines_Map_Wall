@@ -612,7 +612,7 @@ def radar_plotting_func(name_index):
 # In[14]:
 
 
-radar_plotting_func(18)
+#radar_plotting_func(18)
 
 
 # In[9]:
@@ -859,11 +859,11 @@ if (len(sorted(catalog.datasets)) == 0) :
 
 
         #. plt.tight_layout()
-        #plt.subplots_adjust(left   = 0.01, 
-        #                        right  = 0.99, 
-        #                        top    = 0.91, 
-        #                        bottom = .01, 
-        #                        wspace = 0)
+        plt.subplots_adjust(left   = 0.01, 
+                                right  = 0.99, 
+                                top    = 0.91, 
+                                bottom = .01, 
+                                wspace = 0)
         
         rect = patches.Rectangle(xy        = (0, 0),
                                  width     = percent_done,
