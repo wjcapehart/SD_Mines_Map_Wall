@@ -8,6 +8,7 @@ BH.S,BH,S,turquoise,Beach Hazards Statement,108
 CF.S,CF,S,olivedrab,Coastal Flood Statement,107
 FF.S,FF,S,yellowgreen,Flash Flood Statement,106
 HY.S,FL,S,#00ff7f,Hydrological Statement,105
+TR.S,TR,S,rosybrown,Tropical Cyclone Statement,104.5
 FL.S,FL,S,#00ff7f,Flood Statement,104
 HU.S,HU,S,yellow,Hurricane Statement,103
 LS.S,LS,S,lawngreen,Lakeshore Flood Statement,102
@@ -76,7 +77,6 @@ TS.A,TS,A,fuchsia,Tsunami Watch,43
 TR.A,TR,A,#f08080,Tropical Storm Watch,42
 SS.A,SS,A,#DB7FF7,Storm Surge Watch,41
 HF.A,HF,A,darkorchid,Hurricane Force Wind Watch,40
-HU.A,HU,A,#ff00ff,Hurricane Watch,11.5
 TO.A,TO,A,yellow,Tornado Watch,38
 AF.W,AF,W,gray,Ashfall Warning,37
 LC.W,LC,W,gray,Local Area Emergency,36
@@ -100,12 +100,13 @@ SU.W,SU,W,forestgreen,High Surf Warning,20
 FA.W,FA,W,seagreen,Areal Flood Warning,19
 FF.W,FF,W,darkred,Flash Flood Warning,18
 FL.W,FL,W,green,Flood Warning,17
-SE.W,SE,W,thistle,Hazardous Seas Warning,16
 FW.W,FW,W,darkred,Fire Warning,16.5
+SE.W,SE,W,thistle,Hazardous Seas Warning,16
 SQ.W,SQ,W,#EF2B1C,Snow Squall Warning,15
 BZ.W,BZ,W,orangered,Blizzard Warning,14
 SR.W,SR,W,darkorchid,Storm Warning,13
 SS.W,SS,W,#B524F7,Storm Surge Warning,12
+HU.A,HU,A,#ff00ff,Hurricane Watch,11.5
 SV.W,SV,W,orange,Severe Thunderstorm Warning,11
 HU.W,HU,W,#dc143c,Hurricane Warning,10
 UP.W,UP,W,#00C0FF,Heavy Freezing Spray Warning,9
