@@ -1,5 +1,5 @@
 s,phen,sig,color,hdln,Rank
-XX.X,XS,X,Child Abduction Emergency,0
+XX.X,XS,X,snow,Child Abduction Emergency,200
 AS.O,AS,O,gray,Air Stagnation Outlook,112
 HY.O,HY,O,#00ff7f,Hydrologic Outlook,111
 MW.S,MW,S,moccasin,Marine Weather Statement,110
@@ -76,7 +76,7 @@ TS.A,TS,A,fuchsia,Tsunami Watch,43
 TR.A,TR,A,#f08080,Tropical Storm Watch,42
 SS.A,SS,A,#DB7FF7,Storm Surge Watch,41
 HF.A,HF,A,darkorchid,Hurricane Force Wind Watch,40
-HU.A,HU,A,#ff00ff,Hurricane Watch,39
+HU.A,HU,A,#ff00ff,Hurricane Watch,11.5
 TO.A,TO,A,yellow,Tornado Watch,38
 AF.W,AF,W,gray,Ashfall Warning,37
 LC.W,LC,W,gray,Local Area Emergency,36
