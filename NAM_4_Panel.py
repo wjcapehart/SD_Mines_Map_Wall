@@ -371,8 +371,7 @@ precip = nam_model["Total_precipitation_surface_3_Hour_Accumulation"]
 precip.values         = precip.values / 25.4
 precip.attrs['units'] = 'in'
 
-display(mslp)
-display(precip)
+
 
 
 #
@@ -387,7 +386,7 @@ display(precip)
 
 
 
-# In[7]:
+# In[ ]:
 
 
 ####################################################
