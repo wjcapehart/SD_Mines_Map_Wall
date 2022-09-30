@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # JAX Radar
+# # UDX Radar
 # 
 # Creates an Animated Plot for Radar and Station Models
 
@@ -97,13 +97,15 @@ siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 
 print(siphon_pulls_YYYYMMDD_HH)
 
-Fixed_RadarLatitude= 30.485
-Fixed_RadarLongitude= -81.702
-Fixed_RadarAltitude= 48.4632
-Fixed_geospatial_lat_min= 28.419819
-Fixed_geospatial_lat_max= 32.550182
-Fixed_geospatial_lon_max= -79.30316
-Fixed_geospatial_lon_min= -84.10084
+
+Fixed_geospatial_lat_min =   42.05982
+Fixed_geospatial_lat_max =   46.19018
+
+Fixed_geospatial_lon_min = -105.70986
+Fixed_geospatial_lon_max =  -99.950134
+
+Fixed_RadarLatitude   =   44.125
+Fixed_RadarLongitude  = -102.83
 
 RadarLatitude= Fixed_RadarLatitude
 RadarLongitude= Fixed_RadarLongitude
@@ -111,10 +113,9 @@ geospatial_lat_min= Fixed_geospatial_lat_min
 geospatial_lat_max= Fixed_geospatial_lat_max
 geospatial_lon_max= Fixed_geospatial_lon_max
 geospatial_lon_min= Fixed_geospatial_lon_min
-
-
-station_id = "JAX"
-radar_id   = "JAX"
+        
+station_id = "RAP"
+radar_id   = "UDX"
 
 
 
@@ -620,7 +621,6 @@ def radar_plotting_func(name_index):
     print("=====================")
 
   
-    
 
 
 # In[8]:
@@ -893,7 +893,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 
         print(ax.get_position().bounds)
         ax.set_position([0.01, 0.01, 0.82124, 0.9])
-        print(ax.get_position().bounds)                
+        print(ax.get_position().bounds)        
 
         plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(time_index).zfill(3)+".png",
                         facecolor   = 'white', 
