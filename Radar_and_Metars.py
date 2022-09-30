@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # MLB Radar
+# # JAX Radar
 # 
 # Creates an Animated Plot for Radar and Station Models
 
@@ -97,12 +97,13 @@ siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 
 print(siphon_pulls_YYYYMMDD_HH)
 
-Fixed_RadarLatitude      =  28.113
-Fixed_RadarLongitude     =  -80.654
-Fixed_geospatial_lat_min =  26.04782
-Fixed_geospatial_lat_max =  30.17818
-Fixed_geospatial_lon_max =  -78.31026
-Fixed_geospatial_lon_min =  -82.99774
+Fixed_RadarLatitude= 30.485
+Fixed_RadarLongitude= -81.702
+Fixed_RadarAltitude= 48.4632
+Fixed_geospatial_lat_min= 28.419819
+Fixed_geospatial_lat_max= 32.550182
+Fixed_geospatial_lon_max= -79.30316
+Fixed_geospatial_lon_min= -84.10084
 
 RadarLatitude= Fixed_RadarLatitude
 RadarLongitude= Fixed_RadarLongitude
@@ -111,8 +112,9 @@ geospatial_lat_max= Fixed_geospatial_lat_max
 geospatial_lon_max= Fixed_geospatial_lon_max
 geospatial_lon_min= Fixed_geospatial_lon_min
 
-station_id = "MLB"
-radar_id   = "MLB"
+
+station_id = "JAX"
+radar_id   = "JAX"
 
 
 
@@ -617,6 +619,9 @@ def radar_plotting_func(name_index):
     plt.close()
     print("=====================")
 
+  
+    
+
 
 # In[8]:
 
@@ -886,7 +891,6 @@ if (len(sorted(catalog.datasets)) == 0) :
         ax.add_patch(rect)
         ax.set_frame_on(False)
 
-        
         print(ax.get_position().bounds)
         ax.set_position([0.01, 0.01, 0.82124, 0.9])
         print(ax.get_position().bounds)                
