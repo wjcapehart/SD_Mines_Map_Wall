@@ -3,7 +3,7 @@
 
 # #### NAM 4-panel
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -84,7 +84,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ###################################################
@@ -131,7 +131,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -166,7 +166,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[4]:
+# In[ ]:
 
 
 ####################################################
@@ -222,7 +222,7 @@ print(nam_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -286,7 +286,7 @@ coriolis = coriolis.magnitude
 
 # ## Fetch Data for Panel Displays
 
-# In[6]:
+# In[ ]:
 
 
 ####################################################
@@ -403,7 +403,7 @@ times_utc  = mslp.coords[time_dim].to_numpy()
 fxx        = (times_utc-start_time)/ np.timedelta64(1, 'h')
 
 time_precip_dim    = precip.dims[0]
-times_precip_utc   = precip.coords[time_precip_dim].to_numpy()- np.timedelta64(30, 'm')
+times_precip_utc   = precip.coords[time_precip_dim].to_numpy() #- np.timedelta64(30, 'm')
 fpxx               = (times_precip_utc-start_time)/ np.timedelta64(1, 'h')
 
 rain_norm = mpl.colors.BoundaryNorm(boundaries = precip_levels_in, 
@@ -418,7 +418,10 @@ prec_i_array = np.empty( len(times_utc) )
 total_slides = len(times_utc)
 
 
-frat_done = 0
+
+# In[ ]:
+
+
 #for i in [0]: #range(len(times_utc)) :
 for i in range(len(times_utc)) :    
     
