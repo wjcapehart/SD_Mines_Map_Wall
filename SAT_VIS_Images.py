@@ -48,6 +48,7 @@ print(MAINDIR)
 
 
 
+alpha_factor = 0.05
 
 # %load solutions/data_url.py
 
@@ -144,7 +145,7 @@ for filename in files_on_hand:
 ##################################################    
 
 
-# In[6]:
+# In[ ]:
 
 
 ##################################################
@@ -185,6 +186,13 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         print(valid_time,local_time)
 
 
+        ny = dat.shape[0]
+        nx = dat.shape[1]      
+        alpha2d = np.sqrt(np.outer(np.abs(np.hanning(ny)),np.abs(np.hanning(nx))))
+        alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
+        alpha2d = alpha2d / alpha_factor
+
+
 
         fig = plt.figure(figsize=(12.25, 8), facecolor = 'white')
 
@@ -206,7 +214,8 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
                        origin =          'upper',
                        cmap   =        'Greys_r',
                        vmax   =     np.sqrt(1.0),
-                       vmin   =     np.sqrt(0.0))
+                       vmin   =     np.sqrt(0.0),
+                       alpha  =          alpha2d)
 
         #wv_cmap = colortables.get_colortable('WVCIMSS_r')
         #im.set_cmap(wv_cmap)

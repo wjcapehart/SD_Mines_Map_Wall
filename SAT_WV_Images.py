@@ -3,7 +3,7 @@
 
 # # Water Vapor
 
-# In[ ]:
+# In[1]:
 
 
 ##################################################
@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 ##################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ##################################################
@@ -47,7 +47,7 @@ MAINDIR = os.getcwd() + "/"
 print(MAINDIR)
 
 
-
+alpha_factor = 0.05
 
 total_frames = 45*2
 
@@ -81,7 +81,7 @@ print(data_url)
 ##################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ##################################################
@@ -95,7 +95,7 @@ cat = TDSCatalog(data_url)
 ##################################################
 
 
-# In[ ]:
+# In[4]:
 
 
 ##################################################
@@ -123,7 +123,7 @@ file_names_to_use.sort()
 ##################################################    
 
 
-# In[ ]:
+# In[5]:
 
 
 ##################################################
@@ -141,7 +141,7 @@ for filename in files_on_hand:
 ##################################################    
 
 
-# In[ ]:
+# In[6]:
 
 
 ##################################################
@@ -174,6 +174,13 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
 
         print(valid_time,local_time)
 
+        
+        ny = dat.shape[0]
+        nx = dat.shape[1]      
+        alpha2d = np.sqrt(np.outer(np.abs(np.hanning(ny)),np.abs(np.hanning(nx))))
+        alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
+        alpha2d = alpha2d / alpha_factor
+
 
 
         fig = plt.figure(figsize=(12.25, 8), facecolor = 'white')
@@ -188,7 +195,7 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
         ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=2, edgecolor='black')
 
-        im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper')
+        im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper', alpha=alpha2d)
 
         wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 195, 265)
         im.set_cmap(wv_cmap)
@@ -263,7 +270,7 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
 ##################################################
 
 
-# In[ ]:
+# In[7]:
 
 
 ##################################################
@@ -302,6 +309,18 @@ print("completed "+ gif_file_name)
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

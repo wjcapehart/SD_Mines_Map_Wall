@@ -3,7 +3,7 @@
 
 # # Infrared CONUS
 
-# In[ ]:
+# In[1]:
 
 
 ##################################################
@@ -36,7 +36,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 ##################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ##################################################
@@ -48,6 +48,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 MAINDIR = os.getcwd() + "/"
 print(MAINDIR)
 
+alpha_factor = 0.05
 
 
 # %load solutions/data_url.py
@@ -84,7 +85,7 @@ print(data_url)
 ##################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ##################################################
@@ -103,7 +104,7 @@ print("I = ", range(len(cat.datasets)-total_frames,len(cat.datasets),1))
 ##################################################
 
 
-# In[ ]:
+# In[4]:
 
 
 ##################################################
@@ -130,7 +131,7 @@ file_names_to_use.sort()
 ##################################################    
 
 
-# In[ ]:
+# In[5]:
 
 
 ##################################################
@@ -148,7 +149,7 @@ for filename in files_on_hand:
 ##################################################    
 
 
-# In[ ]:
+# In[6]:
 
 
 ##################################################
@@ -181,7 +182,11 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
 
         print(valid_time,local_time)
 
-
+        ny = dat.shape[0]
+        nx = dat.shape[1]      
+        alpha2d = np.sqrt(np.outer(np.abs(np.hanning(ny)),np.abs(np.hanning(nx))))
+        alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
+        alpha2d = alpha2d / alpha_factor
 
         fig = plt.figure(figsize=(12.25, 8), facecolor = 'white')
 
@@ -197,7 +202,7 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         
 
         print("range dat = ",np.nanmin(dat.values),np.nanmax(dat.values))
-        im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper')
+        im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper', alpha=alpha2d)
 
         wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
         im.set_cmap(wv_cmap)
@@ -274,7 +279,7 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
 ##################################################
 
 
-# In[ ]:
+# In[7]:
 
 
 ##################################################
