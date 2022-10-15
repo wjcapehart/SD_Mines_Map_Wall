@@ -52,6 +52,9 @@ import matplotlib.patches as patches
 MAINDIR = os.getcwd() +"/"
 print(MAINDIR)
 
+alpha_factor = 0.05
+
+
 channel_vis =                        2
 channel_tir =                       13
 
@@ -278,6 +281,15 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         image_header_label = "GOES 16" + region_lab + str(channel)+ channel_lab[channel]
 
 
+        ny = dat.shape[0]
+        nx = dat.shape[1]      
+        alpha2d = np.sqrt(np.outer(np.abs(np.hanning(ny)),np.abs(np.hanning(nx))))
+        alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
+        alpha2d = alpha2d / alpha_factor
+
+        
+        
+
         fig = plt.figure(figsize=(8, 8), facecolor = 'white')
 
         plt.suptitle(image_header_label,
@@ -297,7 +309,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
             im = ax.imshow(                        dat, 
                            extent = [x.min(), x.max(), 
                                      y.min(), y.max()], 
-                           origin =            'upper')
+                           origin =            'upper', alpha = alpha2d)
 
             wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
 
@@ -310,7 +322,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                            origin =            'upper',
                            cmap   =          'Greys_r',
                            vmin   =        np.sqrt(0),
-                           vmax   =        np.sqrt(1))
+                           vmax   =        np.sqrt(1), alpha = alpha2d)
 
 
 
@@ -608,6 +620,15 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #if(any(dat == np.nan):
         
 
+        ny = dat.shape[0]
+        nx = dat.shape[1]      
+        alpha2d = np.sqrt(np.outer(np.abs(np.hanning(ny)),np.abs(np.hanning(nx))))
+        alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
+        alpha2d = alpha2d / alpha_factor
+
+
+        
+   
 
         tz         = 'America/Denver'
         time_utc   = datetime.strptime(ds.start_date_time, '%Y%j%H%M%S')
@@ -640,7 +661,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
             im = ax.imshow(                        dat, 
                            extent = [x.min(), x.max(), 
                                      y.min(), y.max()], 
-                           origin =            'upper')
+                           origin =            'upper', alpha = alpha2d)
 
             wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
 
@@ -653,7 +674,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                            origin =            'upper',
                            cmap   =          'Greys_r',
                            vmin   =        np.sqrt(0),
-                           vmax   =        np.sqrt(1))
+                           vmax   =        np.sqrt(1), alpha = alpha2d)
 
 
 
@@ -974,6 +995,16 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         image_header_label = "GOES 16" + region_lab + str(channel)+ channel_lab[channel]
 
 
+
+        ny = dat.shape[0]
+        nx = dat.shape[1]      
+        alpha2d = np.sqrt(np.outer(np.abs(np.hanning(ny)),np.abs(np.hanning(nx))))
+        alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
+        alpha2d = alpha2d / alpha_factor
+
+
+        
+   
         fig = plt.figure(figsize=(8, 8), facecolor = 'white')
 
         plt.suptitle(image_header_label,
@@ -993,7 +1024,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
             im = ax.imshow(                       dat, 
                            extent = [x.min(), x.max(), 
                                      y.min(), y.max()], 
-                           origin =            'upper')
+                           origin =            'upper', alpha = alpha2d)
 
             wv_norm, wv_cmap = colortables.get_with_range('WVCIMSS_r', 190, 310)
 
@@ -1006,7 +1037,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                            origin =            'upper',
                            cmap   =          'Greys_r',
                            vmin   =        np.sqrt(0),
-                           vmax   =        np.sqrt(1))
+                           vmax   =        np.sqrt(1), alpha = alpha2d)
 
 
 
