@@ -99,6 +99,7 @@ MAINDIR = os.getcwd() + "/"
 print(MAINDIR)
 
 
+alpha_factor = 0.05
 
 
 nws_precip_colors = [
@@ -267,6 +268,11 @@ dt_prec = (prectime_bounds[:,1]-prectime_bounds[:,0])/ np.timedelta64(1, 'h')
 
 
 
+ny = lon2d.shape[0]
+nx = lon2d.shape[1]      
+alpha2d = np.sqrt(np.outer(np.abs(np.hanning(ny)),np.abs(np.hanning(nx))))
+alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
+alpha2d = alpha2d / alpha_factor
 
 #
 ####################################################
@@ -528,15 +534,17 @@ for i in range(len(times_utc)) :
                                 stop  =  21,
                                 step  =   1)
 
-    contourf_plot = vorticity_500[i,:,:].plot.contourf(cmap      = plt.cm.bwr,
-                                                       ax = ax1,
-                                                       extend   = 'both',
-                                                       levels    = contourf_levels,
-                                                       cbar_kwargs = {"label"       : "",
-                                                                       "orientation" : "horizontal",
-                                                                       "pad"         : colorbar_pad,
-                                                                       "shrink"      : colorbar_shrink,
-                                                                       "aspect"      :   colorbar_aspect})    
+    contourf_plot = vorticity_500[i,:,:].plot.imshow(  cmap          = plt.cm.bwr, 
+                                                       alpha         = alpha2d,
+                                                       ax            = ax1, 
+                                                       interpolation = "bilinear",
+                                                       extend        = 'both',
+                                                       levels        = contourf_levels,
+                                                       cbar_kwargs   = {"label"       : "",
+                                                                        "orientation" : "horizontal",
+                                                                        "pad"         : colorbar_pad,
+                                                                        "shrink"      : colorbar_shrink,
+                                                                        "aspect"      :   colorbar_aspect})    
     contour_levels = np.arange(480,612, 6)
 
     contour_plot = heights_500[i,:,:].plot.contour(colors     = "black",
@@ -586,11 +594,13 @@ for i in range(len(times_utc)) :
                                 stop  =  613,
                                 step  =    6)
 
-    contourf_plot = thickness[i,:,:].plot.contourf(cmap        = plt.cm.turbo,
-                                                   ax=ax2,
-                                                   extend      = 'both',
-                                                   levels      = contourf_levels,
-                                                   cbar_kwargs = {"label"       : "","orientation" : "horizontal","pad"         : colorbar_pad,"shrink"      : colorbar_shrink,"aspect"      :   colorbar_aspect})    
+    contourf_plot = thickness[i,:,:].plot.imshow(  cmap          = plt.cm.turbo, 
+                                                   alpha         = alpha2d,
+                                                   ax            = ax2, 
+                                                   interpolation = "bilinear",
+                                                   extend        = 'both',
+                                                   levels        = contourf_levels,
+                                                   cbar_kwargs   = {"label"       : "","orientation" : "horizontal","pad"         : colorbar_pad,"shrink"      : colorbar_shrink,"aspect"      :   colorbar_aspect})    
 
 
 
@@ -670,16 +680,18 @@ for i in range(len(times_utc)) :
                                 stop  =  71,
                                 step  =   2)
 
-    contourf_plot = td_850[i,:,:].plot.contourf(cmap        = plt.cm.summer.reversed(),
-                                                ax          = ax3,
-                                                extend      = 'both',
-                                                levels      = contourf_levels,
-                                                cbar_kwargs = {"label"       : "",
-                                                               "orientation" : "horizontal",
-                                                               "pad"         : colorbar_pad,
-                                                               "ticks"       : contourf_levels,
-                                                               "shrink"      : colorbar_shrink,
-                                                               "aspect"      :   colorbar_aspect})    
+    contourf_plot = td_850[i,:,:].plot.imshow(  cmap          = plt.cm.summer.reversed(), 
+                                                alpha         = alpha2d,
+                                                ax            = ax3, 
+                                                interpolation = "bilinear",
+                                                extend        = 'both',
+                                                levels        = contourf_levels,
+                                                cbar_kwargs   = {"label"       : "",
+                                                                 "orientation" : "horizontal",
+                                                                 "pad"         : colorbar_pad,
+                                                                 "ticks"       : contourf_levels,
+                                                                 "shrink"      : colorbar_shrink,
+                                                                 "aspect"      : colorbar_aspect})    
     lw = 5*m_850[i,:,:] / m_850[i,:,:].max()
     
 
@@ -732,18 +744,20 @@ for i in range(len(times_utc)) :
     
     contourf_levels = precip_levels_in
 
-    contourf_plot = dt_precip[prec_i,:,:].plot.contourf(cmap      = precip_colormap,
-                                                        ax       = ax4,
-                                                        extend   = 'max',
-                                                        norm      = rain_norm,
-                                                        levels    = contourf_levels,
-                                                        cbar_kwargs = {"label"        : " ", "orientation" : "horizontal","pad"         : colorbar_pad,"ticks"       : contourf_levels,"shrink"      : colorbar_shrink,"aspect"      :   colorbar_aspect})    
+    contourf_plot = dt_precip[prec_i,:,:].plot.imshow( cmap          = precip_colormap,
+                                                        alpha         = alpha2d,
+                                                        ax            = ax4, 
+                                                        interpolation = "bilinear",
+                                                        extend        = 'max',
+                                                        norm          = rain_norm,
+                                                        levels        = contourf_levels,
+                                                        cbar_kwargs   = {"label"        : " ", "orientation" : "horizontal","pad"         : colorbar_pad,"ticks"       : contourf_levels,"shrink"      : colorbar_shrink,"aspect"      :   colorbar_aspect})    
 
 
     contour_plot2 = dt_precip[prec_i,:,:].plot.contour(colors     =            "cyan",
-                                                    ax         =               ax4,
-                                                    linewidths =                 1, 
-                                                    levels     = np.array([0.002]))
+                                                       ax         =               ax4,
+                                                       linewidths =                 1, 
+                                                       levels     = np.array([0.002]))
 
     contour_plot3 =   thickness[i,:,:].plot.contour(colors     =         "black",
                                                     ax         =             ax4,
