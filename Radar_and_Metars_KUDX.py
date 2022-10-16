@@ -5,7 +5,7 @@
 # 
 # Creates an Animated Plot for Radar and Station Models
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -66,7 +66,7 @@ from joblib import Parallel, delayed
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ####################################################
@@ -90,7 +90,7 @@ print(time_now)
 radar_delta_t = 4 # min
 
 
-metar_time_spread = 59
+metar_time_spread = 60
 
 siphon_time_series       = pd.date_range(time_start- timedelta(hours=1), time_now,freq='H')
 siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
@@ -133,7 +133,7 @@ norm, cmap = colortables.get_with_steps("NWSStormClearReflectivity",
 ####################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -160,13 +160,13 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 ####################################################
 
 
-# In[4]:
+# In[ ]:
 
 
 tz
 
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -260,7 +260,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 ####################################################
 
 
-# In[6]:
+# In[ ]:
 
 
 ####################################################
@@ -326,7 +326,7 @@ print("  end time: ",time_now)
 
 
 
-# In[7]:
+# In[ ]:
 
 
 def radar_plotting_func(name_index):
@@ -395,7 +395,7 @@ def radar_plotting_func(name_index):
 
     recent_local_metars = recent_local_metars.sort_values(["abs_staleness"],ascending=False).reset_index()
 
-    alpha_array = 1-(np.abs(recent_local_metars['abs_staleness'])/metar_time_spread*2).to_numpy()
+    alpha_array = 1-(np.abs(recent_local_metars['abs_staleness'])/metar_time_spread*1.2).to_numpy()
     alpha_array[ alpha_array<0] = 0
     alpha_array[ alpha_array>1] = 1
 
@@ -623,7 +623,7 @@ def radar_plotting_func(name_index):
   
 
 
-# In[8]:
+# In[ ]:
 
 
 try: 
@@ -632,7 +632,7 @@ except:
     print("## No radar files to plot")
 
 
-# In[9]:
+# In[ ]:
 
 
 ####################################################
@@ -670,7 +670,7 @@ print("Done")
 #####################################################
 
 
-# In[10]:
+# In[ ]:
 
 
 #####################################################
@@ -908,7 +908,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 ####################################################
 
 
-# In[11]:
+# In[ ]:
 
 
 ##################################################
