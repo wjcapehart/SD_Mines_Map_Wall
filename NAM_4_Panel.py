@@ -426,6 +426,12 @@ prec_i_array = np.empty( len(times_utc) )
 
 total_slides = len(times_utc)
 
+
+deltatp     = fpxx.copy()
+deltatp[0]  = fpxx[0]
+deltatp[1:] = fpxx[1:] - fpxx[0:-1]
+
+
 print("Forecast Times", fxx)
 print("Prec Forecast Times", fpxx)
 print("Prec Forecast Delta", deltatp)
