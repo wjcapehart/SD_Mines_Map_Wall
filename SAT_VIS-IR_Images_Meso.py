@@ -54,6 +54,16 @@ print(MAINDIR)
 
 alpha_factor = 0.05
 
+dt_time_meso = 1 # minutes
+dt_time_sdm  = 5 # minutes
+
+nt_time_meso = 120 
+nt_time_sdm  = int(nt_time_meso/dt_time_sdm)
+
+delay_time_meso =   5 
+delay_time_sdm  =  int(delay_time_meso * dt_time_sdm / dt_time_meso)
+
+
 
 channel_vis =                        2
 channel_tir =                       13
@@ -114,7 +124,7 @@ jmax_rap_vis = 1000*2 # np.argmin(np.abs(y_vis-y_max_t).values)
 
 # %load solutions/data_url.py
 
-total_frames = int(45*2 * 0.8)
+total_frames = nt_time_meso
 
 # Cell content replaced by load magic replacement.
 
@@ -407,9 +417,11 @@ with open(MAINDIR + "./processing_sat_meso1_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
     print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
-    print("convert -delay 10 " + 
-          big_string + 
-          " " + 
+    print("convert -delay "    + 
+          str(delay_time_meso) + 
+          " "                  + 
+          big_string           + 
+          " "                  + 
           gif_file_name, file =  f) 
     print("echo MAIN:MESO1::: We^re Outahere Like Vladimir", file =  f) 
 
@@ -463,7 +475,7 @@ print("completed "+ gif_file_name)
 
 # %load solutions/data_url.py
 
-total_frames = int(45*2 * 0.8)
+total_frames = nt_time_meso
 
 # Cell content replaced by load magic replacement.
 
@@ -760,9 +772,11 @@ print("creating " + MAINDIR + "./processing_sat_meso2_gif.sh")
 with open(MAINDIR + "./processing_sat_meso2_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
     print("cd " + MAINDIR, file =  f) 
-    print("convert -delay 10 " + 
-          big_string + 
-          " " + 
+    print("convert -delay "    + 
+          str(delay_time_meso) + 
+          " "                  + 
+          big_string           + 
+          " "                  + 
           gif_file_name, file =  f) 
     print("echo MAIN:MESO2::: We^re Outahere Like Vladimir", file =  f) 
 
@@ -822,7 +836,7 @@ print("completed "+ gif_file_name)
 
 # %load solutions/data_url.py
 
-total_frames = int(45*2 * 0.8)
+total_frames = nt_time_sdm
 
 # Cell content replaced by load magic replacement.
 
@@ -1124,9 +1138,11 @@ with open(MAINDIR + "./processing_sat_mesoSD_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
     print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
-    print("convert -delay 10 " + 
-          big_string + 
-          " " + 
+    print("convert -delay "   + 
+          str(delay_time_sdm) + 
+          " "                 + 
+          big_string          + 
+          " "                 + 
           gif_file_name, file =  f) 
     print("echo MAIN:MESO3::: We^re Outahere Like Vladimir", file =  f) 
 
