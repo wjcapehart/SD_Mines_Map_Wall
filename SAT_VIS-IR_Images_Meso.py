@@ -58,7 +58,7 @@ dt_time_meso = 1 # minutes
 dt_time_sdm  = 5 # minutes
 
 nt_time_meso = 120 
-nt_time_sdm  = int(nt_time_meso/dt_time_sdm) + 10
+nt_time_sdm  = int(nt_time_meso/dt_time_sdm) + 1
 
 delay_time_meso =   5 
 delay_time_sdm  =  int(delay_time_meso * dt_time_sdm / dt_time_meso)
