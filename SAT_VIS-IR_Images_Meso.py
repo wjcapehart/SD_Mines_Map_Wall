@@ -58,7 +58,7 @@ dt_time_meso = 1 # minutes
 dt_time_sdm  = 5 # minutes
 
 nt_time_meso = 120 
-nt_time_sdm  = int(nt_time_meso/dt_time_sdm)
+nt_time_sdm  = int(nt_time_meso/dt_time_sdm) + 10
 
 delay_time_meso =   5 
 delay_time_sdm  =  int(delay_time_meso * dt_time_sdm / dt_time_meso)
@@ -378,12 +378,42 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         
         axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+        axins.plot(circle_theta, circle_radius, color="black", linewidth=1)
 
-
-        
         #
         #########################################
+
+
+
+        #########################################
+        #
+        # Insert a Footprint Map
+        #   
+
+
+        axmap = fig.add_axes(rect        =    [1-0.065-0.12*0.65306121, 0.795,
+                                               0.12*0.65306121, 0.12],
+                             projection = proj)
+
+        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
+
+        footprint_xy=np.array([[x.min(),y.min()],
+                               [x.min(),y.max()],
+                               [x.max(),y.max()],
+                               [x.max(),y.min()],
+                               [x.min(),y.min()]])
+
+        footprint = patches.Polygon(xy        = footprint_xy,
+                                    facecolor =        'red')
+
+
+        axmap.add_patch(footprint)
+
+        axmap.set_global()
+
+        #
+        #########################################
+        
         ax.set_frame_on(False)
         plt.tight_layout()
         
@@ -732,12 +762,42 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         
         axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+        axins.plot(circle_theta, circle_radius, color="black", linewidth=1)
 
-
-        
         #
-        #########################################    
+        #########################################
+
+
+
+        #########################################
+        #
+        # Insert a Footprint Map
+        #   
+
+
+        axmap = fig.add_axes(rect        =    [1-0.065-0.12*0.65306121, 0.795,
+                                               0.12*0.65306121, 0.12],
+                             projection = proj)
+
+        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
+
+        footprint_xy=np.array([[x.min(),y.min()],
+                               [x.min(),y.max()],
+                               [x.max(),y.max()],
+                               [x.max(),y.min()],
+                               [x.min(),y.min()]])
+
+        footprint = patches.Polygon(xy        = footprint_xy,
+                                    facecolor =        'blue')
+
+
+        axmap.add_patch(footprint)
+
+        axmap.set_global()
+
+        #
+        #########################################
+        
         ax.set_frame_on(False)
         plt.tight_layout()
         
@@ -1097,12 +1157,42 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         
         axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+        axins.plot(circle_theta, circle_radius, color="black", linewidth=1)
 
-
-        
         #
-        #########################################   
+        #########################################
+
+
+
+        #########################################
+        #
+        # Insert a Footprint Map
+        #   
+
+
+        axmap = fig.add_axes(rect        =    [1-0.065-0.12*0.65306121, 0.795,
+                                               0.12*0.65306121, 0.12],
+                             projection = proj)
+
+        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
+
+        footprint_xy=np.array([[x.min(),y.min()],
+                               [x.min(),y.max()],
+                               [x.max(),y.max()],
+                               [x.max(),y.min()],
+                               [x.min(),y.min()]])
+
+        footprint = patches.Polygon(xy        = footprint_xy,
+                                    facecolor =        'green')
+
+
+        axmap.add_patch(footprint)
+
+        axmap.set_global()
+
+        #
+        #########################################
+        
         ax.set_frame_on(False)
         plt.tight_layout()
         
