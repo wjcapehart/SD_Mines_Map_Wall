@@ -404,7 +404,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                                [x.min(),y.min()]])
 
         footprint = patches.Polygon(xy        = footprint_xy,
-                                    facecolor =        'red')
+                                    facecolor =        'r')
 
 
         axmap.add_patch(footprint)
@@ -788,7 +788,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                                [x.min(),y.min()]])
 
         footprint = patches.Polygon(xy        = footprint_xy,
-                                    facecolor =        'blue')
+                                    facecolor =        'g')
 
 
         axmap.add_patch(footprint)
@@ -1183,7 +1183,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                                [x.min(),y.min()]])
 
         footprint = patches.Polygon(xy        = footprint_xy,
-                                    facecolor =        'green')
+                                    facecolor =        'c')
 
 
         axmap.add_patch(footprint)
@@ -1284,8 +1284,13 @@ with open(MAINDIR + "./processing_sat_all_mesos_gif.sh", 'w') as f:
     print("#!/bin/bash", file =  f)
     print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR, file =  f) 
-    print("convert -delay 10 " + 
-          big_string + 
+    print("convert " + 
+          " -delay " +  str(delay_time_meso) + " " + 
+          " ".join(file_names_to_use_meso1) + 
+          " -delay " +  str(delay_time_meso) + " " + 
+          " ".join(file_names_to_use_meso2) + 
+          " -delay " +  str(delay_time_sdm ) + " " + 
+          " ".join(file_names_to_use_meso3) + 
           " " + 
           gif_file_name12, file =  f) 
     print("echo MAIN:SAT123MESO::: We^re Outahere Like Vladimir", file =  f) 
