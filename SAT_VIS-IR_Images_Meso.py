@@ -3,7 +3,7 @@
 
 # # Blended Meso 1 & 2 + SODAK
 
-# In[ ]:
+# In[1]:
 
 
 ##################################################
@@ -41,7 +41,7 @@ import matplotlib.patches as patches
 ##################################################
 
 
-# In[ ]:
+# In[2]:
 
 
 ##################################################
@@ -114,7 +114,7 @@ jmax_rap_vis = 1000*2 # np.argmin(np.abs(y_vis-y_max_t).values)
 
 # ## Meso Floater 1
 
-# In[ ]:
+# In[3]:
 
 
 ##################################################
@@ -170,7 +170,7 @@ print(data_url_tir)
 ##################################################
 
 
-# In[ ]:
+# In[4]:
 
 
 ##################################################
@@ -344,7 +344,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins = fig.add_axes(rect     =    [0.002,
                                             0.825,
                                             0.12,
-                                            0.12],,
+                                            0.12],
                               projection  =  "polar")
         
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
@@ -394,7 +394,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axmap = fig.add_axes(rect        =    [0.832, 
                                                -0.07,
                                                0.1632, 
-                                               0.25],,
+                                               0.25],
                              projection = proj)
 
         axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
@@ -730,7 +730,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins = fig.add_axes(rect     =    [0.002,
                                             0.825,
                                             0.12,
-                                            0.12],,
+                                            0.12],
                               projection  =  "polar")
         
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
@@ -780,7 +780,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axmap = fig.add_axes(rect        =    [0.832, 
                                                -0.07,
                                                0.1632, 
-                                               0.25],,
+                                               0.25],
                              projection = proj)
 
         axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
