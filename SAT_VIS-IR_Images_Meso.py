@@ -341,10 +341,10 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         # Insert a Clock
         #
         
-        axins = fig.add_axes(rect     =    [0.065,
-                                            0.795,
-                                            0.12*0.65306121,
-                                            0.12],
+        axins = fig.add_axes(rect     =    [0.002,
+                                            0.825,
+                                            0.12,
+                                            0.12],,
                               projection  =  "polar")
         
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
@@ -391,8 +391,10 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #   
 
 
-        axmap = fig.add_axes(rect        =    [1-0.065-0.12*0.65306121, 0.795,
-                                               0.12*0.65306121, 0.12],
+        axmap = fig.add_axes(rect        =    [0.832, 
+                                               -0.07,
+                                               0.1632, 
+                                               0.25],,
                              projection = proj)
 
         axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
@@ -725,10 +727,10 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         # Insert a Clock
         #
         
-        axins = fig.add_axes(rect     =    [0.065,
-                                            0.795,
-                                            0.12*0.65306121,
-                                            0.12],
+        axins = fig.add_axes(rect     =    [0.002,
+                                            0.825,
+                                            0.12,
+                                            0.12],,
                               projection  =  "polar")
         
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
@@ -775,8 +777,10 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #   
 
 
-        axmap = fig.add_axes(rect        =    [1-0.065-0.12*0.65306121, 0.795,
-                                               0.12*0.65306121, 0.12],
+        axmap = fig.add_axes(rect        =    [0.832, 
+                                               -0.07,
+                                               0.1632, 
+                                               0.25],,
                              projection = proj)
 
         axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
@@ -1120,9 +1124,9 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         # Insert a Clock
         #
         
-        axins = fig.add_axes(rect     =    [0.065,
-                                            0.795,
-                                            0.12*0.65306121,
+        axins = fig.add_axes(rect     =    [0.002,
+                                            0.825,
+                                            0.12,
                                             0.12],
                               projection  =  "polar")
         
@@ -1170,8 +1174,10 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #   
 
 
-        axmap = fig.add_axes(rect        =    [1-0.065-0.12*0.65306121, 0.795,
-                                               0.12*0.65306121, 0.12],
+        axmap = fig.add_axes(rect        =    [0.832, 
+                                               -0.07,
+                                               0.1632, 
+                                               0.25],
                              projection = proj)
 
         axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
