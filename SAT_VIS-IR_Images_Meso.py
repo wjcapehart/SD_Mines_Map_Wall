@@ -3,7 +3,7 @@
 
 # # Blended Meso 1 & 2 + SODAK
 
-# In[1]:
+# In[ ]:
 
 
 ##################################################
@@ -41,7 +41,33 @@ import matplotlib.patches as patches
 ##################################################
 
 
-# In[2]:
+# In[ ]:
+
+
+####################################################
+####################################################
+####################################################
+#
+# Mines Colors and Fonts
+#
+
+Mines_Blue = "#002554"
+
+
+plt.rcParams.update({'text.color'      : Mines_Blue,
+                     'axes.labelcolor' : Mines_Blue,
+					 'axes.edgecolor'  : Mines_Blue,
+					 'xtick.color'     : Mines_Blue,
+					 'ytick.color'     : Mines_Blue})
+
+
+#
+####################################################
+####################################################
+####################################################
+
+
+# In[ ]:
 
 
 ##################################################
@@ -114,7 +140,7 @@ jmax_rap_vis = 1000*2 # np.argmin(np.abs(y_vis-y_max_t).values)
 
 # ## Meso Floater 1
 
-# In[3]:
+# In[ ]:
 
 
 ##################################################
@@ -170,7 +196,7 @@ print(data_url_tir)
 ##################################################
 
 
-# In[4]:
+# In[ ]:
 
 
 ##################################################
@@ -304,14 +330,14 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         plt.suptitle(image_header_label,
                      fontsize = 20, 
-                     color    = "black")
+                     color    = Mines_Blue)
         ax = fig.add_subplot(1, 1, 1, projection=proj)
         ax.set_title(valid_time + "  (" + local_time+")",
                      fontsize =      15, 
-                     color    = "black")
-        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1)
-        ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
-        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor='black')
+                     color    = Mines_Blue)
+        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1, edgecolor=Mines_Blue)
+        ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
+        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor=Mines_Blue)
         
         
         if (channel >= 7):
@@ -376,9 +402,9 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins.set_facecolor("white")
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color="black", linewidth=1)
+        axins.plot([angles_h,angles_h], [0,0.60], color=Mines_Blue, linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color=Mines_Blue, linewidth=1)
 
         #
         #########################################
@@ -397,7 +423,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                                                0.25],
                              projection = proj)
 
-        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
+        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5, edgecolor=Mines_Blue)
 
         footprint_xy=np.array([[x.min(),y.min()],
                                [x.min(),y.max()],
@@ -690,14 +716,14 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         plt.suptitle(image_header_label,
                      fontsize = 20, 
-                     color    = "black")
+                     color    = Mines_Blue)
         ax = fig.add_subplot(1, 1, 1, projection=proj)
         ax.set_title(valid_time + "  (" + local_time+")",
                      fontsize =      15, 
-                     color    = "black")
-        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1)
-        ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
-        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor='black')
+                     color    = Mines_Blue)
+        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1, edgecolor=Mines_Blue)
+        ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
+        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor=Mines_Blue)
         
         
         if (channel >= 7):
@@ -762,9 +788,9 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins.set_facecolor("white")
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color="black", linewidth=1)
+        axins.plot([angles_h,angles_h], [0,0.60], color=Mines_Blue, linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color=Mines_Blue, linewidth=1)
 
         #
         #########################################
@@ -783,7 +809,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                                                0.25],
                              projection = proj)
 
-        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
+        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5, edgecolor=Mines_Blue)
 
         footprint_xy=np.array([[x.min(),y.min()],
                                [x.min(),y.max()],
@@ -1087,14 +1113,14 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         plt.suptitle(image_header_label,
                      fontsize = 20, 
-                     color    = "black")
+                     color    = Mines_Blue)
         ax = fig.add_subplot(1, 1, 1, projection=proj)
         ax.set_title(valid_time + "  (" + local_time+")",
                      fontsize =      15, 
-                     color    = "black")
-        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1)
-        ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
-        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor='black')
+                     color    = Mines_Blue)
+        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1, edgecolor=Mines_Blue)
+        ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
+        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor=Mines_Blue)
         
         
         if (channel >= 7):
@@ -1159,9 +1185,9 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins.set_facecolor("white")
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color="black", linewidth=1)
+        axins.plot([angles_h,angles_h], [0,0.60], color=Mines_Blue, linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color=Mines_Blue, linewidth=1)
 
         #
         #########################################
@@ -1180,7 +1206,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                                                0.25],
                              projection = proj)
 
-        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5)
+        axmap.add_feature(cfeature.COASTLINE, linewidth=0.5, edgecolor=Mines_Blue)
 
         footprint_xy=np.array([[x.min(),y.min()],
                                [x.min(),y.max()],

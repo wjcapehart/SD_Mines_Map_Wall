@@ -3,7 +3,7 @@
 
 # # Water Vapor
 
-# In[1]:
+# In[ ]:
 
 
 ##################################################
@@ -33,7 +33,32 @@ import matplotlib.pyplot as plt
 ##################################################
 
 
-# In[2]:
+# In[ ]:
+
+
+####################################################
+####################################################
+####################################################
+#
+# Mines Colors and Fonts
+#
+
+Mines_Blue = "#002554"
+
+plt.rcParams.update({'text.color'      : Mines_Blue,
+                     'axes.labelcolor' : Mines_Blue,
+					 'axes.edgecolor'  : Mines_Blue,
+					 'xtick.color'     : Mines_Blue,
+					 'ytick.color'     : Mines_Blue})
+
+
+#
+####################################################
+####################################################
+####################################################
+
+
+# In[ ]:
 
 
 ##################################################
@@ -81,7 +106,7 @@ print(data_url)
 ##################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ##################################################
@@ -90,12 +115,11 @@ print(data_url)
 #
 
 cat = TDSCatalog(data_url)
-
 #
 ##################################################
 
 
-# In[4]:
+# In[ ]:
 
 
 ##################################################
@@ -123,7 +147,7 @@ file_names_to_use.sort()
 ##################################################    
 
 
-# In[5]:
+# In[ ]:
 
 
 ##################################################
@@ -141,7 +165,7 @@ for filename in files_on_hand:
 ##################################################    
 
 
-# In[6]:
+# In[ ]:
 
 
 ##################################################
@@ -187,13 +211,13 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
 
         plt.suptitle(image_header_label,
                      fontsize = 20, 
-                     color    = "black")
+                     color    = Mines_Blue)
         ax = fig.add_subplot(1, 1, 1, projection=proj)
         ax.set_title(valid_time + "  (" + local_time+")",
-                        fontsize=15, color="black")
-        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2)
-        ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor='black')
-        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=2, edgecolor='black')
+                        fontsize=15, color=Mines_Blue)
+        ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2,   edgecolor=Mines_Blue)
+        ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
+        ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=2,   edgecolor=Mines_Blue)
 
         im = ax.imshow(dat, extent=(x.min(), x.max(), y.min(), y.max()), origin='upper', alpha=alpha2d)
 
@@ -248,8 +272,8 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         axins.set_facecolor("white")
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot([angles_h,angles_h], [0,0.6], color=Mines_Blue, linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 
 
@@ -270,7 +294,7 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
 ##################################################
 
 
-# In[7]:
+# In[ ]:
 
 
 ##################################################

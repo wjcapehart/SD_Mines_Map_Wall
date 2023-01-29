@@ -73,6 +73,32 @@ from joblib import Parallel, delayed
 ####################################################
 ####################################################
 #
+# Mines Colors and Fonts
+#
+
+Mines_Blue = "#002554"
+
+
+plt.rcParams.update({'text.color'      : Mines_Blue,
+                     'axes.labelcolor' : Mines_Blue,
+					 'axes.edgecolor'  : Mines_Blue,
+					 'xtick.color'     : Mines_Blue,
+					 'ytick.color'     : Mines_Blue})
+
+
+#
+####################################################
+####################################################
+####################################################
+
+
+# In[ ]:
+
+
+####################################################
+####################################################
+####################################################
+#
 # System Control
 #
 MAINDIR = os.getcwd() + "/"
@@ -331,12 +357,30 @@ print("  end time: ",time_now)
 
 def radar_plotting_func(name_index):
 
+	####################################################
+	####################################################
+	####################################################
+	#
+	# Mines Colors and Fonts
+	#
+
+    Mines_Blue = "#002554"
+
+    plt.rcParams.update({'text.color'      : Mines_Blue,
+						 'axes.labelcolor' : Mines_Blue,
+						 'axes.edgecolor'  : Mines_Blue,
+						 'xtick.color'     : Mines_Blue,
+						 'ytick.color'     : Mines_Blue})
+
+	#
+	####################################################
+	####################################################
+	####################################################
 
 
     percent_done = (name_index+1.) / number_of_figures
 
     name = sorted(catalog.datasets)[name_index]
-
 
     ds = catalog.datasets[name]
     print(ds)
@@ -447,30 +491,30 @@ def radar_plotting_func(name_index):
 
     try:
         plt.suptitle(radar.ProductStationName + " ["+radar.ProductStation +"] " +radar.keywords_vocabulary,
-                    fontsize=20, color="black")
+                    fontsize=20, color=Mines_Blue)
     except:
         plt.suptitle("Surface Obs (Radar Services Down)",
-                     fontsize=20, color="black")
+                     fontsize=20, color=Mines_Blue)
 
 
        
 
     ax.set_title(valid_time + "  (" + local_time+")",
-                    fontsize=15, color="black")
+                    fontsize=15, color=Mines_Blue)
 
     ax.set_extent([geospatial_lon_min, 
                    geospatial_lon_max, 
                    geospatial_lat_min, 
                    geospatial_lat_max], crs=ccrs.PlateCarree())
     ax.add_feature(feature    = cfeature.STATES,
-                   edgecolor  = 'black',
+                   edgecolor  = Mines_Blue,
                    facecolor  = 'none')
     ax.add_feature(feature    = cfeature.COASTLINE,
-                   edgecolor  = 'black',
+                   edgecolor  = Mines_Blue,
                    facecolor  = 'none')
     ax.add_feature(feature    = USCOUNTIES, 
                    linewidths = 0.5,
-                   edgecolor  = 'black',
+                   edgecolor  = Mines_Blue,
                    facecolor  = 'none')
     
     try:
@@ -484,7 +528,7 @@ def radar_plotting_func(name_index):
                      shrink = 0.8,
                      pad    = 0.012)
         cbytick_obj = plt.getp(color_bar.ax.axes, 'yticklabels')           
-        plt.setp(cbytick_obj, color='black')
+        plt.setp(cbytick_obj, color=Mines_Blue)
         noradar = False
 
 
@@ -512,30 +556,30 @@ def radar_plotting_func(name_index):
 
         stationplot.plot_parameter('NW', 
                                    np.array([single_row['air_temperature']]), 
-                                   color='black')
+                                   color=Mines_Blue)
         stationplot.plot_parameter('SW', 
                                    np.array([single_row['dew_point_temperature']]), 
-                                   color='black')
+                                   color=Mines_Blue)
         stationplot.plot_parameter('NE', 
                                    np.array([single_row['air_pressure_at_sea_level']]),  
-                                   color='black')
+                                   color=Mines_Blue)
         stationplot.plot_parameter('SE',
                                    np.array([single_row['staleness']]),
-                                   color='black')
+                                   color=Mines_Blue)
 
         stationplot.plot_symbol('C', 
                                 np.array([single_row['cloud_eights']]), 
-                                sky_cover,color='black')
+                                sky_cover,color=Mines_Blue)
         stationplot.plot_symbol('W', 
                                 np.array([single_row['current_wx1_symbol']]), 
-                                current_weather,color='black')
+                                current_weather,color=Mines_Blue)
 
         stationplot.plot_text((2, 0), 
                               np.array([single_row['ICAO_id']]), 
-                              color='black')
+                              color=Mines_Blue)
         stationplot.plot_barb(np.array([single_row['eastward_wind']]), 
                               np.array([single_row['northward_wind']]),
-                             color='black')
+                             color=Mines_Blue)
 
         del single_row
 
@@ -582,8 +626,8 @@ def radar_plotting_func(name_index):
     axins.set_facecolor("white")
     axins.grid(False)
 
-    axins.plot([angles_h,angles_h], [0,0.60], color="black", linewidth=1.5)
-    axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+    axins.plot([angles_h,angles_h], [0,0.60], color=Mines_Blue, linewidth=1.5)
+    axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
     axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 
 
@@ -605,8 +649,8 @@ def radar_plotting_func(name_index):
     rect = patches.Rectangle(xy        = (0, 0),
                              width     = percent_done,
                              height    = 0.01, 
-                             edgecolor = 'black', 
-                             facecolor = "black",
+                             edgecolor = Mines_Blue, 
+                             facecolor = Mines_Blue,
                              transform = ax.transAxes)
     ax.add_patch(rect)
 
@@ -675,9 +719,31 @@ print("Done")
 
 #####################################################
 ####################################################
-#\
+#
 # Create Individual Map Files for No Radar
 #
+
+####################################################
+####################################################
+####################################################
+#
+# Mines Colors and Fonts
+#
+
+Mines_Blue = "#002554"
+
+
+plt.rcParams.update({'text.color'      : Mines_Blue,
+                     'axes.labelcolor' : Mines_Blue,
+					 'axes.edgecolor'  : Mines_Blue,
+					 'xtick.color'     : Mines_Blue,
+					 'ytick.color'     : Mines_Blue})
+
+
+#
+####################################################
+####################################################
+####################################################
 
 
 if (len(sorted(catalog.datasets)) == 0) :
@@ -696,9 +762,7 @@ if (len(sorted(catalog.datasets)) == 0) :
                                figsize=(9, 8),
                                facecolor = 'white')
 
-
         time_utc = time
-
 
         metar_dataframe['staleness']     = (time_utc-metar_dataframe['date_time'])/ np.timedelta64(1, 'm')
         metar_dataframe['abs_staleness'] =  np.abs( metar_dataframe['staleness'] )
@@ -736,10 +800,6 @@ if (len(sorted(catalog.datasets)) == 0) :
 
         print(valid_time + "  (" + local_time+")")
 
-
-
-
-
         #
         ###################################
 
@@ -757,24 +817,24 @@ if (len(sorted(catalog.datasets)) == 0) :
                                                        globe=None))
 
         plt.suptitle("Western South Dakota Surface Obs (Radar Services Down)",
-                     fontsize=20, color="black")
+                     fontsize=20, color=Mines_Blue)
 
         ax.set_title(valid_time + "  (" + local_time+")",
-                        fontsize=15, color="black")
+                        fontsize=15, color=Mines_Blue)
 
         ax.set_extent([geospatial_lon_min, 
                        geospatial_lon_max, 
                        geospatial_lat_min, 
                        geospatial_lat_max], crs=ccrs.PlateCarree())
         ax.add_feature(feature    = cfeature.STATES,
-                       edgecolor  = 'black',
+                       edgecolor  = Mines_Blue,
                        facecolor  = 'none')
         ax.add_feature(feature    = cfeature.COASTLINE,
-                       edgecolor  = 'black',
+                       edgecolor  = Mines_Blue,
                        facecolor  = 'none')
         ax.add_feature(feature    = USCOUNTIES, 
                        linewidths = 0.5,
-                       edgecolor  = 'black',
+                       edgecolor  = Mines_Blue,
                        facecolor  = 'none')
 
         ax.set_aspect('equal', 'datalim')
@@ -796,30 +856,30 @@ if (len(sorted(catalog.datasets)) == 0) :
 
             stationplot.plot_parameter('NW', 
                                        np.array([single_row['air_temperature']]), 
-                                       color='black')
+                                       color=Mines_Blue)
             stationplot.plot_parameter('SW', 
                                        np.array([single_row['dew_point_temperature']]), 
-                                       color='black')
+                                       color=Mines_Blue)
             stationplot.plot_parameter('NE', 
                                        np.array([single_row['air_pressure_at_sea_level']]),  
-                                       color='black')
+                                       color=Mines_Blue)
             stationplot.plot_parameter('SE',
                                        np.array([single_row['staleness']]),
-                                       color='black')
+                                       color=Mines_Blue)
 
             stationplot.plot_symbol('C', 
                                     np.array([single_row['cloud_eights']]), 
-                                    sky_cover,color='black')
+                                    sky_cover,color=Mines_Blue)
             stationplot.plot_symbol('W', 
                                     np.array([single_row['current_wx1_symbol']]), 
-                                    current_weather,color='black')
+                                    current_weather,color=Mines_Blue)
 
             stationplot.plot_text((2, 0), 
                                   np.array([single_row['ICAO_id']]), 
-                                  color='black')
+                                  color=Mines_Blue)
             stationplot.plot_barb(np.array([single_row['eastward_wind']]), 
                                   np.array([single_row['northward_wind']]),
-                                 color='black')
+                                 color=Mines_Blue)
 
             del single_row
 
@@ -865,8 +925,8 @@ if (len(sorted(catalog.datasets)) == 0) :
         axins.set_facecolor("white")
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+        axins.plot([angles_h,angles_h], [0,0.6], color=Mines_Blue, linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 
 
@@ -885,8 +945,8 @@ if (len(sorted(catalog.datasets)) == 0) :
         rect = patches.Rectangle(xy        = (0, 0),
                                  width     = percent_done,
                                  height    = 0.01, 
-                                 edgecolor = 'black', 
-                                 facecolor = "black",
+                                 edgecolor = Mines_Blue, 
+                                 facecolor = Mines_Blue,
                                  transform = ax.transAxes)
         ax.add_patch(rect)
         ax.set_frame_on(False)

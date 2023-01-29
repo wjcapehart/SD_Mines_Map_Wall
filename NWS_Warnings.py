@@ -3,7 +3,7 @@
 
 # # NWS Warning Polygons
 
-# In[1]:
+# In[ ]:
 
 
 #Import the necessary packages
@@ -30,10 +30,31 @@ import geopandas as gp
 # In[ ]:
 
 
+####################################################
+####################################################
+####################################################
+#
+# Mines Colors and Fonts
+#
+
+Mines_Blue = "#002554"
+
+
+plt.rcParams.update({'text.color'      : Mines_Blue,
+                     'axes.labelcolor' : Mines_Blue,
+					 'axes.edgecolor'  : Mines_Blue,
+					 'xtick.color'     : Mines_Blue,
+					 'ytick.color'     : Mines_Blue})
+
+
+#
+####################################################
+####################################################
+####################################################
 
 
 
-# In[2]:
+# In[ ]:
 
 
 proj_data_text = '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
@@ -61,7 +82,7 @@ print(valid_time)
 print(local_time)
 
 
-# In[3]:
+# In[ ]:
 
 
 # Open the NWS API in python to get the active alerts
@@ -69,7 +90,7 @@ n = noaa_sdk.noaa.NOAA()
 alerts = n.active_alerts()
 
 
-# In[4]:
+# In[ ]:
 
 
 #injest //shapefiles/CONUS_UGC_Zones/
@@ -95,7 +116,7 @@ UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
 
 
-# In[5]:
+# In[ ]:
 
 
 # priority warnings table
@@ -105,7 +126,7 @@ warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"}
 
 
 
-# In[6]:
+# In[ ]:
 
 
 current_warnings = pd.DataFrame(columns = ['event',
@@ -160,11 +181,15 @@ if (current_warnings['color'].isnull().values.any()):
     locs_missing = current_warnings.index[current_warnings['color'].isnull()].tolist()
     print(current_warnings.loc[locs_missing])
 
+    print("replacing Nones Complete")
   
     for loc_missing in locs_missing:
         current_warnings.loc[loc_missing,"color"] = 'red'
-    
-print("replaced")
+        print(current_warnings.loc[locs_missing])
+print("replaced Nones Complete")
+
+
+
 
 
 warning_color_table = current_warnings[["event","color"]].drop_duplicates()
@@ -176,7 +201,7 @@ print("done: ",i,"rows; ",len(warning_color_table),"event types")
 print()
 
 
-# In[7]:
+# In[ ]:
 
 
 # check for missing colors.
@@ -192,7 +217,7 @@ print("replaced")
 print(warning_color_table)
 
 
-# In[8]:
+# In[ ]:
 
 
 legend_color_table = warning_color_table.values.tolist()
@@ -207,13 +232,13 @@ for row in warning_color_table.iterrows():
   
 
 
-# In[9]:
+# In[ ]:
 
 
 print(warning_color_table)
 
 
-# In[10]:
+# In[ ]:
 
 
 bbox=[-120,-73,22.5,50]
@@ -222,7 +247,7 @@ xxx = [-120.0, -73.0]
 yyy = [  22.5,  50.0]
 
 
-fig = plt.figure(figsize   = (11, 6), 
+fig = plt.figure(figsize   = [11, 6], 
                  facecolor = 'white')
 
 ax = fig.add_subplot(1, 1, 1, 
@@ -230,11 +255,11 @@ ax = fig.add_subplot(1, 1, 1,
 
 plt.suptitle("NWS Watches and Warnings",
              fontsize = 20, 
-             color    = "black")
+             color    = Mines_Blue)
 ax.set_extent(bbox)
 ax.set_title(valid_time + "  (" + local_time+")",
              fontsize=15, 
-             color="black")
+             color=Mines_Blue)
 
 current_warnings.plot(ax = ax,aspect='equal',
                       facecolor=current_warnings["color"],
@@ -242,17 +267,18 @@ current_warnings.plot(ax = ax,aspect='equal',
                       edgecolor='None', linewidth=0)
 
 ax.add_feature(cfeature.COASTLINE.with_scale('50m'), 
-               linewidth = 0.5)
+               linewidth = 0.5,
+			  edgecolor=Mines_Blue)
 ax.add_feature(cfeature.STATES.with_scale('50m'),    
                linewidth = 0.25, 
-               edgecolor = 'black')
+               edgecolor = Mines_Blue)
 ax.add_feature(cfeature.LAKES.with_scale('50m'),   
                linewidth = 0.5,
                facecolor = "none", 
-               edgecolor = 'black')
+               edgecolor = Mines_Blue)
 ax.add_feature(feature    = USCOUNTIES, 
                    linewidths = 0.1,
-                   edgecolor  = 'black',
+                   edgecolor  = Mines_Blue,
                    facecolor  = 'none')
 
 ax.set_frame_on(False)
@@ -266,7 +292,8 @@ labelspacing = 0.1
 fig.legend(handles  = legend_color_table, 
            loc      = 'right',
            frameon  = False,
-           labelspacing = labelspacing)
+           labelspacing = labelspacing,
+			  labelcolor = Mines_Blue)
 
 
 
@@ -311,8 +338,8 @@ axins.set_theta_direction(-1)
 axins.set_facecolor("white")
 axins.grid(False)
 
-axins.plot([angles_h,angles_h], [0,0.6], color="black", linewidth=1.5)
-axins.plot([angles_m,angles_m], [0,0.95], color="black", linewidth=1.5)
+axins.plot([angles_h,angles_h], [0,0.6], color=Mines_Blue, linewidth=1.5)
+axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
 axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 
 

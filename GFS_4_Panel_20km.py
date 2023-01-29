@@ -40,7 +40,31 @@ import scipy.ndimage     as ndimage
 from metpy.units         import units
 from matplotlib.gridspec import GridSpec
 
-def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
+
+####################################################
+####################################################
+####################################################
+#
+# Mines Colors and Fonts
+#
+
+Mines_Blue = "#002554"
+
+
+plt.rcParams.update({'text.color'      : Mines_Blue,
+                     'axes.labelcolor' : Mines_Blue,
+					 'axes.edgecolor'  : Mines_Blue,
+					 'xtick.color'     : Mines_Blue,
+					 'ytick.color'     : Mines_Blue})
+
+
+#
+####################################################
+####################################################
+####################################################
+
+
+def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color="#002554",
                        plotValue=True, transform=None):
     """
     This function will find and plot relative maximum and minimum for a 2D grid. The function
@@ -60,6 +84,16 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
     (e.g., clip_on=True)
     """
     from scipy.ndimage.filters import maximum_filter, minimum_filter
+	
+    Mines_Blue = "#002554"
+
+
+    plt.rcParams.update({'text.color'      : Mines_Blue,
+                     'axes.labelcolor' : Mines_Blue,
+					 'axes.edgecolor'  : Mines_Blue,
+					 'xtick.color'     : Mines_Blue,
+					 'ytick.color'     : Mines_Blue})
+
 
     if (extrema == 'max'):
         data_ext = maximum_filter(data, nsize, mode='nearest')
@@ -83,6 +117,12 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color='k',
 ####################################################
 ####################################################
 ####################################################
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -521,13 +561,15 @@ for i in range(len(times_utc)) :
 
 
     ax1.coastlines(resolution = 'auto',
-                  linewidths =  0.75)
+                  linewidths =  0.75,
+                       facecolor  = 'none' , 
+                       edgecolor  = Mines_Blue)
 
 
     ax1.add_feature(cfeature.STATES.with_scale('110m'), 
                        linewidths = 0.5,
                        facecolor  = 'none' , 
-                       edgecolor  = 'black')
+                       edgecolor  = Mines_Blue)
     
 
     contourf_levels = np.arange(start = -20,
@@ -547,12 +589,12 @@ for i in range(len(times_utc)) :
                                                                         "aspect"      :   colorbar_aspect})    
     contour_levels = np.arange(480,612, 6)
 
-    contour_plot = heights_500[i,:,:].plot.contour(colors     = "black",
+    contour_plot = heights_500[i,:,:].plot.contour(colors     = Mines_Blue,
                                                         ax = ax1,
                                    linewidths = 1.5, 
                                     levels     = contour_levels)
 
-    ax1.clabel(contour_plot)
+    ax1.clabel(contour_plot, colors=Mines_Blue)
     
     ax1.annotate(r"500-hPa Relative Vorticity [10$^{-5}$ s$^{-1}$]", 
                  [0.5,-0.1], 
@@ -582,13 +624,15 @@ for i in range(len(times_utc)) :
 
 
     ax2.coastlines(resolution = 'auto',
-                  linewidths =  0.75)
+                  linewidths =  0.75,
+				   facecolor  = 'none' , 
+                       edgecolor  = Mines_Blue)
 
 
     ax2.add_feature(cfeature.STATES.with_scale('110m'), 
                        linewidths = 0.5,
                        facecolor  = 'none' , 
-                       edgecolor  = 'black')
+                       edgecolor  = Mines_Blue)
     
     contourf_levels = np.arange(start =  480,
                                 stop  =  613,
@@ -617,7 +661,7 @@ for i in range(len(times_utc)) :
 
 
         
-    ax2.clabel(contour_plot2, fontsize="xx-large")
+    ax2.clabel(contour_plot2, fontsize="xx-large", colors=Mines_Blue)
 
   
     
@@ -630,16 +674,16 @@ for i in range(len(times_utc)) :
     smoothed = mslp[i,:,:].copy()
     
 
-    contour_plot = smoothed[:,:].plot.contour(colors    =        "black",
+    contour_plot = smoothed[:,:].plot.contour(colors    =        Mines_Blue,
                                              linewidths =           1.5, 
                                              levels     = contour_levels)
 
 
-    ax2.clabel(contour_plot)
+    ax2.clabel(contour_plot, colors=Mines_Blue)
 
     # Use definition to plot H/L symbols
-    plot_maxmin_points(lon2d, lat2d, smoothed, 'max', 50, symbol='H', color='k',  transform=ccrs.PlateCarree())
-    plot_maxmin_points(lon2d, lat2d, smoothed, 'min', 25, symbol='L', color='k', transform=ccrs.PlateCarree())
+    plot_maxmin_points(lon2d, lat2d, smoothed, 'max', 50, symbol='H', color=Mines_Blue, transform=ccrs.PlateCarree())
+    plot_maxmin_points(lon2d, lat2d, smoothed, 'min', 25, symbol='L', color=Mines_Blue, transform=ccrs.PlateCarree())
 
     ax2.annotate("Color: 1000-500-hPa Thickness [dam]", 
                  [0.5,-0.1], 
@@ -667,13 +711,15 @@ for i in range(len(times_utc)) :
                          projection = gfs_crs)
  
     ax3.coastlines(resolution = 'auto',
-                   linewidths =  0.75)
+                   linewidths =  0.75,
+                       facecolor  = 'none' , 
+                       edgecolor  = Mines_Blue)
 
 
     ax3.add_feature(cfeature.STATES.with_scale('110m'), 
                        linewidths = 0.5,
                        facecolor  = 'none' , 
-                       edgecolor  = 'black')
+                       edgecolor  = Mines_Blue)
     
 
     contourf_levels = np.arange(start =  30,
@@ -700,7 +746,7 @@ for i in range(len(times_utc)) :
                   u_850[i,:,:].values, 
                    v_850[i,:,:].values,
                    linewidth = lw.values,
-                   color     = 'black')
+                   color     = Mines_Blue)
     
     humidity_mask = np.ma.masked_greater_equal(rh_850[i,:,:].values,90)
 
@@ -734,13 +780,15 @@ for i in range(len(times_utc)) :
 
 
     ax4.coastlines(resolution = 'auto',
-                  linewidths =  0.75)
+                  linewidths =  0.75,
+                       facecolor  = 'none' , 
+                       edgecolor  = Mines_Blue)
 
 
     ax4.add_feature(cfeature.STATES.with_scale('110m'), 
                     linewidths = 0.5,
                     facecolor  = 'none' , 
-                    edgecolor  = 'black')
+                    edgecolor  = Mines_Blue)
     
     contourf_levels = precip_levels_in
 
@@ -759,13 +807,13 @@ for i in range(len(times_utc)) :
                                                        linewidths =                 1, 
                                                        levels     = np.array([0.002]))
 
-    contour_plot3 =   thickness[i,:,:].plot.contour(colors     =         "black",
+    contour_plot3 =   thickness[i,:,:].plot.contour(colors     =         Mines_Blue,
                                                     ax         =             ax4,
                                                     linewidths =               2, 
                                                     levels     = np.array([540]))
 
         
-    ax4.clabel(contour_plot3, fontsize="xx-large")
+    ax4.clabel(contour_plot3, fontsize="xx-large", colors=Mines_Blue)
  
     
     ax4.annotate(str(int( deltatp[prec_i]))+"-hrly Precip [in]", 
@@ -796,7 +844,7 @@ for i in range(len(times_utc)) :
    
     plt.suptitle("NOAA-NCEP Global Forecast System", x=0.5,y=1.0,
                  fontsize = 25, 
-                 color    = "black")
+                 color    = Mines_Blue)
             
  
 
@@ -807,7 +855,7 @@ for i in range(len(times_utc)) :
                   horizontalalignment   =        "center",
                   zorder                =           99999,
                   fontsize              =              15, 
-                  color                 =         "black",
+                  color                 =         Mines_Blue,
                   bbox = dict(facecolor =         'white', edgecolor =         "white"))
 
 
@@ -817,7 +865,7 @@ for i in range(len(times_utc)) :
                   horizontalalignment   =        "center",
                   zorder                =           99999,
                   fontsize              =              15, 
-                  color                 =         "black",
+                  color                 =         Mines_Blue,
                   bbox = dict(facecolor =         'white', edgecolor =         "white"))
 
 
@@ -828,7 +876,7 @@ for i in range(len(times_utc)) :
                   horizontalalignment   =        "center",
                   zorder                =           99999,
                   fontsize              =              15, 
-                  color                 =         "black",
+                  color                 =         Mines_Blue,
                   bbox = dict(facecolor =         'white', edgecolor =         "white"))
 
     ax4.annotate(time_labelp,[0.5,1.05],
@@ -837,30 +885,30 @@ for i in range(len(times_utc)) :
                   horizontalalignment   =        "center",
                   zorder                =           99999,
                   fontsize              =              15, 
-                  color                 =         "black",
+                  color                 =         Mines_Blue,
                   bbox = dict(facecolor =         'white', edgecolor =         "white"))
 
     ax1.add_feature(cfeature.LAKES, 
                        linewidths = 0.5,
                        facecolor  = 'none' , 
-                       edgecolor  = 'black')
+                       edgecolor  = Mines_Blue)
 
 
     ax2.add_feature(cfeature.LAKES, 
                        linewidths = 0.5,
                        facecolor  = 'none' , 
-                       edgecolor  = 'black')
+                       edgecolor  = Mines_Blue)
 
 
     ax3.add_feature(cfeature.LAKES, 
                        linewidths = 0.5,
                        facecolor  = 'none' , 
-                       edgecolor  = 'black')
+                       edgecolor  = Mines_Blue)
 
     ax4.add_feature(cfeature.LAKES, 
                        linewidths = 0.5,
                        facecolor  = 'none' , 
-                       edgecolor  = 'black')
+                       edgecolor  = Mines_Blue)
     
     ax1.set_extent(nam_crs_extent, crs=gfs_crs)
     ax2.set_extent(nam_crs_extent, crs=gfs_crs)
@@ -883,26 +931,26 @@ for i in range(len(times_utc)) :
     rect1 = patches.Rectangle(xy        = (0, 0),
                          width     = percent_done,
                          height    = 0.01, 
-                         edgecolor = 'black', 
-                         facecolor = "black",
+                         edgecolor = Mines_Blue, 
+                         facecolor = Mines_Blue,
                          transform = ax1.transAxes)
     rect2 = patches.Rectangle(xy        = (0, 0),
                      width     = percent_done,
                      height    = 0.01, 
-                     edgecolor = 'black', 
-                     facecolor = "black",
+                     edgecolor = Mines_Blue, 
+                     facecolor = Mines_Blue,
                      transform = ax2.transAxes)
     rect3 = patches.Rectangle(xy        = (0, 0),
                  width     = percent_done,
                  height    = 0.01, 
-                 edgecolor = 'black', 
-                 facecolor = "black",
+                 edgecolor = Mines_Blue, 
+                 facecolor = Mines_Blue,
                  transform = ax3.transAxes)
     rect4 = patches.Rectangle(xy        = (0, 0),
              width     = percent_done,
              height    = 0.01, 
-             edgecolor = 'black', 
-             facecolor = "black",
+             edgecolor = Mines_Blue, 
+             facecolor = Mines_Blue,
              transform = ax4.transAxes)
     
     ax1.add_patch(rect1)
