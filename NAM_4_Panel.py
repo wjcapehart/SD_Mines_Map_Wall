@@ -146,7 +146,7 @@ nws_precip_colors = [
     "#bc0000",  # 5.00 - 6.00 inches
     "#f800fd",  # 6.00 - 8.00 inches
     "#9854c6",  # 8.00 - 10.00 inches
-    "#fdfdfd"]  # 10.00+
+    "#999999"]  # 10.00+
 
 precip_colormap = mpl.colors.ListedColormap(colors = nws_precip_colors)
 
@@ -472,6 +472,7 @@ print("Prec Forecast Delta", deltatp)
 # In[ ]:
 
 
+nt = len(times_utc)
 # for i in [0]: #range(len(times_utc)) :
 for i in range(len(times_utc)) :    
     
@@ -488,6 +489,21 @@ for i in range(len(times_utc)) :
     time_label  = valid_time + " F" + str(int( fxx[i]     )).zfill(2) + " (" + local_time   + ")"
     time_labelp = valid_time + " P" + str(int(fpxx[prec_i])).zfill(2) + " (" + local_time_p + ")"
 
+    local_time_zone = pd.to_datetime(times_utc[i]).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Z")
+    dow = pd.to_datetime(times_utc[i]).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%a")
+    time_for_clock = pd.to_datetime(times_utc[i]).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+
+    hour   = time_for_clock.hour
+    minute = time_for_clock.minute
+    second = time_for_clock.second
+    percent_done = (1.0 * i) / (nt-1.)
+    
+    if ((hour >= 6) and (hour < 18)):
+        Clock_Color = Mines_Blue
+        Clock_BgndC = "white"           
+    else:
+        Clock_Color = "white"
+        Clock_BgndC = Mines_Blue               
 
 
     print(time_label)
@@ -925,8 +941,234 @@ for i in range(len(times_utc)) :
     ax2.add_patch(rect2)
     ax3.add_patch(rect3)
     ax4.add_patch(rect4)
-
     
+    #################################
+    #
+    # Walking Clock 1
+    #
+    plot_box         = ax1.get_position()
+    plot_box_x_start = plot_box.x0
+    plot_box_y_start = plot_box.y0
+    plot_box_x_end   = plot_box.x1
+    plot_box_y_end   = plot_box.y1
+    
+    circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+    circle_radius = circle_theta * 0 + 1
+
+    if (hour > 12) :
+        hour = hour - 12
+
+    angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+    angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+    
+    size_of_clock = 0.02
+
+    x_clock = percent_done*(plot_box_x_end-plot_box_x_start) + plot_box_x_start - size_of_clock/2
+    y_clock = plot_box_y_start-size_of_clock/2+0.005
+
+    x_dow = percent_done
+    y_dow = size_of_clock+.045
+
+    ax1.annotate(dow+"-"+local_time_zone, 
+                 [x_dow,y_dow],
+                 horizontalalignment="center",fontsize="x-large",
+                verticalalignment="center",
+                xycoords='axes fraction')
+
+
+    axins1 = fig.add_axes(rect     =    [x_clock,
+                                        y_clock,
+                                        size_of_clock,
+                                        size_of_clock],
+                         projection =  "polar")
+
+    plt.setp(axins1.get_yticklabels(), visible=False)
+    plt.setp(axins1.get_xticklabels(), visible=False)
+    axins1.spines['polar'].set_visible(False)
+    axins1.set_ylim(0,1)
+    axins1.set_theta_zero_location('N')
+    axins1.set_theta_direction(-1)
+    axins1.set_facecolor(Clock_BgndC)
+    axins1.grid(False)
+
+    axins1.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1)
+    axins1.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1)
+    axins1.plot(circle_theta, circle_radius,   color=Mines_Blue,  linewidth=1)
+
+    #
+    ##################################    
+    
+    #################################
+    #
+    # Walking Clock 1
+    #
+    plot_box         = ax2.get_position()
+    plot_box_x_start = plot_box.x0
+    plot_box_y_start = plot_box.y0
+    plot_box_x_end   = plot_box.x1
+    plot_box_y_end   = plot_box.y1
+    
+    circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+    circle_radius = circle_theta * 0 + 1
+
+    if (hour > 12) :
+        hour = hour - 12
+
+    angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+    angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+    
+    size_of_clock = 0.02
+
+    x_clock = percent_done*(plot_box_x_end-plot_box_x_start) + plot_box_x_start - size_of_clock/2
+    y_clock = plot_box_y_start-size_of_clock/2+0.005
+
+    x_dow = percent_done
+    y_dow = size_of_clock+.045
+
+    ax2.annotate(dow+"-"+local_time_zone, 
+                 [x_dow,y_dow],
+                 horizontalalignment="center",
+                verticalalignment="center",fontsize="x-large",
+                xycoords='axes fraction')
+
+
+    axins2 = fig.add_axes(rect     =    [x_clock,
+                                        y_clock,
+                                        size_of_clock,
+                                        size_of_clock],
+                         projection =  "polar")
+
+    plt.setp(axins2.get_yticklabels(), visible=False)
+    plt.setp(axins2.get_xticklabels(), visible=False)
+    axins2.spines['polar'].set_visible(False)
+    axins2.set_ylim(0,1)
+    axins2.set_theta_zero_location('N')
+    axins2.set_theta_direction(-1)
+    axins2.set_facecolor(Clock_BgndC)
+    axins2.grid(False)
+
+    axins2.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1)
+    axins2.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1)
+    axins2.plot(circle_theta, circle_radius,   color=Mines_Blue,  linewidth=1)
+
+    #
+    ##################################       
+
+        
+    #################################
+    #
+    # Walking Clock 3
+    #
+    plot_box         = ax3.get_position()
+    plot_box_x_start = plot_box.x0
+    plot_box_y_start = plot_box.y0
+    plot_box_x_end   = plot_box.x1
+    plot_box_y_end   = plot_box.y1
+    
+    circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+    circle_radius = circle_theta * 0 + 1
+
+    if (hour > 12) :
+        hour = hour - 12
+
+    angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+    angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+    
+    size_of_clock = 0.02
+
+    x_clock = percent_done*(plot_box_x_end-plot_box_x_start) + plot_box_x_start - size_of_clock/2
+    y_clock = plot_box_y_start-size_of_clock/2+0.005
+
+    x_dow = percent_done
+    y_dow = size_of_clock+.045
+
+    ax3.annotate(dow+"-"+local_time_zone, 
+                 [x_dow,y_dow],
+                 horizontalalignment="center",
+                verticalalignment="center",fontsize="x-large",
+                xycoords='axes fraction')
+
+
+    axins3 = fig.add_axes(rect     =    [x_clock,
+                                        y_clock,
+                                        size_of_clock,
+                                        size_of_clock],
+                         projection =  "polar")
+
+    plt.setp(axins3.get_yticklabels(), visible=False)
+    plt.setp(axins3.get_xticklabels(), visible=False)
+    axins3.spines['polar'].set_visible(False)
+    axins3.set_ylim(0,1)
+    axins3.set_theta_zero_location('N')
+    axins3.set_theta_direction(-1)
+    axins3.set_facecolor(Clock_BgndC)
+    axins3.grid(False)
+
+    axins3.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1)
+    axins3.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1)
+    axins3.plot(circle_theta, circle_radius,   color=Mines_Blue,  linewidth=1)
+
+    #
+    ##################################    
+ 
+       
+    #################################
+    #
+    # Walking Clock 3
+    #
+    plot_box         = ax4.get_position()
+    plot_box_x_start = plot_box.x0
+    plot_box_y_start = plot_box.y0
+    plot_box_x_end   = plot_box.x1
+    plot_box_y_end   = plot_box.y1
+    
+    circle_theta  = np.deg2rad(np.arange(0,360,0.01))
+    circle_radius = circle_theta * 0 + 1
+
+    if (hour > 12) :
+        hour = hour - 12
+
+    angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
+    angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
+    
+    size_of_clock = 0.02
+
+    x_clock = percent_done*(plot_box_x_end-plot_box_x_start) + plot_box_x_start - size_of_clock/2
+    y_clock = plot_box_y_start-size_of_clock/2+0.005
+
+    x_dow = percent_done
+    y_dow = size_of_clock+.045
+
+    ax4.annotate(dow+"-"+local_time_zone, 
+                 [x_dow,y_dow],
+                 horizontalalignment="center",
+                verticalalignment="center",fontsize="x-large",
+                xycoords='axes fraction')
+
+
+    axins4 = fig.add_axes(rect     =    [x_clock,
+                                        y_clock,
+                                        size_of_clock,
+                                        size_of_clock],
+                         projection =  "polar")
+
+    plt.setp(axins4.get_yticklabels(), visible=False)
+    plt.setp(axins4.get_xticklabels(), visible=False)
+    axins4.spines['polar'].set_visible(False)
+    axins4.set_ylim(0,1)
+    axins4.set_theta_zero_location('N')
+    axins4.set_theta_direction(-1)
+    axins4.set_facecolor(Clock_BgndC)
+    axins4.grid(False)
+
+    axins4.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1)
+    axins4.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1)
+    axins4.plot(circle_theta, circle_radius,   color=Mines_Blue,  linewidth=1)
+
+    #
+    ##################################    
+    
+
     plt.savefig(png_file_root + "F" + str(int( fxx[i])).zfill(3) + ".png",
                         facecolor   = 'white', 
                         transparent =   False)
