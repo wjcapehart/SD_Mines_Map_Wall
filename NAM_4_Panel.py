@@ -636,7 +636,7 @@ for i in range(len(times_utc)) :
 
 
         
-    ax2.clabel(contour_plot2, fontsize="xx-large", colors=Mines_Blue)
+    ax2.clabel(contour_plot2, fontsize="xx-large", colors="white")
 
   
     
@@ -776,7 +776,12 @@ for i in range(len(times_utc)) :
                                                    extend        = 'max',
                                                    norm          = rain_norm,
                                                    levels        = contourf_levels,
-                                                   cbar_kwargs   = {"label"        : " ", "orientation" : "horizontal","pad"         : colorbar_pad,"ticks"       : contourf_levels,"shrink"      : colorbar_shrink,"aspect"      :   colorbar_aspect})    
+                                                   cbar_kwargs   = {"label"        : " ", 
+                                                                    "orientation" : "horizontal",
+                                                                    "pad"         : colorbar_pad,
+                                                                    "ticks"       : contourf_levels,
+                                                                    "shrink"      : colorbar_shrink,
+                                                                    "aspect"      :   colorbar_aspect})    
 
 
     contour_plot2 = precip[prec_i,:,:].plot.contour(colors     =            "cyan",
