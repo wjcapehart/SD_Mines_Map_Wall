@@ -3,7 +3,7 @@
 
 # # NWS Warning Polygons
 
-# In[ ]:
+# In[1]:
 
 
 #Import the necessary packages
@@ -26,8 +26,16 @@ import pytz              as pytz
 
 import geopandas as gp
 
+length = 11
+height =  6
 
-# In[ ]:
+dpi = 52
+length = 19
+height = 10.36538462
+font_fac = 1.923076923
+
+
+# In[2]:
 
 
 ####################################################
@@ -54,7 +62,7 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 
 
 
-# In[ ]:
+# In[3]:
 
 
 proj_data_text = '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
@@ -82,7 +90,7 @@ print(valid_time)
 print(local_time)
 
 
-# In[ ]:
+# In[4]:
 
 
 # Open the NWS API in python to get the active alerts
@@ -90,7 +98,7 @@ n = noaa_sdk.noaa.NOAA()
 alerts = n.active_alerts()
 
 
-# In[ ]:
+# In[5]:
 
 
 #injest //shapefiles/CONUS_UGC_Zones/
@@ -116,7 +124,7 @@ UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
 
 
-# In[ ]:
+# In[6]:
 
 
 # priority warnings table
@@ -126,7 +134,7 @@ warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"}
 
 
 
-# In[ ]:
+# In[7]:
 
 
 current_warnings = pd.DataFrame(columns = ['event',
@@ -201,7 +209,7 @@ print("done: ",i,"rows; ",len(warning_color_table),"event types")
 print()
 
 
-# In[ ]:
+# In[8]:
 
 
 # check for missing colors.
@@ -217,7 +225,7 @@ print("replaced")
 print(warning_color_table)
 
 
-# In[ ]:
+# In[9]:
 
 
 legend_color_table = warning_color_table.values.tolist()
@@ -232,13 +240,13 @@ for row in warning_color_table.iterrows():
   
 
 
-# In[ ]:
+# In[10]:
 
 
 print(warning_color_table)
 
 
-# In[ ]:
+# In[20]:
 
 
 bbox=[-120,-73,22.5,50]
@@ -247,18 +255,18 @@ xxx = [-120.0, -73.0]
 yyy = [  22.5,  50.0]
 
 
-fig = plt.figure(figsize   = [11, 6], 
+fig = plt.figure(figsize   = [length, height], dpi = dpi,
                  facecolor = 'white')
 
 ax = fig.add_subplot(1, 1, 1, 
                      projection=myproj)
 
 plt.suptitle("NWS Watches and Warnings",
-             fontsize = 20, 
+             fontsize = 20*font_fac, 
              color    = Mines_Blue)
 ax.set_extent(bbox)
 ax.set_title(valid_time + "  (" + local_time+")",
-             fontsize=15, 
+             fontsize=15*font_fac, 
              color=Mines_Blue)
 
 current_warnings.plot(ax = ax,aspect='equal',
@@ -291,7 +299,7 @@ plt.subplots_adjust(left   = 0.01,
 labelspacing = 0.1
 fig.legend(handles  = legend_color_table, 
            loc      = 'right',
-           frameon  = False,
+           frameon  = False,fontsize=18,
            labelspacing = labelspacing,
 			  labelcolor = Mines_Blue)
 
@@ -338,16 +346,16 @@ axins.set_theta_direction(-1)
 axins.set_facecolor("white")
 axins.grid(False)
 
-axins.plot([angles_h,angles_h], [0,0.6], color=Mines_Blue, linewidth=1.5)
-axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
-axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+axins.plot([angles_h,angles_h], [0,0.6], color=Mines_Blue, linewidth=1.5*font_fac)
+axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5*font_fac)
+axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1*font_fac)
 
 
 #
 #########################################
         
         
-plt.savefig(gif_file_name,
+plt.savefig(gif_file_name, dpi = dpi,
                         facecolor   = 'white', 
                         transparent =   False)
 
@@ -386,6 +394,30 @@ print("done")
 
 
 
+
+
+# In[12]:
+
+
+import matplotlib as mpl
+
+
+# In[13]:
+
+
+mpl.rcParams['lines.linewidth']
+
+
+# In[14]:
+
+
+mpl.rcParams['legend.fontsize']
+
+
+# In[15]:
+
+
+mpl.rcParams['.fontsize']
 
 
 # In[ ]:
