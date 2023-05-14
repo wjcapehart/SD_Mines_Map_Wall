@@ -29,7 +29,7 @@ import geopandas as gp
 length = 11
 height =  6
 
-dpi = 52
+dpi = 100
 length = 19
 height = 10.36538462
 font_fac = 1.923076923
@@ -246,7 +246,7 @@ for row in warning_color_table.iterrows():
 print(warning_color_table)
 
 
-# In[20]:
+# In[11]:
 
 
 bbox=[-120,-73,22.5,50]
