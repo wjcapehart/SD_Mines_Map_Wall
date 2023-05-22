@@ -3,7 +3,7 @@
 
 # # NWS Warning Polygons
 
-# In[1]:
+# In[ ]:
 
 
 #Import the necessary packages
@@ -27,7 +27,7 @@ import pytz              as pytz
 import geopandas as gp
 
 
-# In[2]:
+# In[ ]:
 
 
 ####################################################
@@ -54,12 +54,11 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 
 
 
-# In[3]:
+# In[ ]:
 
 
 proj_data_text = '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
 
-gif_file_name = "./graphics_files/NWS_Warnings."
 xls_file_name = "./graphics_files/NWS_Warnings.xlsx"
 
 
@@ -82,7 +81,7 @@ print(valid_time)
 print(local_time)
 
 
-# In[4]:
+# In[ ]:
 
 
 # Open the NWS API in python to get the active alerts
@@ -90,7 +89,7 @@ n = noaa_sdk.noaa.NOAA()
 alerts = n.active_alerts()
 
 
-# In[5]:
+# In[ ]:
 
 
 #injest //shapefiles/CONUS_UGC_Zones/
@@ -116,7 +115,7 @@ UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
 
 
-# In[6]:
+# In[ ]:
 
 
 # priority warnings table
@@ -126,7 +125,7 @@ warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"}
 
 
 
-# In[7]:
+# In[ ]:
 
 
 current_warnings = pd.DataFrame(columns = ['event',
@@ -201,7 +200,7 @@ print("done: ",i,"rows; ",len(warning_color_table),"event types")
 print()
 
 
-# In[8]:
+# In[ ]:
 
 
 # check for missing colors.
@@ -217,7 +216,7 @@ print("replaced")
 print(warning_color_table)
 
 
-# In[9]:
+# In[ ]:
 
 
 legend_color_table = warning_color_table.values.tolist()
@@ -232,13 +231,13 @@ for row in warning_color_table.iterrows():
   
 
 
-# In[10]:
+# In[ ]:
 
 
 print(warning_color_table)
 
 
-# In[11]:
+# In[ ]:
 
 
 bbox=[-120,-73,22.5,50]
@@ -290,7 +289,7 @@ plt.subplots_adjust(left   = 0.01,
 
 labelspacing = 0.1
 fig.legend(handles  = legend_color_table, 
-           loc      = 'right',
+           loc      = 'right', fontsize=11.0,
            frameon  = False,
            labelspacing = labelspacing,
 			  labelcolor = Mines_Blue)
@@ -346,7 +345,8 @@ axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
 #
 #########################################
         
-        
+gif_file_name = "./graphics_files/NWS_Warnings."
+    
 plt.savefig(gif_file_name + "svg",
                         facecolor   = 'white', 
                         transparent =   False)
