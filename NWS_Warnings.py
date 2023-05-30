@@ -3,7 +3,7 @@
 
 # # NWS Warning Polygons
 
-# In[ ]:
+# In[1]:
 
 
 #Import the necessary packages
@@ -27,7 +27,7 @@ import pytz              as pytz
 import geopandas as gp
 
 
-# In[ ]:
+# In[2]:
 
 
 ####################################################
@@ -54,7 +54,7 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 
 
 
-# In[ ]:
+# In[3]:
 
 
 proj_data_text = '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
@@ -81,7 +81,7 @@ print(valid_time)
 print(local_time)
 
 
-# In[ ]:
+# In[4]:
 
 
 # Open the NWS API in python to get the active alerts
@@ -89,7 +89,7 @@ n = noaa_sdk.noaa.NOAA()
 alerts = n.active_alerts()
 
 
-# In[ ]:
+# In[5]:
 
 
 #injest //shapefiles/CONUS_UGC_Zones/
@@ -115,7 +115,7 @@ UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
 
 
-# In[ ]:
+# In[6]:
 
 
 # priority warnings table
@@ -125,7 +125,7 @@ warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"}
 
 
 
-# In[ ]:
+# In[7]:
 
 
 current_warnings = pd.DataFrame(columns = ['event',
@@ -200,7 +200,7 @@ print("done: ",i,"rows; ",len(warning_color_table),"event types")
 print()
 
 
-# In[ ]:
+# In[8]:
 
 
 # check for missing colors.
@@ -216,7 +216,7 @@ print("replaced")
 print(warning_color_table)
 
 
-# In[ ]:
+# In[9]:
 
 
 legend_color_table = warning_color_table.values.tolist()
@@ -231,13 +231,13 @@ for row in warning_color_table.iterrows():
   
 
 
-# In[ ]:
+# In[10]:
 
 
 print(warning_color_table)
 
 
-# In[ ]:
+# In[11]:
 
 
 bbox=[-120,-73,22.5,50]
@@ -347,7 +347,7 @@ axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
         
 gif_file_name = "./graphics_files/NWS_Warnings."
     
-plt.savefig(gif_file_name + "svg",
+plt.savefig(gif_file_name + "png",
                         facecolor   = 'white', 
                         transparent =   False)
 
