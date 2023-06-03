@@ -259,6 +259,14 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         hour   = time_for_clock.hour
         minute = time_for_clock.minute
         second = time_for_clock.second
+
+        if ((hour >= 6) and (hour < 18)):
+            Clock_Color = Mines_Blue
+            Clock_BgndC = "white"           
+        else:
+            Clock_Color = "white"
+            Clock_BgndC = Mines_Blue           
+
         
         circle_theta  = np.deg2rad(np.arange(0,360,0.01))
         circle_radius = circle_theta * 0 + 1
