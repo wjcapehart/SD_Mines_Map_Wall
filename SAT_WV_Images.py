@@ -258,9 +258,9 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
         
-        print(time_for_clock)
-        print(hour,   np.rad2deg(angles_h))
-        print(minute, np.rad2deg(angles_m))
+        #print(time_for_clock)
+        #print(hour,   np.rad2deg(angles_h))
+        #print(minute, np.rad2deg(angles_m))
 
         
         plt.setp(axins.get_yticklabels(), visible=False)
@@ -269,13 +269,12 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         axins.set_ylim(0,1)
         axins.set_theta_zero_location('N')
         axins.set_theta_direction(-1)
-        axins.set_facecolor("white")
+        axins.set_facecolor(Clock_BgndC)
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.6], color=Mines_Blue, linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
-
+        axins.plot([angles_h,angles_h], [0,0.6], color=Clock_Color, linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
 
         
         #

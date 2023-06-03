@@ -271,6 +271,14 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         minute = time_for_clock.minute
         second = time_for_clock.second
         
+        if ((hour >= 6) and (hour < 18)):
+            Clock_Color = Mines_Blue
+            Clock_BgndC = "white"           
+        else:
+            Clock_Color = "white"
+            Clock_BgndC = Mines_Blue               
+
+        
         circle_theta  = np.deg2rad(np.arange(0,360,0.01))
         circle_radius = circle_theta * 0 + 1
         
@@ -291,12 +299,12 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         axins.set_ylim(0,1)
         axins.set_theta_zero_location('N')
         axins.set_theta_direction(-1)
-        axins.set_facecolor("white")
+        axins.set_facecolor(Clock_BgndC)
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.6], color=Mines_Blue, linewidth=1.5)
-        axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1)
+        axins.plot([angles_h,angles_h], [0,0.6], color=Clock_Color, linewidth=1.5)
+        axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
+        axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
 
 
         
