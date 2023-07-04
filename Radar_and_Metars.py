@@ -88,7 +88,7 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 
 
 alpha_factor               =     0.05
-alpha_color_table_fraction =     0.00 #0.25
+alpha_color_table_fraction =     0.25
 radar_floor                = -9999.99
 
 # Choose colormap
