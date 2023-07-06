@@ -176,7 +176,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 
 png_processing_directory = "./temp_files_nam/"
 
-gif_file_name = "./graphics_files/NAM_4_Panel.gif"
+gif_file_name = "NAM_4_Panel.gif"
 
 png_file_root = png_processing_directory + "NAM_4_Panel_"
 
@@ -1228,7 +1228,8 @@ with open(MAINDIR + "./processing_NAM_gif.sh", 'w') as f:
           "-delay 60 "             + \
           long_files              + \
           " "                      + \
-          gif_file_name,           file =  f) 
+          "./graphics_files/staging_area/"+gif_file_name,           file =  f) 
+    print("mv -fv ./graphics_files/staging_area/"+gif_file_name+" ./graphics_files/", file =  f) 
     print("echo MAIN:NAM::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_NAM_gif.sh")

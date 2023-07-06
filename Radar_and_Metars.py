@@ -88,7 +88,7 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 
 
 alpha_factor               =     0.05
-alpha_color_table_fraction =     0.25
+alpha_color_table_fraction =     0.70
 radar_floor                = -9999.99
 
 # Choose colormap
@@ -1027,7 +1027,8 @@ with open(MAINDIR + "./processing_radar_gif.sh", 'w') as f:
     print("convert -delay 25 " + 
           "./temp_files_radar/Radar_Loop_Image_*.png"  + 
           " " + 
-          "./graphics_files/RealTime_Radar_Loop.gif", file =  f) 
+          "./graphics_files/staging_area/RealTime_Radar_Loop.gif", file =  f) 
+    print("mv -fv ./graphics_files/staging_area/RealTime_Radar_Loop.gif ./graphics_files/", file =  f) 
     print("echo MAIN:RADAR::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_radar_gif.sh")

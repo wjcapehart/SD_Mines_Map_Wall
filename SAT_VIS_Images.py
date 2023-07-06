@@ -82,7 +82,7 @@ total_frames = 45*2
 
 png_processing_directory = "./temp_files_sat_vis/"
 
-gif_file_name = "./graphics_files/RealTime_SAT_VIS_Loop.gif"
+gif_file_name = "RealTime_SAT_VIS_Loop.gif"
 
 image_header_label = "GOES 16 Band 2 [0.64 µm Visible Red]"
 
@@ -344,7 +344,8 @@ with open(MAINDIR + "./processing_sat_VIS_gif.sh", 'w') as f:
     print("convert -delay 10 " + 
           big_string + 
           " " + 
-          gif_file_name, file =  f) 
+          "./graphics_files/staging_area/"+gif_file_name, file =  f) 
+    print("mv -fv ./graphics_files/staging_area/"+gif_file_name+" ./graphics_files/", file =  f) 
     print("echo MAIN:SAT_VIS::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_VIS_gif.sh")

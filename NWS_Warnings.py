@@ -26,6 +26,8 @@ import pytz              as pytz
 
 import geopandas as gp
 
+import os as os
+
 
 # In[ ]:
 
@@ -353,14 +355,19 @@ axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
 #
 #########################################
         
-gif_file_name = "./graphics_files/NWS_Warnings."
+gif_file_name = "./graphics_files/staging_area/NWS_Warnings."
     
-plt.savefig(gif_file_name + "png",
+plt.savefig("./graphics_files/staging_area/NWS_Warnings.png",
                         facecolor   = 'white', 
                         transparent =   False)
 
 
+
+
 plt.close()
+
+os.system("mv -fv ./graphics_files/staging_area/NWS_Warnings.png ./graphics_files/NWS_Warnings.png") 
+
 
 
 print("done")

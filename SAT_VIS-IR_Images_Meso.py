@@ -115,7 +115,7 @@ channel_lab = [' Channel Zero',                     #  0
 gif_file_name1  = "./graphics_files/RealTime_SAT_IR_Meso1_Loop.gif"
 gif_file_name2  = "./graphics_files/RealTime_SAT_IR_Meso2_Loop.gif"
 gif_file_name3  = "./graphics_files/RealTime_SAT_IR_SODAK_Loop.gif"
-gif_file_name12 = "./graphics_files/RealTime_SAT_IR_Meso12_Loop.gif"
+gif_file_name12 = "RealTime_SAT_IR_Meso12_Loop.gif"
 
 png_file_dir1  = "./temp_files_sat_meso1/"
 png_file_dir2  = "./temp_files_sat_meso2/"
@@ -1348,7 +1348,8 @@ with open(MAINDIR + "./processing_sat_all_mesos_gif.sh", 'w') as f:
           " -delay " +  str(delay_time_sdm ) + " " + 
           " ".join(file_names_to_use_meso3) + 
           " " + 
-          gif_file_name12, file =  f) 
+          "./graphics_files/staging_area/"+gif_file_name12, file =  f) 
+    print("mv -fv ./graphics_files/staging_area/"+gif_file_name12+" ./graphics_files/", file =  f) 
     print("echo MAIN:SAT123MESO::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_sat_all_mesos_gif.sh")

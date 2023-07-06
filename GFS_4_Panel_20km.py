@@ -187,7 +187,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 
 png_processing_directory = "./temp_files_gfs/"
 
-gif_file_name = "./graphics_files/GFS_4_Panel.gif"
+gif_file_name = "GFS_4_Panel.gif"
 
 png_file_root = png_processing_directory + "GFS_4_Panel_"
 
@@ -1252,6 +1252,8 @@ with open(MAINDIR + "./processing_GFS_gif.sh", 'w') as f:
           png_file_root        + \
           "*.png "             + \
           gif_file_name,         file = f) 
+          "./graphics_files/staging_area/"+gif_file_name,           file =  f) 
+    print("mv -fv ./graphics_files/staging_area/"+gif_file_name+" ./graphics_files/", file =  f) 
     print("echo MAIN:GFS:: We\'re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_GFS_gif.sh")
