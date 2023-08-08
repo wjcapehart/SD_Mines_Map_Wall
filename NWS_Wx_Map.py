@@ -92,8 +92,6 @@ with urllib.request.urlopen(url_map_data) as response, open(file_map_data, 'wb')
 img = Image.open(fp      = file_map_overlay,
                  formats =["gif"])
 
-display(img.info)
-
 img_data = np.asarray(img.convert("RGB"))
 
 
