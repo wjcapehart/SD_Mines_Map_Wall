@@ -123,7 +123,7 @@ print(date_string)
 tf     = tzf.TimezoneFinder()
 tz     = tf.certain_timezone_at(lng = -103, 
                                 lat =   44)
-display(tz)
+print(tz)
 utc_time = pd.to_datetime(datetime.strptime(date_string, '%H %Z %b %d %Y')-timedelta(hours=6))
 
 local_time      = pd.to_datetime(utc_time).tz_localize(tz="UTC").tz_convert(tz=tz)
