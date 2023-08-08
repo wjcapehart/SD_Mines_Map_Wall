@@ -216,9 +216,9 @@ axins.set_facecolor(Clock_BgndC)
 axins.grid(False)
 axins.margins(x = 0, y = 0)
 
-axins.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1.5)
-axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
-axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=1.5)
+axins.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=2)
+axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=2)
+axins.plot(circle_theta, circle_radius, color="darkgrey", linewidth=2)
 
 
 
