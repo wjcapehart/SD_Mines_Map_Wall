@@ -1,0 +1,7 @@
+92f_ndfdloop_map.gif "Forecast valid 00 UTC Aug 09 2023" overlay=92f_ndfdwx_trans.gif,92f_fronts_for_ndfd_trans.gif 
+93f_ndfdloop_map.gif "Forecast valid 06 UTC Aug 09 2023" overlay=93f_ndfdwx_trans.gif,93f_fronts_for_ndfd_trans.gif 
+94f_ndfdloop_map.gif "Forecast valid 12 UTC Aug 09 2023" overlay=94f_ndfdwx_trans.gif,94f_fronts_for_ndfd_trans.gif 
+95f_ndfdloop_map.gif "Forecast valid 18 UTC Aug 09 2023" overlay=95f_ndfdwx_trans.gif,95f_fronts_for_ndfd_trans.gif 
+96f_ndfdloop_map.gif "Forecast valid 00 UTC Aug 10 2023" overlay=96f_ndfdwx_trans.gif,96f_fronts_for_ndfd_trans.gif 
+98f_ndfdloop_map.gif "Forecast valid 12 UTC Aug 10 2023" overlay=98f_ndfdwx_trans.gif,98f_fronts_for_ndfd_trans.gif 
+99f_ndfdloop_map.gif "Forecast valid 00 UTC Aug 11 2023" overlay=99f_ndfdwx_trans.gif,99f_fronts_for_ndfd_trans.gif 
