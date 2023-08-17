@@ -72,8 +72,9 @@ os.system("rm -frv ./temp_sfc_analysis/*")
 url_map_overlay  = "https://www.wpc.ncep.noaa.gov/basicwx/91fndfd.gif"
 file_map_overlay = "./temp_sfc_analysis/91fndfd.gif"
 
-url_map_data     = "https://www.wpc.ncep.noaa.gov/basicwx/ndfd_overlay_loop.txt"
-file_map_data    = "./temp_sfc_analysis/ndfd_overlay_loop.txt"
+
+url_map_data     = "https://www.wpc.ncep.noaa.gov/basicwx/6_hour.txt"
+file_map_data    = "./temp_sfc_analysis/6_hour.txt"
 
 print("downloading "+ url_map_overlay)
 with urllib.request.urlopen(url_map_overlay) as response, open(file_map_overlay, 'wb') as out_file:
@@ -116,15 +117,16 @@ print("Lx = ", Lx, " Ly=", Ly)
 with open(file_map_data) as f:
     lines = f.readlines()
 
-date_string = lines[0][37:55]
+date_string = lines[4][7:28]
 
 print(date_string)
 
 tf     = tzf.TimezoneFinder()
 tz     = tf.certain_timezone_at(lng = -103, 
                                 lat =   44)
+
 print(tz)
-utc_time = pd.to_datetime(datetime.strptime(date_string, '%H %Z %b %d %Y')-timedelta(hours=6))
+utc_time = pd.to_datetime(datetime.strptime(date_string, '%H00Z THU %b %d %Y'))
 
 local_time      = pd.to_datetime(utc_time).tz_localize(tz="UTC").tz_convert(tz=tz)
 local_time_zone = local_time.strftime("%Z")
