@@ -126,7 +126,7 @@ tz     = tf.certain_timezone_at(lng = -103,
                                 lat =   44)
 
 print(tz)
-utc_time = pd.to_datetime(datetime.strptime(date_string, '%H00Z THU %b %d %Y'))
+utc_time = pd.to_datetime(datetime.strptime(date_string, '%H00Z %a %b %d %Y'))
 
 local_time      = pd.to_datetime(utc_time).tz_localize(tz="UTC").tz_convert(tz=tz)
 local_time_zone = local_time.strftime("%Z")
