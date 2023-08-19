@@ -29,6 +29,7 @@ from   metpy.plots       import colortables, USCOUNTIES, StationPlot, sky_cover,
 from   metpy.units       import units
 
 import matplotlib.patches as patches
+from matplotlib.colors import ListedColormap
 
 from siphon.cdmr         import Dataset
 from siphon.radarserver  import get_radarserver_datasets, RadarServer
@@ -86,6 +87,25 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 					 'ytick.color'     : Mines_Blue})
 
 
+alpha_factor               =     0.05
+alpha_color_table_fraction =     0.70
+radar_floor                = -9999.99
+
+# Choose colormap
+norm, cmap = colortables.get_with_steps(name = "NWSStormClearReflectivity", 
+                                        start = -20.0, 
+                                        step  =   0.5)
+n_colors = cmap.N
+
+# Get the colormap colors
+cmap = cmap(np.arange(cmap.N))
+
+
+# Set alpha
+cmap[0:int(n_colors*alpha_color_table_fraction),-1] = np.linspace(0, 1, int(n_colors*alpha_color_table_fraction))
+
+# Create new colormap
+cmap = ListedColormap(cmap)
 #
 ####################################################
 ####################################################
@@ -148,15 +168,16 @@ radar_id   = "UDX"
 metar_collection = 'https://thredds.ucar.edu/thredds/catalog/nws/metar/ncdecoded/catalog.xml?dataset=nws/metar/ncdecoded/Metar_Station_Data_fc.cdmr'
 synop_collection = "https://thredds.ucar.edu/thredds/catalog/nws/synoptic/ncdecoded/catalog.xml?dataset=nws/synoptic/ncdecoded/Surface_Synoptic_Point_Data_fc.cdmr" 
 
-norm, cmap = colortables.get_with_steps("NWSStormClearReflectivity", 
-                                        -20, 
-                                        0.5)
-
-
 #
 ####################################################
 ####################################################
 ####################################################
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -189,7 +210,7 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 # In[ ]:
 
 
-tz
+
 
 
 # In[ ]:
@@ -401,6 +422,13 @@ def radar_plotting_func(name_index):
         x   = rng * np.sin(np.deg2rad(az))[:, None]
         y   = rng * np.cos(np.deg2rad(az))[:, None]
         ref = np.ma.array(ref, mask=np.isnan(ref))
+        ref[ ref< radar_floor] = np.nan
+
+        ny = ref.shape[0]
+        nx = ref.shape[1]      
+        alpha2d = np.sqrt(np.outer(np.abs(np.hanning(ny)),np.abs(np.hanning(nx))))
+        alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
+        alpha2d = alpha2d / alpha_factor
 
     except:
         print("poopie: ", name, name[15:-5])
@@ -518,11 +546,15 @@ def radar_plotting_func(name_index):
                    facecolor  = 'none')
     
     try:
+
+
+        
         filled_cm = ax.pcolormesh(x, 
                                   y, 
                                   ref,
                                   norm = norm, 
                                   cmap = cmap)
+        
         color_bar = plt.colorbar(filled_cm, 
                      label  = "Reflectivity (dbZ)",
                      shrink = 0.8,
@@ -690,7 +722,7 @@ except:
 ####################################################
 ####################################################
 ####################################################
-#
+# 
 # Create Individual Map Files for Radar
 #
 
@@ -995,7 +1027,8 @@ with open(MAINDIR + "./processing_radar_gif.sh", 'w') as f:
     print("convert -delay 25 " + 
           "./temp_files_radar/Radar_Loop_Image_*.png"  + 
           " " + 
-          "./graphics_files/RealTime_Radar_Loop.gif", file =  f) 
+          "./graphics_files/staging_area/RealTime_Radar_Loop.gif", file =  f) 
+    print("mv -fv ./graphics_files/staging_area/RealTime_Radar_Loop.gif ./graphics_files/", file =  f) 
     print("echo MAIN:RADAR::: We^re Outahere Like Vladimir", file =  f) 
 
 os.system("chmod a+x " + MAINDIR + "./processing_radar_gif.sh")
@@ -1010,6 +1043,12 @@ print()
 
 #
 ##################################################
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

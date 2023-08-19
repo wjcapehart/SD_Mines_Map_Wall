@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # KKNX Radar
+# # KYUX Radar
 # 
 # Creates an Animated Plot for Radar and Station Models
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -67,7 +67,7 @@ from joblib import Parallel, delayed
 ####################################################
 
 
-# In[2]:
+# In[ ]:
 
 
 ####################################################
@@ -112,7 +112,7 @@ cmap = ListedColormap(cmap)
 ####################################################
 
 
-# In[11]:
+# In[ ]:
 
 
 ####################################################
@@ -162,7 +162,7 @@ geospatial_lat_max= Fixed_geospatial_lat_max
 geospatial_lon_max= Fixed_geospatial_lon_max
 geospatial_lon_min= Fixed_geospatial_lon_min
         
-station_id = "YUX"
+station_id = "YUM"
 radar_id   = "YUX"
 
 
@@ -182,7 +182,7 @@ synop_collection = "https://thredds.ucar.edu/thredds/catalog/nws/synoptic/ncdeco
 
 
 
-# In[12]:
+# In[ ]:
 
 
 ####################################################
@@ -214,10 +214,10 @@ print("Local Timezone = " + tz)
 # In[ ]:
 
 
+airport_database_IATA["YUM"]
 
 
-
-# In[13]:
+# In[ ]:
 
 
 ####################################################
@@ -311,13 +311,19 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 ####################################################
 
 
-# In[14]:
+# In[ ]:
 
 
 print(metar_dataframe)
 
 
-# In[15]:
+# In[ ]:
+
+
+
+
+
+# In[ ]:
 
 
 ####################################################
@@ -344,11 +350,31 @@ datasets_sorted = sorted(catalog.datasets)
 
 list(datasets_sorted)
 
+print((datasets_sorted))
+
+
 figure_counter    = 1
 number_of_figures = len(sorted(catalog.datasets))
 
 number_of_figures = len(sorted(catalog.datasets))
 print("Number of Radar Images=",number_of_figures)
+
+    
+#
+####################################################
+####################################################
+####################################################
+
+
+# In[ ]:
+
+
+####################################################
+####################################################
+####################################################
+#
+# Retrieve Radar Data
+#
 
 dates_for_radar  = []
 
@@ -367,23 +393,13 @@ for name in datasets_sorted:
         
 print("  end time: ",time_now)
 
-    
-    
-    
 #
 ####################################################
 ####################################################
 ####################################################
 
 
-
 # In[ ]:
-
-
-
-
-
-# In[16]:
 
 
 def radar_plotting_func(name_index):
@@ -420,10 +436,14 @@ def radar_plotting_func(name_index):
                            figsize=(9, 8),
                            facecolor = 'white')
 
+
+    
     try:
 
-
+    
         radar    = Dataset(ds.access_urls['CdmRemote'])
+        print(radar)
+
 
         rng      = radar.variables['gate'][:] 
         az       = radar.variables['azimuth'][:]
@@ -717,7 +737,7 @@ def radar_plotting_func(name_index):
   
 
 
-# In[17]:
+# In[ ]:
 
 
 try: 
@@ -726,7 +746,13 @@ except:
     print("## No radar files to plot")
 
 
-# In[18]:
+# In[ ]:
+
+
+radar_plotting_func(0)
+
+
+# In[ ]:
 
 
 ####################################################
@@ -764,7 +790,7 @@ print("Done")
 #####################################################
 
 
-# In[19]:
+# In[ ]:
 
 
 #####################################################
@@ -1018,7 +1044,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 ####################################################
 
 
-# In[20]:
+# In[ ]:
 
 
 ##################################################
