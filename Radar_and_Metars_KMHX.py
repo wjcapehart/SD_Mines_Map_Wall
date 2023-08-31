@@ -166,7 +166,7 @@ geospatial_lat_max= Fixed_geospatial_lat_max
 geospatial_lon_max= Fixed_geospatial_lon_max
 geospatial_lon_min= Fixed_geospatial_lon_min
         
-station_id = "NKT"
+station_id = "OAJ"
 radar_id   = "MHX"
 
 
