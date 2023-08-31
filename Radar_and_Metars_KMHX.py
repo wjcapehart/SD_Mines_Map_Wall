@@ -166,7 +166,7 @@ geospatial_lat_max= Fixed_geospatial_lat_max
 geospatial_lon_max= Fixed_geospatial_lon_max
 geospatial_lon_min= Fixed_geospatial_lon_min
         
-station_id = "MRH"
+station_id = "NKT"
 radar_id   = "MHX"
 
 
