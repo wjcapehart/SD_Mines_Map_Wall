@@ -5,7 +5,7 @@
 # 
 # ## Libraries
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -30,6 +30,8 @@ from datetime import datetime, timedelta
 import pytz as pytz
 import os as os
 
+import time
+
 import timezonefinder as tzf
 
 import pandas            as pd
@@ -45,7 +47,7 @@ import pandas            as pd
 
 # ## Mines Colors and Fonts
 
-# In[2]:
+# In[ ]:
 
 
 ####################################################
@@ -71,7 +73,7 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 
 # ## Time Zone Handling & Current Time
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -84,6 +86,10 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 tf     = tzf.TimezoneFinder()
 tz     = tf.certain_timezone_at(lng = -103, 
                                 lat =   44)
+
+mtz = time.tzname[time.daylight]
+print("Machine Time Zone:",mtz)
+print("  Local Time Zone:",tz)
 #
 ####################################################
 ####################################################
@@ -92,7 +98,7 @@ tz     = tf.certain_timezone_at(lng = -103,
 
 # ## Get Current Time
 
-# In[4]:
+# In[ ]:
 
 
 ####################################################
@@ -102,7 +108,10 @@ tz     = tf.certain_timezone_at(lng = -103,
 # Get Current Time
 #
 
-now_date = pd.to_datetime(datetime.now()).tz_convert(tz="UTC")
+if(mtz != "UTC"):
+    now_date = pd.to_datetime(datetime.now()).tz_localize(tz=tz).tz_convert(tz="UTC")
+else:
+    now_date = pd.to_datetime(datetime.now()).tz_localize(tz="UTC").tz_convert(tz="UTC")
 
 #
 ####################################################
@@ -112,7 +121,7 @@ now_date = pd.to_datetime(datetime.now()).tz_convert(tz="UTC")
 
 # ## Downloading Image and Timing Files from NCEP
 
-# In[14]:
+# In[ ]:
 
 
 ####################################################
@@ -149,7 +158,7 @@ with urllib.request.urlopen(url_map_data) as response, open(file_map_data, 'wb')
 
 # ## Read Map Metadata File Internal Date Data
 
-# In[6]:
+# In[ ]:
 
 
 ####################################################
@@ -178,7 +187,7 @@ product_time  = pd.to_datetime(datetime.strptime(date_string, '%H00Z %a %b %d %Y
 
 # ## Get Server Metadata File Creation Time
 
-# In[7]:
+# In[ ]:
 
 
 ####################################################
@@ -201,7 +210,7 @@ metadata_file_date = pd.to_datetime(datetime.strptime(metadata_file_date, "%a, %
 
 # ## Get Server Map Image File Creation Time
 
-# In[8]:
+# In[ ]:
 
 
 ####################################################
@@ -224,7 +233,7 @@ map_file_date      = pd.to_datetime(datetime.strptime(map_file_date, "%a, %d %b 
 
 # ## Summary of Times
 
-# In[9]:
+# In[ ]:
 
 
 ####################################################
@@ -244,7 +253,7 @@ print(" Product Label Time: ",       product_time)
 ####################################################
 
 
-# In[10]:
+# In[ ]:
 
 
 ####################################################
@@ -290,7 +299,7 @@ with open(timings_file, 'a') as f:
 
 # ## Graphical Map Clock Information
 
-# In[11]:
+# In[ ]:
 
 
 ####################################################
@@ -366,7 +375,7 @@ print(time_label)
 
 # ## Generate Map Image
 
-# In[12]:
+# In[ ]:
 
 
 ####################################################
@@ -511,7 +520,7 @@ os.system("mv -fv ./temp_sfc_analysis/NWS_Sfc_Analysis.png ./graphics_files/")
 
 # ## Closeout
 
-# In[13]:
+# In[ ]:
 
 
 #########################################
