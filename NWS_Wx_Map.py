@@ -5,7 +5,7 @@
 # 
 # ## Libraries
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -45,7 +45,7 @@ import pandas            as pd
 
 # ## Mines Colors and Fonts
 
-# In[ ]:
+# In[2]:
 
 
 ####################################################
@@ -71,7 +71,7 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 
 # ## Time Zone Handling & Current Time
 
-# In[ ]:
+# In[3]:
 
 
 ####################################################
@@ -92,7 +92,7 @@ tz     = tf.certain_timezone_at(lng = -103,
 
 # ## Get Current Time
 
-# In[ ]:
+# In[4]:
 
 
 ####################################################
@@ -102,7 +102,7 @@ tz     = tf.certain_timezone_at(lng = -103,
 # Get Current Time
 #
 
-now_date = pd.to_datetime(datetime.now()).tz_localize(tz=tz).tz_convert(tz="UTC")
+now_date = pd.to_datetime(datetime.now()).tz_convert(tz="UTC")
 
 #
 ####################################################
@@ -112,7 +112,7 @@ now_date = pd.to_datetime(datetime.now()).tz_localize(tz=tz).tz_convert(tz="UTC"
 
 # ## Downloading Image and Timing Files from NCEP
 
-# In[ ]:
+# In[14]:
 
 
 ####################################################
@@ -149,7 +149,7 @@ with urllib.request.urlopen(url_map_data) as response, open(file_map_data, 'wb')
 
 # ## Read Map Metadata File Internal Date Data
 
-# In[ ]:
+# In[6]:
 
 
 ####################################################
@@ -178,7 +178,7 @@ product_time  = pd.to_datetime(datetime.strptime(date_string, '%H00Z %a %b %d %Y
 
 # ## Get Server Metadata File Creation Time
 
-# In[ ]:
+# In[7]:
 
 
 ####################################################
@@ -201,7 +201,7 @@ metadata_file_date = pd.to_datetime(datetime.strptime(metadata_file_date, "%a, %
 
 # ## Get Server Map Image File Creation Time
 
-# In[ ]:
+# In[8]:
 
 
 ####################################################
@@ -224,7 +224,7 @@ map_file_date      = pd.to_datetime(datetime.strptime(map_file_date, "%a, %d %b 
 
 # ## Summary of Times
 
-# In[ ]:
+# In[9]:
 
 
 ####################################################
@@ -244,7 +244,7 @@ print(" Product Label Time: ",       product_time)
 ####################################################
 
 
-# In[ ]:
+# In[10]:
 
 
 ####################################################
@@ -290,7 +290,7 @@ with open(timings_file, 'a') as f:
 
 # ## Graphical Map Clock Information
 
-# In[ ]:
+# In[11]:
 
 
 ####################################################
@@ -366,7 +366,7 @@ print(time_label)
 
 # ## Generate Map Image
 
-# In[ ]:
+# In[12]:
 
 
 ####################################################
@@ -511,7 +511,7 @@ os.system("mv -fv ./temp_sfc_analysis/NWS_Sfc_Analysis.png ./graphics_files/")
 
 # ## Closeout
 
-# In[ ]:
+# In[13]:
 
 
 #########################################
