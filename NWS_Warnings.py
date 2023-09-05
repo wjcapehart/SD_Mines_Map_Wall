@@ -61,7 +61,7 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 
 proj_data_text = '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
 
-xls_file_name = "./graphics_files/NWS_Warnings.xlsx"
+csv_file_name = "./graphics_files/NWS_Warnings.csv"
 
 
 
@@ -196,7 +196,7 @@ print("replaced Nones Complete")
 warning_color_table = current_warnings[["event","color"]].drop_duplicates()
 
 
-current_warnings.drop(["geometry"], axis="columns").to_excel(xls_file_name)
+current_warnings.drop(["geometry"], axis="columns").to_csv(csv_file_name)
 
 print("done: ",i,"rows; ",len(warning_color_table),"event types")
 print()
