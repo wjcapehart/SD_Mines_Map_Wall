@@ -315,25 +315,46 @@ snow = ds_hrrr[         "Categorical_Snow_surface"][0,:,:]
 icep = ds_hrrr[  "Categorical_Ice_Pellets_surface"][0,:,:] 
 frzr = ds_hrrr["Categorical_Freezing_Rain_surface"][0,:,:] 
 
-water_equiv =  ds_hrrr["Precipitation_rate_surface"][0,:,:]
 
-#water_equiv.values[water_equiv.values == 0] = [np.nan]
-water_equiv.values = water_equiv.values * 0.0393701 * 3600.0
+#######################################
+#
+# Convert to Hourly Extrapolation in Inches.
+#
 
-print("inches per hour", np.nanmax(water_equiv.values))
-print("inches per hour", np.nanmin(water_equiv.values))
+water_equiv =  ds_hrrr["Precipitation_rate_surface"][0,:,:]* 0.0393701 * 3600.0 * 24.0
 
-max_rain =  0.50
-min_rain =  0.03
-water_equiv.values[water_equiv.values < min_rain] = [0] 
-water_equiv.values[water_equiv.values > max_rain] = [max_rain] 
-water_equiv.values = (water_equiv.values-0)/(max_rain-0)
+print("inches per hour", np.nanmin(water_equiv.values), np.nanmax(water_equiv.values))
 
-water_equiv.values[water_equiv.values < 0.25] = [0.25] 
+min_rain =  0.005
+max_rain =  1
+
+min_alpha = 0.25
+max_alpha = 1.00
+
+slope     = (    max_alpha      -      min_alpha    ) / (max_rain - min_rain)
+intercept = (min_alpha*max_rain - max_alpha*min_rain) / (max_rain - min_rain)
+
+print("slope = ", slope, "intercept = ",intercept)
 
 
-print("alphas",np.nanmax(water_equiv.values))
-print("alphas",np.nanmin(water_equiv.values))
+alphas = water_equiv.copy()
+
+alphas.values = intercept + slope * water_equiv.values 
+
+alphas.values[alphas.values > max_alpha] = [1]
+print("alphas", np.nanmin(alphas.values), np.nanmax(alphas.values))
+
+
+alphas.values[alphas.values < min_alpha] = [min_alpha/2]
+
+
+
+
+#
+######################################
+
+
+
 
 
 rain.values[rain.values == 0] = [np.nan] 
@@ -341,9 +362,56 @@ snow.values[snow.values == 0] = [np.nan]
 icep.values[icep.values == 0] = [np.nan]
 frzr.values[frzr.values == 0] = [np.nan]
 
+rain.values = rain.values * alphas.values
+snow.values = snow.values * alphas.values
+icep.values = icep.values * alphas.values
+frzr.values = frzr.values * alphas.values
 
+print("  shape rain: ", alphas.shape)
+print("shape alp[ha: ", rain.shape)
+
+
+
+
+
+
+
+# ######################################
+# #
+# fig = plt.figure()
+# ax1 = fig.add_subplot(2, 2, 1, projection=hrrr_crs)
+# ax2 = fig.add_subplot(2, 2, 2, projection=hrrr_crs)
+# ax3 = fig.add_subplot(2, 2, 3, projection=hrrr_crs)
+# ax4 = fig.add_subplot(2, 2, 4, projection=hrrr_crs)
+# 
+# rain.plot.imshow(cmap='Greens',  vmax=1, vmin=0, ax=ax1, transform = hrrr_crs, add_colorbar = False)
+# snow.plot.imshow(cmap='Blues',   vmax=1, vmin=0, ax=ax2, transform = hrrr_crs, add_colorbar = False)
+# icep.plot.imshow(cmap='Purples', vmax=1, vmin=0, ax=ax3, transform = hrrr_crs, add_colorbar = False)
+# frzr.plot.imshow(cmap='Reds',    vmax=1, vmin=0, ax=ax4, transform = hrrr_crs, add_colorbar = False)
+# ax1.add_feature(cfeature.COASTLINE.with_scale('50m'), 
+#                linewidth = 0.5,
+#                edgecolor = Mines_Blue)
+# ax2.add_feature(cfeature.COASTLINE.with_scale('50m'), 
+#                linewidth = 0.5,
+#                edgecolor = Mines_Blue)
+# ax3.add_feature(cfeature.COASTLINE.with_scale('50m'), 
+#                linewidth = 0.5,
+#                edgecolor = Mines_Blue)
+# ax4.add_feature(cfeature.COASTLINE.with_scale('50m'), 
+#                linewidth = 0.5,
+#                edgecolor = Mines_Blue)
+# plt.show()
+# #
+# ######################################
 
 # In[ ]:
+
+
+
+
+
+
+
 
 
 
@@ -418,22 +486,22 @@ def plot_bulletin(ax, data):
 
     
     complete_style = { 'HIGH': {'color': 'blue', 'fontsize': HLfontsize},
-                        'LOW': {'color': 'red', 'fontsize': HLfontsize},
+                        'LOW': {'color': 'darkred', 'fontsize': HLfontsize},
                        'WARM': {'linewidth': 1, 'path_effects': [WarmFront(size=size, spacing=spacing)]},
                        'COLD': {'linewidth': 1, 'path_effects': [ColdFront(size=size, spacing=spacing)]},
                       'OCFNT': {'linewidth': 1, 'path_effects': [OccludedFront(size=size, spacing=spacing)]},
                       'STNRY': {'linewidth': 1, 'path_effects': [StationaryFront(size=size, spacing=spacing)]},
                        'TROF': {'linewidth': 2, 'linestyle': 'dashed',
-                                'edgecolor': 'darkred'}}
+                                'edgecolor': 'brown'}}
 
     complete_stylet = {'HIGH': {'color': 'blue', 'fontsize': fontsize},
-                      'LOW': {'color': 'red', 'fontsize': fontsize},
+                      'LOW': {'color': 'darkred', 'fontsize': fontsize},
                       'WARM': {'linewidth': 1, 'path_effects': [WarmFront(size=size, spacing=spacing)]},
                       'COLD': {'linewidth': 1, 'path_effects': [ColdFront(size=size, spacing=1)]},
                       'OCFNT': {'linewidth': 1, 'path_effects': [OccludedFront(size=size, spacing=1)]},
                       'STNRY': {'linewidth': 1, 'path_effects': [StationaryFront(size=size, spacing=1)]},
                       'TROF': {'linewidth': 2, 'linestyle': 'dashed',
-                               'edgecolor': 'darkred'}}
+                               'edgecolor': 'brown'}}
 
 
     # Handle H/L points using MetPy's StationPlot class
@@ -565,19 +633,6 @@ plot_bulletin(ax, df)
 #
 ###############################
 
-###############################
-#
-# HRRR Weather
-#
-myalpha = water_equiv.values
-#myalpha = 1
-rain.plot.imshow(ax = ax, alpha = myalpha, cmap =  "Greens", add_colorbar = False, transform = hrrr_crs)
-snow.plot.imshow(ax = ax, alpha = myalpha, cmap =   "Blues", add_colorbar = False, transform = hrrr_crs)
-icep.plot.imshow(ax = ax, alpha = myalpha, cmap = "Purples", add_colorbar = False, transform = hrrr_crs)
-frzr.plot.imshow(ax = ax, alpha = myalpha, cmap =    "Reds", add_colorbar = False, transform = hrrr_crs)
-
-#
-###############################
 
 
 ###############################
@@ -598,6 +653,19 @@ ax.clabel(mslpplot,
 #
 ###############################
 
+###############################
+#
+# HRRR Weather
+#
+myalpha = 0.75
+
+rain.plot.imshow(cmap='Greens',  vmax=1, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
+snow.plot.imshow(cmap='Blues',   vmax=1, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
+icep.plot.imshow(cmap='Purples', vmax=1, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
+frzr.plot.imshow(cmap='Reds',    vmax=1, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
+
+#
+###############################
 
 
 plt.suptitle("NWS-WPC Surface Analysis",
@@ -612,7 +680,6 @@ ax.set_title(valid_time + "  (" + local_time+")",
 plt.savefig("./temp_sfc_analysis/NWS_Sfc_Analysis.png",
                         facecolor   = 'white', 
                         transparent =   False)
-
 
 plt.close()
 os.system("mv -fv ./temp_sfc_analysis/NWS_Sfc_Analysis.png ./graphics_files/")
