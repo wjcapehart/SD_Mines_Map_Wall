@@ -3,7 +3,7 @@
 
 # #### GFS 4-panel
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -83,7 +83,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color="#002554",
     The max/min symbol will be plotted on the current axes within the bounding frame
     (e.g., clip_on=True)
     """
-    from scipy.ndimage.filters import maximum_filter, minimum_filter
+    from scipy.ndimage import maximum_filter, minimum_filter
 	
     Mines_Blue = "#002554"
 
@@ -125,7 +125,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color="#002554",
 
 
 
-# In[ ]:
+# In[2]:
 
 
 ###################################################
@@ -175,7 +175,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[ ]:
+# In[3]:
 
 
 ####################################################
@@ -210,7 +210,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[ ]:
+# In[4]:
 
 
 ####################################################
@@ -267,7 +267,7 @@ print(gfs_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[ ]:
+# In[5]:
 
 
 ####################################################
@@ -345,7 +345,7 @@ alpha2d = alpha2d / alpha_factor
 
 # ## Fetch Data for Panel Displays
 
-# In[ ]:
+# In[6]:
 
 
 zz = np.array([ 10000.,  15000.,  20000.,  25000.,  30000.,  35000.,  40000.,  45000.,
@@ -355,7 +355,7 @@ zz = np.array([ 10000.,  15000.,  20000.,  25000.,  30000.,  35000.,  40000.,  4
 np.where(zz==700)
 
 
-# In[ ]:
+# In[7]:
 
 
 ####################################################
@@ -455,7 +455,12 @@ precip.values                = precip.values / 25.4
 precip.attrs['units']        = 'in'
 dt_precip                    = precip.copy()
 dt_precip.values[1:,:,:]     = precip.values[1:,:,:] - precip.values[0:-1,:,:]
+          
 dt_precip.attrs['long_name'] = "x-hrly Precipitation"
+
+dt_precip_ishow = dt_precip.copy()
+dt_precip_ishow = dt_precip_ishow.where(dt_precip_ishow >= 0.01)
+
 
 time_gfs_precip    = gfs_model[precip.dims[0]]
 time_gfs_vorticity = gfs_model[vorticity_500.dims[0]]
@@ -491,13 +496,17 @@ time_precip_dim    = precip.dims[0]
 times_precip_utc   = precip.coords[time_precip_dim].to_numpy()
 fpxx               = (times_precip_utc-start_time)/ np.timedelta64(1, 'h')
 
+deltat     = fxx.copy()
+deltat[0]  = fxx[0]
+deltat[1:] = fxx[1:] - fxx[0:-1]
+
 deltatp     = fpxx.copy()
 deltatp[0]  = fpxx[0]
 deltatp[1:] = fpxx[1:] - fpxx[0:-1]
-
-print("Prec Forecast Times", fpxx)
-print("Prec Forecast Delta", deltatp)
-
+print("500mb Forecast Times", fxx)
+print(" Prec Forecast Times", fpxx)
+print(" Prec Forecast Delta", deltatp)
+print("500mb Forecast Delta", deltat)
 
 
 rain_norm = mpl.colors.BoundaryNorm(boundaries = precip_levels_in, 
@@ -521,7 +530,7 @@ for i in range(len(times_utc)) :
     
     print("========================================================")
     
-    plot_label = "NOAA-NCEP Global Forecast Model"
+    plot_label = "NOAA-NCEP Global Forecast System Model"
 
     tz           = 'America/Denver'
     time_utc     = times_utc[i]
@@ -809,7 +818,7 @@ for i in range(len(times_utc)) :
     
     contourf_levels = precip_levels_in
 
-    contourf_plot = dt_precip[prec_i,:,:].plot.imshow( cmap          = precip_colormap,
+    contourf_plot = dt_precip_ishow[prec_i,:,:].plot.imshow( cmap          = precip_colormap,
                                                         alpha         = alpha2d,
                                                         ax            = ax4, 
                                                         interpolation = "bilinear",
@@ -859,8 +868,10 @@ for i in range(len(times_utc)) :
 
 
    
-    plt.suptitle("NOAA-NCEP Global Forecast System", x=0.5,y=1.0,
-                 fontsize = 25, 
+    plt.suptitle(plot_label, 
+                 x        =        0.5,
+                 y        =        1.0,
+                 fontsize =         25, 
                  color    = Mines_Blue)
             
  
@@ -1248,7 +1259,7 @@ with open(MAINDIR + "./processing_GFS_gif.sh", 'w') as f:
     print("#!/bin/bash",         file = f)
     print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR,       file = f) 
-    print("convert -delay 20 " + \
+    print("convert -delay 29 " + \
           png_file_root        + \
           "*.png "             + \
           gif_file_name,         file = f) 
@@ -1267,6 +1278,28 @@ print()
 
 #
 #################################################
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+print(deltat)
+
+import pandas as pd
+
+pd.DataFrame(data={"deltat":deltat})
 
 
 # In[ ]:

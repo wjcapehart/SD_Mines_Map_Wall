@@ -81,7 +81,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color="#002554",
     The max/min symbol will be plotted on the current axes within the bounding frame
     (e.g., clip_on=True)
     """
-    from scipy.ndimage.filters import maximum_filter, minimum_filter
+    from scipy.ndimage import maximum_filter, minimum_filter
 	
     plt.rcParams.update({'text.color'      : Mines_Blue,
                      'axes.labelcolor' : Mines_Blue,
@@ -463,10 +463,18 @@ deltatp     = fpxx.copy()
 deltatp[0]  = fpxx[0]
 deltatp[1:] = fpxx[1:] - fpxx[0:-1]
 
+precip_ishow = precip.copy()
+precip_ishow = precip_ishow.where(precip_ishow >= 0.01)
 
 print("Forecast Times", fxx)
 print("Prec Forecast Times", fpxx)
 print("Prec Forecast Delta", deltatp)
+
+
+# In[ ]:
+
+
+precip_ishow
 
 
 # In[ ]:
@@ -769,7 +777,7 @@ for i in range(len(times_utc)) :
     
     contourf_levels = precip_levels_in
 
-    contourf_plot = precip[prec_i,:,:].plot.imshow(cmap          = precip_colormap, 
+    contourf_plot = precip_ishow[prec_i,:,:].plot.imshow(cmap          = precip_colormap, 
                                                    alpha         = alpha2d,
                                                    ax            = ax4,  
                                                    interpolation = "bilinear",

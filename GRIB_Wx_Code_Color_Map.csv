@@ -1,0 +1,2200 @@
+Code,Text_Weather,Simple_Weather,Alpha,Color
+0,No weather,,0,white
+1,LoProb R,Rain,0.25,green
+2,LoProb R-,Rain,0.25,green
+3,LoProb R+,Rain,0.25,green
+4,LoProb RW,Rain,0.25,green
+5,LoProb RW-,Rain,0.25,green
+6,LoProb RW+,Rain,0.25,green
+7,LoProb L,Rain,0.25,green
+8,LoProb L-,Rain,0.25,green
+9,LoProb L+,Rain,0.25,green
+10,LoProb ZL,Ice,0.25,cyan
+11,LoProb ZL-,Ice,0.25,cyan
+12,LoProb ZL+,Ice,0.25,cyan
+13,LoProb ZR,Ice,0.25,cyan
+14,LoProb ZR-,Ice,0.25,cyan
+15,LoProb ZR+,Ice,0.25,cyan
+16,LoProb IP,Ice,0.25,cyan
+17,LoProb IP-,Ice,0.25,cyan
+18,LoProb IP+,Ice,0.25,cyan
+19,LoProb SW,Snow,0.25,dodgerblue
+20,LoProb SW-,Snow,0.25,dodgerblue
+21,LoProb SW+,Snow,0.25,dodgerblue
+22,LoProb S,Snow,0.25,dodgerblue
+23,LoProb S-,Snow,0.25,dodgerblue
+24,LoProb S+,Snow,0.25,dodgerblue
+25,LoProb T,Rain,0.25,green
+26,LoProb T-,Rain,0.25,green
+27,LoProb T+,Severe,0.25,red
+28,Fog,Fog,0.76,yellow
+29,Fog,Fog,0.76,yellow
+30,Dense Fog,Fog,0.76,yellow
+31,Smoke,Smoke,0.76,peru
+32,Blowing Snow,Blowing,0,white
+33,Blowing Dust,Blowing,0,white
+34,Freezing Fog,Fog,0.76,yellow
+35,Ice Fog,Fog,0.76,yellow
+36,Ice Crystals,,0,white
+37,Blowing Sand,Blowing,0,white
+38,Freezing Spray,,0,white
+39,Volcanic Ash,Smoke,0.76,lightgrey
+40,Water Spouts,,0,white
+41,Haze,Haze,0.76,khaki
+42,MISSING,MISSING,0,white
+43,MISSING,MISSING,0,white
+44,MISSING,MISSING,0,white
+45,MISSING,MISSING,0,white
+46,MISSING,MISSING,0,white
+47,MISSING,MISSING,0,white
+48,MISSING,MISSING,0,white
+49,MISSING,MISSING,0,white
+50,MISSING,MISSING,0,white
+51,MISSING,MISSING,0,white
+52,MISSING,MISSING,0,white
+53,MISSING,MISSING,0,white
+54,MISSING,MISSING,0,white
+55,MISSING,MISSING,0,white
+56,MISSING,MISSING,0,white
+57,MISSING,MISSING,0,white
+58,MISSING,MISSING,0,white
+59,MISSING,MISSING,0,white
+60,MISSING,MISSING,0,white
+61,MISSING,MISSING,0,white
+62,MISSING,MISSING,0,white
+63,MISSING,MISSING,0,white
+64,MISSING,MISSING,0,white
+65,MISSING,MISSING,0,white
+66,MISSING,MISSING,0,white
+67,MISSING,MISSING,0,white
+68,MISSING,MISSING,0,white
+69,MISSING,MISSING,0,white
+70,MISSING,MISSING,0,white
+71,MISSING,MISSING,0,white
+72,MISSING,MISSING,0,white
+73,MISSING,MISSING,0,white
+74,MISSING,MISSING,0,white
+75,MISSING,MISSING,0,white
+76,MISSING,MISSING,0,white
+77,MISSING,MISSING,0,white
+78,MISSING,MISSING,0,white
+79,MISSING,MISSING,0,white
+80,MISSING,MISSING,0,white
+81,MISSING,MISSING,0,white
+82,MISSING,MISSING,0,white
+83,MISSING,MISSING,0,white
+84,MISSING,MISSING,0,white
+85,MISSING,MISSING,0,white
+86,MISSING,MISSING,0,white
+87,MISSING,MISSING,0,white
+88,MISSING,MISSING,0,white
+89,MISSING,MISSING,0,white
+90,MISSING,MISSING,0,white
+91,MISSING,MISSING,0,white
+92,MISSING,MISSING,0,white
+93,MISSING,MISSING,0,white
+94,MISSING,MISSING,0,white
+95,MISSING,MISSING,0,white
+96,MISSING,MISSING,0,white
+97,MISSING,MISSING,0,white
+98,MISSING,MISSING,0,white
+99,MISSING,MISSING,0,white
+100,LoProb R/R,Rain,0.25,green
+101,LoProb R-/R,Rain,0.25,green
+102,LoProb R+/R,Rain,0.25,green
+103,LoProb R/R-,Rain,0.25,green
+104,LoProb R-/R-,Rain,0.25,green
+105,LoProb R+/R-,Rain,0.25,green
+106,LoProb R/R+,Rain,0.25,green
+107,LoProb R-/R+,Rain,0.25,green
+108,LoProb R+/R+,Rain,0.25,green
+109,MISSING,MISSING,0,white
+110,LoProb R/RW,Rain,0.25,green
+111,LoProb R-/RW,Rain,0.25,green
+112,LoProb R+/RW,Rain,0.25,green
+113,LoProb R/RW-,Rain,0.25,green
+114,LoProb R-/RW-,Rain,0.25,green
+115,LoProb R+/RW-,Rain,0.25,green
+116,LoProb R/RW+,Rain,0.25,green
+117,LoProb R-/RW+,Rain,0.25,green
+118,LoProb R+/RW+,Rain,0.25,green
+119,MISSING,MISSING,0,white
+120,LoProb R/L,Rain,0.25,green
+121,LoProb R-/L,Rain,0.25,green
+122,LoProb R+/L,Rain,0.25,green
+123,LoProb R/L-,Rain,0.25,green
+124,LoProb R-/L-,Rain,0.25,green
+125,LoProb R+/L-,Rain,0.25,green
+126,LoProb R/L+,Rain,0.25,green
+127,LoProb R-/L+,Rain,0.25,green
+128,LoProb R+/L+,Rain,0.25,green
+129,MISSING,MISSING,0,white
+130,LoProb R/ZL,Ice,0.25,cyan
+131,LoProb R-/ZL,Ice,0.25,cyan
+132,LoProb R+/ZL,Ice,0.25,cyan
+133,LoProb R/ZL-,Ice,0.25,cyan
+134,LoProb R-/ZL-,Ice,0.25,cyan
+135,LoProb R+/ZL-,Ice,0.25,cyan
+136,LoProb R/ZL+,Ice,0.25,cyan
+137,LoProb R-/ZL+,Ice,0.25,cyan
+138,LoProb R+/ZL+,Ice,0.25,cyan
+139,MISSING,MISSING,0,white
+140,LoProb R/ZR,Ice,0.25,cyan
+141,LoProb R-/ZR,Ice,0.25,cyan
+142,LoProb R+/ZR,Ice,0.25,cyan
+143,LoProb R/ZR-,Ice,0.25,cyan
+144,LoProb R-/ZR-,Ice,0.25,cyan
+145,LoProb R+/ZR-,Ice,0.25,cyan
+146,LoProb R/ZR+,Ice,0.25,cyan
+147,LoProb R-/ZR+,Ice,0.25,cyan
+148,LoProb R+/ZR+,Ice,0.25,cyan
+149,MISSING,MISSING,0,white
+150,LoProb R/IP,Ice,0.25,cyan
+151,LoProb R-/IP,Ice,0.25,cyan
+152,LoProb R+/IP,Ice,0.25,cyan
+153,LoProb R/IP-,Ice,0.25,cyan
+154,LoProb R-/IP-,Ice,0.25,cyan
+155,LoProb R+/IP-,Ice,0.25,cyan
+156,LoProb R/IP+,Ice,0.25,cyan
+157,LoProb R-/IP+,Ice,0.25,cyan
+158,LoProb R+/IP+,Ice,0.25,cyan
+159,MISSING,MISSING,0,white
+160,LoProb R/SW,Mix,0.25,magenta
+161,LoProb R-/SW,Mix,0.25,magenta
+162,LoProb R+/SW,Mix,0.25,magenta
+163,LoProb R/SW-,Mix,0.25,magenta
+164,LoProb R-/SW-,Mix,0.25,magenta
+165,LoProb R+/SW-,Mix,0.25,magenta
+166,LoProb R/SW+,Mix,0.25,magenta
+167,LoProb R-/SW+,Mix,0.25,magenta
+168,LoProb R+/SW+,Mix,0.25,magenta
+169,MISSING,MISSING,0,white
+170,LoProb R/S,Mix,0.25,magenta
+171,LoProb R-/S,Mix,0.25,magenta
+172,LoProb R+/S,Mix,0.25,magenta
+173,LoProb R/S-,Mix,0.25,magenta
+174,LoProb R-/S-,Mix,0.25,magenta
+175,LoProb R+/S-,Mix,0.25,magenta
+176,LoProb R/S+,Mix,0.25,magenta
+177,LoProb R-/S+,Mix,0.25,magenta
+178,LoProb R+/S+,Mix,0.25,magenta
+179,MISSING,MISSING,0,white
+180,LoProb R/T,Rain,0.25,green
+181,LoProb R-/T,Rain,0.25,green
+182,LoProb R+/T,Rain,0.25,green
+183,LoProb R/T-,Rain,0.25,green
+184,LoProb R-/T-,Rain,0.25,green
+185,LoProb R+/T-,Rain,0.25,green
+186,LoProb R/T+,Severe,0.25,red
+187,LoProb R-/T+,Severe,0.25,red
+188,LoProb R+/T+,Severe,0.25,red
+189,MISSING,MISSING,0,white
+190,LoProb R/F,Rain,0.25,green
+191,LoProb R-/F,Rain,0.25,green
+192,LoProb R+/F,Rain,0.25,green
+193,LoProb R/F-,Rain,0.25,green
+194,LoProb R-/F-,Rain,0.25,green
+195,LoProb R+/F-,Rain,0.25,green
+196,LoProb R/F+,Rain,0.25,green
+197,LoProb R-/F+,Rain,0.25,green
+198,LoProb R+/F+,Rain,0.25,green
+199,MISSING,MISSING,0,white
+200,LoProb RW/R,Rain,0.25,green
+201,LoProb RW-/R,Rain,0.25,green
+202,LoProb RW+/R,Rain,0.25,green
+203,LoProb RW/R-,Rain,0.25,green
+204,LoProb RW-/R-,Rain,0.25,green
+205,LoProb RW+/R-,Rain,0.25,green
+206,LoProb RW/R+,Rain,0.25,green
+207,LoProb RW-/R+,Rain,0.25,green
+208,LoProb RW+/R+,Rain,0.25,green
+209,MISSING,MISSING,0,white
+210,LoProb RW/RW,Rain,0.25,green
+211,LoProb RW-/RW,Rain,0.25,green
+212,LoProb RW+/RW,Rain,0.25,green
+213,LoProb RW/RW-,Rain,0.25,green
+214,LoProb RW-/RW-,Rain,0.25,green
+215,LoProb RW+/RW-,Rain,0.25,green
+216,LoProb RW/RW+,Rain,0.25,green
+217,LoProb RW-/RW+,Rain,0.25,green
+218,LoProb RW+/RW+,Rain,0.25,green
+219,MISSING,MISSING,0,white
+220,LoProb RW/L,Rain,0.25,green
+221,LoProb RW-/L,Rain,0.25,green
+222,LoProb RW+/L,Rain,0.25,green
+223,LoProb RW/L-,Rain,0.25,green
+224,LoProb RW-/L-,Rain,0.25,green
+225,LoProb RW+/L-,Rain,0.25,green
+226,LoProb RW/L+,Rain,0.25,green
+227,LoProb RW-/L+,Rain,0.25,green
+228,LoProb RW+/L+,Rain,0.25,green
+229,MISSING,MISSING,0,white
+230,LoProb RW/ZL,Ice,0.25,cyan
+231,LoProb RW-/ZL,Ice,0.25,cyan
+232,LoProb RW+/ZL,Ice,0.25,cyan
+233,LoProb RW/ZL-,Ice,0.25,cyan
+234,LoProb RW-/ZL-,Ice,0.25,cyan
+235,LoProb RW+/ZL-,Ice,0.25,cyan
+236,LoProb RW/ZL+,Ice,0.25,cyan
+237,LoProb RW-/ZL+,Ice,0.25,cyan
+238,LoProb RW+/ZL+,Ice,0.25,cyan
+239,MISSING,MISSING,0,white
+240,LoProb RW/ZR,Ice,0.25,cyan
+241,LoProb RW-/ZR,Ice,0.25,cyan
+242,LoProb RW+/ZR,Ice,0.25,cyan
+243,LoProb RW/ZR-,Ice,0.25,cyan
+244,LoProb RW-/ZR-,Ice,0.25,cyan
+245,LoProb RW+/ZR-,Ice,0.25,cyan
+246,LoProb RW/ZR+,Ice,0.25,cyan
+247,LoProb RW-/ZR+,Ice,0.25,cyan
+248,LoProb RW+/ZR+,Ice,0.25,cyan
+249,MISSING,MISSING,0,white
+250,LoProb RW/IP,Ice,0.25,cyan
+251,LoProb RW-/IP,Ice,0.25,cyan
+252,LoProb RW+/IP,Ice,0.25,cyan
+253,LoProb RW/IP-,Ice,0.25,cyan
+254,LoProb RW-/IP-,Ice,0.25,cyan
+255,LoProb RW+/IP-,Ice,0.25,cyan
+256,LoProb RW/IP+,Ice,0.25,cyan
+257,LoProb RW-/IP+,Ice,0.25,cyan
+258,LoProb RW+/IP+,Ice,0.25,cyan
+259,MISSING,MISSING,0,white
+260,LoProb RW/SW,Mix,0.25,magenta
+261,LoProb RW-/SW,Mix,0.25,magenta
+262,LoProb RW+/SW,Mix,0.25,magenta
+263,LoProb RW/SW-,Mix,0.25,magenta
+264,LoProb RW-/SW-,Mix,0.25,magenta
+265,LoProb RW+/SW-,Mix,0.25,magenta
+266,LoProb RW/SW+,Mix,0.25,magenta
+267,LoProb RW-/SW+,Mix,0.25,magenta
+268,LoProb RW+/SW+,Mix,0.25,magenta
+269,MISSING,MISSING,0,white
+270,LoProb RW/S,Mix,0.25,magenta
+271,LoProb RW-/S,Mix,0.25,magenta
+272,LoProb RW+/S,Mix,0.25,magenta
+273,LoProb RW/S-,Mix,0.25,magenta
+274,LoProb RW-/S-,Mix,0.25,magenta
+275,LoProb RW+/S-,Mix,0.25,magenta
+276,LoProb RW/S+,Mix,0.25,magenta
+277,LoProb RW-/S+,Mix,0.25,magenta
+278,LoProb RW+/S+,Mix,0.25,magenta
+279,MISSING,MISSING,0,white
+280,LoProb RW/T,Rain,0.25,green
+281,LoProb RW-/T,Rain,0.25,green
+282,LoProb RW+/T,Rain,0.25,green
+283,LoProb RW/T-,Rain,0.25,green
+284,LoProb RW-/T-,Rain,0.25,green
+285,LoProb RW+/T-,Rain,0.25,green
+286,LoProb RW/T+,Severe,0.25,red
+287,LoProb RW-/T+,Severe,0.25,red
+288,LoProb RW+/T+,Severe,0.25,red
+289,MISSING,MISSING,0,white
+290,LoProb RW/F,Rain,0.25,green
+291,LoProb RW-/F,Rain,0.25,green
+292,LoProb RW+/F,Rain,0.25,green
+293,LoProb RW/F-,Rain,0.25,green
+294,LoProb RW-/F-,Rain,0.25,green
+295,LoProb RW+/F-,Rain,0.25,green
+296,LoProb RW/F+,Rain,0.25,green
+297,LoProb RW-/F+,Rain,0.25,green
+298,LoProb RW+/F+,Rain,0.25,green
+299,MISSING,MISSING,0,white
+300,LoProb L/R,Rain,0.25,green
+301,LoProb L-/R,Rain,0.25,green
+302,LoProb L+/R,Rain,0.25,green
+303,LoProb L/R-,Rain,0.25,green
+304,LoProb L-/R-,Rain,0.25,green
+305,LoProb L+/R-,Rain,0.25,green
+306,LoProb L/R+,Rain,0.25,green
+307,LoProb L-/R+,Rain,0.25,green
+308,LoProb L+/R+,Rain,0.25,green
+309,MISSING,MISSING,0,white
+310,LoProb L/RW,Rain,0.25,green
+311,LoProb L-/RW,Rain,0.25,green
+312,LoProb L+/RW,Rain,0.25,green
+313,LoProb L/RW-,Rain,0.25,green
+314,LoProb L-/RW-,Rain,0.25,green
+315,LoProb L+/RW-,Rain,0.25,green
+316,LoProb L/RW+,Rain,0.25,green
+317,LoProb L-/RW+,Rain,0.25,green
+318,LoProb L+/RW+,Rain,0.25,green
+319,MISSING,MISSING,0,white
+320,LoProb L/L,Rain,0.25,green
+321,LoProb L-/L,Rain,0.25,green
+322,LoProb L+/L,Rain,0.25,green
+323,LoProb L/L-,Rain,0.25,green
+324,LoProb L-/L-,Rain,0.25,green
+325,LoProb L+/L-,Rain,0.25,green
+326,LoProb L/L+,Rain,0.25,green
+327,LoProb L-/L+,Rain,0.25,green
+328,LoProb L+/L+,Rain,0.25,green
+329,MISSING,MISSING,0,white
+330,LoProb L/ZL,Ice,0.25,cyan
+331,LoProb L-/ZL,Ice,0.25,cyan
+332,LoProb L+/ZL,Ice,0.25,cyan
+333,LoProb L/ZL-,Ice,0.25,cyan
+334,LoProb L-/ZL-,Ice,0.25,cyan
+335,LoProb L+/ZL-,Ice,0.25,cyan
+336,LoProb L/ZL+,Ice,0.25,cyan
+337,LoProb L-/ZL+,Ice,0.25,cyan
+338,LoProb L+/ZL+,Ice,0.25,cyan
+339,MISSING,MISSING,0,white
+340,LoProb L/ZR,Ice,0.25,cyan
+341,LoProb L-/ZR,Ice,0.25,cyan
+342,LoProb L+/ZR,Ice,0.25,cyan
+343,LoProb L/ZR-,Ice,0.25,cyan
+344,LoProb L-/ZR-,Ice,0.25,cyan
+345,LoProb L+/ZR-,Ice,0.25,cyan
+346,LoProb L/ZR+,Ice,0.25,cyan
+347,LoProb L-/ZR+,Ice,0.25,cyan
+348,LoProb L+/ZR+,Ice,0.25,cyan
+349,MISSING,MISSING,0,white
+350,LoProb L/IP,Ice,0.25,cyan
+351,LoProb L-/IP,Ice,0.25,cyan
+352,LoProb L+/IP,Ice,0.25,cyan
+353,LoProb L/IP-,Ice,0.25,cyan
+354,LoProb L-/IP-,Ice,0.25,cyan
+355,LoProb L+/IP-,Ice,0.25,cyan
+356,LoProb L/IP+,Ice,0.25,cyan
+357,LoProb L-/IP+,Ice,0.25,cyan
+358,LoProb L+/IP+,Ice,0.25,cyan
+359,MISSING,MISSING,0,white
+360,LoProb L/SW,Mix,0.25,magenta
+361,LoProb L-/SW,Mix,0.25,magenta
+362,LoProb L+/SW,Mix,0.25,magenta
+363,LoProb L/SW-,Mix,0.25,magenta
+364,LoProb L-/SW-,Mix,0.25,magenta
+365,LoProb L+/SW-,Mix,0.25,magenta
+366,LoProb L/SW+,Mix,0.25,magenta
+367,LoProb L-/SW+,Mix,0.25,magenta
+368,LoProb L+/SW+,Mix,0.25,magenta
+369,MISSING,MISSING,0,white
+370,LoProb L/S,Mix,0.25,magenta
+371,LoProb L-/S,Mix,0.25,magenta
+372,LoProb L+/S,Mix,0.25,magenta
+373,LoProb L/S-,Mix,0.25,magenta
+374,LoProb L-/S-,Mix,0.25,magenta
+375,LoProb L+/S-,Mix,0.25,magenta
+376,LoProb L/S+,Mix,0.25,magenta
+377,LoProb L-/S+,Mix,0.25,magenta
+378,LoProb L+/S+,Mix,0.25,magenta
+379,MISSING,MISSING,0,white
+380,LoProb L/T,Rain,0.25,green
+381,LoProb L-/T,Rain,0.25,green
+382,LoProb L+/T,Rain,0.25,green
+383,LoProb L/T-,Rain,0.25,green
+384,LoProb L-/T-,Rain,0.25,green
+385,LoProb L+/T-,Rain,0.25,green
+386,LoProb L/T+,Severe,0.25,red
+387,LoProb L-/T+,Severe,0.25,red
+388,LoProb L+/T+,Severe,0.25,red
+389,MISSING,MISSING,0,white
+390,LoProb L/F,Rain,0.25,green
+391,LoProb L-/F,Rain,0.25,green
+392,LoProb L+/F,Rain,0.25,green
+393,LoProb L/F-,Rain,0.25,green
+394,LoProb L-/F-,Rain,0.25,green
+395,LoProb L+/F-,Rain,0.25,green
+396,LoProb L/F+,Rain,0.25,green
+397,LoProb L-/F+,Rain,0.25,green
+398,LoProb L+/F+,Rain,0.25,green
+399,MISSING,MISSING,0,white
+400,LoProb ZL/R,Ice,0.25,cyan
+401,LoProb ZL-/R,Ice,0.25,cyan
+402,LoProb ZL+/R,Ice,0.25,cyan
+403,LoProb ZL/R-,Ice,0.25,cyan
+404,LoProb ZL-/R-,Ice,0.25,cyan
+405,LoProb ZL+/R-,Ice,0.25,cyan
+406,LoProb ZL/R+,Ice,0.25,cyan
+407,LoProb ZL-/R+,Ice,0.25,cyan
+408,LoProb ZL+/R+,Ice,0.25,cyan
+409,MISSING,MISSING,0,white
+410,LoProb ZL/RW,Ice,0.25,cyan
+411,LoProb ZL-/RW,Ice,0.25,cyan
+412,LoProb ZL+/RW,Ice,0.25,cyan
+413,LoProb ZL/RW-,Ice,0.25,cyan
+414,LoProb ZL-/RW-,Ice,0.25,cyan
+415,LoProb ZL+/RW-,Ice,0.25,cyan
+416,LoProb ZL/RW+,Ice,0.25,cyan
+417,LoProb ZL-/RW+,Ice,0.25,cyan
+418,LoProb ZL+/RW+,Ice,0.25,cyan
+419,MISSING,MISSING,0,white
+420,LoProb ZL/L,Ice,0.25,cyan
+421,LoProb ZL-/L,Ice,0.25,cyan
+422,LoProb ZL+/L,Ice,0.25,cyan
+423,LoProb ZL/L-,Ice,0.25,cyan
+424,LoProb ZL-/L-,Ice,0.25,cyan
+425,LoProb ZL+/L-,Ice,0.25,cyan
+426,LoProb ZL/L+,Ice,0.25,cyan
+427,LoProb ZL-/L+,Ice,0.25,cyan
+428,LoProb ZL+/L+,Ice,0.25,cyan
+429,MISSING,MISSING,0,white
+430,LoProb ZL/ZL,Ice,0.25,cyan
+431,LoProb ZL-/ZL,Ice,0.25,cyan
+432,LoProb ZL+/ZL,Ice,0.25,cyan
+433,LoProb ZL/ZL-,Ice,0.25,cyan
+434,LoProb ZL-/ZL-,Ice,0.25,cyan
+435,LoProb ZL+/ZL-,Ice,0.25,cyan
+436,LoProb ZL/ZL+,Ice,0.25,cyan
+437,LoProb ZL-/ZL+,Ice,0.25,cyan
+438,LoProb ZL+/ZL+,Ice,0.25,cyan
+439,MISSING,MISSING,0,white
+440,LoProb ZL/ZR,Ice,0.25,cyan
+441,LoProb ZL-/ZR,Ice,0.25,cyan
+442,LoProb ZL+/ZR,Ice,0.25,cyan
+443,LoProb ZL/ZR-,Ice,0.25,cyan
+444,LoProb ZL-/ZR-,Ice,0.25,cyan
+445,LoProb ZL+/ZR-,Ice,0.25,cyan
+446,LoProb ZL/ZR+,Ice,0.25,cyan
+447,LoProb ZL-/ZR+,Ice,0.25,cyan
+448,LoProb ZL+/ZR+,Ice,0.25,cyan
+449,MISSING,MISSING,0,white
+450,LoProb ZL/IP,Ice,0.25,cyan
+451,LoProb ZL-/IP,Ice,0.25,cyan
+452,LoProb ZL+/IP,Ice,0.25,cyan
+453,LoProb ZL/IP-,Ice,0.25,cyan
+454,LoProb ZL-/IP-,Ice,0.25,cyan
+455,LoProb ZL+/IP-,Ice,0.25,cyan
+456,LoProb ZL/IP+,Ice,0.25,cyan
+457,LoProb ZL-/IP+,Ice,0.25,cyan
+458,LoProb ZL+/IP+,Ice,0.25,cyan
+459,MISSING,MISSING,0,white
+460,LoProb ZL/SW,Ice,0.25,cyan
+461,LoProb ZL-/SW,Ice,0.25,cyan
+462,LoProb ZL+/SW,Ice,0.25,cyan
+463,LoProb ZL/SW-,Ice,0.25,cyan
+464,LoProb ZL-/SW-,Ice,0.25,cyan
+465,LoProb ZL+/SW-,Ice,0.25,cyan
+466,LoProb ZL/SW+,Ice,0.25,cyan
+467,LoProb ZL-/SW+,Ice,0.25,cyan
+468,LoProb ZL+/SW+,Ice,0.25,cyan
+469,MISSING,MISSING,0,white
+470,LoProb ZL/S,Ice,0.25,cyan
+471,LoProb ZL-/S,Ice,0.25,cyan
+472,LoProb ZL+/S,Ice,0.25,cyan
+473,LoProb ZL/S-,Ice,0.25,cyan
+474,LoProb ZL-/S-,Ice,0.25,cyan
+475,LoProb ZL+/S-,Ice,0.25,cyan
+476,LoProb ZL/S+,Ice,0.25,cyan
+477,LoProb ZL-/S+,Ice,0.25,cyan
+478,LoProb ZL+/S+,Ice,0.25,cyan
+479,MISSING,MISSING,0,white
+480,LoProb ZL/T,Ice,0.25,cyan
+481,LoProb ZL-/T,Ice,0.25,cyan
+482,LoProb ZL+/T,Ice,0.25,cyan
+483,LoProb ZL/T-,Ice,0.25,cyan
+484,LoProb ZL-/T-,Ice,0.25,cyan
+485,LoProb ZL+/T-,Ice,0.25,cyan
+486,LoProb ZL/T+,Severe,0.25,red
+487,LoProb ZL-/T+,Severe,0.25,red
+488,LoProb ZL+/T+,Severe,0.25,red
+489,MISSING,MISSING,0,white
+490,LoProb ZL/F,Ice,0.25,cyan
+491,LoProb ZL-/F,Ice,0.25,cyan
+492,LoProb ZL+/F,Ice,0.25,cyan
+493,LoProb ZL/F-,Ice,0.25,cyan
+494,LoProb ZL-/F-,Ice,0.25,cyan
+495,LoProb ZL+/F-,Ice,0.25,cyan
+496,LoProb ZL/F+,Ice,0.25,cyan
+497,LoProb ZL-/F+,Ice,0.25,cyan
+498,LoProb ZL+/F+,Ice,0.25,cyan
+499,MISSING,MISSING,0,white
+500,LoProb ZR/R,Ice,0.25,cyan
+501,LoProb ZR-/R,Ice,0.25,cyan
+502,LoProb ZR+/R,Ice,0.25,cyan
+503,LoProb ZR/R-,Ice,0.25,cyan
+504,LoProb ZR-/R-,Ice,0.25,cyan
+505,LoProb ZR+/R-,Ice,0.25,cyan
+506,LoProb ZR/R+,Ice,0.25,cyan
+507,LoProb ZR-/R+,Ice,0.25,cyan
+508,LoProb ZR+/R+,Ice,0.25,cyan
+509,MISSING,MISSING,0,white
+510,LoProb ZR/RW,Ice,0.25,cyan
+511,LoProb ZR-/RW,Ice,0.25,cyan
+512,LoProb ZR+/RW,Ice,0.25,cyan
+513,LoProb ZR/RW-,Ice,0.25,cyan
+514,LoProb ZR-/RW-,Ice,0.25,cyan
+515,LoProb ZR+/RW-,Ice,0.25,cyan
+516,LoProb ZR/RW+,Ice,0.25,cyan
+517,LoProb ZR-/RW+,Ice,0.25,cyan
+518,LoProb ZR+/RW+,Ice,0.25,cyan
+519,MISSING,MISSING,0,white
+520,LoProb ZR/L,Ice,0.25,cyan
+521,LoProb ZR-/L,Ice,0.25,cyan
+522,LoProb ZR+/L,Ice,0.25,cyan
+523,LoProb ZR/L-,Ice,0.25,cyan
+524,LoProb ZR-/L-,Ice,0.25,cyan
+525,LoProb ZR+/L-,Ice,0.25,cyan
+526,LoProb ZR/L+,Ice,0.25,cyan
+527,LoProb ZR-/L+,Ice,0.25,cyan
+528,LoProb ZR+/L+,Ice,0.25,cyan
+529,MISSING,MISSING,0,white
+530,LoProb ZR/ZL,Ice,0.25,cyan
+531,LoProb ZR-/ZL,Ice,0.25,cyan
+532,LoProb ZR+/ZL,Ice,0.25,cyan
+533,LoProb ZR/ZL-,Ice,0.25,cyan
+534,LoProb ZR-/ZL-,Ice,0.25,cyan
+535,LoProb ZR+/ZL-,Ice,0.25,cyan
+536,LoProb ZR/ZL+,Ice,0.25,cyan
+537,LoProb ZR-/ZL+,Ice,0.25,cyan
+538,LoProb ZR+/ZL+,Ice,0.25,cyan
+539,MISSING,MISSING,0,white
+540,LoProb ZR/ZR,Ice,0.25,cyan
+541,LoProb ZR-/ZR,Ice,0.25,cyan
+542,LoProb ZR+/ZR,Ice,0.25,cyan
+543,LoProb ZR/ZR-,Ice,0.25,cyan
+544,LoProb ZR-/ZR-,Ice,0.25,cyan
+545,LoProb ZR+/ZR-,Ice,0.25,cyan
+546,LoProb ZR/ZR+,Ice,0.25,cyan
+547,LoProb ZR-/ZR+,Ice,0.25,cyan
+548,LoProb ZR+/ZR+,Ice,0.25,cyan
+549,MISSING,MISSING,0,white
+550,LoProb ZR/IP,Ice,0.25,cyan
+551,LoProb ZR-/IP,Ice,0.25,cyan
+552,LoProb ZR+/IP,Ice,0.25,cyan
+553,LoProb ZR/IP-,Ice,0.25,cyan
+554,LoProb ZR-/IP-,Ice,0.25,cyan
+555,LoProb ZR+/IP-,Ice,0.25,cyan
+556,LoProb ZR/IP+,Ice,0.25,cyan
+557,LoProb ZR-/IP+,Ice,0.25,cyan
+558,LoProb ZR+/IP+,Ice,0.25,cyan
+559,MISSING,MISSING,0,white
+560,LoProb ZR/SW,Ice,0.25,cyan
+561,LoProb ZR-/SW,Ice,0.25,cyan
+562,LoProb ZR+/SW,Ice,0.25,cyan
+563,LoProb ZR/SW-,Ice,0.25,cyan
+564,LoProb ZR-/SW-,Ice,0.25,cyan
+565,LoProb ZR+/SW-,Ice,0.25,cyan
+566,LoProb ZR/SW+,Ice,0.25,cyan
+567,LoProb ZR-/SW+,Ice,0.25,cyan
+568,LoProb ZR+/SW+,Ice,0.25,cyan
+569,MISSING,MISSING,0,white
+570,LoProb ZR/S,Ice,0.25,cyan
+571,LoProb ZR-/S,Ice,0.25,cyan
+572,LoProb ZR+/S,Ice,0.25,cyan
+573,LoProb ZR/S-,Ice,0.25,cyan
+574,LoProb ZR-/S-,Ice,0.25,cyan
+575,LoProb ZR+/S-,Ice,0.25,cyan
+576,LoProb ZR/S+,Ice,0.25,cyan
+577,LoProb ZR-/S+,Ice,0.25,cyan
+578,LoProb ZR+/S+,Ice,0.25,cyan
+579,MISSING,MISSING,0,white
+580,LoProb ZR/T,Ice,0.25,cyan
+581,LoProb ZR-/T,Ice,0.25,cyan
+582,LoProb ZR+/T,Ice,0.25,cyan
+583,LoProb ZR/T-,Ice,0.25,cyan
+584,LoProb ZR-/T-,Ice,0.25,cyan
+585,LoProb ZR+/T-,Ice,0.25,cyan
+586,LoProb ZR/T+,Severe,0.25,red
+587,LoProb ZR-/T+,Severe,0.25,red
+588,LoProb ZR+/T+,Severe,0.25,red
+589,MISSING,MISSING,0,white
+590,LoProb ZR/F,Ice,0.25,cyan
+591,LoProb ZR-/F,Ice,0.25,cyan
+592,LoProb ZR+/F,Ice,0.25,cyan
+593,LoProb ZR/F-,Ice,0.25,cyan
+594,LoProb ZR-/F-,Ice,0.25,cyan
+595,LoProb ZR+/F-,Ice,0.25,cyan
+596,LoProb ZR/F+,Ice,0.25,cyan
+597,LoProb ZR-/F+,Ice,0.25,cyan
+598,LoProb ZR+/F+,Ice,0.25,cyan
+599,MISSING,MISSING,0,white
+600,LoProb IP/R,Ice,0.25,cyan
+601,LoProb IP-/R,Ice,0.25,cyan
+602,LoProb IP+/R,Ice,0.25,cyan
+603,LoProb IP/R-,Ice,0.25,cyan
+604,LoProb IP-/R-,Ice,0.25,cyan
+605,LoProb IP+/R-,Ice,0.25,cyan
+606,LoProb IP/R+,Ice,0.25,cyan
+607,LoProb IP-/R+,Ice,0.25,cyan
+608,LoProb IP+/R+,Ice,0.25,cyan
+609,MISSING,MISSING,0,white
+610,LoProb IP/RW,Ice,0.25,cyan
+611,LoProb IP-/RW,Ice,0.25,cyan
+612,LoProb IP+/RW,Ice,0.25,cyan
+613,LoProb IP/RW-,Ice,0.25,cyan
+614,LoProb IP-/RW-,Ice,0.25,cyan
+615,LoProb IP+/RW-,Ice,0.25,cyan
+616,LoProb IP/RW+,Ice,0.25,cyan
+617,LoProb IP-/RW+,Ice,0.25,cyan
+618,LoProb IP+/RW+,Ice,0.25,cyan
+619,MISSING,MISSING,0,white
+620,LoProb IP/L,Ice,0.25,cyan
+621,LoProb IP-/L,Ice,0.25,cyan
+622,LoProb IP+/L,Ice,0.25,cyan
+623,LoProb IP/L-,Ice,0.25,cyan
+624,LoProb IP-/L-,Ice,0.25,cyan
+625,LoProb IP+/L-,Ice,0.25,cyan
+626,LoProb IP/L+,Ice,0.25,cyan
+627,LoProb IP-/L+,Ice,0.25,cyan
+628,LoProb IP+/L+,Ice,0.25,cyan
+629,MISSING,MISSING,0,white
+630,LoProb IP/ZL,Ice,0.25,cyan
+631,LoProb IP-/ZL,Ice,0.25,cyan
+632,LoProb IP+/ZL,Ice,0.25,cyan
+633,LoProb IP/ZL-,Ice,0.25,cyan
+634,LoProb IP-/ZL-,Ice,0.25,cyan
+635,LoProb IP+/ZL-,Ice,0.25,cyan
+636,LoProb IP/ZL+,Ice,0.25,cyan
+637,LoProb IP-/ZL+,Ice,0.25,cyan
+638,LoProb IP+/ZL+,Ice,0.25,cyan
+639,MISSING,MISSING,0,white
+640,LoProb IP/ZR,Ice,0.25,cyan
+641,LoProb IP-/ZR,Ice,0.25,cyan
+642,LoProb IP+/ZR,Ice,0.25,cyan
+643,LoProb IP/ZR-,Ice,0.25,cyan
+644,LoProb IP-/ZR-,Ice,0.25,cyan
+645,LoProb IP+/ZR-,Ice,0.25,cyan
+646,LoProb IP/ZR+,Ice,0.25,cyan
+647,LoProb IP-/ZR+,Ice,0.25,cyan
+648,LoProb IP+/ZR+,Ice,0.25,cyan
+649,MISSING,MISSING,0,white
+650,LoProb IP/IP,Ice,0.25,cyan
+651,LoProb IP-/IP,Ice,0.25,cyan
+652,LoProb IP+/IP,Ice,0.25,cyan
+653,LoProb IP/IP-,Ice,0.25,cyan
+654,LoProb IP-/IP-,Ice,0.25,cyan
+655,LoProb IP+/IP-,Ice,0.25,cyan
+656,LoProb IP/IP+,Ice,0.25,cyan
+657,LoProb IP-/IP+,Ice,0.25,cyan
+658,LoProb IP+/IP+,Ice,0.25,cyan
+659,MISSING,MISSING,0,white
+660,LoProb IP/SW,Ice,0.25,cyan
+661,LoProb IP-/SW,Ice,0.25,cyan
+662,LoProb IP+/SW,Ice,0.25,cyan
+663,LoProb IP/SW-,Ice,0.25,cyan
+664,LoProb IP-/SW-,Ice,0.25,cyan
+665,LoProb IP+/SW-,Ice,0.25,cyan
+666,LoProb IP/SW+,Ice,0.25,cyan
+667,LoProb IP-/SW+,Ice,0.25,cyan
+668,LoProb IP+/SW+,Ice,0.25,cyan
+669,MISSING,MISSING,0,white
+670,LoProb IP/S,Ice,0.25,cyan
+671,LoProb IP-/S,Ice,0.25,cyan
+672,LoProb IP+/S,Ice,0.25,cyan
+673,LoProb IP/S-,Ice,0.25,cyan
+674,LoProb IP-/S-,Ice,0.25,cyan
+675,LoProb IP+/S-,Ice,0.25,cyan
+676,LoProb IP/S+,Ice,0.25,cyan
+677,LoProb IP-/S+,Ice,0.25,cyan
+678,LoProb IP+/S+,Ice,0.25,cyan
+679,MISSING,MISSING,0,white
+680,LoProb IP/T,Ice,0.25,cyan
+681,LoProb IP-/T,Ice,0.25,cyan
+682,LoProb IP+/T,Ice,0.25,cyan
+683,LoProb IP/T-,Ice,0.25,cyan
+684,LoProb IP-/T-,Ice,0.25,cyan
+685,LoProb IP+/T-,Ice,0.25,cyan
+686,LoProb IP/T+,Severe,0.25,red
+687,LoProb IP-/T+,Severe,0.25,red
+688,LoProb IP+/T+,Severe,0.25,red
+689,MISSING,MISSING,0,white
+690,LoProb IP/F,Ice,0.25,cyan
+691,LoProb IP-/F,Ice,0.25,cyan
+692,LoProb IP+/F,Ice,0.25,cyan
+693,LoProb IP/F-,Ice,0.25,cyan
+694,LoProb IP-/F-,Ice,0.25,cyan
+695,LoProb IP+/F-,Ice,0.25,cyan
+696,LoProb IP/F+,Ice,0.25,cyan
+697,LoProb IP-/F+,Ice,0.25,cyan
+698,LoProb IP+/F+,Ice,0.25,cyan
+699,MISSING,MISSING,0,white
+700,LoProb SW/R,Mix,0.25,magenta
+701,LoProb SW-/R,Mix,0.25,magenta
+702,LoProb SW+/R,Mix,0.25,magenta
+703,LoProb SW/R-,Mix,0.25,magenta
+704,LoProb SW-/R-,Mix,0.25,magenta
+705,LoProb SW+/R-,Mix,0.25,magenta
+706,LoProb SW/R+,Mix,0.25,magenta
+707,LoProb SW-/R+,Mix,0.25,magenta
+708,LoProb SW+/R+,Mix,0.25,magenta
+709,MISSING,MISSING,0,white
+710,LoProb SW/RW,Mix,0.25,magenta
+711,LoProb SW-/RW,Mix,0.25,magenta
+712,LoProb SW+/RW,Mix,0.25,magenta
+713,LoProb SW/RW-,Mix,0.25,magenta
+714,LoProb SW-/RW-,Mix,0.25,magenta
+715,LoProb SW+/RW-,Mix,0.25,magenta
+716,LoProb SW/RW+,Mix,0.25,magenta
+717,LoProb SW-/RW+,Mix,0.25,magenta
+718,LoProb SW+/RW+,Mix,0.25,magenta
+719,MISSING,MISSING,0,white
+720,LoProb SW/L,Mix,0.25,magenta
+721,LoProb SW-/L,Mix,0.25,magenta
+722,LoProb SW+/L,Mix,0.25,magenta
+723,LoProb SW/L-,Mix,0.25,magenta
+724,LoProb SW-/L-,Mix,0.25,magenta
+725,LoProb SW+/L-,Mix,0.25,magenta
+726,LoProb SW/L+,Mix,0.25,magenta
+727,LoProb SW-/L+,Mix,0.25,magenta
+728,LoProb SW+/L+,Mix,0.25,magenta
+729,MISSING,MISSING,0,white
+730,LoProb SW/ZL,Ice,0.25,cyan
+731,LoProb SW-/ZL,Ice,0.25,cyan
+732,LoProb SW+/ZL,Ice,0.25,cyan
+733,LoProb SW/ZL-,Ice,0.25,cyan
+734,LoProb SW-/ZL-,Ice,0.25,cyan
+735,LoProb SW+/ZL-,Ice,0.25,cyan
+736,LoProb SW/ZL+,Ice,0.25,cyan
+737,LoProb SW-/ZL+,Ice,0.25,cyan
+738,LoProb SW+/ZL+,Ice,0.25,cyan
+739,MISSING,MISSING,0,white
+740,LoProb SW/ZR,Ice,0.25,cyan
+741,LoProb SW-/ZR,Ice,0.25,cyan
+742,LoProb SW+/ZR,Ice,0.25,cyan
+743,LoProb SW/ZR-,Ice,0.25,cyan
+744,LoProb SW-/ZR-,Ice,0.25,cyan
+745,LoProb SW+/ZR-,Ice,0.25,cyan
+746,LoProb SW/ZR+,Ice,0.25,cyan
+747,LoProb SW-/ZR+,Ice,0.25,cyan
+748,LoProb SW+/ZR+,Ice,0.25,cyan
+749,MISSING,MISSING,0,white
+750,LoProb SW/IP,Ice,0.25,cyan
+751,LoProb SW-/IP,Ice,0.25,cyan
+752,LoProb SW+/IP,Ice,0.25,cyan
+753,LoProb SW/IP-,Ice,0.25,cyan
+754,LoProb SW-/IP-,Ice,0.25,cyan
+755,LoProb SW+/IP-,Ice,0.25,cyan
+756,LoProb SW/IP+,Ice,0.25,cyan
+757,LoProb SW-/IP+,Ice,0.25,cyan
+758,LoProb SW+/IP+,Ice,0.25,cyan
+759,MISSING,MISSING,0,white
+760,LoProb SW/SW,Snow,0.25,dodgerblue
+761,LoProb SW-/SW,Snow,0.25,dodgerblue
+762,LoProb SW+/SW,Snow,0.25,dodgerblue
+763,LoProb SW/SW-,Snow,0.25,dodgerblue
+764,LoProb SW-/SW-,Snow,0.25,dodgerblue
+765,LoProb SW+/SW-,Snow,0.25,dodgerblue
+766,LoProb SW/SW+,Snow,0.25,dodgerblue
+767,LoProb SW-/SW+,Snow,0.25,dodgerblue
+768,LoProb SW+/SW+,Snow,0.25,dodgerblue
+769,MISSING,MISSING,0,white
+770,LoProb SW/S,Snow,0.25,dodgerblue
+771,LoProb SW-/S,Snow,0.25,dodgerblue
+772,LoProb SW+/S,Snow,0.25,dodgerblue
+773,LoProb SW/S-,Snow,0.25,dodgerblue
+774,LoProb SW-/S-,Snow,0.25,dodgerblue
+775,LoProb SW+/S-,Snow,0.25,dodgerblue
+776,LoProb SW/S+,Snow,0.25,dodgerblue
+777,LoProb SW-/S+,Snow,0.25,dodgerblue
+778,LoProb SW+/S+,Snow,0.25,dodgerblue
+779,MISSING,MISSING,0,white
+780,LoProb SW/T,Mix,0.25,magenta
+781,LoProb SW-/T,Mix,0.25,magenta
+782,LoProb SW+/T,Mix,0.25,magenta
+783,LoProb SW/T-,Mix,0.25,magenta
+784,LoProb SW-/T-,Mix,0.25,magenta
+785,LoProb SW+/T-,Mix,0.25,magenta
+786,LoProb SW/T+,Severe,0.25,red
+787,LoProb SW-/T+,Severe,0.25,red
+788,LoProb SW+/T+,Severe,0.25,red
+789,MISSING,MISSING,0,white
+790,LoProb SW/F,Snow,0.25,dodgerblue
+791,LoProb SW-/F,Snow,0.25,dodgerblue
+792,LoProb SW+/F,Snow,0.25,dodgerblue
+793,LoProb SW/F-,Snow,0.25,dodgerblue
+794,LoProb SW-/F-,Snow,0.25,dodgerblue
+795,LoProb SW+/F-,Snow,0.25,dodgerblue
+796,LoProb SW/F+,Snow,0.25,dodgerblue
+797,LoProb SW-/F+,Snow,0.25,dodgerblue
+798,LoProb SW+/F+,Snow,0.25,dodgerblue
+799,MISSING,MISSING,0,white
+800,LoProb S/R,Mix,0.25,magenta
+801,LoProb S-/R,Mix,0.25,magenta
+802,LoProb S+/R,Mix,0.25,magenta
+803,LoProb S/R-,Mix,0.25,magenta
+804,LoProb S-/R-,Mix,0.25,magenta
+805,LoProb S+/R-,Mix,0.25,magenta
+806,LoProb S/R+,Mix,0.25,magenta
+807,LoProb S-/R+,Mix,0.25,magenta
+808,LoProb S+/R+,Mix,0.25,magenta
+809,MISSING,MISSING,0,white
+810,LoProb S/RW,Mix,0.25,magenta
+811,LoProb S-/RW,Mix,0.25,magenta
+812,LoProb S+/RW,Mix,0.25,magenta
+813,LoProb S/RW-,Mix,0.25,magenta
+814,LoProb S-/RW-,Mix,0.25,magenta
+815,LoProb S+/RW-,Mix,0.25,magenta
+816,LoProb S/RW+,Mix,0.25,magenta
+817,LoProb S-/RW+,Mix,0.25,magenta
+818,LoProb S+/RW+,Mix,0.25,magenta
+819,MISSING,MISSING,0,white
+820,LoProb S/L,Mix,0.25,magenta
+821,LoProb S-/L,Mix,0.25,magenta
+822,LoProb S+/L,Mix,0.25,magenta
+823,LoProb S/L-,Mix,0.25,magenta
+824,LoProb S-/L-,Mix,0.25,magenta
+825,LoProb S+/L-,Mix,0.25,magenta
+826,LoProb S/L+,Mix,0.25,magenta
+827,LoProb S-/L+,Mix,0.25,magenta
+828,LoProb S+/L+,Mix,0.25,magenta
+829,MISSING,MISSING,0,white
+830,LoProb S/ZL,Ice,0.25,cyan
+831,LoProb S-/ZL,Ice,0.25,cyan
+832,LoProb S+/ZL,Ice,0.25,cyan
+833,LoProb S/ZL-,Ice,0.25,cyan
+834,LoProb S-/ZL-,Ice,0.25,cyan
+835,LoProb S+/ZL-,Ice,0.25,cyan
+836,LoProb S/ZL+,Ice,0.25,cyan
+837,LoProb S-/ZL+,Ice,0.25,cyan
+838,LoProb S+/ZL+,Ice,0.25,cyan
+839,MISSING,MISSING,0,white
+840,LoProb S/ZR,Ice,0.25,cyan
+841,LoProb S-/ZR,Ice,0.25,cyan
+842,LoProb S+/ZR,Ice,0.25,cyan
+843,LoProb S/ZR-,Ice,0.25,cyan
+844,LoProb S-/ZR-,Ice,0.25,cyan
+845,LoProb S+/ZR-,Ice,0.25,cyan
+846,LoProb S/ZR+,Ice,0.25,cyan
+847,LoProb S-/ZR+,Ice,0.25,cyan
+848,LoProb S+/ZR+,Ice,0.25,cyan
+849,MISSING,MISSING,0,white
+850,LoProb S/IP,Ice,0.25,cyan
+851,LoProb S-/IP,Ice,0.25,cyan
+852,LoProb S+/IP,Ice,0.25,cyan
+853,LoProb S/IP-,Ice,0.25,cyan
+854,LoProb S-/IP-,Ice,0.25,cyan
+855,LoProb S+/IP-,Ice,0.25,cyan
+856,LoProb S/IP+,Ice,0.25,cyan
+857,LoProb S-/IP+,Ice,0.25,cyan
+858,LoProb S+/IP+,Ice,0.25,cyan
+859,MISSING,MISSING,0,white
+860,LoProb S/SW,Snow,0.25,dodgerblue
+861,LoProb S-/SW,Snow,0.25,dodgerblue
+862,LoProb S+/SW,Snow,0.25,dodgerblue
+863,LoProb S/SW-,Snow,0.25,dodgerblue
+864,LoProb S-/SW-,Snow,0.25,dodgerblue
+865,LoProb S+/SW-,Snow,0.25,dodgerblue
+866,LoProb S/SW+,Snow,0.25,dodgerblue
+867,LoProb S-/SW+,Snow,0.25,dodgerblue
+868,LoProb S+/SW+,Snow,0.25,dodgerblue
+869,MISSING,MISSING,0,white
+870,LoProb S/S,Snow,0.25,dodgerblue
+871,LoProb S-/S,Snow,0.25,dodgerblue
+872,LoProb S+/S,Snow,0.25,dodgerblue
+873,LoProb S/S-,Snow,0.25,dodgerblue
+874,LoProb S-/S-,Snow,0.25,dodgerblue
+875,LoProb S+/S-,Snow,0.25,dodgerblue
+876,LoProb S/S+,Snow,0.25,dodgerblue
+877,LoProb S-/S+,Snow,0.25,dodgerblue
+878,LoProb S+/S+,Snow,0.25,dodgerblue
+879,MISSING,MISSING,0,white
+880,LoProb S/T,Mix,0.25,magenta
+881,LoProb S-/T,Mix,0.25,magenta
+882,LoProb S+/T,Mix,0.25,magenta
+883,LoProb S/T-,Mix,0.25,magenta
+884,LoProb S-/T-,Mix,0.25,magenta
+885,LoProb S+/T-,Mix,0.25,magenta
+886,LoProb S/T+,Severe,0.25,red
+887,LoProb S-/T+,Severe,0.25,red
+888,LoProb S+/T+,Severe,0.25,red
+889,MISSING,MISSING,0,white
+890,LoProb S/F,Snow,0.25,dodgerblue
+891,LoProb S-/F,Snow,0.25,dodgerblue
+892,LoProb S+/F,Snow,0.25,dodgerblue
+893,LoProb S/F-,Snow,0.25,dodgerblue
+894,LoProb S-/F-,Snow,0.25,dodgerblue
+895,LoProb S+/F-,Snow,0.25,dodgerblue
+896,LoProb S/F+,Snow,0.25,dodgerblue
+897,LoProb S-/F+,Snow,0.25,dodgerblue
+898,LoProb S+/F+,Snow,0.25,dodgerblue
+899,MISSING,MISSING,0,white
+900,LoProb T/R,Rain,0.25,green
+901,LoProb T-/R,Rain,0.25,green
+902,LoProb T+/R,Severe,0.25,red
+903,LoProb T/R-,Rain,0.25,green
+904,LoProb T-/R-,Rain,0.25,green
+905,LoProb T+/R-,Severe,0.25,red
+906,LoProb T/R+,Rain,0.25,green
+907,LoProb T-/R+,Rain,0.25,green
+908,LoProb T+/R+,Severe,0.25,red
+909,MISSING,MISSING,0,white
+910,LoProb T/RW,Rain,0.25,green
+911,LoProb T-/RW,Rain,0.25,green
+912,LoProb T+/RW,Severe,0.25,red
+913,LoProb T/RW-,Rain,0.25,green
+914,LoProb T-/RW-,Rain,0.25,green
+915,LoProb T+/RW-,Severe,0.25,red
+916,LoProb T/RW+,Rain,0.25,green
+917,LoProb T-/RW+,Rain,0.25,green
+918,LoProb T+/RW+,Severe,0.25,red
+919,MISSING,MISSING,0,white
+920,LoProb T/L,Rain,0.25,green
+921,LoProb T-/L,Rain,0.25,green
+922,LoProb T+/L,Severe,0.25,red
+923,LoProb T/L-,Rain,0.25,green
+924,LoProb T-/L-,Rain,0.25,green
+925,LoProb T+/L-,Severe,0.25,red
+926,LoProb T/L+,Rain,0.25,green
+927,LoProb T-/L+,Rain,0.25,green
+928,LoProb T+/L+,Severe,0.25,red
+929,MISSING,MISSING,0,white
+930,LoProb T/ZL,Ice,0.25,cyan
+931,LoProb T-/ZL,Ice,0.25,cyan
+932,LoProb T+/ZL,Severe,0.25,red
+933,LoProb T/ZL-,Ice,0.25,cyan
+934,LoProb T-/ZL-,Ice,0.25,cyan
+935,LoProb T+/ZL-,Severe,0.25,red
+936,LoProb T/ZL+,Ice,0.25,cyan
+937,LoProb T-/ZL+,Ice,0.25,cyan
+938,LoProb T+/ZL+,Severe,0.25,red
+939,MISSING,MISSING,0,white
+940,LoProb T/ZR,Ice,0.25,cyan
+941,LoProb T-/ZR,Ice,0.25,cyan
+942,LoProb T+/ZR,Severe,0.25,red
+943,LoProb T/ZR-,Ice,0.25,cyan
+944,LoProb T-/ZR-,Ice,0.25,cyan
+945,LoProb T+/ZR-,Severe,0.25,red
+946,LoProb T/ZR+,Ice,0.25,cyan
+947,LoProb T-/ZR+,Ice,0.25,cyan
+948,LoProb T+/ZR+,Severe,0.25,red
+949,MISSING,MISSING,0,white
+950,LoProb T/IP,Ice,0.25,cyan
+951,LoProb T-/IP,Ice,0.25,cyan
+952,LoProb T+/IP,Severe,0.25,red
+953,LoProb T/IP-,Ice,0.25,cyan
+954,LoProb T-/IP-,Ice,0.25,cyan
+955,LoProb T+/IP-,Severe,0.25,red
+956,LoProb T/IP+,Ice,0.25,cyan
+957,LoProb T-/IP+,Ice,0.25,cyan
+958,LoProb T+/IP+,Severe,0.25,red
+959,MISSING,MISSING,0,white
+960,LoProb T/SW,Mix,0.25,magenta
+961,LoProb T-/SW,Mix,0.25,magenta
+962,LoProb T+/SW,Severe,0.25,red
+963,LoProb T/SW-,Mix,0.25,magenta
+964,LoProb T-/SW-,Mix,0.25,magenta
+965,LoProb T+/SW-,Severe,0.25,red
+966,LoProb T/SW+,Mix,0.25,magenta
+967,LoProb T-/SW+,Mix,0.25,magenta
+968,LoProb T+/SW+,Severe,0.25,red
+969,MISSING,MISSING,0,white
+970,LoProb T/S,Mix,0.25,magenta
+971,LoProb T-/S,Mix,0.25,magenta
+972,LoProb T+/S,Severe,0.25,red
+973,LoProb T/S-,Mix,0.25,magenta
+974,LoProb T-/S-,Mix,0.25,magenta
+975,LoProb T+/S-,Severe,0.25,red
+976,LoProb T/S+,Mix,0.25,magenta
+977,LoProb T-/S+,Mix,0.25,magenta
+978,LoProb T+/S+,Severe,0.25,red
+979,MISSING,MISSING,0,white
+980,LoProb T/T,Rain,0.25,green
+981,LoProb T-/T,Rain,0.25,green
+982,LoProb T+/T,Severe,0.25,red
+983,LoProb T/T-,Rain,0.25,green
+984,LoProb T-/T-,Rain,0.25,green
+985,LoProb T+/T-,Severe,0.25,red
+986,LoProb T/T+,Severe,0.25,red
+987,LoProb T-/T+,Severe,0.25,red
+988,LoProb T+/T+,Severe,0.25,red
+989,MISSING,MISSING,0,white
+990,LoProb T/F,Rain,0.25,green
+991,LoProb T-/F,Rain,0.25,green
+992,LoProb T+/F,Severe,0.25,red
+993,LoProb T/F-,Rain,0.25,green
+994,LoProb T-/F-,Rain,0.25,green
+995,LoProb T+/F-,Severe,0.25,red
+996,LoProb T/F+,Rain,0.25,green
+997,LoProb T-/F+,Rain,0.25,green
+998,LoProb T+/F+,Severe,0.25,red
+999,MISSING,MISSING,0,white
+1000,LoProb F/R,Rain,0.25,green
+1001,LoProb F-/R,Rain,0.25,green
+1002,LoProb F+/R,Rain,0.25,green
+1003,LoProb F/R-,Rain,0.25,green
+1004,LoProb F-/R-,Rain,0.25,green
+1005,LoProb F+/R-,Rain,0.25,green
+1006,LoProb F/R+,Rain,0.25,green
+1007,LoProb F-/R+,Rain,0.25,green
+1008,LoProb F+/R+,Rain,0.25,green
+1009,MISSING,MISSING,0,white
+1010,LoProb F/RW,Rain,0.25,green
+1011,LoProb F-/RW,Rain,0.25,green
+1012,LoProb F+/RW,Rain,0.25,green
+1013,LoProb F/RW-,Rain,0.25,green
+1014,LoProb F-/RW-,Rain,0.25,green
+1015,LoProb F+/RW-,Rain,0.25,green
+1016,LoProb F/RW+,Rain,0.25,green
+1017,LoProb F-/RW+,Rain,0.25,green
+1018,LoProb F+/RW+,Rain,0.25,green
+1019,MISSING,MISSING,0,white
+1020,LoProb F/L,Rain,0.25,green
+1021,LoProb F-/L,Rain,0.25,green
+1022,LoProb F+/L,Rain,0.25,green
+1023,LoProb F/L-,Rain,0.25,green
+1024,LoProb F-/L-,Rain,0.25,green
+1025,LoProb F+/L-,Rain,0.25,green
+1026,LoProb F/L+,Rain,0.25,green
+1027,LoProb F-/L+,Rain,0.25,green
+1028,LoProb F+/L+,Rain,0.25,green
+1029,MISSING,MISSING,0,white
+1030,LoProb F/ZL,Ice,0.25,cyan
+1031,LoProb F-/ZL,Ice,0.25,cyan
+1032,LoProb F+/ZL,Ice,0.25,cyan
+1033,LoProb F/ZL-,Ice,0.25,cyan
+1034,LoProb F-/ZL-,Ice,0.25,cyan
+1035,LoProb F+/ZL-,Ice,0.25,cyan
+1036,LoProb F/ZL+,Ice,0.25,cyan
+1037,LoProb F-/ZL+,Ice,0.25,cyan
+1038,LoProb F+/ZL+,Ice,0.25,cyan
+1039,MISSING,MISSING,0,white
+1040,LoProb F/ZR,Ice,0.25,cyan
+1041,LoProb F-/ZR,Ice,0.25,cyan
+1042,LoProb F+/ZR,Ice,0.25,cyan
+1043,LoProb F/ZR-,Ice,0.25,cyan
+1044,LoProb F-/ZR-,Ice,0.25,cyan
+1045,LoProb F+/ZR-,Ice,0.25,cyan
+1046,LoProb F/ZR+,Ice,0.25,cyan
+1047,LoProb F-/ZR+,Ice,0.25,cyan
+1048,LoProb F+/ZR+,Ice,0.25,cyan
+1049,MISSING,MISSING,0,white
+1050,LoProb F/IP,Ice,0.25,cyan
+1051,LoProb F-/IP,Ice,0.25,cyan
+1052,LoProb F+/IP,Ice,0.25,cyan
+1053,LoProb F/IP-,Ice,0.25,cyan
+1054,LoProb F-/IP-,Ice,0.25,cyan
+1055,LoProb F+/IP-,Ice,0.25,cyan
+1056,LoProb F/IP+,Ice,0.25,cyan
+1057,LoProb F-/IP+,Ice,0.25,cyan
+1058,LoProb F+/IP+,Ice,0.25,cyan
+1059,MISSING,MISSING,0,white
+1060,LoProb F/SW,Snow,0.25,dodgerblue
+1061,LoProb F-/SW,Snow,0.25,dodgerblue
+1062,LoProb F+/SW,Snow,0.25,dodgerblue
+1063,LoProb F/SW-,Snow,0.25,dodgerblue
+1064,LoProb F-/SW-,Snow,0.25,dodgerblue
+1065,LoProb F+/SW-,Snow,0.25,dodgerblue
+1066,LoProb F/SW+,Snow,0.25,dodgerblue
+1067,LoProb F-/SW+,Snow,0.25,dodgerblue
+1068,LoProb F+/SW+,Snow,0.25,dodgerblue
+1069,MISSING,MISSING,0,white
+1070,LoProb F/S,Snow,0.25,dodgerblue
+1071,LoProb F-/S,Snow,0.25,dodgerblue
+1072,LoProb F+/S,Snow,0.25,dodgerblue
+1073,LoProb F/S-,Snow,0.25,dodgerblue
+1074,LoProb F-/S-,Snow,0.25,dodgerblue
+1075,LoProb F+/S-,Snow,0.25,dodgerblue
+1076,LoProb F/S+,Snow,0.25,dodgerblue
+1077,LoProb F-/S+,Snow,0.25,dodgerblue
+1078,LoProb F+/S+,Snow,0.25,dodgerblue
+1079,MISSING,MISSING,0,white
+1080,LoProb F/T,Rain,0.25,green
+1081,LoProb F-/T,Rain,0.25,green
+1082,LoProb F+/T,Rain,0.25,green
+1083,LoProb F/T-,Rain,0.25,green
+1084,LoProb F-/T-,Rain,0.25,green
+1085,LoProb F+/T-,Rain,0.25,green
+1086,LoProb F/T+,Severe,0.25,red
+1087,LoProb F-/T+,Severe,0.25,red
+1088,LoProb F+/T+,Severe,0.25,red
+1089,MISSING,MISSING,0,white
+1090,LoProb F/F,Fog,0.25,yellow
+1091,LoProb F-/F,Fog,0.25,yellow
+1092,LoProb F+/F,Fog,0.25,yellow
+1093,LoProb F/F-,Fog,0.25,yellow
+1094,LoProb F-/F-,Fog,0.25,yellow
+1095,LoProb F+/F-,Fog,0.25,yellow
+1096,LoProb F/F+,Fog,0.25,yellow
+1097,LoProb F-/F+,Fog,0.25,yellow
+1098,LoProb F+/F+,Fog,0.25,yellow
+1099,MISSING,MISSING,0,white
+1100,No weather,,0,white
+1101,HiProb R,Rain,0.75,green
+1102,HiProb R-,Rain,0.75,green
+1103,HiProb R+,Rain,0.75,green
+1104,HiProb RW,Rain,0.75,green
+1105,HiProb RW-,Rain,0.75,green
+1106,HiProb RW+,Rain,0.75,green
+1107,HiProb L,Rain,0.75,green
+1108,HiProb L-,Rain,0.75,green
+1109,HiProb L+,Rain,0.75,green
+1110,HiProb ZL,Ice,0.75,cyan
+1111,HiProb ZL-,Ice,0.75,cyan
+1112,HiProb ZL+,Ice,0.75,cyan
+1113,HiProb ZR,Ice,0.75,cyan
+1114,HiProb ZR-,Ice,0.75,cyan
+1115,HiProb ZR+,Ice,0.75,cyan
+1116,HiProb IP,Ice,0.75,cyan
+1117,HiProb IP-,Ice,0.75,cyan
+1118,HiProb IP+,Ice,0.75,cyan
+1119,HiProb SW,Snow,0.75,dodgerblue
+1120,HiProb SW-,Snow,0.75,dodgerblue
+1121,HiProb SW+,Snow,0.75,dodgerblue
+1122,HiProb S,Snow,0.75,dodgerblue
+1123,HiProb S-,Snow,0.75,dodgerblue
+1124,HiProb S+,Snow,0.75,dodgerblue
+1125,HiProb T,Rain,0.75,green
+1126,HiProb T-,Rain,0.75,green
+1127,HiProb T+,Severe,0.75,red
+1128,Fog,Fog,0.76,yellow
+1129,Fog,Fog,0.76,yellow
+1130,Dense Fog,Fog,0.76,yellow
+1131,Smoke,Smoke,0.76,peru
+1132,Blowing Snow,Blowing,0,white
+1133,Blowing Dust,Blowing,0,white
+1134,Freezing Fog,Fog,0.76,yellow
+1135,Ice Fog,Fog,0.76,yellow
+1136,Ice Crystals,,0,white
+1137,Blowing Sand,Blowing,0,white
+1138,Freezing Spray,,0,white
+1139,Volcanic Ash,Smoke,0.76,lightgrey
+1140,Water Spouts,,0,white
+1141,Haze,Haze,0.76,khaki
+1142,MISSING,MISSING,0,white
+1143,MISSING,MISSING,0,white
+1144,MISSING,MISSING,0,white
+1145,MISSING,MISSING,0,white
+1146,MISSING,MISSING,0,white
+1147,MISSING,MISSING,0,white
+1148,MISSING,MISSING,0,white
+1149,MISSING,MISSING,0,white
+1150,MISSING,MISSING,0,white
+1151,MISSING,MISSING,0,white
+1152,MISSING,MISSING,0,white
+1153,MISSING,MISSING,0,white
+1154,MISSING,MISSING,0,white
+1155,MISSING,MISSING,0,white
+1156,MISSING,MISSING,0,white
+1157,MISSING,MISSING,0,white
+1158,MISSING,MISSING,0,white
+1159,MISSING,MISSING,0,white
+1160,MISSING,MISSING,0,white
+1161,MISSING,MISSING,0,white
+1162,MISSING,MISSING,0,white
+1163,MISSING,MISSING,0,white
+1164,MISSING,MISSING,0,white
+1165,MISSING,MISSING,0,white
+1166,MISSING,MISSING,0,white
+1167,MISSING,MISSING,0,white
+1168,MISSING,MISSING,0,white
+1169,MISSING,MISSING,0,white
+1170,MISSING,MISSING,0,white
+1171,MISSING,MISSING,0,white
+1172,MISSING,MISSING,0,white
+1173,MISSING,MISSING,0,white
+1174,MISSING,MISSING,0,white
+1175,MISSING,MISSING,0,white
+1176,MISSING,MISSING,0,white
+1177,MISSING,MISSING,0,white
+1178,MISSING,MISSING,0,white
+1179,MISSING,MISSING,0,white
+1180,MISSING,MISSING,0,white
+1181,MISSING,MISSING,0,white
+1182,MISSING,MISSING,0,white
+1183,MISSING,MISSING,0,white
+1184,MISSING,MISSING,0,white
+1185,MISSING,MISSING,0,white
+1186,MISSING,MISSING,0,white
+1187,MISSING,MISSING,0,white
+1188,MISSING,MISSING,0,white
+1189,MISSING,MISSING,0,white
+1190,MISSING,MISSING,0,white
+1191,MISSING,MISSING,0,white
+1192,MISSING,MISSING,0,white
+1193,MISSING,MISSING,0,white
+1194,MISSING,MISSING,0,white
+1195,MISSING,MISSING,0,white
+1196,MISSING,MISSING,0,white
+1197,MISSING,MISSING,0,white
+1198,MISSING,MISSING,0,white
+1199,MISSING,MISSING,0,white
+1200,HiProb R/R,Rain,0.75,green
+1201,HiProb R-/R,Rain,0.75,green
+1202,HiProb R+/R,Rain,0.75,green
+1203,HiProb R/R-,Rain,0.75,green
+1204,HiProb R-/R-,Rain,0.75,green
+1205,HiProb R+/R-,Rain,0.75,green
+1206,HiProb R/R+,Rain,0.75,green
+1207,HiProb R-/R+,Rain,0.75,green
+1208,HiProb R+/R+,Rain,0.75,green
+1209,MISSING,MISSING,0,white
+1210,HiProb R/RW,Rain,0.75,green
+1211,HiProb R-/RW,Rain,0.75,green
+1212,HiProb R+/RW,Rain,0.75,green
+1213,HiProb R/RW-,Rain,0.75,green
+1214,HiProb R-/RW-,Rain,0.75,green
+1215,HiProb R+/RW-,Rain,0.75,green
+1216,HiProb R/RW+,Rain,0.75,green
+1217,HiProb R-/RW+,Rain,0.75,green
+1218,HiProb R+/RW+,Rain,0.75,green
+1219,MISSING,MISSING,0,white
+1220,HiProb R/L,Rain,0.75,green
+1221,HiProb R-/L,Rain,0.75,green
+1222,HiProb R+/L,Rain,0.75,green
+1223,HiProb R/L-,Rain,0.75,green
+1224,HiProb R-/L-,Rain,0.75,green
+1225,HiProb R+/L-,Rain,0.75,green
+1226,HiProb R/L+,Rain,0.75,green
+1227,HiProb R-/L+,Rain,0.75,green
+1228,HiProb R+/L+,Rain,0.75,green
+1229,MISSING,MISSING,0,white
+1230,HiProb R/ZL,Ice,0.75,cyan
+1231,HiProb R-/ZL,Ice,0.75,cyan
+1232,HiProb R+/ZL,Ice,0.75,cyan
+1233,HiProb R/ZL-,Ice,0.75,cyan
+1234,HiProb R-/ZL-,Ice,0.75,cyan
+1235,HiProb R+/ZL-,Ice,0.75,cyan
+1236,HiProb R/ZL+,Ice,0.75,cyan
+1237,HiProb R-/ZL+,Ice,0.75,cyan
+1238,HiProb R+/ZL+,Ice,0.75,cyan
+1239,MISSING,MISSING,0,white
+1240,HiProb R/ZR,Ice,0.75,cyan
+1241,HiProb R-/ZR,Ice,0.75,cyan
+1242,HiProb R+/ZR,Ice,0.75,cyan
+1243,HiProb R/ZR-,Ice,0.75,cyan
+1244,HiProb R-/ZR-,Ice,0.75,cyan
+1245,HiProb R+/ZR-,Ice,0.75,cyan
+1246,HiProb R/ZR+,Ice,0.75,cyan
+1247,HiProb R-/ZR+,Ice,0.75,cyan
+1248,HiProb R+/ZR+,Ice,0.75,cyan
+1249,MISSING,MISSING,0,white
+1250,HiProb R/IP,Ice,0.75,cyan
+1251,HiProb R-/IP,Ice,0.75,cyan
+1252,HiProb R+/IP,Ice,0.75,cyan
+1253,HiProb R/IP-,Ice,0.75,cyan
+1254,HiProb R-/IP-,Ice,0.75,cyan
+1255,HiProb R+/IP-,Ice,0.75,cyan
+1256,HiProb R/IP+,Ice,0.75,cyan
+1257,HiProb R-/IP+,Ice,0.75,cyan
+1258,HiProb R+/IP+,Ice,0.75,cyan
+1259,MISSING,MISSING,0,white
+1260,HiProb R/SW,Mix,0.75,magenta
+1261,HiProb R-/SW,Mix,0.75,magenta
+1262,HiProb R+/SW,Mix,0.75,magenta
+1263,HiProb R/SW-,Mix,0.75,magenta
+1264,HiProb R-/SW-,Mix,0.75,magenta
+1265,HiProb R+/SW-,Mix,0.75,magenta
+1266,HiProb R/SW+,Mix,0.75,magenta
+1267,HiProb R-/SW+,Mix,0.75,magenta
+1268,HiProb R+/SW+,Mix,0.75,magenta
+1269,MISSING,MISSING,0,white
+1270,HiProb R/S,Mix,0.75,magenta
+1271,HiProb R-/S,Mix,0.75,magenta
+1272,HiProb R+/S,Mix,0.75,magenta
+1273,HiProb R/S-,Mix,0.75,magenta
+1274,HiProb R-/S-,Mix,0.75,magenta
+1275,HiProb R+/S-,Mix,0.75,magenta
+1276,HiProb R/S+,Mix,0.75,magenta
+1277,HiProb R-/S+,Mix,0.75,magenta
+1278,HiProb R+/S+,Mix,0.75,magenta
+1279,MISSING,MISSING,0,white
+1280,HiProb R/T,Rain,0.75,green
+1281,HiProb R-/T,Rain,0.75,green
+1282,HiProb R+/T,Rain,0.75,green
+1283,HiProb R/T-,Rain,0.75,green
+1284,HiProb R-/T-,Rain,0.75,green
+1285,HiProb R+/T-,Rain,0.75,green
+1286,HiProb R/T+,Severe,0.75,red
+1287,HiProb R-/T+,Severe,0.75,red
+1288,HiProb R+/T+,Severe,0.75,red
+1289,MISSING,MISSING,0,white
+1290,HiProb R/F,Rain,0.75,green
+1291,HiProb R-/F,Rain,0.75,green
+1292,HiProb R+/F,Rain,0.75,green
+1293,HiProb R/F-,Rain,0.75,green
+1294,HiProb R-/F-,Rain,0.75,green
+1295,HiProb R+/F-,Rain,0.75,green
+1296,HiProb R/F+,Rain,0.75,green
+1297,HiProb R-/F+,Rain,0.75,green
+1298,HiProb R+/F+,Rain,0.75,green
+1299,MISSING,MISSING,0,white
+1300,HiProb RW/R,Rain,0.75,green
+1301,HiProb RW-/R,Rain,0.75,green
+1302,HiProb RW+/R,Rain,0.75,green
+1303,HiProb RW/R-,Rain,0.75,green
+1304,HiProb RW-/R-,Rain,0.75,green
+1305,HiProb RW+/R-,Rain,0.75,green
+1306,HiProb RW/R+,Rain,0.75,green
+1307,HiProb RW-/R+,Rain,0.75,green
+1308,HiProb RW+/R+,Rain,0.75,green
+1309,MISSING,MISSING,0,white
+1310,HiProb RW/RW,Rain,0.75,green
+1311,HiProb RW-/RW,Rain,0.75,green
+1312,HiProb RW+/RW,Rain,0.75,green
+1313,HiProb RW/RW-,Rain,0.75,green
+1314,HiProb RW-/RW-,Rain,0.75,green
+1315,HiProb RW+/RW-,Rain,0.75,green
+1316,HiProb RW/RW+,Rain,0.75,green
+1317,HiProb RW-/RW+,Rain,0.75,green
+1318,HiProb RW+/RW+,Rain,0.75,green
+1319,MISSING,MISSING,0,white
+1320,HiProb RW/L,Rain,0.75,green
+1321,HiProb RW-/L,Rain,0.75,green
+1322,HiProb RW+/L,Rain,0.75,green
+1323,HiProb RW/L-,Rain,0.75,green
+1324,HiProb RW-/L-,Rain,0.75,green
+1325,HiProb RW+/L-,Rain,0.75,green
+1326,HiProb RW/L+,Rain,0.75,green
+1327,HiProb RW-/L+,Rain,0.75,green
+1328,HiProb RW+/L+,Rain,0.75,green
+1329,MISSING,MISSING,0,white
+1330,HiProb RW/ZL,Ice,0.75,cyan
+1331,HiProb RW-/ZL,Ice,0.75,cyan
+1332,HiProb RW+/ZL,Ice,0.75,cyan
+1333,HiProb RW/ZL-,Ice,0.75,cyan
+1334,HiProb RW-/ZL-,Ice,0.75,cyan
+1335,HiProb RW+/ZL-,Ice,0.75,cyan
+1336,HiProb RW/ZL+,Ice,0.75,cyan
+1337,HiProb RW-/ZL+,Ice,0.75,cyan
+1338,HiProb RW+/ZL+,Ice,0.75,cyan
+1339,MISSING,MISSING,0,white
+1340,HiProb RW/ZR,Ice,0.75,cyan
+1341,HiProb RW-/ZR,Ice,0.75,cyan
+1342,HiProb RW+/ZR,Ice,0.75,cyan
+1343,HiProb RW/ZR-,Ice,0.75,cyan
+1344,HiProb RW-/ZR-,Ice,0.75,cyan
+1345,HiProb RW+/ZR-,Ice,0.75,cyan
+1346,HiProb RW/ZR+,Ice,0.75,cyan
+1347,HiProb RW-/ZR+,Ice,0.75,cyan
+1348,HiProb RW+/ZR+,Ice,0.75,cyan
+1349,MISSING,MISSING,0,white
+1350,HiProb RW/IP,Ice,0.75,cyan
+1351,HiProb RW-/IP,Ice,0.75,cyan
+1352,HiProb RW+/IP,Ice,0.75,cyan
+1353,HiProb RW/IP-,Ice,0.75,cyan
+1354,HiProb RW-/IP-,Ice,0.75,cyan
+1355,HiProb RW+/IP-,Ice,0.75,cyan
+1356,HiProb RW/IP+,Ice,0.75,cyan
+1357,HiProb RW-/IP+,Ice,0.75,cyan
+1358,HiProb RW+/IP+,Ice,0.75,cyan
+1359,MISSING,MISSING,0,white
+1360,HiProb RW/SW,Mix,0.75,magenta
+1361,HiProb RW-/SW,Mix,0.75,magenta
+1362,HiProb RW+/SW,Mix,0.75,magenta
+1363,HiProb RW/SW-,Mix,0.75,magenta
+1364,HiProb RW-/SW-,Mix,0.75,magenta
+1365,HiProb RW+/SW-,Mix,0.75,magenta
+1366,HiProb RW/SW+,Mix,0.75,magenta
+1367,HiProb RW-/SW+,Mix,0.75,magenta
+1368,HiProb RW+/SW+,Mix,0.75,magenta
+1369,MISSING,MISSING,0,white
+1370,HiProb RW/S,Mix,0.75,magenta
+1371,HiProb RW-/S,Mix,0.75,magenta
+1372,HiProb RW+/S,Mix,0.75,magenta
+1373,HiProb RW/S-,Mix,0.75,magenta
+1374,HiProb RW-/S-,Mix,0.75,magenta
+1375,HiProb RW+/S-,Mix,0.75,magenta
+1376,HiProb RW/S+,Mix,0.75,magenta
+1377,HiProb RW-/S+,Mix,0.75,magenta
+1378,HiProb RW+/S+,Mix,0.75,magenta
+1379,MISSING,MISSING,0,white
+1380,HiProb RW/T,Rain,0.75,green
+1381,HiProb RW-/T,Rain,0.75,green
+1382,HiProb RW+/T,Rain,0.75,green
+1383,HiProb RW/T-,Rain,0.75,green
+1384,HiProb RW-/T-,Rain,0.75,green
+1385,HiProb RW+/T-,Rain,0.75,green
+1386,HiProb RW/T+,Severe,0.75,red
+1387,HiProb RW-/T+,Severe,0.75,red
+1388,HiProb RW+/T+,Severe,0.75,red
+1389,MISSING,MISSING,0,white
+1390,HiProb RW/F,Rain,0.75,green
+1391,HiProb RW-/F,Rain,0.75,green
+1392,HiProb RW+/F,Rain,0.75,green
+1393,HiProb RW/F-,Rain,0.75,green
+1394,HiProb RW-/F-,Rain,0.75,green
+1395,HiProb RW+/F-,Rain,0.75,green
+1396,HiProb RW/F+,Rain,0.75,green
+1397,HiProb RW-/F+,Rain,0.75,green
+1398,HiProb RW+/F+,Rain,0.75,green
+1399,MISSING,MISSING,0,white
+1400,HiProb L/R,Rain,0.75,green
+1401,HiProb L-/R,Rain,0.75,green
+1402,HiProb L+/R,Rain,0.75,green
+1403,HiProb L/R-,Rain,0.75,green
+1404,HiProb L-/R-,Rain,0.75,green
+1405,HiProb L+/R-,Rain,0.75,green
+1406,HiProb L/R+,Rain,0.75,green
+1407,HiProb L-/R+,Rain,0.75,green
+1408,HiProb L+/R+,Rain,0.75,green
+1409,MISSING,MISSING,0,white
+1410,HiProb L/RW,Rain,0.75,green
+1411,HiProb L-/RW,Rain,0.75,green
+1412,HiProb L+/RW,Rain,0.75,green
+1413,HiProb L/RW-,Rain,0.75,green
+1414,HiProb L-/RW-,Rain,0.75,green
+1415,HiProb L+/RW-,Rain,0.75,green
+1416,HiProb L/RW+,Rain,0.75,green
+1417,HiProb L-/RW+,Rain,0.75,green
+1418,HiProb L+/RW+,Rain,0.75,green
+1419,MISSING,MISSING,0,white
+1420,HiProb L/L,Rain,0.75,green
+1421,HiProb L-/L,Rain,0.75,green
+1422,HiProb L+/L,Rain,0.75,green
+1423,HiProb L/L-,Rain,0.75,green
+1424,HiProb L-/L-,Rain,0.75,green
+1425,HiProb L+/L-,Rain,0.75,green
+1426,HiProb L/L+,Rain,0.75,green
+1427,HiProb L-/L+,Rain,0.75,green
+1428,HiProb L+/L+,Rain,0.75,green
+1429,MISSING,MISSING,0,white
+1430,HiProb L/ZL,Ice,0.75,cyan
+1431,HiProb L-/ZL,Ice,0.75,cyan
+1432,HiProb L+/ZL,Ice,0.75,cyan
+1433,HiProb L/ZL-,Ice,0.75,cyan
+1434,HiProb L-/ZL-,Ice,0.75,cyan
+1435,HiProb L+/ZL-,Ice,0.75,cyan
+1436,HiProb L/ZL+,Ice,0.75,cyan
+1437,HiProb L-/ZL+,Ice,0.75,cyan
+1438,HiProb L+/ZL+,Ice,0.75,cyan
+1439,MISSING,MISSING,0,white
+1440,HiProb L/ZR,Ice,0.75,cyan
+1441,HiProb L-/ZR,Ice,0.75,cyan
+1442,HiProb L+/ZR,Ice,0.75,cyan
+1443,HiProb L/ZR-,Ice,0.75,cyan
+1444,HiProb L-/ZR-,Ice,0.75,cyan
+1445,HiProb L+/ZR-,Ice,0.75,cyan
+1446,HiProb L/ZR+,Ice,0.75,cyan
+1447,HiProb L-/ZR+,Ice,0.75,cyan
+1448,HiProb L+/ZR+,Ice,0.75,cyan
+1449,MISSING,MISSING,0,white
+1450,HiProb L/IP,Ice,0.75,cyan
+1451,HiProb L-/IP,Ice,0.75,cyan
+1452,HiProb L+/IP,Ice,0.75,cyan
+1453,HiProb L/IP-,Ice,0.75,cyan
+1454,HiProb L-/IP-,Ice,0.75,cyan
+1455,HiProb L+/IP-,Ice,0.75,cyan
+1456,HiProb L/IP+,Ice,0.75,cyan
+1457,HiProb L-/IP+,Ice,0.75,cyan
+1458,HiProb L+/IP+,Ice,0.75,cyan
+1459,MISSING,MISSING,0,white
+1460,HiProb L/SW,Mix,0.75,magenta
+1461,HiProb L-/SW,Mix,0.75,magenta
+1462,HiProb L+/SW,Mix,0.75,magenta
+1463,HiProb L/SW-,Mix,0.75,magenta
+1464,HiProb L-/SW-,Mix,0.75,magenta
+1465,HiProb L+/SW-,Mix,0.75,magenta
+1466,HiProb L/SW+,Mix,0.75,magenta
+1467,HiProb L-/SW+,Mix,0.75,magenta
+1468,HiProb L+/SW+,Mix,0.75,magenta
+1469,MISSING,MISSING,0,white
+1470,HiProb L/S,Mix,0.75,magenta
+1471,HiProb L-/S,Mix,0.75,magenta
+1472,HiProb L+/S,Mix,0.75,magenta
+1473,HiProb L/S-,Mix,0.75,magenta
+1474,HiProb L-/S-,Mix,0.75,magenta
+1475,HiProb L+/S-,Mix,0.75,magenta
+1476,HiProb L/S+,Mix,0.75,magenta
+1477,HiProb L-/S+,Mix,0.75,magenta
+1478,HiProb L+/S+,Mix,0.75,magenta
+1479,MISSING,MISSING,0,white
+1480,HiProb L/T,Rain,0.75,green
+1481,HiProb L-/T,Rain,0.75,green
+1482,HiProb L+/T,Rain,0.75,green
+1483,HiProb L/T-,Rain,0.75,green
+1484,HiProb L-/T-,Rain,0.75,green
+1485,HiProb L+/T-,Rain,0.75,green
+1486,HiProb L/T+,Severe,0.75,red
+1487,HiProb L-/T+,Severe,0.75,red
+1488,HiProb L+/T+,Severe,0.75,red
+1489,MISSING,MISSING,0,white
+1490,HiProb L/F,Rain,0.75,green
+1491,HiProb L-/F,Rain,0.75,green
+1492,HiProb L+/F,Rain,0.75,green
+1493,HiProb L/F-,Rain,0.75,green
+1494,HiProb L-/F-,Rain,0.75,green
+1495,HiProb L+/F-,Rain,0.75,green
+1496,HiProb L/F+,Rain,0.75,green
+1497,HiProb L-/F+,Rain,0.75,green
+1498,HiProb L+/F+,Rain,0.75,green
+1499,MISSING,MISSING,0,white
+1500,HiProb ZL/R,Ice,0.75,cyan
+1501,HiProb ZL-/R,Ice,0.75,cyan
+1502,HiProb ZL+/R,Ice,0.75,cyan
+1503,HiProb ZL/R-,Ice,0.75,cyan
+1504,HiProb ZL-/R-,Ice,0.75,cyan
+1505,HiProb ZL+/R-,Ice,0.75,cyan
+1506,HiProb ZL/R+,Ice,0.75,cyan
+1507,HiProb ZL-/R+,Ice,0.75,cyan
+1508,HiProb ZL+/R+,Ice,0.75,cyan
+1509,MISSING,MISSING,0,white
+1510,HiProb ZL/RW,Ice,0.75,cyan
+1511,HiProb ZL-/RW,Ice,0.75,cyan
+1512,HiProb ZL+/RW,Ice,0.75,cyan
+1513,HiProb ZL/RW-,Ice,0.75,cyan
+1514,HiProb ZL-/RW-,Ice,0.75,cyan
+1515,HiProb ZL+/RW-,Ice,0.75,cyan
+1516,HiProb ZL/RW+,Ice,0.75,cyan
+1517,HiProb ZL-/RW+,Ice,0.75,cyan
+1518,HiProb ZL+/RW+,Ice,0.75,cyan
+1519,MISSING,MISSING,0,white
+1520,HiProb ZL/L,Ice,0.75,cyan
+1521,HiProb ZL-/L,Ice,0.75,cyan
+1522,HiProb ZL+/L,Ice,0.75,cyan
+1523,HiProb ZL/L-,Ice,0.75,cyan
+1524,HiProb ZL-/L-,Ice,0.75,cyan
+1525,HiProb ZL+/L-,Ice,0.75,cyan
+1526,HiProb ZL/L+,Ice,0.75,cyan
+1527,HiProb ZL-/L+,Ice,0.75,cyan
+1528,HiProb ZL+/L+,Ice,0.75,cyan
+1529,MISSING,MISSING,0,white
+1530,HiProb ZL/ZL,Ice,0.75,cyan
+1531,HiProb ZL-/ZL,Ice,0.75,cyan
+1532,HiProb ZL+/ZL,Ice,0.75,cyan
+1533,HiProb ZL/ZL-,Ice,0.75,cyan
+1534,HiProb ZL-/ZL-,Ice,0.75,cyan
+1535,HiProb ZL+/ZL-,Ice,0.75,cyan
+1536,HiProb ZL/ZL+,Ice,0.75,cyan
+1537,HiProb ZL-/ZL+,Ice,0.75,cyan
+1538,HiProb ZL+/ZL+,Ice,0.75,cyan
+1539,MISSING,MISSING,0,white
+1540,HiProb ZL/ZR,Ice,0.75,cyan
+1541,HiProb ZL-/ZR,Ice,0.75,cyan
+1542,HiProb ZL+/ZR,Ice,0.75,cyan
+1543,HiProb ZL/ZR-,Ice,0.75,cyan
+1544,HiProb ZL-/ZR-,Ice,0.75,cyan
+1545,HiProb ZL+/ZR-,Ice,0.75,cyan
+1546,HiProb ZL/ZR+,Ice,0.75,cyan
+1547,HiProb ZL-/ZR+,Ice,0.75,cyan
+1548,HiProb ZL+/ZR+,Ice,0.75,cyan
+1549,MISSING,MISSING,0,white
+1550,HiProb ZL/IP,Ice,0.75,cyan
+1551,HiProb ZL-/IP,Ice,0.75,cyan
+1552,HiProb ZL+/IP,Ice,0.75,cyan
+1553,HiProb ZL/IP-,Ice,0.75,cyan
+1554,HiProb ZL-/IP-,Ice,0.75,cyan
+1555,HiProb ZL+/IP-,Ice,0.75,cyan
+1556,HiProb ZL/IP+,Ice,0.75,cyan
+1557,HiProb ZL-/IP+,Ice,0.75,cyan
+1558,HiProb ZL+/IP+,Ice,0.75,cyan
+1559,MISSING,MISSING,0,white
+1560,HiProb ZL/SW,Ice,0.75,cyan
+1561,HiProb ZL-/SW,Ice,0.75,cyan
+1562,HiProb ZL+/SW,Ice,0.75,cyan
+1563,HiProb ZL/SW-,Ice,0.75,cyan
+1564,HiProb ZL-/SW-,Ice,0.75,cyan
+1565,HiProb ZL+/SW-,Ice,0.75,cyan
+1566,HiProb ZL/SW+,Ice,0.75,cyan
+1567,HiProb ZL-/SW+,Ice,0.75,cyan
+1568,HiProb ZL+/SW+,Ice,0.75,cyan
+1569,MISSING,MISSING,0,white
+1570,HiProb ZL/S,Ice,0.75,cyan
+1571,HiProb ZL-/S,Ice,0.75,cyan
+1572,HiProb ZL+/S,Ice,0.75,cyan
+1573,HiProb ZL/S-,Ice,0.75,cyan
+1574,HiProb ZL-/S-,Ice,0.75,cyan
+1575,HiProb ZL+/S-,Ice,0.75,cyan
+1576,HiProb ZL/S+,Ice,0.75,cyan
+1577,HiProb ZL-/S+,Ice,0.75,cyan
+1578,HiProb ZL+/S+,Ice,0.75,cyan
+1579,MISSING,MISSING,0,white
+1580,HiProb ZL/T,Ice,0.75,cyan
+1581,HiProb ZL-/T,Ice,0.75,cyan
+1582,HiProb ZL+/T,Ice,0.75,cyan
+1583,HiProb ZL/T-,Ice,0.75,cyan
+1584,HiProb ZL-/T-,Ice,0.75,cyan
+1585,HiProb ZL+/T-,Ice,0.75,cyan
+1586,HiProb ZL/T+,Severe,0.75,red
+1587,HiProb ZL-/T+,Severe,0.75,red
+1588,HiProb ZL+/T+,Severe,0.75,red
+1589,MISSING,MISSING,0,white
+1590,HiProb ZL/F,Ice,0.75,cyan
+1591,HiProb ZL-/F,Ice,0.75,cyan
+1592,HiProb ZL+/F,Ice,0.75,cyan
+1593,HiProb ZL/F-,Ice,0.75,cyan
+1594,HiProb ZL-/F-,Ice,0.75,cyan
+1595,HiProb ZL+/F-,Ice,0.75,cyan
+1596,HiProb ZL/F+,Ice,0.75,cyan
+1597,HiProb ZL-/F+,Ice,0.75,cyan
+1598,HiProb ZL+/F+,Ice,0.75,cyan
+1599,MISSING,MISSING,0,white
+1600,HiProb ZR/R,Ice,0.75,cyan
+1601,HiProb ZR-/R,Ice,0.75,cyan
+1602,HiProb ZR+/R,Ice,0.75,cyan
+1603,HiProb ZR/R-,Ice,0.75,cyan
+1604,HiProb ZR-/R-,Ice,0.75,cyan
+1605,HiProb ZR+/R-,Ice,0.75,cyan
+1606,HiProb ZR/R+,Ice,0.75,cyan
+1607,HiProb ZR-/R+,Ice,0.75,cyan
+1608,HiProb ZR+/R+,Ice,0.75,cyan
+1609,MISSING,MISSING,0,white
+1610,HiProb ZR/RW,Ice,0.75,cyan
+1611,HiProb ZR-/RW,Ice,0.75,cyan
+1612,HiProb ZR+/RW,Ice,0.75,cyan
+1613,HiProb ZR/RW-,Ice,0.75,cyan
+1614,HiProb ZR-/RW-,Ice,0.75,cyan
+1615,HiProb ZR+/RW-,Ice,0.75,cyan
+1616,HiProb ZR/RW+,Ice,0.75,cyan
+1617,HiProb ZR-/RW+,Ice,0.75,cyan
+1618,HiProb ZR+/RW+,Ice,0.75,cyan
+1619,MISSING,MISSING,0,white
+1620,HiProb ZR/L,Ice,0.75,cyan
+1621,HiProb ZR-/L,Ice,0.75,cyan
+1622,HiProb ZR+/L,Ice,0.75,cyan
+1623,HiProb ZR/L-,Ice,0.75,cyan
+1624,HiProb ZR-/L-,Ice,0.75,cyan
+1625,HiProb ZR+/L-,Ice,0.75,cyan
+1626,HiProb ZR/L+,Ice,0.75,cyan
+1627,HiProb ZR-/L+,Ice,0.75,cyan
+1628,HiProb ZR+/L+,Ice,0.75,cyan
+1629,MISSING,MISSING,0,white
+1630,HiProb ZR/ZL,Ice,0.75,cyan
+1631,HiProb ZR-/ZL,Ice,0.75,cyan
+1632,HiProb ZR+/ZL,Ice,0.75,cyan
+1633,HiProb ZR/ZL-,Ice,0.75,cyan
+1634,HiProb ZR-/ZL-,Ice,0.75,cyan
+1635,HiProb ZR+/ZL-,Ice,0.75,cyan
+1636,HiProb ZR/ZL+,Ice,0.75,cyan
+1637,HiProb ZR-/ZL+,Ice,0.75,cyan
+1638,HiProb ZR+/ZL+,Ice,0.75,cyan
+1639,MISSING,MISSING,0,white
+1640,HiProb ZR/ZR,Ice,0.75,cyan
+1641,HiProb ZR-/ZR,Ice,0.75,cyan
+1642,HiProb ZR+/ZR,Ice,0.75,cyan
+1643,HiProb ZR/ZR-,Ice,0.75,cyan
+1644,HiProb ZR-/ZR-,Ice,0.75,cyan
+1645,HiProb ZR+/ZR-,Ice,0.75,cyan
+1646,HiProb ZR/ZR+,Ice,0.75,cyan
+1647,HiProb ZR-/ZR+,Ice,0.75,cyan
+1648,HiProb ZR+/ZR+,Ice,0.75,cyan
+1649,MISSING,MISSING,0,white
+1650,HiProb ZR/IP,Ice,0.75,cyan
+1651,HiProb ZR-/IP,Ice,0.75,cyan
+1652,HiProb ZR+/IP,Ice,0.75,cyan
+1653,HiProb ZR/IP-,Ice,0.75,cyan
+1654,HiProb ZR-/IP-,Ice,0.75,cyan
+1655,HiProb ZR+/IP-,Ice,0.75,cyan
+1656,HiProb ZR/IP+,Ice,0.75,cyan
+1657,HiProb ZR-/IP+,Ice,0.75,cyan
+1658,HiProb ZR+/IP+,Ice,0.75,cyan
+1659,MISSING,MISSING,0,white
+1660,HiProb ZR/SW,Ice,0.75,cyan
+1661,HiProb ZR-/SW,Ice,0.75,cyan
+1662,HiProb ZR+/SW,Ice,0.75,cyan
+1663,HiProb ZR/SW-,Ice,0.75,cyan
+1664,HiProb ZR-/SW-,Ice,0.75,cyan
+1665,HiProb ZR+/SW-,Ice,0.75,cyan
+1666,HiProb ZR/SW+,Ice,0.75,cyan
+1667,HiProb ZR-/SW+,Ice,0.75,cyan
+1668,HiProb ZR+/SW+,Ice,0.75,cyan
+1669,MISSING,MISSING,0,white
+1670,HiProb ZR/S,Ice,0.75,cyan
+1671,HiProb ZR-/S,Ice,0.75,cyan
+1672,HiProb ZR+/S,Ice,0.75,cyan
+1673,HiProb ZR/S-,Ice,0.75,cyan
+1674,HiProb ZR-/S-,Ice,0.75,cyan
+1675,HiProb ZR+/S-,Ice,0.75,cyan
+1676,HiProb ZR/S+,Ice,0.75,cyan
+1677,HiProb ZR-/S+,Ice,0.75,cyan
+1678,HiProb ZR+/S+,Ice,0.75,cyan
+1679,MISSING,MISSING,0,white
+1680,HiProb ZR/T,Ice,0.75,cyan
+1681,HiProb ZR-/T,Ice,0.75,cyan
+1682,HiProb ZR+/T,Ice,0.75,cyan
+1683,HiProb ZR/T-,Ice,0.75,cyan
+1684,HiProb ZR-/T-,Ice,0.75,cyan
+1685,HiProb ZR+/T-,Ice,0.75,cyan
+1686,HiProb ZR/T+,Severe,0.75,red
+1687,HiProb ZR-/T+,Severe,0.75,red
+1688,HiProb ZR+/T+,Severe,0.75,red
+1689,MISSING,MISSING,0,white
+1690,HiProb ZR/F,Ice,0.75,cyan
+1691,HiProb ZR-/F,Ice,0.75,cyan
+1692,HiProb ZR+/F,Ice,0.75,cyan
+1693,HiProb ZR/F-,Ice,0.75,cyan
+1694,HiProb ZR-/F-,Ice,0.75,cyan
+1695,HiProb ZR+/F-,Ice,0.75,cyan
+1696,HiProb ZR/F+,Ice,0.75,cyan
+1697,HiProb ZR-/F+,Ice,0.75,cyan
+1698,HiProb ZR+/F+,Ice,0.75,cyan
+1699,MISSING,MISSING,0,white
+1700,HiProb IP/R,Ice,0.75,cyan
+1701,HiProb IP-/R,Ice,0.75,cyan
+1702,HiProb IP+/R,Ice,0.75,cyan
+1703,HiProb IP/R-,Ice,0.75,cyan
+1704,HiProb IP-/R-,Ice,0.75,cyan
+1705,HiProb IP+/R-,Ice,0.75,cyan
+1706,HiProb IP/R+,Ice,0.75,cyan
+1707,HiProb IP-/R+,Ice,0.75,cyan
+1708,HiProb IP+/R+,Ice,0.75,cyan
+1709,MISSING,MISSING,0,white
+1710,HiProb IP/RW,Ice,0.75,cyan
+1711,HiProb IP-/RW,Ice,0.75,cyan
+1712,HiProb IP+/RW,Ice,0.75,cyan
+1713,HiProb IP/RW-,Ice,0.75,cyan
+1714,HiProb IP-/RW-,Ice,0.75,cyan
+1715,HiProb IP+/RW-,Ice,0.75,cyan
+1716,HiProb IP/RW+,Ice,0.75,cyan
+1717,HiProb IP-/RW+,Ice,0.75,cyan
+1718,HiProb IP+/RW+,Ice,0.75,cyan
+1719,MISSING,MISSING,0,white
+1720,HiProb IP/L,Ice,0.75,cyan
+1721,HiProb IP-/L,Ice,0.75,cyan
+1722,HiProb IP+/L,Ice,0.75,cyan
+1723,HiProb IP/L-,Ice,0.75,cyan
+1724,HiProb IP-/L-,Ice,0.75,cyan
+1725,HiProb IP+/L-,Ice,0.75,cyan
+1726,HiProb IP/L+,Ice,0.75,cyan
+1727,HiProb IP-/L+,Ice,0.75,cyan
+1728,HiProb IP+/L+,Ice,0.75,cyan
+1729,MISSING,MISSING,0,white
+1730,HiProb IP/ZL,Ice,0.75,cyan
+1731,HiProb IP-/ZL,Ice,0.75,cyan
+1732,HiProb IP+/ZL,Ice,0.75,cyan
+1733,HiProb IP/ZL-,Ice,0.75,cyan
+1734,HiProb IP-/ZL-,Ice,0.75,cyan
+1735,HiProb IP+/ZL-,Ice,0.75,cyan
+1736,HiProb IP/ZL+,Ice,0.75,cyan
+1737,HiProb IP-/ZL+,Ice,0.75,cyan
+1738,HiProb IP+/ZL+,Ice,0.75,cyan
+1739,MISSING,MISSING,0,white
+1740,HiProb IP/ZR,Ice,0.75,cyan
+1741,HiProb IP-/ZR,Ice,0.75,cyan
+1742,HiProb IP+/ZR,Ice,0.75,cyan
+1743,HiProb IP/ZR-,Ice,0.75,cyan
+1744,HiProb IP-/ZR-,Ice,0.75,cyan
+1745,HiProb IP+/ZR-,Ice,0.75,cyan
+1746,HiProb IP/ZR+,Ice,0.75,cyan
+1747,HiProb IP-/ZR+,Ice,0.75,cyan
+1748,HiProb IP+/ZR+,Ice,0.75,cyan
+1749,MISSING,MISSING,0,white
+1750,HiProb IP/IP,Ice,0.75,cyan
+1751,HiProb IP-/IP,Ice,0.75,cyan
+1752,HiProb IP+/IP,Ice,0.75,cyan
+1753,HiProb IP/IP-,Ice,0.75,cyan
+1754,HiProb IP-/IP-,Ice,0.75,cyan
+1755,HiProb IP+/IP-,Ice,0.75,cyan
+1756,HiProb IP/IP+,Ice,0.75,cyan
+1757,HiProb IP-/IP+,Ice,0.75,cyan
+1758,HiProb IP+/IP+,Ice,0.75,cyan
+1759,MISSING,MISSING,0,white
+1760,HiProb IP/SW,Ice,0.75,cyan
+1761,HiProb IP-/SW,Ice,0.75,cyan
+1762,HiProb IP+/SW,Ice,0.75,cyan
+1763,HiProb IP/SW-,Ice,0.75,cyan
+1764,HiProb IP-/SW-,Ice,0.75,cyan
+1765,HiProb IP+/SW-,Ice,0.75,cyan
+1766,HiProb IP/SW+,Ice,0.75,cyan
+1767,HiProb IP-/SW+,Ice,0.75,cyan
+1768,HiProb IP+/SW+,Ice,0.75,cyan
+1769,MISSING,MISSING,0,white
+1770,HiProb IP/S,Ice,0.75,cyan
+1771,HiProb IP-/S,Ice,0.75,cyan
+1772,HiProb IP+/S,Ice,0.75,cyan
+1773,HiProb IP/S-,Ice,0.75,cyan
+1774,HiProb IP-/S-,Ice,0.75,cyan
+1775,HiProb IP+/S-,Ice,0.75,cyan
+1776,HiProb IP/S+,Ice,0.75,cyan
+1777,HiProb IP-/S+,Ice,0.75,cyan
+1778,HiProb IP+/S+,Ice,0.75,cyan
+1779,MISSING,MISSING,0,white
+1780,HiProb IP/T,Ice,0.75,cyan
+1781,HiProb IP-/T,Ice,0.75,cyan
+1782,HiProb IP+/T,Ice,0.75,cyan
+1783,HiProb IP/T-,Ice,0.75,cyan
+1784,HiProb IP-/T-,Ice,0.75,cyan
+1785,HiProb IP+/T-,Ice,0.75,cyan
+1786,HiProb IP/T+,Severe,0.75,red
+1787,HiProb IP-/T+,Severe,0.75,red
+1788,HiProb IP+/T+,Severe,0.75,red
+1789,MISSING,MISSING,0,white
+1790,HiProb IP/F,Ice,0.75,cyan
+1791,HiProb IP-/F,Ice,0.75,cyan
+1792,HiProb IP+/F,Ice,0.75,cyan
+1793,HiProb IP/F-,Ice,0.75,cyan
+1794,HiProb IP-/F-,Ice,0.75,cyan
+1795,HiProb IP+/F-,Ice,0.75,cyan
+1796,HiProb IP/F+,Ice,0.75,cyan
+1797,HiProb IP-/F+,Ice,0.75,cyan
+1798,HiProb IP+/F+,Ice,0.75,cyan
+1799,MISSING,MISSING,0,white
+1800,HiProb SW/R,Mix,0.75,magenta
+1801,HiProb SW-/R,Mix,0.75,magenta
+1802,HiProb SW+/R,Mix,0.75,magenta
+1803,HiProb SW/R-,Mix,0.75,magenta
+1804,HiProb SW-/R-,Mix,0.75,magenta
+1805,HiProb SW+/R-,Mix,0.75,magenta
+1806,HiProb SW/R+,Mix,0.75,magenta
+1807,HiProb SW-/R+,Mix,0.75,magenta
+1808,HiProb SW+/R+,Mix,0.75,magenta
+1809,MISSING,MISSING,0,white
+1810,HiProb SW/RW,Mix,0.75,magenta
+1811,HiProb SW-/RW,Mix,0.75,magenta
+1812,HiProb SW+/RW,Mix,0.75,magenta
+1813,HiProb SW/RW-,Mix,0.75,magenta
+1814,HiProb SW-/RW-,Mix,0.75,magenta
+1815,HiProb SW+/RW-,Mix,0.75,magenta
+1816,HiProb SW/RW+,Mix,0.75,magenta
+1817,HiProb SW-/RW+,Mix,0.75,magenta
+1818,HiProb SW+/RW+,Mix,0.75,magenta
+1819,MISSING,MISSING,0,white
+1820,HiProb SW/L,Mix,0.75,magenta
+1821,HiProb SW-/L,Mix,0.75,magenta
+1822,HiProb SW+/L,Mix,0.75,magenta
+1823,HiProb SW/L-,Mix,0.75,magenta
+1824,HiProb SW-/L-,Mix,0.75,magenta
+1825,HiProb SW+/L-,Mix,0.75,magenta
+1826,HiProb SW/L+,Mix,0.75,magenta
+1827,HiProb SW-/L+,Mix,0.75,magenta
+1828,HiProb SW+/L+,Mix,0.75,magenta
+1829,MISSING,MISSING,0,white
+1830,HiProb SW/ZL,Ice,0.75,cyan
+1831,HiProb SW-/ZL,Ice,0.75,cyan
+1832,HiProb SW+/ZL,Ice,0.75,cyan
+1833,HiProb SW/ZL-,Ice,0.75,cyan
+1834,HiProb SW-/ZL-,Ice,0.75,cyan
+1835,HiProb SW+/ZL-,Ice,0.75,cyan
+1836,HiProb SW/ZL+,Ice,0.75,cyan
+1837,HiProb SW-/ZL+,Ice,0.75,cyan
+1838,HiProb SW+/ZL+,Ice,0.75,cyan
+1839,MISSING,MISSING,0,white
+1840,HiProb SW/ZR,Ice,0.75,cyan
+1841,HiProb SW-/ZR,Ice,0.75,cyan
+1842,HiProb SW+/ZR,Ice,0.75,cyan
+1843,HiProb SW/ZR-,Ice,0.75,cyan
+1844,HiProb SW-/ZR-,Ice,0.75,cyan
+1845,HiProb SW+/ZR-,Ice,0.75,cyan
+1846,HiProb SW/ZR+,Ice,0.75,cyan
+1847,HiProb SW-/ZR+,Ice,0.75,cyan
+1848,HiProb SW+/ZR+,Ice,0.75,cyan
+1849,MISSING,MISSING,0,white
+1850,HiProb SW/IP,Ice,0.75,cyan
+1851,HiProb SW-/IP,Ice,0.75,cyan
+1852,HiProb SW+/IP,Ice,0.75,cyan
+1853,HiProb SW/IP-,Ice,0.75,cyan
+1854,HiProb SW-/IP-,Ice,0.75,cyan
+1855,HiProb SW+/IP-,Ice,0.75,cyan
+1856,HiProb SW/IP+,Ice,0.75,cyan
+1857,HiProb SW-/IP+,Ice,0.75,cyan
+1858,HiProb SW+/IP+,Ice,0.75,cyan
+1859,MISSING,MISSING,0,white
+1860,HiProb SW/SW,Snow,0.75,dodgerblue
+1861,HiProb SW-/SW,Snow,0.75,dodgerblue
+1862,HiProb SW+/SW,Snow,0.75,dodgerblue
+1863,HiProb SW/SW-,Snow,0.75,dodgerblue
+1864,HiProb SW-/SW-,Snow,0.75,dodgerblue
+1865,HiProb SW+/SW-,Snow,0.75,dodgerblue
+1866,HiProb SW/SW+,Snow,0.75,dodgerblue
+1867,HiProb SW-/SW+,Snow,0.75,dodgerblue
+1868,HiProb SW+/SW+,Snow,0.75,dodgerblue
+1869,MISSING,MISSING,0,white
+1870,HiProb SW/S,Snow,0.75,dodgerblue
+1871,HiProb SW-/S,Snow,0.75,dodgerblue
+1872,HiProb SW+/S,Snow,0.75,dodgerblue
+1873,HiProb SW/S-,Snow,0.75,dodgerblue
+1874,HiProb SW-/S-,Snow,0.75,dodgerblue
+1875,HiProb SW+/S-,Snow,0.75,dodgerblue
+1876,HiProb SW/S+,Snow,0.75,dodgerblue
+1877,HiProb SW-/S+,Snow,0.75,dodgerblue
+1878,HiProb SW+/S+,Snow,0.75,dodgerblue
+1879,MISSING,MISSING,0,white
+1880,HiProb SW/T,Mix,0.75,magenta
+1881,HiProb SW-/T,Mix,0.75,magenta
+1882,HiProb SW+/T,Mix,0.75,magenta
+1883,HiProb SW/T-,Mix,0.75,magenta
+1884,HiProb SW-/T-,Mix,0.75,magenta
+1885,HiProb SW+/T-,Mix,0.75,magenta
+1886,HiProb SW/T+,Severe,0.75,red
+1887,HiProb SW-/T+,Severe,0.75,red
+1888,HiProb SW+/T+,Severe,0.75,red
+1889,MISSING,MISSING,0,white
+1890,HiProb SW/F,Snow,0.75,dodgerblue
+1891,HiProb SW-/F,Snow,0.75,dodgerblue
+1892,HiProb SW+/F,Snow,0.75,dodgerblue
+1893,HiProb SW/F-,Snow,0.75,dodgerblue
+1894,HiProb SW-/F-,Snow,0.75,dodgerblue
+1895,HiProb SW+/F-,Snow,0.75,dodgerblue
+1896,HiProb SW/F+,Snow,0.75,dodgerblue
+1897,HiProb SW-/F+,Snow,0.75,dodgerblue
+1898,HiProb SW+/F+,Snow,0.75,dodgerblue
+1899,MISSING,MISSING,0,white
+1900,HiProb S/R,Mix,0.75,magenta
+1901,HiProb S-/R,Mix,0.75,magenta
+1902,HiProb S+/R,Mix,0.75,magenta
+1903,HiProb S/R-,Mix,0.75,magenta
+1904,HiProb S-/R-,Mix,0.75,magenta
+1905,HiProb S+/R-,Mix,0.75,magenta
+1906,HiProb S/R+,Mix,0.75,magenta
+1907,HiProb S-/R+,Mix,0.75,magenta
+1908,HiProb S+/R+,Mix,0.75,magenta
+1909,MISSING,MISSING,0,white
+1910,HiProb S/RW,Mix,0.75,magenta
+1911,HiProb S-/RW,Mix,0.75,magenta
+1912,HiProb S+/RW,Mix,0.75,magenta
+1913,HiProb S/RW-,Mix,0.75,magenta
+1914,HiProb S-/RW-,Mix,0.75,magenta
+1915,HiProb S+/RW-,Mix,0.75,magenta
+1916,HiProb S/RW+,Mix,0.75,magenta
+1917,HiProb S-/RW+,Mix,0.75,magenta
+1918,HiProb S+/RW+,Mix,0.75,magenta
+1919,MISSING,MISSING,0,white
+1920,HiProb S/L,Mix,0.75,magenta
+1921,HiProb S-/L,Mix,0.75,magenta
+1922,HiProb S+/L,Mix,0.75,magenta
+1923,HiProb S/L-,Mix,0.75,magenta
+1924,HiProb S-/L-,Mix,0.75,magenta
+1925,HiProb S+/L-,Mix,0.75,magenta
+1926,HiProb S/L+,Mix,0.75,magenta
+1927,HiProb S-/L+,Mix,0.75,magenta
+1928,HiProb S+/L+,Mix,0.75,magenta
+1929,MISSING,MISSING,0,white
+1930,HiProb S/ZL,Ice,0.75,cyan
+1931,HiProb S-/ZL,Ice,0.75,cyan
+1932,HiProb S+/ZL,Ice,0.75,cyan
+1933,HiProb S/ZL-,Ice,0.75,cyan
+1934,HiProb S-/ZL-,Ice,0.75,cyan
+1935,HiProb S+/ZL-,Ice,0.75,cyan
+1936,HiProb S/ZL+,Ice,0.75,cyan
+1937,HiProb S-/ZL+,Ice,0.75,cyan
+1938,HiProb S+/ZL+,Ice,0.75,cyan
+1939,MISSING,MISSING,0,white
+1940,HiProb S/ZR,Ice,0.75,cyan
+1941,HiProb S-/ZR,Ice,0.75,cyan
+1942,HiProb S+/ZR,Ice,0.75,cyan
+1943,HiProb S/ZR-,Ice,0.75,cyan
+1944,HiProb S-/ZR-,Ice,0.75,cyan
+1945,HiProb S+/ZR-,Ice,0.75,cyan
+1946,HiProb S/ZR+,Ice,0.75,cyan
+1947,HiProb S-/ZR+,Ice,0.75,cyan
+1948,HiProb S+/ZR+,Ice,0.75,cyan
+1949,MISSING,MISSING,0,white
+1950,HiProb S/IP,Ice,0.75,cyan
+1951,HiProb S-/IP,Ice,0.75,cyan
+1952,HiProb S+/IP,Ice,0.75,cyan
+1953,HiProb S/IP-,Ice,0.75,cyan
+1954,HiProb S-/IP-,Ice,0.75,cyan
+1955,HiProb S+/IP-,Ice,0.75,cyan
+1956,HiProb S/IP+,Ice,0.75,cyan
+1957,HiProb S-/IP+,Ice,0.75,cyan
+1958,HiProb S+/IP+,Ice,0.75,cyan
+1959,MISSING,MISSING,0,white
+1960,HiProb S/SW,Snow,0.75,dodgerblue
+1961,HiProb S-/SW,Snow,0.75,dodgerblue
+1962,HiProb S+/SW,Snow,0.75,dodgerblue
+1963,HiProb S/SW-,Snow,0.75,dodgerblue
+1964,HiProb S-/SW-,Snow,0.75,dodgerblue
+1965,HiProb S+/SW-,Snow,0.75,dodgerblue
+1966,HiProb S/SW+,Snow,0.75,dodgerblue
+1967,HiProb S-/SW+,Snow,0.75,dodgerblue
+1968,HiProb S+/SW+,Snow,0.75,dodgerblue
+1969,MISSING,MISSING,0,white
+1970,HiProb S/S,Snow,0.75,dodgerblue
+1971,HiProb S-/S,Snow,0.75,dodgerblue
+1972,HiProb S+/S,Snow,0.75,dodgerblue
+1973,HiProb S/S-,Snow,0.75,dodgerblue
+1974,HiProb S-/S-,Snow,0.75,dodgerblue
+1975,HiProb S+/S-,Snow,0.75,dodgerblue
+1976,HiProb S/S+,Snow,0.75,dodgerblue
+1977,HiProb S-/S+,Snow,0.75,dodgerblue
+1978,HiProb S+/S+,Snow,0.75,dodgerblue
+1979,MISSING,MISSING,0,white
+1980,HiProb S/T,Mix,0.75,magenta
+1981,HiProb S-/T,Mix,0.75,magenta
+1982,HiProb S+/T,Mix,0.75,magenta
+1983,HiProb S/T-,Mix,0.75,magenta
+1984,HiProb S-/T-,Mix,0.75,magenta
+1985,HiProb S+/T-,Mix,0.75,magenta
+1986,HiProb S/T+,Severe,0.75,red
+1987,HiProb S-/T+,Severe,0.75,red
+1988,HiProb S+/T+,Severe,0.75,red
+1989,MISSING,MISSING,0,white
+1990,HiProb S/F,Snow,0.75,dodgerblue
+1991,HiProb S-/F,Snow,0.75,dodgerblue
+1992,HiProb S+/F,Snow,0.75,dodgerblue
+1993,HiProb S/F-,Snow,0.75,dodgerblue
+1994,HiProb S-/F-,Snow,0.75,dodgerblue
+1995,HiProb S+/F-,Snow,0.75,dodgerblue
+1996,HiProb S/F+,Snow,0.75,dodgerblue
+1997,HiProb S-/F+,Snow,0.75,dodgerblue
+1998,HiProb S+/F+,Snow,0.75,dodgerblue
+1999,MISSING,MISSING,0,white
+2000,HiProb T/R,Rain,0.75,green
+2001,HiProb T-/R,Rain,0.75,green
+2002,HiProb T+/R,Severe,0.75,red
+2003,HiProb T/R-,Rain,0.75,green
+2004,HiProb T-/R-,Rain,0.75,green
+2005,HiProb T+/R-,Severe,0.75,red
+2006,HiProb T/R+,Rain,0.75,green
+2007,HiProb T-/R+,Rain,0.75,green
+2008,HiProb T+/R+,Severe,0.75,red
+2009,MISSING,MISSING,0,white
+2010,HiProb T/RW,Rain,0.75,green
+2011,HiProb T-/RW,Rain,0.75,green
+2012,HiProb T+/RW,Severe,0.75,red
+2013,HiProb T/RW-,Rain,0.75,green
+2014,HiProb T-/RW-,Rain,0.75,green
+2015,HiProb T+/RW-,Severe,0.75,red
+2016,HiProb T/RW+,Rain,0.75,green
+2017,HiProb T-/RW+,Rain,0.75,green
+2018,HiProb T+/RW+,Severe,0.75,red
+2019,MISSING,MISSING,0,white
+2020,HiProb T/L,Rain,0.75,green
+2021,HiProb T-/L,Rain,0.75,green
+2022,HiProb T+/L,Severe,0.75,red
+2023,HiProb T/L-,Rain,0.75,green
+2024,HiProb T-/L-,Rain,0.75,green
+2025,HiProb T+/L-,Severe,0.75,red
+2026,HiProb T/L+,Rain,0.75,green
+2027,HiProb T-/L+,Rain,0.75,green
+2028,HiProb T+/L+,Severe,0.75,red
+2029,MISSING,MISSING,0,white
+2030,HiProb T/ZL,Ice,0.75,cyan
+2031,HiProb T-/ZL,Ice,0.75,cyan
+2032,HiProb T+/ZL,Severe,0.75,red
+2033,HiProb T/ZL-,Ice,0.75,cyan
+2034,HiProb T-/ZL-,Ice,0.75,cyan
+2035,HiProb T+/ZL-,Severe,0.75,red
+2036,HiProb T/ZL+,Ice,0.75,cyan
+2037,HiProb T-/ZL+,Ice,0.75,cyan
+2038,HiProb T+/ZL+,Severe,0.75,red
+2039,MISSING,MISSING,0,white
+2040,HiProb T/ZR,Ice,0.75,cyan
+2041,HiProb T-/ZR,Ice,0.75,cyan
+2042,HiProb T+/ZR,Severe,0.75,red
+2043,HiProb T/ZR-,Ice,0.75,cyan
+2044,HiProb T-/ZR-,Ice,0.75,cyan
+2045,HiProb T+/ZR-,Severe,0.75,red
+2046,HiProb T/ZR+,Ice,0.75,cyan
+2047,HiProb T-/ZR+,Ice,0.75,cyan
+2048,HiProb T+/ZR+,Severe,0.75,red
+2049,MISSING,MISSING,0,white
+2050,HiProb T/IP,Ice,0.75,cyan
+2051,HiProb T-/IP,Ice,0.75,cyan
+2052,HiProb T+/IP,Severe,0.75,red
+2053,HiProb T/IP-,Ice,0.75,cyan
+2054,HiProb T-/IP-,Ice,0.75,cyan
+2055,HiProb T+/IP-,Severe,0.75,red
+2056,HiProb T/IP+,Ice,0.75,cyan
+2057,HiProb T-/IP+,Ice,0.75,cyan
+2058,HiProb T+/IP+,Severe,0.75,red
+2059,MISSING,MISSING,0,white
+2060,HiProb T/SW,Mix,0.75,magenta
+2061,HiProb T-/SW,Mix,0.75,magenta
+2062,HiProb T+/SW,Severe,0.75,red
+2063,HiProb T/SW-,Mix,0.75,magenta
+2064,HiProb T-/SW-,Mix,0.75,magenta
+2065,HiProb T+/SW-,Severe,0.75,red
+2066,HiProb T/SW+,Mix,0.75,magenta
+2067,HiProb T-/SW+,Mix,0.75,magenta
+2068,HiProb T+/SW+,Severe,0.75,red
+2069,MISSING,MISSING,0,white
+2070,HiProb T/S,Mix,0.75,magenta
+2071,HiProb T-/S,Mix,0.75,magenta
+2072,HiProb T+/S,Severe,0.75,red
+2073,HiProb T/S-,Mix,0.75,magenta
+2074,HiProb T-/S-,Mix,0.75,magenta
+2075,HiProb T+/S-,Severe,0.75,red
+2076,HiProb T/S+,Mix,0.75,magenta
+2077,HiProb T-/S+,Mix,0.75,magenta
+2078,HiProb T+/S+,Severe,0.75,red
+2079,MISSING,MISSING,0,white
+2080,HiProb T/T,Rain,0.75,green
+2081,HiProb T-/T,Rain,0.75,green
+2082,HiProb T+/T,Severe,0.75,red
+2083,HiProb T/T-,Rain,0.75,green
+2084,HiProb T-/T-,Rain,0.75,green
+2085,HiProb T+/T-,Severe,0.75,red
+2086,HiProb T/T+,Severe,0.75,red
+2087,HiProb T-/T+,Severe,0.75,red
+2088,HiProb T+/T+,Severe,0.75,red
+2089,MISSING,MISSING,0,white
+2090,HiProb T/F,Rain,0.75,green
+2091,HiProb T-/F,Rain,0.75,green
+2092,HiProb T+/F,Severe,0.75,red
+2093,HiProb T/F-,Rain,0.75,green
+2094,HiProb T-/F-,Rain,0.75,green
+2095,HiProb T+/F-,Severe,0.75,red
+2096,HiProb T/F+,Rain,0.75,green
+2097,HiProb T-/F+,Rain,0.75,green
+2098,HiProb T+/F+,Severe,0.75,red
+2099,MISSING,MISSING,0,white
+2100,HiProb F/R,Rain,0.75,green
+2101,HiProb F-/R,Rain,0.75,green
+2102,HiProb F+/R,Rain,0.75,green
+2103,HiProb F/R-,Rain,0.75,green
+2104,HiProb F-/R-,Rain,0.75,green
+2105,HiProb F+/R-,Rain,0.75,green
+2106,HiProb F/R+,Rain,0.75,green
+2107,HiProb F-/R+,Rain,0.75,green
+2108,HiProb F+/R+,Rain,0.75,green
+2109,MISSING,MISSING,0,white
+2110,HiProb F/RW,Rain,0.75,green
+2111,HiProb F-/RW,Rain,0.75,green
+2112,HiProb F+/RW,Rain,0.75,green
+2113,HiProb F/RW-,Rain,0.75,green
+2114,HiProb F-/RW-,Rain,0.75,green
+2115,HiProb F+/RW-,Rain,0.75,green
+2116,HiProb F/RW+,Rain,0.75,green
+2117,HiProb F-/RW+,Rain,0.75,green
+2118,HiProb F+/RW+,Rain,0.75,green
+2119,MISSING,MISSING,0,white
+2120,HiProb F/L,Rain,0.75,green
+2121,HiProb F-/L,Rain,0.75,green
+2122,HiProb F+/L,Rain,0.75,green
+2123,HiProb F/L-,Rain,0.75,green
+2124,HiProb F-/L-,Rain,0.75,green
+2125,HiProb F+/L-,Rain,0.75,green
+2126,HiProb F/L+,Rain,0.75,green
+2127,HiProb F-/L+,Rain,0.75,green
+2128,HiProb F+/L+,Rain,0.75,green
+2129,MISSING,MISSING,0,white
+2130,HiProb F/ZL,Ice,0.75,cyan
+2131,HiProb F-/ZL,Ice,0.75,cyan
+2132,HiProb F+/ZL,Ice,0.75,cyan
+2133,HiProb F/ZL-,Ice,0.75,cyan
+2134,HiProb F-/ZL-,Ice,0.75,cyan
+2135,HiProb F+/ZL-,Ice,0.75,cyan
+2136,HiProb F/ZL+,Ice,0.75,cyan
+2137,HiProb F-/ZL+,Ice,0.75,cyan
+2138,HiProb F+/ZL+,Ice,0.75,cyan
+2139,MISSING,MISSING,0,white
+2140,HiProb F/ZR,Ice,0.75,cyan
+2141,HiProb F-/ZR,Ice,0.75,cyan
+2142,HiProb F+/ZR,Ice,0.75,cyan
+2143,HiProb F/ZR-,Ice,0.75,cyan
+2144,HiProb F-/ZR-,Ice,0.75,cyan
+2145,HiProb F+/ZR-,Ice,0.75,cyan
+2146,HiProb F/ZR+,Ice,0.75,cyan
+2147,HiProb F-/ZR+,Ice,0.75,cyan
+2148,HiProb F+/ZR+,Ice,0.75,cyan
+2149,MISSING,MISSING,0,white
+2150,HiProb F/IP,Ice,0.75,cyan
+2151,HiProb F-/IP,Ice,0.75,cyan
+2152,HiProb F+/IP,Ice,0.75,cyan
+2153,HiProb F/IP-,Ice,0.75,cyan
+2154,HiProb F-/IP-,Ice,0.75,cyan
+2155,HiProb F+/IP-,Ice,0.75,cyan
+2156,HiProb F/IP+,Ice,0.75,cyan
+2157,HiProb F-/IP+,Ice,0.75,cyan
+2158,HiProb F+/IP+,Ice,0.75,cyan
+2159,MISSING,MISSING,0,white
+2160,HiProb F/SW,Snow,0.75,dodgerblue
+2161,HiProb F-/SW,Snow,0.75,dodgerblue
+2162,HiProb F+/SW,Snow,0.75,dodgerblue
+2163,HiProb F/SW-,Snow,0.75,dodgerblue
+2164,HiProb F-/SW-,Snow,0.75,dodgerblue
+2165,HiProb F+/SW-,Snow,0.75,dodgerblue
+2166,HiProb F/SW+,Snow,0.75,dodgerblue
+2167,HiProb F-/SW+,Snow,0.75,dodgerblue
+2168,HiProb F+/SW+,Snow,0.75,dodgerblue
+2169,MISSING,MISSING,0,white
+2170,HiProb F/S,Snow,0.75,dodgerblue
+2171,HiProb F-/S,Snow,0.75,dodgerblue
+2172,HiProb F+/S,Snow,0.75,dodgerblue
+2173,HiProb F/S-,Snow,0.75,dodgerblue
+2174,HiProb F-/S-,Snow,0.75,dodgerblue
+2175,HiProb F+/S-,Snow,0.75,dodgerblue
+2176,HiProb F/S+,Snow,0.75,dodgerblue
+2177,HiProb F-/S+,Snow,0.75,dodgerblue
+2178,HiProb F+/S+,Snow,0.75,dodgerblue
+2179,MISSING,MISSING,0,white
+2180,HiProb F/T,Rain,0.75,green
+2181,HiProb F-/T,Rain,0.75,green
+2182,HiProb F+/T,Rain,0.75,green
+2183,HiProb F/T-,Rain,0.75,green
+2184,HiProb F-/T-,Rain,0.75,green
+2185,HiProb F+/T-,Rain,0.75,green
+2186,HiProb F/T+,Severe,0.75,red
+2187,HiProb F-/T+,Severe,0.75,red
+2188,HiProb F+/T+,Severe,0.75,red
+2189,MISSING,MISSING,0,white
+2190,HiProb F/F,Fog,0.75,yellow
+2191,HiProb F-/F,Fog,0.75,yellow
+2192,HiProb F+/F,Fog,0.75,yellow
+2193,HiProb F/F-,Fog,0.75,yellow
+2194,HiProb F-/F-,Fog,0.75,yellow
+2195,HiProb F+/F-,Fog,0.75,yellow
+2196,HiProb F/F+,Fog,0.75,yellow
+2197,HiProb F-/F+,Fog,0.75,yellow
+2198,HiProb F+/F+,Fog,0.75,yellow
