@@ -11,6 +11,7 @@ echo
 echo "Entering Working Directory"
 echo
 cd /projects/SD_Mines_Map_Wall
+rm -frv /projects/SD_Mines_Map_Wall/temp_sfc_analysis/*
 echo
 echo  "Firing Things Up!"
 echo

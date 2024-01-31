@@ -40,6 +40,8 @@ from metpy.plots import (add_metpy_logo, ColdFront, OccludedFront, StationaryFro
 
 working_dir = "./temp_sfc_analysis/"
 
+os.system("rm -frv "+working_dir+"/*")
+
 tz='America/Denver'
 
 
@@ -174,7 +176,7 @@ fronts_url = "https://thredds.ucar.edu/thredds/fileServer/" +  \
              "noaaport/text/fronts/Fronts_highres_KWBC_"    +  \
              fronts_date_YYYYMMDD_HH00 + ".txt"
 
-temp_front_file = "./fronts.txt"
+temp_front_file = "./temp_sfc_analysis/fronts.txt"
 
 
 print("downloading "+ fronts_url)
