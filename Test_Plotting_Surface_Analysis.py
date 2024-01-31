@@ -10,7 +10,7 @@
 # path effects for matplotlib than can be used to represent a line as a traditional front.
 # 
 
-# In[1]:
+# In[ ]:
 
 
 import pandas as pd
@@ -72,7 +72,7 @@ plt.rcParams.update({'text.color'      : Mines_Blue,
 # 
 # 
 
-# In[2]:
+# In[ ]:
 
 
 #display(time_frame)
@@ -112,7 +112,7 @@ print(pd.Timestamp.now().round('3h').to_pydatetime())
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -157,7 +157,7 @@ print("   NDFD Time ", ndfd_date_YYYYMMDD_HH00)
 ####################################################
 
 
-# In[4]:
+# In[ ]:
 
 
 fronts_date_YYYYMMDD_HH00
@@ -167,7 +167,7 @@ fronts_date_YYYYMMDD_HH00
 # 
 # https://thredds.ucar.edu/thredds/catalog/noaaport/text/fronts/catalog.html
 
-# In[5]:
+# In[ ]:
 
 
 fronts_url = "https://thredds.ucar.edu/thredds/fileServer/" +  \
@@ -281,7 +281,7 @@ df = parse_wpc_surface_bulletin(temp_front_file)
 # 
 # MSLP_MAPS_System_Reduction_msl
 
-# In[6]:
+# In[ ]:
 
 
 hrrr_url = "https://thredds.ucar.edu/thredds/dodsC/" +  \
@@ -313,13 +313,25 @@ snow = ds_hrrr[         "Categorical_Snow_surface"][0,:,:]
 icep = ds_hrrr[  "Categorical_Ice_Pellets_surface"][0,:,:] 
 frzr = ds_hrrr["Categorical_Freezing_Rain_surface"][0,:,:] 
 
-water_equiv =  ds_hrrr["Total_precipitation_surface_Mixed_intervals_Accumulation"][0,:,:]
+water_equiv =  ds_hrrr["Precipitation_rate_surface"][0,:,:]
 
-max_rain =  1.00
+#water_equiv.values[water_equiv.values == 0] = [np.nan]
+water_equiv.values = water_equiv.values * 0.0393701 * 3600.0
+
+print("inches per hour", np.nanmax(water_equiv.values))
+print("inches per hour", np.nanmin(water_equiv.values))
+
+max_rain =  0.50
 min_rain =  0.03
 water_equiv.values[water_equiv.values < min_rain] = [0] 
 water_equiv.values[water_equiv.values > max_rain] = [max_rain] 
 water_equiv.values = (water_equiv.values-0)/(max_rain-0)
+
+water_equiv.values[water_equiv.values < 0.25] = [0.25] 
+
+
+print("alphas",np.nanmax(water_equiv.values))
+print("alphas",np.nanmin(water_equiv.values))
 
 
 rain.values[rain.values == 0] = [np.nan] 
@@ -335,7 +347,7 @@ frzr.values[frzr.values == 0] = [np.nan]
 
 
 
-# In[7]:
+# In[ ]:
 
 
 def plot_clock_stationary(fig,time_utc):
@@ -391,7 +403,7 @@ def plot_clock_stationary(fig,time_utc):
 ##################################################
 
 
-# In[8]:
+# In[ ]:
 
 
 def plot_bulletin(ax, data):
@@ -469,7 +481,7 @@ def plot_bulletin(ax, data):
 
 # 
 
-# In[9]:
+# In[ ]:
 
 
 # Set up a default figure and map
@@ -555,11 +567,12 @@ plot_bulletin(ax, df)
 #
 # HRRR Weather
 #
-
-rain.plot.imshow(ax = ax, alpha = water_equiv.values, cmap =  "Greens", add_colorbar = False, transform = hrrr_crs)
-snow.plot.imshow(ax = ax, alpha = water_equiv.values, cmap =   "Blues", add_colorbar = False, transform = hrrr_crs)
-icep.plot.imshow(ax = ax, alpha = water_equiv.values, cmap = "Purples", add_colorbar = False, transform = hrrr_crs)
-frzr.plot.imshow(ax = ax, alpha = water_equiv.values, cmap =    "Reds", add_colorbar = False, transform = hrrr_crs)
+myalpha = water_equiv.values
+#myalpha = 1
+rain.plot.imshow(ax = ax, alpha = myalpha, cmap =  "Greens", add_colorbar = False, transform = hrrr_crs)
+snow.plot.imshow(ax = ax, alpha = myalpha, cmap =   "Blues", add_colorbar = False, transform = hrrr_crs)
+icep.plot.imshow(ax = ax, alpha = myalpha, cmap = "Purples", add_colorbar = False, transform = hrrr_crs)
+frzr.plot.imshow(ax = ax, alpha = myalpha, cmap =    "Reds", add_colorbar = False, transform = hrrr_crs)
 
 #
 ###############################
@@ -612,7 +625,7 @@ os.system("mv -fv ./temp_sfc_analysis/NWS_Sfc_Analysis.png ./graphics_files/")
 
 
 
-# In[10]:
+# In[ ]:
 
 
 print("Current Time ", current_datetime)
@@ -624,6 +637,12 @@ print(" ")
 print("--- MSLP Time ", mslp.coords)
 print(" ")
 print("--- PREC Time ", water_equiv.coords)
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
