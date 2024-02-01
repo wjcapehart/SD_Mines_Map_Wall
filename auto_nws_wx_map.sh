@@ -15,7 +15,7 @@ rm -frv /projects/SD_Mines_Map_Wall/temp_sfc_analysis/*
 echo
 echo  "Firing Things Up!"
 echo
-.  /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/Test_Plotting_Surface_Analysis.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
+.  /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/Surface_Analysis_Rapid_Refresh.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
 echo
 echo "Ending Script"
 echo
