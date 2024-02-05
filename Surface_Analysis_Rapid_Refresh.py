@@ -659,10 +659,10 @@ ax.clabel(mslpplot,
 #
 myalpha = 0.75
 
-rain.plot.imshow(cmap='Greens',  vmax=1, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
-snow.plot.imshow(cmap='Blues',   vmax=1, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
-icep.plot.imshow(cmap='Purples', vmax=1, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
-frzr.plot.imshow(cmap='Reds',    vmax=1, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
+rain.plot.imshow(cmap='Greens',  vmax=1.2, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
+snow.plot.imshow(cmap='Blues',   vmax=1.2, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
+icep.plot.imshow(cmap='Purples', vmax=1.2, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
+frzr.plot.imshow(cmap='Reds',    vmax=1.2, vmin=0, alpha=myalpha, ax=ax, transform = hrrr_crs, add_colorbar = False)
 
 #
 ###############################
