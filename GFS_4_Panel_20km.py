@@ -472,7 +472,7 @@ time_gfs_mslp      = gfs_model[mslp.dims[0]]
 ####################################################
 
 
-# In[ ]:
+# In[8]:
 
 
 ####################################################
@@ -1245,7 +1245,7 @@ for i in range(len(times_utc)) :
 ####################################################
 
 
-# In[ ]:
+# In[23]:
 
 
 ##################################################
@@ -1253,16 +1253,27 @@ for i in range(len(times_utc)) :
 # Convert PNGs into an Animated GIF
 #
 
+all_files = sorted(os.listdir(png_processing_directory))
+
+append_str = png_processing_directory + "/"
+all_files = [append_str + sub for sub in all_files]
+
+short_files = " ".join(all_files[ 0:28+1])
+long_files  = " ".join(all_files[29:])
+
 
 print("creating " + MAINDIR + "./processing_GFS_gif.sh")
 with open(MAINDIR + "./processing_GFS_gif.sh", 'w') as f:
     print("#!/bin/bash",         file = f)
     print(". /home/wjc/.bashrc", file = f)
     print("cd " + MAINDIR,       file = f) 
-    print("convert -delay 29 " + \
-          png_file_root        + \
-          "*.png "             + \
-          gif_file_name,         file = f) 
+    print("convert "               + \
+          "-delay 20 "             + \
+          short_files              + \
+          " "                      + \
+          "-delay 60 "             + \
+          long_files              + \
+          " "                      + \
           "./graphics_files/staging_area/"+gif_file_name,           file =  f) 
     print("mv -fv ./graphics_files/staging_area/"+gif_file_name+" ./graphics_files/", file =  f) 
     print("echo MAIN:GFS:: We\'re Outahere Like Vladimir", file =  f) 
@@ -1278,34 +1289,6 @@ print()
 
 #
 #################################################
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-print(deltat)
-
-import pandas as pd
-
-pd.DataFrame(data={"deltat":deltat})
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
