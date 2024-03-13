@@ -16,7 +16,7 @@ from metpy.plots    import colortables
 from metpy.plots    import add_timestamp
 from datetime       import datetime
 from siphon.catalog import TDSCatalog
-from datetime       import datetime
+from datetime       import datetime, timezone
 
 import numpy             as np
 import os                as os
