@@ -14,9 +14,8 @@
 
 from metpy.plots    import colortables
 from metpy.plots    import add_timestamp
-from datetime       import datetime
 from siphon.catalog import TDSCatalog
-from datetime       import datetime
+from datetime       import datetime, timezone
 
 import numpy             as np
 import os                as os
@@ -91,7 +90,7 @@ image_header_label = "GOES 16 Band 13 [10.3 µm Clean Longwave IR Window]"
 
 # Create variables for URL generation
 
-image_date = datetime.utcnow().date()
+image_date = datetime.now(tz=timezone.utc).date()
 region = 'CONUS'
 channel = 13
 

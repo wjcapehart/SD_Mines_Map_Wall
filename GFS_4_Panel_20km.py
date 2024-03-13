@@ -3,7 +3,7 @@
 
 # #### GFS 4-panel
 
-# In[1]:
+# In[ ]:
 
 
 ####################################################
@@ -39,6 +39,8 @@ import pyproj            as pyproj
 import scipy.ndimage     as ndimage
 from metpy.units         import units
 from matplotlib.gridspec import GridSpec
+from datetime            import timezone
+
 
 
 ####################################################
@@ -125,7 +127,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color="#002554",
 
 
 
-# In[2]:
+# In[ ]:
 
 
 ###################################################
@@ -175,7 +177,7 @@ precip_levels_mm = [  0.25,   2.50,   5.00,  10.00,
 ###################################################
 
 
-# In[3]:
+# In[ ]:
 
 
 ####################################################
@@ -210,7 +212,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 # |        12 UTC            |        15 UTC              |
 # |        18 UTC            |        21 UTC              |
 
-# In[4]:
+# In[ ]:
 
 
 ####################################################
@@ -222,7 +224,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 
 lag_hours = 5
 
-current_datetime = datetime.datetime.utcnow()
+current_datetime = datetime.datetime.now(tz=timezone.utc)
 
 current_datetime_lag3 = current_datetime - datetime.timedelta(hours=lag_hours)
 
@@ -267,7 +269,7 @@ print(gfs_opendap_url)
 
 # ## Crack open GRIB array with Xarray
 
-# In[5]:
+# In[ ]:
 
 
 ####################################################
@@ -345,7 +347,7 @@ alpha2d = alpha2d / alpha_factor
 
 # ## Fetch Data for Panel Displays
 
-# In[6]:
+# In[ ]:
 
 
 zz = np.array([ 10000.,  15000.,  20000.,  25000.,  30000.,  35000.,  40000.,  45000.,
@@ -355,7 +357,7 @@ zz = np.array([ 10000.,  15000.,  20000.,  25000.,  30000.,  35000.,  40000.,  4
 np.where(zz==700)
 
 
-# In[7]:
+# In[ ]:
 
 
 ####################################################
@@ -472,7 +474,7 @@ time_gfs_mslp      = gfs_model[mslp.dims[0]]
 ####################################################
 
 
-# In[8]:
+# In[ ]:
 
 
 ####################################################
@@ -1245,7 +1247,7 @@ for i in range(len(times_utc)) :
 ####################################################
 
 
-# In[23]:
+# In[ ]:
 
 
 ##################################################

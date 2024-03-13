@@ -86,7 +86,7 @@ image_header_label = "GOES 16 Band 8 [6.2 µm Upper-level Water Vapor]"
 
 # Create variables for URL generation
 
-image_date = datetime.utcnow().date()
+image_date = datetime.now(tz=timezone.utc).date()
 region = 'CONUS'
 channel = 8
 
@@ -265,10 +265,7 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-        
-        #print(time_for_clock)
-        #print(hour,   np.rad2deg(angles_h))
-        #print(minute, np.rad2deg(angles_m))
+
 
         
         plt.setp(axins.get_yticklabels(), visible=False)
@@ -280,9 +277,9 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
         axins.set_facecolor(Clock_BgndC)
         axins.grid(False)
         
-        axins.plot([angles_h,angles_h], [0,0.6], color=Clock_Color, linewidth=1.5)
+        axins.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
-        axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
+        axins.plot(circle_theta, circle_radius,   color=Clock_Color, linewidth=1.0)
 
         
         #

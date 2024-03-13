@@ -14,9 +14,8 @@
 
 from metpy.plots    import colortables
 from metpy.plots    import add_timestamp
-from datetime       import datetime
+from datetime       import datetime, timezone
 from siphon.catalog import TDSCatalog
-from datetime       import datetime
 
 import numpy             as np
 import os                as os
@@ -87,7 +86,7 @@ image_header_label = "GOES 18 Band 8 [6.2 µm Upper-level Water Vapor]"
 
 # Create variables for URL generation
 
-image_date = datetime.utcnow().date()
+image_date = datetime.now(tz=timezone.utc).date()
 region = 'CONUS'
 channel =  8
 

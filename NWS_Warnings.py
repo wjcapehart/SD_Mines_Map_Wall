@@ -17,7 +17,7 @@ import noaa_sdk as noaa_sdk
 import pandas as pd
 import shapely as shapely
 from   metpy.plots       import  USCOUNTIES
-
+from  datetime import timezone
 
 
 import timezonefinder    as tzf
@@ -65,19 +65,19 @@ csv_file_name = "./graphics_files/NWS_Warnings.csv"
 
 
 
-myproj = ccrs.AlbersEqualArea(central_longitude=-96, 
-                              central_latitude=37.5, 
-                              false_easting=0.0, 
-                              false_northing=0.0, 
-                              standard_parallels=(29.5, 45.5))
+myproj = ccrs.AlbersEqualArea(central_longitude  =  -96, 
+                              central_latitude   = 37.5, 
+                              false_easting      =  0.0, 
+                              false_northing     =  0.0, 
+                              standard_parallels =(29.5, 45.5))
 
 
 
 tz='America/Denver'
 
-time_utc = dt.datetime.utcnow()
-valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H%M %Z")
-local_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%Y-%m-%d %H%M %Z")
+time_utc = dt.datetime.now(tz=timezone.utc)
+valid_time = pd.to_datetime(time_utc).strftime("%Y-%m-%d %H%M %Z")
+local_time = pd.to_datetime(time_utc).tz_convert(tz=tz).strftime("%Y-%m-%d %H%M %Z")
 
 print(valid_time)
 print(local_time)
@@ -225,8 +225,11 @@ legend_color_table = warning_color_table.values.tolist()
 print(legend_color_table)
 legend_color_table = []
 
-for row in warning_color_table.iterrows():
-    mypatch = [mpatches.Patch(color=row[1][1], label=row[1][0])]
+
+
+for row in range(len(warning_color_table)):
+    mypatch = [mpatches.Patch(color = warning_color_table.iloc[row]["color"], 
+                              label = warning_color_table.iloc[row]["event"])]
     legend_color_table = legend_color_table + mypatch
     
     
@@ -310,7 +313,7 @@ axins = fig.add_axes(rect     =    [0, # 0.015,
                                     0.12],
                       projection  =  "polar")
 
-time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
+time_for_clock = pd.to_datetime(time_utc).tz_convert(tz=tz).time()
 
 hour   = time_for_clock.hour
 minute = time_for_clock.minute

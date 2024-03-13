@@ -37,7 +37,9 @@ import cartopy.feature   as cfeature
 import pandas            as pd
 import pyproj            as pyproj
 import scipy.ndimage     as ndimage
+
 from matplotlib.gridspec import GridSpec
+from datetime            import timezone
 
 
 ####################################################
@@ -211,7 +213,7 @@ os.system("rm -v "+ png_processing_directory +"*")
 
 lag_hours = 3
 
-current_datetime = datetime.datetime.utcnow()
+current_datetime = datetime.datetime.now(tz=timezone.utc)
 
 current_datetime_lag3 = current_datetime - datetime.timedelta(hours=lag_hours)
 

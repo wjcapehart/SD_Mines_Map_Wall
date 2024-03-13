@@ -26,7 +26,7 @@
 #   * [Cartopy](https://scitools.org.uk/cartopy/docs/latest/): Geospatial data processing in order to produce maps and other geospatial data analyses.
 # 
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -38,7 +38,7 @@
 
 # Internal Python Libraries
 
-from   datetime          import datetime, timedelta
+from   datetime          import datetime, timedelta, timezone
 import os                as     os
 import platform          as     platform
 import pathlib           as     pathlib
@@ -94,7 +94,7 @@ from   siphon.catalog     import TDSCatalog
 # 
 # The user should also 
 
-# In[ ]:
+# In[2]:
 
 
 ####################################################
@@ -158,7 +158,7 @@ geospatial_lon_min = Fixed_geospatial_lon_min
 # 
 # ![Faded NWSStormClearReflectivity](http://kyrill.ias.sdsmt.edu/wjc/eduresources/NWSStormClearReflectivity.png)
 
-# In[ ]:
+# In[3]:
 
 
 ####################################################
@@ -221,7 +221,7 @@ cmap = ListedColormap(cmap)
 # Currently, we only do a three-hour loop with the assumption that we should expect a radar image every four minutes.  If not available, these will be replaced by a plain map of the radar coverage area.
 # 
 
-# In[ ]:
+# In[6]:
 
 
 ####################################################
@@ -241,7 +241,7 @@ synop_collection = "https://thredds.ucar.edu/thredds/catalog/nws/synoptic/ncdeco
 
 #  Time Control
 
-time_now   = datetime.utcnow()
+time_now   =  datetime.now(tz=timezone.utc)
 time_start = time_now - timedelta(hours=3)
 
 print(time_start)
@@ -251,7 +251,7 @@ radar_delta_t = 4 # min
 
 metar_time_spread = 60
 
-siphon_time_series       = pd.date_range(time_start- timedelta(hours=1), time_now,freq='H')
+siphon_time_series       = pd.date_range(time_start- timedelta(hours=1), time_now,freq='h')
 siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 
 print(siphon_pulls_YYYYMMDD_HH)
@@ -270,7 +270,7 @@ print(siphon_pulls_YYYYMMDD_HH)
 # 
 # The local timezone is pulled from the using the station_id.  This uses [Jannik Kissinger's timezone finder](https://timezonefinder.readthedocs.io/en/latest/) to link the station_id's latitude and longitude to a timezone.
 
-# In[ ]:
+# In[7]:
 
 
 ####################################################
@@ -303,7 +303,7 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 # 
 # This is looped over the 4-hr product period.
 
-# In[ ]:
+# In[8]:
 
 
 ####################################################
@@ -408,7 +408,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 # [https://stackoverflow.com/questions/69923496/sorting-a-tdscatalog-list-for-loops-and-animations](https://stackoverflow.com/questions/69923496/sorting-a-tdscatalog-list-for-loops-and-animations)
 # 
 
-# In[ ]:
+# In[12]:
 
 
 ####################################################
@@ -447,7 +447,7 @@ print("start time: ",time_start)
 
 for name in datasets_sorted:
     
-    datetime_string = datetime.strptime(name[15:28], "%Y%m%d_%H%M")
+    datetime_string = pd.to_datetime(datetime.strptime(name[15:28], "%Y%m%d_%H%M")).tz_localize(tz="UTC")
     dates_for_radar.append(datetime_string)
 
     if (name == datasets_sorted[0]):
@@ -491,7 +491,7 @@ print("  end time: ",time_now)
 # 7.  And we're done!
 # 
 
-# In[ ]:
+# In[13]:
 
 
 ####################################################
@@ -919,7 +919,7 @@ def radar_plotting_func(name_index):
 # If the first instance of the big plotting function returns an error, return a diagnostic message which indicates that there are no radar files available during the current run.
 # 
 
-# In[ ]:
+# In[14]:
 
 
 #try: 
@@ -932,7 +932,7 @@ radar_plotting_func(0)
 # 
 # Use th [Joblib.Parallel()](https://joblib.readthedocs.io/en/stable/generated/joblib.Parallel.html) class to run the radar script in parallel for speedy results.
 
-# In[ ]:
+# In[15]:
 
 
 ####################################################
@@ -951,13 +951,13 @@ if (number_of_figures > 0) :
     n_jobs = 8
     
     
-    start_parallel = datetime.utcnow()
+    start_parallel = datetime.now(tz=timezone.utc)
     print("Starting Parallel : ",start_parallel)
 
 
     Parallel(n_jobs=n_jobs)(delayed(radar_plotting_func)(name_I) for name_I in range(number_of_figures))
     
-    end_parallel = datetime.utcnow()
+    end_parallel = datetime.now(tz=timezone.utc)
     print("Ending Parallel = ", end_parallel)
     print("  Parallel Time = ", (end_parallel - start_parallel))
 
@@ -974,7 +974,7 @@ print("Done")
 # 
 # In the event that there are *zero* radar plots.  The Big Plot Function will not be executed.  A faster simpler plot series is below that follows the same tasks in the Big Plot Function with the exception of pulling the radar data and plotting it.  The only thing that will be rendered will be the station plots using the same transparent=stale trick.
 
-# In[ ]:
+# In[16]:
 
 
 #####################################################
@@ -1232,7 +1232,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 # Rather than using Python's animation feature (which is wanting in some areas, we will use the classic [ImageMagik "convert" utility](https://imagemagick.org/script/convert.php) to create a high-quality animated gif. 
 # 
 
-# In[ ]:
+# In[17]:
 
 
 ##################################################
