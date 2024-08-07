@@ -114,7 +114,8 @@ print(data_url)
 # Pull Catalog
 #
 
-cat = TDSCatalog(data_url)
+cat = TDSCatalog(catalog_url = data_url)
+
 #
 ##################################################
 
@@ -181,7 +182,8 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
     
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
 
-        ds = dataset.remote_access(use_xarray=True)
+        ds = dataset.remote_access(service="OPENDAP",
+                                   use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
         proj = dat.metpy.cartopy_crs
         x = dat['x']
@@ -301,6 +303,18 @@ for i in range(len(cat.datasets)-total_frames,len(cat.datasets),1) :
 # In[ ]:
 
 
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
 ##################################################
 #
 # Convert PNGs into an Animated GIF
@@ -355,5 +369,5 @@ print("completed "+ gif_file_name)
 # In[ ]:
 
 
-
+dataset = cat.datasets[i]
 

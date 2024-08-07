@@ -288,7 +288,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         
         channel = channel_vis
 
-        ds  = dataset_vis.remote_access(use_xarray=True)
+        ds  = dataset_vis.remote_access(service="OPENDAP",
+                                   use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
         
         print("pixels : ",channel,dat.values.shape)
@@ -299,7 +300,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         if(frac_missing > 0.05):
             print("Switching to IR")
             channel = channel_tir
-            ds      = dataset_tir.remote_access(use_xarray=True)
+            ds      = dataset_tir.remote_access(service="OPENDAP",
+                                   use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')
         
         proj = dat.metpy.cartopy_crs
@@ -683,7 +685,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         
         channel = channel_vis
 
-        ds  = dataset_vis.remote_access(use_xarray=True)
+        ds  = dataset_vis.remote_access(service="OPENDAP",
+                                   use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
         
         frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
@@ -692,7 +695,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         if(frac_missing > 0.05):
             print("Switching to IR")
             channel = channel_tir
-            ds      = dataset_tir.remote_access(use_xarray=True)
+            ds      = dataset_tir.remote_access(service="OPENDAP",
+                                   use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')
         
         proj = dat.metpy.cartopy_crs
@@ -1064,7 +1068,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         
         channel = channel_vis
 
-        ds  = dataset_vis.remote_access(use_xarray=True)
+        ds  = dataset_vis.remote_access(service="OPENDAP",
+                                   use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
         
         frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
@@ -1073,7 +1078,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         if(frac_missing > 0.05):
             print("Switching to IR")
             channel = channel_tir
-            ds      = dataset_tir.remote_access(use_xarray=True)
+            ds      = dataset_tir.remote_access(service="OPENDAP",
+                                   use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')
         
         proj = dat.metpy.cartopy_crs
@@ -1439,7 +1445,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         
         channel = channel_vis
 
-        ds  = dataset_vis.remote_access(use_xarray=True)
+        ds  = dataset_vis.remote_access(service="OPENDAP",
+                                   use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
         
         frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
@@ -1448,7 +1455,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         if(frac_missing > 0.05):
             print("Switching to IR")
             channel = channel_tir
-            ds      = dataset_tir.remote_access(use_xarray=True)
+            ds      = dataset_tir.remote_access(service="OPENDAP",
+                                   use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')
         
         proj = dat.metpy.cartopy_crs
@@ -1848,7 +1856,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         channel  = channel_vis
 
 
-        ds  = dataset_vis.remote_access(use_xarray=True)
+        ds  = dataset_vis.remote_access(service="OPENDAP",
+                                   use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')[jmin_rap_vis : jmax_rap_vis,
                                                   imin_rap_vis : imax_rap_vis]
         
@@ -1861,7 +1870,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         if(frac_missing > 0.05):
             print("Switching to IR")
             channel = channel_tir
-            ds      = dataset_tir.remote_access(use_xarray=True)
+            ds      = dataset_tir.remote_access(service="OPENDAP",
+                                   use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')[jmin_rap_tir : jmax_rap_tir,
                                                           imin_rap_tir : imax_rap_tir] 
 
