@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # TLH Radar Loop for the Map Wall
+# # UDX Radar Loop for the Map Wall
 # 
 # Creates an Animated Plot for Radar and Station Models
 # 
@@ -26,7 +26,7 @@
 #   * [Cartopy](https://scitools.org.uk/cartopy/docs/latest/): Geospatial data processing in order to produce maps and other geospatial data analyses.
 # 
 
-# In[ ]:
+# In[1]:
 
 
 ####################################################
@@ -94,7 +94,7 @@ from   siphon.catalog     import TDSCatalog
 # 
 # The user should also 
 
-# In[ ]:
+# In[2]:
 
 
 ####################################################
@@ -106,26 +106,26 @@ from   siphon.catalog     import TDSCatalog
 
 # Station ID for METARS Addressing; Radar ID for Radar Data
 
-station_id = "TLH"
-radar_id   = "TLH"
+station_id = "RAP"
+radar_id   = "UDX"
 
 
 #
 #  Radar Domain Center
 # 
 
-Fixed_RadarLatitude      =   30.398
-Fixed_RadarLongitude     = -84.329
+Fixed_RadarLatitude      =   44.125
+Fixed_RadarLongitude     = -102.83
 
 #
 #  Assigned Radar Domain Extents
 # 
 
-Fixed_geospatial_lat_min =   28.332819
-Fixed_geospatial_lat_max =   32.46318
+Fixed_geospatial_lat_min =   42.05982
+Fixed_geospatial_lat_max =   46.19018
 
-Fixed_geospatial_lon_min = -86.7257
-Fixed_geospatial_lon_max =  -81.9323
+Fixed_geospatial_lon_min = -105.70986
+Fixed_geospatial_lon_max =  -99.950134
 
 RadarLatitude      = Fixed_RadarLatitude
 RadarLongitude     = Fixed_RadarLongitude
@@ -158,7 +158,7 @@ geospatial_lon_min = Fixed_geospatial_lon_min
 # 
 # ![Faded NWSStormClearReflectivity](http://kyrill.ias.sdsmt.edu/wjc/eduresources/NWSStormClearReflectivity.png)
 
-# In[ ]:
+# In[3]:
 
 
 ####################################################
@@ -221,7 +221,7 @@ cmap = ListedColormap(cmap)
 # Currently, we only do a three-hour loop with the assumption that we should expect a radar image every four minutes.  If not available, these will be replaced by a plain map of the radar coverage area.
 # 
 
-# In[ ]:
+# In[6]:
 
 
 ####################################################
@@ -270,7 +270,7 @@ print(siphon_pulls_YYYYMMDD_HH)
 # 
 # The local timezone is pulled from the using the station_id.  This uses [Jannik Kissinger's timezone finder](https://timezonefinder.readthedocs.io/en/latest/) to link the station_id's latitude and longitude to a timezone.
 
-# In[ ]:
+# In[7]:
 
 
 ####################################################
@@ -303,7 +303,7 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 # 
 # This is looped over the 4-hr product period.
 
-# In[ ]:
+# In[8]:
 
 
 ####################################################
@@ -408,7 +408,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 # [https://stackoverflow.com/questions/69923496/sorting-a-tdscatalog-list-for-loops-and-animations](https://stackoverflow.com/questions/69923496/sorting-a-tdscatalog-list-for-loops-and-animations)
 # 
 
-# In[ ]:
+# In[12]:
 
 
 ####################################################
@@ -491,7 +491,7 @@ print("  end time: ",time_now)
 # 7.  And we're done!
 # 
 
-# In[ ]:
+# In[13]:
 
 
 ####################################################
@@ -919,7 +919,7 @@ def radar_plotting_func(name_index):
 # If the first instance of the big plotting function returns an error, return a diagnostic message which indicates that there are no radar files available during the current run.
 # 
 
-# In[ ]:
+# In[14]:
 
 
 #try: 
@@ -932,7 +932,7 @@ radar_plotting_func(0)
 # 
 # Use th [Joblib.Parallel()](https://joblib.readthedocs.io/en/stable/generated/joblib.Parallel.html) class to run the radar script in parallel for speedy results.
 
-# In[ ]:
+# In[15]:
 
 
 ####################################################
@@ -974,7 +974,7 @@ print("Done")
 # 
 # In the event that there are *zero* radar plots.  The Big Plot Function will not be executed.  A faster simpler plot series is below that follows the same tasks in the Big Plot Function with the exception of pulling the radar data and plotting it.  The only thing that will be rendered will be the station plots using the same transparent=stale trick.
 
-# In[ ]:
+# In[16]:
 
 
 #####################################################
@@ -1232,7 +1232,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 # Rather than using Python's animation feature (which is wanting in some areas, we will use the classic [ImageMagik "convert" utility](https://imagemagick.org/script/convert.php) to create a high-quality animated gif. 
 # 
 
-# In[ ]:
+# In[17]:
 
 
 ##################################################
@@ -1268,10 +1268,4 @@ print()
 
 
 print("We're Out a Here Like Vladimir!")
-
-
-# In[ ]:
-
-
-
 

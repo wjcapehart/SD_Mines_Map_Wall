@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # TLH Radar Loop for the Map Wall
+# # EVX Radar Loop for the Map Wall
 # 
 # Creates an Animated Plot for Radar and Station Models
 # 
@@ -106,26 +106,26 @@ from   siphon.catalog     import TDSCatalog
 
 # Station ID for METARS Addressing; Radar ID for Radar Data
 
-station_id = "TLH"
-radar_id   = "TLH"
+station_id = "CEW"
+radar_id   = "EVX"
 
 
 #
 #  Radar Domain Center
 # 
 
-Fixed_RadarLatitude      =   30.398
-Fixed_RadarLongitude     = -84.329
+Fixed_RadarLatitude      =   30.565
+Fixed_RadarLongitude     = -85.922
 
 #
 #  Assigned Radar Domain Extents
 # 
 
-Fixed_geospatial_lat_min =   28.332819
-Fixed_geospatial_lat_max =   32.46318
+Fixed_geospatial_lat_min =     28.499819
+Fixed_geospatial_lat_max =    32.63018
 
-Fixed_geospatial_lon_min = -86.7257
-Fixed_geospatial_lon_max =  -81.9323
+Fixed_geospatial_lon_min =  -88.322815
+Fixed_geospatial_lon_max =  -83.52119
 
 RadarLatitude      = Fixed_RadarLatitude
 RadarLongitude     = Fixed_RadarLongitude
