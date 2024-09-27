@@ -8,7 +8,7 @@
 # This script has been cloned repeatedly to manage other radar sites
 # 
 # An image sample is shown here:
-# ![KUNR_Radar_2023-12-25_2014Z.gif](http://kyrill.ias.sdsmt.edu/wjc/eduresources/KUNR_Radar_2023-12-25_2014Z.gif)
+# ![KUNR_Radar_2023-12-25_2014Z.gif](https://kyrill.ias.sdsmt.edu/wjc/eduresources/KUNR_Radar_2023-12-25_2014Z.gif)
 
 # ## Libraries
 # 
@@ -156,7 +156,7 @@ geospatial_lon_min = Fixed_geospatial_lon_min
 # 
 # This table is then modified using a simple alpha transparency to fade out lower dBz levels.
 # 
-# ![Faded NWSStormClearReflectivity](http://kyrill.ias.sdsmt.edu/wjc/eduresources/NWSStormClearReflectivity.png)
+# ![Faded NWSStormClearReflectivity](https://kyrill.ias.sdsmt.edu/wjc/eduresources/NWSStormClearReflectivity.png)
 
 # In[3]:
 
