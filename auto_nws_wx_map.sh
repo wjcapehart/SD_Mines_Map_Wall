@@ -1,5 +1,13 @@
 #!/bin/bash
 echo on
+echo "enable bashrc"
+source ~/.bashrc
+echo
+echo "CONDA_PYTHON_EXE = "
+echo $CONDA_PYTHON_EXE
+echo
+echo "CONDA_EN_CODE"
+echo $CONDA_PROMPT_MODIFIER 
 echo
 echo "Starting NWS Surface Analysis on Kyrill"
 echo "Date: `date`"
