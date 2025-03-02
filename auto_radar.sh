@@ -1,7 +1,15 @@
 #!/bin/bash
 echo on
+echo "enable bashrc"
+source ~/.bashrc
 echo
-echo "Starting Radar Display Scriot on Cyclone"
+echo "CONDA_PYTHON_EXE = "
+echo $CONDA_PYTHON_EXE
+echo
+echo "CONDA_EN_CODE"
+echo $CONDA_PROMPT_MODIFIER 
+echo
+echo "Starting Radar Display Script on Cyclone"
 echo "Date: `date`"
 echo
 echo
