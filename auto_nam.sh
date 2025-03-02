@@ -17,7 +17,7 @@ echo  "Firing Things Up!"
 #
 rm -frv  /projects/SD_Mines_Map_Wall/temp_files_nam/*.png
 #
-. source /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/NAM_4_Panel.py > /projects/SD_Mines_Map_Wall/__log_nam4.log 2>&1
+. source /home/wjc/.bashrc ; $CONDA_PYTHON_EXE /projects/SD_Mines_Map_Wall/NAM_4_Panel.py > /projects/SD_Mines_Map_Wall/__log_nam4.log 2>&1
 
 
 echo
