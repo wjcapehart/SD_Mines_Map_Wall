@@ -14,7 +14,7 @@ cd /projects/SD_Mines_Map_Wall
 echo
 echo  "Firing Things Up!"
 echo
-.  /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/SAT_WV_Images.py > /projects/SD_Mines_Map_Wall/__log_sat_wv.log 2>&1
+.  /home/wjc/.bashrc ; $CONDA_PYTHON_EXE /projects/SD_Mines_Map_Wall/SAT_WV_Images.py > /projects/SD_Mines_Map_Wall/__log_sat_wv.log 2>&1
 echo
 echo "Ending Script"
 echo
