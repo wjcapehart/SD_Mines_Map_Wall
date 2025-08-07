@@ -1291,7 +1291,7 @@ print()
 # # Finally...
 # As they used to say with the MM5 "decks"...
 
-# In[24]:
+# In[13]:
 
 
 print("We're Out a Here Like Vladimir!")
@@ -1311,13 +1311,13 @@ sdsmt_metar_dataframe=sdsmt_metar_dataframe.sort_values(    'date_time',
 single_station = sdsmt_metar_dataframe.iloc[0]
 bottom_label = single_station["ICAO_id"] + " " + single_station['date_time'].tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%H:%M %Z")
 
-temp_label = f"{single_station["air_temperature"]:.0f}°F"
-dewp_label = f"{single_station["dew_point_temperature"]:.0f}°F"
-pres_label = f"{single_station["air_pressure_at_sea_level"]:.0f}mb"
+temp_label = f"{single_station['air_temperature']:.0f}°F"
+dewp_label = f"{single_station['dew_point_temperature']:.0f}°F"
+pres_label = f"{single_station['air_pressure_at_sea_level']:.0f}mb"
 
 
 
-# In[25]:
+# In[16]:
 
 
 fig, ax = plt.subplots(figsize=[5,5])
@@ -1362,7 +1362,7 @@ plt.close()
 # In[ ]:
 
 
-
+print("Standalone StationPlot Done!")
 
 
 # In[ ]:

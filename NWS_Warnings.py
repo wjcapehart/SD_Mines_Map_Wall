@@ -91,6 +91,7 @@ n = noaa_sdk.noaa.NOAA()
 alerts = n.active_alerts()
 
 
+
 # In[ ]:
 
 
@@ -99,7 +100,7 @@ alerts = n.active_alerts()
 
 UGC_Zones_Shapefile    = gp.read_file('./shapefiles/CONUS_UGC_Zones/CONUS_UGC_Zones.shp')
 UGC_Counties_Shapefile = gp.read_file('./shapefiles/CONUS_UGC_Counties/CONUS_UGC_Counties.shp')
- 
+
 UGC_Shapefile = pd.concat([UGC_Zones_Shapefile, 
                            UGC_Counties_Shapefile]).drop(["UGC_Temp",
                                                           "Shape_Leng",
@@ -112,7 +113,7 @@ UGC_Shapefile = pd.concat([UGC_Zones_Shapefile,
                                                           "TIME_ZONE",
                                                           "FE_AREA"],
                                                           axis = 'columns').reset_index(drop=True)  
-    
+
 UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 
 
@@ -123,7 +124,6 @@ UGC_Zone_County_List = UGC_Shapefile['UGC'].to_list()
 # priority warnings table
 warning_priority_table = pd.read_csv("./warning_table_sorted.csv")
 
-warning_priority_table = warning_priority_table.rename(columns={"hdln": "event"})
 
 
 
@@ -144,7 +144,7 @@ i = 0
 for alert in alerts['features']:
     event = alert['properties']['event']
     if (event != "Test Message"): 
-        
+
         try:
 
             ugc_codes = alert['properties']['geocode']['UGC']
@@ -171,10 +171,10 @@ for alert in alerts['features']:
         except KeyError:
             print("poopie:")
             print(event, ugc_code)
-    
+
 current_warnings = current_warnings.merge(warning_priority_table, how='left', on='event')
 current_warnings = UGC_Shapefile.merge(current_warnings, how='right', on='UGC')
-current_warnings = current_warnings.sort_values("Rank", ascending=False)
+current_warnings = current_warnings.sort_values("priority", ascending=False)
 
 
 if (current_warnings['color'].isnull().values.any()):
@@ -183,9 +183,11 @@ if (current_warnings['color'].isnull().values.any()):
     print(current_warnings.loc[locs_missing])
 
     print("replacing Nones Complete")
-  
+
     for loc_missing in locs_missing:
-        current_warnings.loc[loc_missing,"color"] = 'red'
+        current_warnings.loc[loc_missing,"color"] = '#101010'
+        current_warnings.loc[loc_missing].to_csv("./graphics_files/NWS_Warning_Missing_Reports.csv")
+
         print(current_warnings.loc[locs_missing])
 print("replaced Nones Complete")
 
@@ -212,9 +214,9 @@ if (warning_color_table['color'].isnull().values.any()):
     loc_missing = warning_color_table.index[warning_color_table['color'].isnull()].tolist()
     print(loc_missing)
     print(warning_color_table.loc[loc_missing])
-    warning_color_table.loc[loc_missing,"color"] = '#ffffff'
-    
-print("replaced")
+    warning_color_table.loc[loc_missing].to_csv("./graphics_files/NWS_Warning_Missing_ColTab.csv")
+    warning_color_table.loc[loc_missing,"color"] = '#101010'
+
 print(warning_color_table)
 
 
@@ -231,9 +233,9 @@ for row in range(len(warning_color_table)):
     mypatch = [mpatches.Patch(color = warning_color_table.iloc[row]["color"], 
                               label = warning_color_table.iloc[row]["event"])]
     legend_color_table = legend_color_table + mypatch
-    
-    
-  
+
+
+
 
 
 # In[ ]:
@@ -357,16 +359,16 @@ axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
 
 #
 #########################################
-        
+
 gif_file_name = "./graphics_files/staging_area/NWS_Warnings."
-    
+
 plt.savefig("./graphics_files/staging_area/NWS_Warnings.png",
                         facecolor   = 'white', 
                         transparent =   False)
 
 
 
-
+plt.show()
 plt.close()
 
 os.system("mv -fv ./graphics_files/staging_area/NWS_Warnings.png ./graphics_files/NWS_Warnings.png") 
@@ -374,24 +376,6 @@ os.system("mv -fv ./graphics_files/staging_area/NWS_Warnings.png ./graphics_file
 
 
 print("done")
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
