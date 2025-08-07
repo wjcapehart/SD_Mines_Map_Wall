@@ -22,7 +22,7 @@ cd /projects/SD_Mines_Map_Wall
 echo
 echo  "Firing Things Up!"
 echo
-.  /home/wjc/.bash_profile  ; ~/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/SAT_VIS-IR_Images_Meso.py > /projects/SD_Mines_Map_Wall/__log_sat_Meso.log 2>&1
+.  /home/wjc/.bash_profile  ; ~wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/SAT_VIS-IR_Images_Meso.py > /projects/SD_Mines_Map_Wall/__log_sat_Meso.log 2>&1
 echo
 echo "Ending Script"
 echo

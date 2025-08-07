@@ -25,7 +25,7 @@ echo  "Firing Things Up!"
 #
 rm -frv  /projects/SD_Mines_Map_Wall/temp_files_gfs/*.png
 #
-.  /home/wjc/.bash_profile ; ~/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/GFS_4_Panel_20km.py > /projects/SD_Mines_Map_Wall/__log_gfs4.log 2>&1
+.  /home/wjc/.bash_profile ; ~wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/GFS_4_Panel_20km.py > /projects/SD_Mines_Map_Wall/__log_gfs4.log 2>&1
 
 
 echo
