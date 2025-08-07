@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# ![AES Masthead](https://kyrill.ias.sdsmt.edu/wjc/eduresources/AES_Masthead.png)
+# 
+# 
 # # UDX Radar Loop for the Map Wall
 # 
 # Creates an Animated Plot for Radar and Station Models
 # 
-# This script has been cloned repeatedly to manage other radar sites
+# This script has been cloned repeatedly to manage other radar sites.
 # 
 # An image sample is shown here:
 # ![KUNR_Radar_2023-12-25_2014Z.gif](https://kyrill.ias.sdsmt.edu/wjc/eduresources/KUNR_Radar_2023-12-25_2014Z.gif)
@@ -44,6 +47,7 @@ import platform          as     platform
 import pathlib           as     pathlib
 import urllib.request
 import shutil
+#import datetime as datetime
 
 # Classic General Use Libraries
 
@@ -55,6 +59,7 @@ import pandas             as pd
 
 import airportsdata       as airpt
 import timezonefinder     as tzf
+import haversine          as haversine
 
 from   joblib             import Parallel, delayed
 
@@ -134,7 +139,7 @@ geospatial_lat_min = Fixed_geospatial_lat_min
 geospatial_lat_max = Fixed_geospatial_lat_max
 geospatial_lon_max = Fixed_geospatial_lon_max
 geospatial_lon_min = Fixed_geospatial_lon_min
-        
+
 #
 ####################################################
 ####################################################
@@ -169,6 +174,11 @@ geospatial_lon_min = Fixed_geospatial_lon_min
 #
 
 Mines_Blue = "#002554"
+
+#from pyfonts import load_google_font
+
+#font = load_google_font("Open Sans")
+
 
 
 plt.rcParams.update({'text.color'      : Mines_Blue,
@@ -221,7 +231,7 @@ cmap = ListedColormap(cmap)
 # Currently, we only do a three-hour loop with the assumption that we should expect a radar image every four minutes.  If not available, these will be replaced by a plain map of the radar coverage area.
 # 
 
-# In[6]:
+# In[4]:
 
 
 ####################################################
@@ -244,6 +254,7 @@ synop_collection = "https://thredds.ucar.edu/thredds/catalog/nws/synoptic/ncdeco
 time_now   =  datetime.now(tz=timezone.utc)
 time_start = time_now - timedelta(hours=3)
 
+print("Time Range")
 print(time_start)
 print(time_now)
 
@@ -255,6 +266,10 @@ siphon_time_series       = pd.date_range(time_start- timedelta(hours=1), time_no
 siphon_pulls_YYYYMMDD_HH = siphon_time_series.strftime("%Y%m%d_%H00")
 
 print(siphon_pulls_YYYYMMDD_HH)
+
+mclaury_lon = -103.206670 
+mclaury_lat =   44.074921
+
 
 #
 ####################################################
@@ -270,7 +285,7 @@ print(siphon_pulls_YYYYMMDD_HH)
 # 
 # The local timezone is pulled from the using the station_id.  This uses [Jannik Kissinger's timezone finder](https://timezonefinder.readthedocs.io/en/latest/) to link the station_id's latitude and longitude to a timezone.
 
-# In[7]:
+# In[5]:
 
 
 ####################################################
@@ -303,7 +318,7 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 # 
 # This is looped over the 4-hr product period.
 
-# In[8]:
+# In[6]:
 
 
 ####################################################
@@ -325,20 +340,20 @@ first = True
 for datehour in siphon_pulls_YYYYMMDD_HH:
 
     # URLs & Local Work File Names
-    
+
     metar_url  = "https://thredds-dev.unidata.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_"+datehour+".txt"
     metar_file = "./temp_files_radar/metar_"+datehour+".txt"
-    
+
     path_to_file = pathlib.Path(metar_file)
-    
+
     print(path_to_file, path_to_file.is_file())
 
     # Pull File 
-    
+
     print("downloading "+ metar_url)
     with urllib.request.urlopen(metar_url) as response, open(metar_file, 'wb') as out_file:
         shutil.copyfileobj(response, out_file)
-            
+
     print("cracking "+metar_file)
     try:
         indata = mpio.metar.parse_metar_file(metar_file)
@@ -392,11 +407,23 @@ metar_dataframe['cloud_eights']          = (8 * metar_dataframe['cloud_eights']/
 metar_dataframe['air_temperature']       = ( metar_dataframe['air_temperature'] * 9/5) + 32
 metar_dataframe['dew_point_temperature'] = ( metar_dataframe['dew_point_temperature'] * 9/5) + 32
 metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_sm'] / 1609.34,decimals=1)
+metar_dataframe["dist_from_sdsmt"]       = np.nan
+
+for index, row in metar_dataframe.iterrows():
+    metar_dataframe.loc[index,"dist_from_sdsmt"] = haversine.haversine_vector([    mclaury_lat,      mclaury_lon],
+                                                        [row["latitude"], row["longitude"]], comb=True)
 
 #
 ####################################################
 ####################################################
 ####################################################
+
+
+# In[ ]:
+
+
+
+
 
 
 # ## Pulling Radar Data Times and Radar Objects
@@ -408,7 +435,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 # [https://stackoverflow.com/questions/69923496/sorting-a-tdscatalog-list-for-loops-and-animations](https://stackoverflow.com/questions/69923496/sorting-a-tdscatalog-list-for-loops-and-animations)
 # 
 
-# In[12]:
+# In[7]:
 
 
 ####################################################
@@ -418,7 +445,7 @@ metar_dataframe['visibility_sm']         = np.round(metar_dataframe['visibility_
 # Retrieve Radar Data
 #
 
-ds  = get_radarserver_datasets('http://thredds.ucar.edu/thredds/')
+ds  = get_radarserver_datasets('https://thredds.ucar.edu/thredds/')
 url = ds['NEXRAD Level III Radar from IDD'].follow().catalog_url
 rs  = RadarServer(url)
 
@@ -446,7 +473,7 @@ dates_for_radar  = []
 print("start time: ",time_start)
 
 for name in datasets_sorted:
-    
+
     datetime_string = pd.to_datetime(datetime.strptime(name[15:28], "%Y%m%d_%H%M")).tz_localize(tz="UTC")
     dates_for_radar.append(datetime_string)
 
@@ -454,7 +481,7 @@ for name in datasets_sorted:
         print(" - ",datetime_string, dates_for_radar[-1]-time_start)
     else:
         print(" - ",datetime_string, (dates_for_radar[-1]-dates_for_radar[-2]))
-        
+
 print("  end time: ",time_now)
 
 #
@@ -491,7 +518,7 @@ print("  end time: ",time_now)
 # 7.  And we're done!
 # 
 
-# In[13]:
+# In[8]:
 
 
 ####################################################
@@ -507,7 +534,7 @@ def radar_plotting_func(name_index):
     #
     # Repating Mines Colors and Fonts
     #
-    
+
     Mines_Blue = "#002554"
 
     plt.rcParams.update({'text.color'      : Mines_Blue,
@@ -518,12 +545,12 @@ def radar_plotting_func(name_index):
 
     #
     ###################################
-    
+
     ###################################
     #
     # Create the Status Bar Completeness Calculation
     #
-    
+
     percent_done = (name_index+1.) / number_of_figures
 
     print("image# = ", (name_index+1), 
@@ -532,35 +559,35 @@ def radar_plotting_func(name_index):
 
     #
     ###################################
-    
+
     ###################################
     #
     # Touch the dataset.
     #
-    
+
     name = sorted(catalog.datasets)[name_index]
     ds   = catalog.datasets[name]
     print(ds)
 
     #
     ###################################
-    
+
     ###################################
     #
     # Enable the Figure Workspace
     #
-    
+
     fig = plt.figure(figsize   =  (9, 8),
                      facecolor = 'white')
 
     #
     ###################################
-    
+
     ###################################
     #
     # Crack the Dataset If there is a failure, swear like mom (and record the time)
     #
-    
+
     try:
 
         # Crack the dataset and pull range, azimuth and reflectivity and make a mapping grid
@@ -574,7 +601,7 @@ def radar_plotting_func(name_index):
         time_utc = datetime.strptime(radar.time_coverage_start, "%Y-%m-%dT%H:%M:%SZ")
         x        = rng * np.sin(np.deg2rad(az))[:, None]
         y        = rng * np.cos(np.deg2rad(az))[:, None]
-        
+
         ref[ ref< radar_floor] = np.nan
 
         ny = ref.shape[0]
@@ -590,12 +617,12 @@ def radar_plotting_func(name_index):
 
     #
     ###################################
-    
+
     ###################################
     #
     # Pull the observation window for this image's window and also record relative staleness for plotting.
     #
-    
+
     metar_dataframe['staleness']     = (time_utc-metar_dataframe['date_time'])/ np.timedelta64(1, 'm')
     metar_dataframe['abs_staleness'] =  np.abs( metar_dataframe['staleness'] )
 
@@ -635,12 +662,12 @@ def radar_plotting_func(name_index):
 
     #
     ###################################
-    
+
     ###################################
     #
     # Reset the Spatial Extents for either radar/station or just-station plot.
     #
-    
+
     try:
         noradar = False
         RadarLatitude      = radar.RadarLatitude
@@ -696,7 +723,7 @@ def radar_plotting_func(name_index):
     #
     # Always label your plots.. (note the divergent tities)
     #
-    
+
     try:
         plt.suptitle(radar.ProductStationName + " [" +
                      radar.ProductStation     + "] " +
@@ -728,30 +755,30 @@ def radar_plotting_func(name_index):
                    linewidths = 0.5,
                    edgecolor  = Mines_Blue,
                    facecolor  = 'none')
-    
+
     try:
 
         #
         # Start with the Radar Mesh
         #
-        
+
         filled_cm = ax.pcolormesh(x, 
                                   y, 
                                   ref,
                                   norm = norm, 
                                   cmap = cmap)
-        
+
         color_bar = plt.colorbar(filled_cm, 
                                  label  = "Reflectivity (dbZ)",
                                  shrink = 0.8,
                                  pad    = 0.012)
-        
+
         cbytick_obj = plt.getp(obj      = color_bar.ax.axes, 
                                property =     'yticklabels')   
-        
+
         #plt.setp(obj   = cbytick_obj, 
         #         color = Mines_Blue)
-        
+
         noradar = False
 
     except:
@@ -762,12 +789,12 @@ def radar_plotting_func(name_index):
     #
     # Loop over METAR Station Models
     #
-    
+
     print(         "number of obs",
           len(recent_local_metars))
 
     for i in range(0,len(recent_local_metars)) :
-        
+
         single_row = recent_local_metars.loc[i]
 
         stationplot = StationPlot(ax, 
@@ -901,7 +928,7 @@ def radar_plotting_func(name_index):
                 transparent =   False)
 
     plt.close()
-    
+
     print("=====================")
 
     #
@@ -911,7 +938,7 @@ def radar_plotting_func(name_index):
 ####################################################
 ####################################################
 ####################################################
-  
+
 
 
 # ## In-script Test of the Big Plotting Function
@@ -919,7 +946,7 @@ def radar_plotting_func(name_index):
 # If the first instance of the big plotting function returns an error, return a diagnostic message which indicates that there are no radar files available during the current run.
 # 
 
-# In[14]:
+# In[9]:
 
 
 #try: 
@@ -932,7 +959,7 @@ radar_plotting_func(0)
 # 
 # Use th [Joblib.Parallel()](https://joblib.readthedocs.io/en/stable/generated/joblib.Parallel.html) class to run the radar script in parallel for speedy results.
 
-# In[15]:
+# In[10]:
 
 
 ####################################################
@@ -946,17 +973,17 @@ radar_plotting_func(0)
 number_of_figures = len(sorted(catalog.datasets))
 
 if (number_of_figures > 0) :
-    
+
 
     n_jobs = 8
-    
-    
+
+
     start_parallel = datetime.now(tz=timezone.utc)
     print("Starting Parallel : ",start_parallel)
 
 
     Parallel(n_jobs=n_jobs)(delayed(radar_plotting_func)(name_I) for name_I in range(number_of_figures))
-    
+
     end_parallel = datetime.now(tz=timezone.utc)
     print("Ending Parallel = ", end_parallel)
     print("  Parallel Time = ", (end_parallel - start_parallel))
@@ -974,7 +1001,7 @@ print("Done")
 # 
 # In the event that there are *zero* radar plots.  The Big Plot Function will not be executed.  A faster simpler plot series is below that follows the same tasks in the Big Plot Function with the exception of pulling the radar data and plotting it.  The only thing that will be rendered will be the station plots using the same transparent=stale trick.
 
-# In[16]:
+# In[11]:
 
 
 #####################################################
@@ -1013,7 +1040,7 @@ if (len(sorted(catalog.datasets)) == 0) :
     number_of_figures = len(radarless_time_series)
 
     for time_index in range(len(radarless_time_series)):
-        
+
         time = radarless_time_series[time_index]
         percent_done = (time_index + 1) / number_of_figures
 
@@ -1101,7 +1128,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 
         ax.set_aspect('equal', 'datalim')
 
- 
+
         # Metar Plots
 
         print("number of obs",len(recent_local_metars))
@@ -1146,38 +1173,38 @@ if (len(sorted(catalog.datasets)) == 0) :
             del single_row
 
         del recent_local_metars 
-        
+
         #########################################
         #
         # Insert a Clock
         #
-        
+
         axins = fig.add_axes(rect     =    [0.015,
                                             0.785,
                                             0.12*8/9,
                                             0.12],
                               projection  =  "polar")
-        
+
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
 
         hour   = time_for_clock.hour
         minute = time_for_clock.minute
         second = time_for_clock.second
-        
+
         circle_theta  = np.deg2rad(np.arange(0,360,0.01))
         circle_radius = circle_theta * 0 + 1
-        
+
         if (hour > 12) :
             hour = hour - 12
-        
+
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-        
+
         print(time_for_clock)
         print(hour,   np.rad2deg(angles_h))
         print(minute, np.rad2deg(angles_m))
 
-        
+
         plt.setp(axins.get_yticklabels(), visible=False)
         plt.setp(axins.get_xticklabels(), visible=False)
         axins.spines['polar'].set_visible(False)
@@ -1186,13 +1213,13 @@ if (len(sorted(catalog.datasets)) == 0) :
         axins.set_theta_direction(-1)
         axins.set_facecolor("white")
         axins.grid(False)
-        
+
         axins.plot([angles_h,angles_h], [0,0.6], color=Mines_Blue, linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color=Mines_Blue, linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color=Mines_Blue, linewidth=1)
 
 
-        
+
         #
         #########################################
 
@@ -1203,7 +1230,7 @@ if (len(sorted(catalog.datasets)) == 0) :
                                 top    = 0.91, 
                                 bottom = .01, 
                                 wspace = 0)
-        
+
         rect = patches.Rectangle(xy        = (0, 0),
                                  width     = percent_done,
                                  height    = 0.01, 
@@ -1212,7 +1239,7 @@ if (len(sorted(catalog.datasets)) == 0) :
                                  transform = ax.transAxes)
         ax.add_patch(rect)
 
-        
+
 
         plt.savefig("./temp_files_radar/Radar_Loop_Image_"+str(time_index).zfill(3)+".png",
                         facecolor   = 'white', 
@@ -1232,7 +1259,7 @@ if (len(sorted(catalog.datasets)) == 0) :
 # Rather than using Python's animation feature (which is wanting in some areas, we will use the classic [ImageMagik "convert" utility](https://imagemagick.org/script/convert.php) to create a high-quality animated gif. 
 # 
 
-# In[17]:
+# In[12]:
 
 
 ##################################################
@@ -1264,8 +1291,82 @@ print()
 # # Finally...
 # As they used to say with the MM5 "decks"...
 
-# In[ ]:
+# In[24]:
 
 
 print("We're Out a Here Like Vladimir!")
+
+
+# In[14]:
+
+
+sdsmt_metar_dataframe = metar_dataframe[metar_dataframe['dist_from_sdsmt'] < 15]  
+
+
+# In[15]:
+
+
+sdsmt_metar_dataframe=sdsmt_metar_dataframe.sort_values(    'date_time',
+                                  ascending=False).reset_index()
+single_station = sdsmt_metar_dataframe.iloc[0]
+bottom_label = single_station["ICAO_id"] + " " + single_station['date_time'].tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%H:%M %Z")
+
+temp_label = f"{single_station["air_temperature"]:.0f}°F"
+dewp_label = f"{single_station["dew_point_temperature"]:.0f}°F"
+pres_label = f"{single_station["air_pressure_at_sea_level"]:.0f}mb"
+
+
+
+# In[25]:
+
+
+fig, ax = plt.subplots(figsize=[5,5])
+stationplot = StationPlot(ax, 
+                          0, 
+                          0, 
+                          #transform = ccrs.PlateCarree(),
+                          fontsize  = 50)
+
+stationplot.plot_text('NW', 
+                           np.array( [temp_label] ), 
+                           color=Mines_Blue,
+                           fontsize=45)
+stationplot.plot_text('SW', 
+                           np.array([dewp_label]), 
+                           color=Mines_Blue,
+                           fontsize=45)
+
+
+stationplot.plot_symbol('C', 
+                        np.array([single_station['cloud_eights']]), 
+                        sky_cover,color=Mines_Blue)
+stationplot.plot_symbol('W', 
+                        np.array([single_station['current_wx1_symbol']]), 
+                        current_weather,color=Mines_Blue)
+
+stationplot.plot_barb(np.array([single_station['eastward_wind']]), 
+                      np.array([single_station['northward_wind']]),
+                     color=Mines_Blue, linewidth=2)
+
+stationplot.plot_text((0, -2), 
+                      np.array([bottom_label]), 
+                      color=Mines_Blue,
+                      fontsize=25, ha="center")
+plt.axis('off')
+plt.savefig("./graphics_files/local_station.svg", 
+            bbox_inches = "tight", 
+            pad_inches  = 0.0)
+plt.close()
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
