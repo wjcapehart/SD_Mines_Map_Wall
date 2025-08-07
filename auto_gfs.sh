@@ -1,7 +1,7 @@
 #!/bin/bash
 echo on
 echo "enable bashrc"
-source ~/.bashrc
+source ~/.bash_profile
 echo
 echo "CONDA_PYTHON_EXE = "
 echo $CONDA_PYTHON_EXE
@@ -25,7 +25,7 @@ echo  "Firing Things Up!"
 #
 rm -frv  /projects/SD_Mines_Map_Wall/temp_files_gfs/*.png
 #
-.  /home/wjc/.bashrc ; $CONDA_PYTHON_EXE /projects/SD_Mines_Map_Wall/GFS_4_Panel_20km.py > /projects/SD_Mines_Map_Wall/__log_gfs4.log 2>&1
+.  /home/wjc/.bash_profile ; $CONDA_PYTHON_EXE /projects/SD_Mines_Map_Wall/GFS_4_Panel_20km.py > /projects/SD_Mines_Map_Wall/__log_gfs4.log 2>&1
 
 
 echo

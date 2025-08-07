@@ -1,7 +1,7 @@
 #!/bin/bash
 echo on
 echo "enable bashrc"
-source ~/.bashrc
+source ~/.bash_profile 
 echo
 echo "CONDA_PYTHON_EXE = "
 echo $CONDA_PYTHON_EXE
@@ -23,8 +23,8 @@ rm -frv /projects/SD_Mines_Map_Wall/temp_sfc_analysis/*
 echo
 echo  "Firing Things Up!"
 echo
-.  /home/wjc/.bashrc ; $CONDA_PYTHON_EXE /projects/SD_Mines_Map_Wall/NWS_Wx_Map.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
-#.  /home/wjc/.bashrc ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/Surface_Analysis_Rapid_Refresh.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
+.  /home/wjc/.bash_profile  ; $CONDA_PYTHON_EXE /projects/SD_Mines_Map_Wall/NWS_Wx_Map.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
+#.  /home/wjc/.bash_profile  ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/Surface_Analysis_Rapid_Refresh.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
 echo
 echo "Ending Script"
 echo
