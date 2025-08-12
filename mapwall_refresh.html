@@ -26,7 +26,7 @@
 
       <link rel="stylesheet" 
             type="text/css" 
-            href="//fonts.googleapis.com/css?family=Open+Sans">
+            href="https://fonts.googleapis.com/css?family=Open+Sans">
     </head>
 
     <script type="text/javascript">
@@ -34,17 +34,24 @@
       function startTime() {
         const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
         const today = new Date();
+
         let h = today.getUTCHours();
-        let m = today.getUTCMinutes();
-        let s = today.getUTCSeconds();
-        let y = today.getUTCFullYear();
-        let d = today.getUTCDate();
-        let mm = today.getUTCMonth();
+        let hL = today.getHours();
+        //let TZ = today.getZone();
+
+        let m   = today.getUTCMinutes();
+        let s   = today.getUTCSeconds();
+        let y   = today.getUTCFullYear();
+        let d   = today.getUTCDate();
+        let mm  = today.getUTCMonth();
+
         h = checkTime(h);
+        hL = checkTime(hL);
         m = checkTime(m);
         s = checkTime(s);
         d = checkTime(d);
-        document.getElementById('UTC_Clock').innerHTML =  h + ":" + m + ":" + s + " UTC<br>" + d + " " + month[mm] + " " + y;
+
+        document.getElementById('UTC_Clock').innerHTML =  h + ":" + m + ":" + s + " UTC (" + hL + ":" + m+ " MT)<br>" + d + " " + month[mm] + " " + y;
         setTimeout(startTime, 1000);
       }
 
