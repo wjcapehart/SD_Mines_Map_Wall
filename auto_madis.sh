@@ -1,0 +1,32 @@
+#!/bin/bash
+echo on
+echo "enable bashrc"
+source ~/.bash_profile 
+echo
+echo "CONDA_PYTHON_EXE = "
+echo $CONDA_PYTHON_EXE
+echo
+echo "CONDA_EN_CODE"
+echo $CONDA_PROMPT_MODIFIER 
+echo
+echo "MADIS Scripts"
+echo "Date: `date`"
+echo
+echo
+DATESTRING=`date +"%Y-%m-%d_%H%M"`
+echo
+echo
+echo "Entering Working Directory"
+echo
+cd /projects/SD_Mines_Map_Wall
+
+echo
+echo  "Firing Things Up!"
+echo
+.  /home/wjc/.bash_profile  ; ~wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/madis_station_plot.py > /projects/SD_Mines_Map_Wall/__log_madis.log 2>&1
+echo
+echo "Ending Script"
+echo
+echo "Completed: `date`"
+echo
+echo off

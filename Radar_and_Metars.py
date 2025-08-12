@@ -1300,69 +1300,72 @@ print("We're Out a Here Like Vladimir!")
 # In[14]:
 
 
-sdsmt_metar_dataframe = metar_dataframe[metar_dataframe['dist_from_sdsmt'] < 15]  
+
 
 
 # In[15]:
 
 
-sdsmt_metar_dataframe=sdsmt_metar_dataframe.sort_values(    'date_time',
-                                  ascending=False).reset_index()
-single_station = sdsmt_metar_dataframe.iloc[0]
-bottom_label = single_station["ICAO_id"] + " " + single_station['date_time'].tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%H:%M %Z")
-
-temp_label = f"{single_station['air_temperature']:.0f}°F"
-dewp_label = f"{single_station['dew_point_temperature']:.0f}°F"
-pres_label = f"{single_station['air_pressure_at_sea_level']:.0f}mb"
 
 
 
-# In[16]:
 
-
-fig, ax = plt.subplots(figsize=[5,5])
-stationplot = StationPlot(ax, 
-                          0, 
-                          0, 
-                          #transform = ccrs.PlateCarree(),
-                          fontsize  = 50)
-
-stationplot.plot_text('NW', 
-                           np.array( [temp_label] ), 
-                           color=Mines_Blue,
-                           fontsize=45)
-stationplot.plot_text('SW', 
-                           np.array([dewp_label]), 
-                           color=Mines_Blue,
-                           fontsize=45)
-
-
-stationplot.plot_symbol('C', 
-                        np.array([single_station['cloud_eights']]), 
-                        sky_cover,color=Mines_Blue)
-stationplot.plot_symbol('W', 
-                        np.array([single_station['current_wx1_symbol']]), 
-                        current_weather,color=Mines_Blue)
-
-stationplot.plot_barb(np.array([single_station['eastward_wind']]), 
-                      np.array([single_station['northward_wind']]),
-                     color=Mines_Blue, linewidth=2)
-
-stationplot.plot_text((0, -2), 
-                      np.array([bottom_label]), 
-                      color=Mines_Blue,
-                      fontsize=25, ha="center")
-plt.axis('off')
-plt.savefig("./graphics_files/local_station.svg", 
-            bbox_inches = "tight", 
-            pad_inches  = 0.0)
-plt.close()
-
+# sdsmt_metar_dataframe = metar_dataframe[metar_dataframe['dist_from_sdsmt'] < 15]  
+# 
+# 
+# sdsmt_metar_dataframe=sdsmt_metar_dataframe.sort_values(    'date_time',
+#                                   ascending=False).reset_index()
+# single_station = sdsmt_metar_dataframe.iloc[0]
+# bottom_label = single_station["ICAO_id"] + " " + single_station['date_time'].tz_localize(tz="UTC").tz_convert(tz=tz).strftime("%H:%M %Z")
+# 
+# temp_label = f"{single_station['air_temperature']:.0f}°F"
+# dewp_label = f"{single_station['dew_point_temperature']:.0f}°F"
+# pres_label = f"{single_station['air_pressure_at_sea_level']:.0f}mb"
+# 
+# fig, ax = plt.subplots(figsize=[5,5])
+# stationplot = StationPlot(ax, 
+#                           0, 
+#                           0, 
+#                           #transform = ccrs.PlateCarree(),
+#                           fontsize  = 50)
+# 
+# stationplot.plot_text('NW', 
+#                            np.array( [temp_label] ), 
+#                            color=Mines_Blue,
+#                            fontsize=45)
+# stationplot.plot_text('SW', 
+#                            np.array([dewp_label]), 
+#                            color=Mines_Blue,
+#                            fontsize=45)
+# 
+# 
+# stationplot.plot_symbol('C', 
+#                         np.array([single_station['cloud_eights']]), 
+#                         sky_cover,color=Mines_Blue)
+# stationplot.plot_symbol('W', 
+#                         np.array([single_station['current_wx1_symbol']]), 
+#                         current_weather,color=Mines_Blue)
+# 
+# stationplot.plot_barb(np.array([single_station['eastward_wind']]), 
+#                       np.array([single_station['northward_wind']]),
+#                      color=Mines_Blue, linewidth=2)
+# 
+# stationplot.plot_text((0, -2), 
+#                       np.array([bottom_label]), 
+#                       color=Mines_Blue,
+#                       fontsize=25, ha="center")
+# plt.axis('off')
+# plt.savefig("./graphics_files/local_station.svg", 
+#             bbox_inches = "tight", 
+#             pad_inches  = 0.0)
+# plt.close()
+# 
+# print("Standalone StationPlot Done!")
 
 # In[ ]:
 
 
-print("Standalone StationPlot Done!")
+
 
 
 # In[ ]:
