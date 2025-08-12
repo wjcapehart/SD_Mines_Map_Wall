@@ -1,0 +1,4 @@
+https://madis-data.ncep.noaa.gov/madisPublic1/cgi-bin/madisXmlPublicDir?rdr=&time=0&minbck=-59&minfwd=0&recwin=2&dfltrsel=3&stanam=KRAP&stasel=1&pvdrsel=1&varsel=1&qctype=0&qcsel=0&xml=2&csvmiss=0&pvd=ASOS-HFM&nvars=TD&nvars=ALTSE&nvars=P&nvars=T&nvars=U&nvars=V&nvars=VIS&nvars=PRESWEA&nvars=SKYCOV
+
+ STAID     ,OBDATE    ,OBTIME,PVDR     ,SUBPVDR    ,TD           ,ALTSE        ,P            ,T            ,U            ,V            ,DIS          ,PRESWEA                 ,SKYCOV_1,SKYCOV_2,SKYCOV_3,SKYCOV_4,SKYCOV_5,SKYCOV_6 ,
+ KRAP      ,08/12/2025,15:20,ASOS-HFM  ,           ,   285.149994,102065.750000, 90951.468750,   297.149994,     1.231653,    -3.383937, 16093.440430,                         ,CLR     ,        ,        ,        ,        ,         ,
