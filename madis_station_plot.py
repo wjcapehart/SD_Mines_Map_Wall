@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[ ]:
 
 
 import metpy as metpy
@@ -11,7 +11,7 @@ import pandas as pd
 import requests as requests
 import os as os
 import requests
-from bs4 import BeautifulSoup
+from   bs4 import BeautifulSoup
 import urllib.request
 import warnings
 import matplotlib.pyplot as plt
@@ -19,10 +19,22 @@ import matplotlib.pyplot as plt
 from   datetime          import datetime, timedelta, timezone
 import timezonefinder     as tzf
 from   metpy.plots        import colortables, USCOUNTIES, StationPlot, pressure_tendency,sky_cover,current_weather
+
 pd.options.mode.copy_on_write = True
 
+from IPython import get_ipython
 
-# In[2]:
+display_images = False
+
+if get_ipython() is not None:
+    display_images = True
+    print("You are currently in an IPython session.")
+else:
+    display_images = False
+    print("You are not currently in an IPython session.")
+
+
+# In[ ]:
 
 
 stationname     = "KRAP"
@@ -44,7 +56,7 @@ links.sort()
 
 
 
-# In[3]:
+# In[ ]:
 
 
 new = True
@@ -134,6 +146,95 @@ df_metar = df_metar_nocloud.join(other = df_metar_cloud, on="recNum")
 df_metar = df_metar[df_metar["stationId"]==stationname]. \
                 set_index("observationTime")
 
+df_metar["Reset_Precip"] = (((df_metar.index + np.timedelta64(5, 'm')).hour)%3 == 0) & \
+                            ((df_metar.index + np.timedelta64(5, 'm')).minute  == 0)
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+precip_accum = df_metar["precipAccum"].to_numpy().copy()
+reset_arr    = df_metar["Reset_Precip"].to_numpy().copy()
+precip_loc   = np.zeros(len(df_metar))
+
+for i in range(len(df_metar)):
+    if (i == 0):
+        precip_loc[i] = 0
+    elif reset_arr[i]:
+        precip_loc[i] = precip_accum[i]
+    else:
+        precip_loc[i] = precip_accum[i] - precip_accum[i-1]
+
+df_metar["precip_now"] = precip_loc
+
+
+
+# if (display_images):
+#     df_metar["precip_now"].plot(style = "o")
+#     df_metar["precipAccum"].plot()
+#     plt.ylabel("Precipitation (mm)")
+#     plt.title("Precipitation Calculations")
+#     plt.show()
+# 
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
 df_metar["temperatureF"] = 1.8*(df_metar["temperature"] - 273.15) + 32
 df_metar["dewpointF"]    = 1.8*(df_metar["dewpoint"]    - 273.15) + 32
 
@@ -187,28 +288,24 @@ for index, row in df_metar.iterrows():
                                                                              row["elevation"]   * metpy.units.units("m"), 
                                                                              row["temperature"] * metpy.units.units("K")).magnitude / 100.
 
-    #print(f"Index: {index}, skyc: {skyc}, Sky10: {row['cloud_tenths']}")
+
+
+
+# In[ ]:
 
 
 first_index = np.where(df_metar["secs_from_3hrs"] == df_metar["secs_from_3hrs"].min())[0][0]
-df_metar = df_metar[first_index:] 
+df_metar    = df_metar[first_index:] 
 df_half1 = df_metar[df_metar["secs_from_1p5hrs"]>=0]
 df_half2 = df_metar[df_metar["secs_from_1p5hrs"]<=0]
-
 
 df_3hours = df_metar.iloc[ 0]
 df_latest = df_metar.iloc[-1]
 
-ptrend =  (df_latest["MSLP"] - df_3hours["MSLP"])
+ptrend    =  (df_latest["MSLP"] - df_3hours["MSLP"])
 
 
-# In[4]:
-
-
-df_metar
-
-
-# In[5]:
+# In[ ]:
 
 
 line_half1 = np.polyfit(df_half1["secs_from_3hrs"]/3600 ,df_half1["MSLP"], 1)
@@ -219,72 +316,97 @@ para_all   = np.polyfit(df_metar["secs_from_3hrs"]/3600 ,df_metar["MSLP"], 2)
 trend_1rst = round(line_half1[0]*1.5,1)
 trend_2rst = round(line_half2[0]*1.5,1)
 
+print("   ")
 print("Total Change : ",round(ptrend/3,2),      "mb/hr;", round(        ptrend,1), "mb")
 print(" Mean Change : ",round(line_all[0],2),   "mb/hr;", round( line_all[0]*3,1), "mb")
-print("  First Half : ",round(line_half1[0],2), "mb/hr;", round(trend_1rst,1), "mb")
-print(" Second Half : ",round(line_half2[0],2), "mb/hr;", round(trend_2rst,1), "mb")
+print("  First Half : ",round(line_half1[0],2), "mb/hr;", round(    trend_1rst,1), "mb")
+print(" Second Half : ",round(line_half2[0],2), "mb/hr;", round(    trend_2rst,1), "mb")
+print("   ")
 
 
 if   (ptrend >  0.05):
-    if (trend_1rst >  0) & (trend_2rst >  0):
+    if   (trend_1rst >=  0) & (trend_2rst >  0):
+        print("  - pressure rising steadily")
         trend_code = 2
     elif (trend_1rst >  0) & (trend_2rst ==  0):
+        print("  - pressure rising then flattening")
         trend_code = 1
     elif (trend_1rst >  0) & (trend_2rst <  0):
+        print("  - pressure rising then falling slightly")
         trend_code = 0
     elif (trend_1rst <  0) & (trend_2rst >  0):
+        print("  - pressure falling then rising sharply")
         trend_code = 3
 elif (ptrend < -0.05):
-    if (trend_1rst <  0) & (trend_2rst <  0):
+    if   (trend_1rst <=  0) & (trend_2rst <  0):
+        print("  - pressure falling steadily")
         trend_code = 7
     elif (trend_1rst >  0) & (trend_2rst ==  0):
+        print("  - pressure falling then flattening")
         trend_code = 6
     elif (trend_1rst >  0) & (trend_2rst <  0):
+        print("  - pressure rising then falling sharply")
         trend_code = 8
     elif (trend_1rst <  0) & (trend_2rst >  0):
-        trend_code = 9
+        trend_code = 5
+        print("  - pressure falling then rising slightly")
 else:
+    print("  - pressure runs flat")
     trend_code = 4
 
 print("trend code:",trend_code)
 
+print("   ")
 
 
-# 
-# plt.scatter(df_half1["secs_from_3hrs"]/3600, df_half1["MSLP"],
-#             marker =         'o', 
-#             color  =       "red", 
-#             alpha  =         0.5,
-#             label  = "1rst Half")
-# plt.scatter(df_half2["secs_from_3hrs"]/3600, df_half2["MSLP"],
-#             marker =         'o', 
-#             color  =      "blue", 
-#             alpha  =         0.5,
-#             label  = "2nd Half")
-# 
-# plt.plot((df_metar["secs_from_3hrs"]/3600),
-#          (df_metar["secs_from_3hrs"]/3600) **2 * para_all[0] + 
-#          (df_metar["secs_from_3hrs"]/3600)     * para_all[1] +  para_all[2], 
-#          color = "grey",
-#          label = "2nd-order trend")
-# plt.axline(slope =       line_all[0], 
-#            xy1   =   [0,line_all[1]], 
-#            color =          "purple",
-#            alpha =              0.90)
-# plt.axline(slope =     line_half1[0], 
-#            xy1   = [0,line_half1[1]], 
-#            color =             "red",
-#            alpha =              0.75)
-# plt.axline(slope =     line_half2[0], 
-#            xy1   = [0,line_half2[1]], 
-#            color =            "blue",
-#            alpha =              0.75)
-# 
-# plt.legend()
-# plt.xlabel("hours")
-# plt.ylabel("Mean Sea Level Pressure (hPa)")
-# 
-# plt.show()
+# In[ ]:
+
+
+if display_images:
+
+    plt.scatter(df_half1["secs_from_3hrs"]/3600, df_half1["MSLP"],
+                marker =         'o', 
+                color  =       "red", 
+                alpha  =         0.5,
+                label  = "1rst Half")
+
+    plt.scatter(df_half2["secs_from_3hrs"]/3600, df_half2["MSLP"],
+                marker =         'o', 
+                color  =      "blue", 
+                alpha  =         0.5,
+                label  = "2nd Half")
+
+    plt.plot((df_metar["secs_from_3hrs"]/3600),
+             (df_metar["secs_from_3hrs"]/3600) **2 * para_all[0] + 
+             (df_metar["secs_from_3hrs"]/3600)     * para_all[1] +  para_all[2], 
+             color = "grey",
+             linestyle="dashed",
+             label = "2nd-order trend")
+
+    plt.axline(slope =       line_all[0], 
+               xy1   =   [0,line_all[1]], 
+               color =          "purple",
+               alpha =              0.50)
+
+    plt.plot([0, 1.5], 
+             [0.0*line_half1[0] + line_half1[1],
+              1.5*line_half1[0] + line_half1[1]],
+             color =             "red",
+             alpha =              0.75)
+
+    plt.plot([1.5,3.0], 
+             [1.5*line_half2[0] + line_half2[1],
+              3.0*line_half2[0] + line_half2[1]],
+             color =             "blue",
+             alpha =              0.75)
+
+    plt.legend()
+    plt.xlabel("hours")
+    plt.ylabel("Mean Sea Level Pressure (hPa)")
+    plt.ylim([df_metar["MSLP"].min()-.1,df_metar["MSLP"].max()+.1])
+    plt.title("Pressure Tendency Trends")
+    plt.show()
+
 
 # In[ ]:
 
@@ -304,7 +426,26 @@ print("trend code:",trend_code)
 
 
 
-# In[6]:
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
 
 
 current_wx = []
@@ -333,7 +474,7 @@ print(current_wx_symbol)
 
 
 
-# In[7]:
+# In[ ]:
 
 
 df_latest["current_wx1"] = current_wx[0]
@@ -365,7 +506,7 @@ df_latest["gust_kts"] = 1.94384 * df_latest["windGust"]
 
 
 
-# In[8]:
+# In[ ]:
 
 
 Mines_Blue = "#002554"
@@ -373,19 +514,33 @@ Mines_Blue = "#002554"
 bottom_label  = df_latest["stationId"] + " " + df_latest["TimeLOC"].tz_convert(tz=tz).strftime("%H:%M %Z")
 temp_label    = f"{df_latest['temperatureF']:.0f}°F  "
 dewp_label    = f"{df_latest['dewpointF']:.0f}°F  "
-pres_label    = f" {df_latest['MSLP']:.0f}ᵐᵇ"
+pres_label    = f"   {df_latest['MSLP']:.0f}ᵐᵇ"
 pres_tend_lab = f"   {ptrend:+4.1f}ᵐᵇ"
+
+precip_accum_3hr = df_metar["precip_now"].sum()/25.4
+
+if (precip_accum_3hr == 0):
+    prec_label = ""
+elif (precip_accum_3hr < 0.005):
+    prec_label = "Traceᐟ³ʰ"
+else:
+    prec_label    = f"  {precip_accum_3hr:.2f}ⁱⁿᐟ³ʰ"
+
+
 
 if ((df_latest['visibility']/1609) > .9):
     vis_label    = f"{(df_latest['visibility']/1609):.0f}ᵐⁱ"
 else:
     vis_label    = f"{round(df_latest['visibility']/1609,1):.1f}ᵐⁱ"
 
+
+
+
 fig, ax = plt.subplots(figsize=[5,5])
+
 stationplot = StationPlot(ax, 
                           0, 
                           0, 
-                          #transform = ccrs.PlateCarree(),
                           fontsize  = 50)
 
 stationplot.plot_text('NW', 
@@ -397,10 +552,16 @@ stationplot.plot_text('SW',
                            color=Mines_Blue,
                            fontsize=45)
 
+stationplot.plot_text('SE', 
+                           np.array([prec_label]), 
+                           color=Mines_Blue,
+                           fontsize=20)
+
+
 stationplot.plot_text('NE', 
                            np.array([pres_label]), 
                            color=Mines_Blue,
-                           fontsize=25)
+                           fontsize=35)
 
 stationplot.plot_text('E', 
                            np.array([pres_tend_lab]), 
@@ -420,29 +581,54 @@ stationplot.plot_symbol('C',
 
 stationplot.plot_symbol('W', 
                         np.array([df_latest['current_wx1_symbol']]), 
-                        current_weather,color=Mines_Blue)
+                        current_weather,
+                        color=Mines_Blue)
+
 stationplot.plot_text('W2', 
                            np.array([vis_label]), 
                            color=Mines_Blue,
-                           fontsize=20)
+                           fontsize=25)
 
 
 stationplot.plot_barb(np.array([df_latest['u_kts']]), 
                       np.array([df_latest['v_kts']]),
-                     color=Mines_Blue, linewidth=2)
+                      color=Mines_Blue, 
+                      linewidth=2)
 
 stationplot.plot_text((0, -2), 
                       np.array([bottom_label]), 
                       color=Mines_Blue,
-                      fontsize=25, ha="center")
+                      fontsize=25, 
+                      ha="center")
 plt.axis('off')
 plt.savefig("./graphics_files/local_station.svg", 
             bbox_inches = "tight", 
             pad_inches  = 0.0)
-#plt.show()
+
+#if display_images:
+#    plt.show()
+
 plt.close()
 
 print("Completed")
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
