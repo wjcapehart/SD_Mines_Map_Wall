@@ -55,6 +55,18 @@ links.sort()
 
 
 
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
 
 # In[ ]:
 
@@ -146,44 +158,7 @@ df_metar = df_metar_nocloud.join(other = df_metar_cloud, on="recNum")
 df_metar = df_metar[df_metar["stationId"]==stationname]. \
                 set_index("observationTime")
 
-df_metar["Reset_Precip"] = (((df_metar.index + np.timedelta64(5, 'm')).hour)%3 == 0) & \
-                            ((df_metar.index + np.timedelta64(5, 'm')).minute  == 0)
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
+df_metar["Reset_Precip"] = ((df_metar.index + np.timedelta64(5, 'm')).minute  == 0)
 
 
 
@@ -204,15 +179,55 @@ for i in range(len(df_metar)):
 
 df_metar["precip_now"] = precip_loc
 
+if (display_images):
+    df_metar["precip_now"].plot(style = "o")
+    df_metar["precipAccum"].plot()
+    plt.ylabel("Precipitation (mm)")
+    plt.title("Precipitation Calculations")
+    plt.show()
 
 
-# if (display_images):
-#     df_metar["precip_now"].plot(style = "o")
-#     df_metar["precipAccum"].plot()
-#     plt.ylabel("Precipitation (mm)")
-#     plt.title("Precipitation Calculations")
-#     plt.show()
-# 
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+df_metar[["Reset_Precip","precipAccum"]]
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
 
 # In[ ]:
 
@@ -289,6 +304,17 @@ for index, row in df_metar.iterrows():
                                                                              row["temperature"] * metpy.units.units("K")).magnitude / 100.
 
 
+
+
+# In[ ]:
+
+
+if (display_images):
+    df_metar["precip_now"].plot(style = "o")
+    df_metar["precipAccum"].plot()
+    plt.ylabel("Precipitation (mm)")
+    plt.title("Precipitation Calculations")
+    plt.show()
 
 
 # In[ ]:
@@ -605,8 +631,8 @@ plt.savefig("./graphics_files/local_station.svg",
             bbox_inches = "tight", 
             pad_inches  = 0.0)
 
-#if display_images:
-#    plt.show()
+if display_images:
+    plt.show()
 
 plt.close()
 
