@@ -341,7 +341,7 @@ for datehour in siphon_pulls_YYYYMMDD_HH:
 
     # URLs & Local Work File Names
 
-    metar_url  = "https://thredds-dev.unidata.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_"+datehour+".txt"
+    metar_url  = "https://thredds.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_"+datehour+".txt"
     metar_file = "./temp_files_radar/metar_"+datehour+".txt"
 
     path_to_file = pathlib.Path(metar_file)
