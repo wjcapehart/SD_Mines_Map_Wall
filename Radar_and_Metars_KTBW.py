@@ -313,7 +313,7 @@ tz     = tf.certain_timezone_at(lng = airport_database_IATA[station_id]['lon'],
 # Pull Text-Based METARS from UNIDATA NOAAPORT Experimental Site
 #
 
-# cat = siphcat.TDSCatalog('https://thredds-dev.unidata.ucar.edu/thredds/catalog/noaaport/text/metar/catalog.xml')
+# cat = siphcat.TDSCatalog('https://thredds.ucar.edu/thredds/fileServer/noaaport/text/metar/catalog.xml')
 
 #
 # Extraction File Text Model
@@ -326,7 +326,7 @@ for datehour in siphon_pulls_YYYYMMDD_HH:
 
     # URLs & Local Work File Names
     
-    metar_url  = "https://thredds-dev.unidata.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_"+datehour+".txt"
+    metar_url  = "https://thredds.ucar.edu/thredds/fileServer/noaaport/text/metar/metar_"+datehour+".txt"
     metar_file = "./temp_files_radar/metar_"+datehour+".txt"
     
     path_to_file = pathlib.Path(metar_file)
