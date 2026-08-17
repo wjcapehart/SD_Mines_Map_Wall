@@ -59,7 +59,7 @@ import metpy             as metpy
 
 from metpy.cbook import get_test_data
 from metpy.io import parse_wpc_surface_bulletin
-from metpy.plots import (add_metpy_logo, ColdFront, OccludedFront, StationaryFront,
+from metpy.plots import (scattertext, ColdFront, OccludedFront, StationaryFront,
                          StationPlot, WarmFront)
 
 
@@ -191,7 +191,7 @@ def plot_bulletin(ax, data):
                        'TROF': {'linewidth': 2, 'linestyle': 'dashed',
                                 'edgecolor': 'brown'}}
 
-    complete_stylet = {'HIGH': {'color': 'blue', 'fontsize': fontsize},
+    complete_stylet = {'HIGH': {'color': 'blue', 'faontsize': fontsize},
                       'LOW': {'color': 'darkred', 'fontsize': fontsize},
                       'WARM': {'linewidth': 1, 'path_effects': [WarmFront(size=size, spacing=spacing)]},
                       'COLD': {'linewidth': 1, 'path_effects': [ColdFront(size=size, spacing=1)]},
@@ -201,20 +201,22 @@ def plot_bulletin(ax, data):
                                'edgecolor': 'brown'}}
 
 
-    # Handle H/L points using MetPy's StationPlot class
-    for field in ('HIGH', 'LOW'):
-        rows = data[data.feature == field]
-        x, y = zip(*((pt.x, pt.y) for pt in rows.geometry))
-        sp = StationPlot(ax, x, y, transform=ccrs.PlateCarree(), clip_on=True)
-        sp.plot_text('C', [field[0]] * len(x), **complete_style[field])
-        sp.plot_parameter('S2', rows.strength, **complete_stylet[field])
-
-
     # Handle all the boundary types
     for field in ('WARM', 'COLD', 'STNRY', 'OCFNT', 'TROF'):
         rows = data[data.feature == field]
         ax.add_geometries(rows.geometry, crs=ccrs.PlateCarree(), **complete_style[field],
                           facecolor='none')
+
+
+    # Handle H/L points using MetPy's StationPlot class
+    for field in ('HIGH', 'LOW'):
+        rows = data[data.feature == field]
+        x, y = zip(*((pt.x, pt.y) for pt in rows.geometry), strict=False)
+        scattertext(ax, x, y, field[0],
+                    **complete_style[field], transform=ccrs.PlateCarree(), clip_on=True)
+        scattertext(ax, x, y, rows.strength, formatter='.0f', loc=(0, -10),
+                    **complete_style[field], transform=ccrs.PlateCarree(), clip_on=True)
+
 
 
 # In[ ]:
