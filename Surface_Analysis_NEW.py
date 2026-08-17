@@ -215,7 +215,7 @@ def plot_bulletin(ax, data):
         scattertext(ax, x, y, field[0],
                     **complete_style[field], transform=ccrs.PlateCarree(), clip_on=True)
         scattertext(ax, x, y, rows.strength, formatter='.0f', loc=(0, -10),
-                    **complete_style[field], transform=ccrs.PlateCarree(), clip_on=True)
+                    **complete_stylet[field], transform=ccrs.PlateCarree(), clip_on=True)
 
 
 
