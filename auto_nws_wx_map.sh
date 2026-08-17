@@ -27,8 +27,8 @@ wget https://www.wpc.ncep.noaa.gov/basicwx/6_hour.txt -O /projects/SD_Mines_Map_
 echo
 echo  "Firing Things Up!"
 echo
-# .  /home/wjc/.bash_profile  ; ~wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/Surface_Analysis_NEW.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
-.  /home/wjc/.bash_profile  ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/NWS_Wx_Map.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
+.  /home/wjc/.bash_profile  ; ~wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/Surface_Analysis_NEW.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
+#.  /home/wjc/.bash_profile  ; /home/wjc/miniconda3/bin/python /projects/SD_Mines_Map_Wall/NWS_Wx_Map.py > /projects/SD_Mines_Map_Wall/__log_nws_map.log 2>&1
 
 echo
 echo "Ending Script"

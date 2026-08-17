@@ -191,7 +191,7 @@ def plot_bulletin(ax, data):
                        'TROF': {'linewidth': 2, 'linestyle': 'dashed',
                                 'edgecolor': 'brown'}}
 
-    complete_stylet = {'HIGH': {'color': 'blue', 'faontsize': fontsize},
+    complete_stylet = {'HIGH': {'color': 'blue', 'fontsize': fontsize},
                       'LOW': {'color': 'darkred', 'fontsize': fontsize},
                       'WARM': {'linewidth': 1, 'path_effects': [WarmFront(size=size, spacing=spacing)]},
                       'COLD': {'linewidth': 1, 'path_effects': [ColdFront(size=size, spacing=1)]},
@@ -208,7 +208,7 @@ def plot_bulletin(ax, data):
                           facecolor='none')
 
 
-    # Handle H/L points using MetPy's StationPlot class
+    # Handle H/L points 
     for field in ('HIGH', 'LOW'):
         rows = data[data.feature == field]
         x, y = zip(*((pt.x, pt.y) for pt in rows.geometry), strict=False)
@@ -436,8 +436,8 @@ nldn_xf         = cat.datasets[0].remote_access(service="CdmRemote",
                                                 use_xarray=True)
 print("Accessing NLDN for " + front_time_string)
 nldn_30m = nldn_xf["NLDN_CG_030min_AvgDensity_altitude_above_msl"][0,0,:,:]
-nldn_lon = nldn_xf["lon"]
-nldn_lat = nldn_xf["lat"]
+nldn_lon = nldn_xf["lon"].astype(float) 
+nldn_lat = nldn_xf["lat"].astype(float) 
 
 
 
