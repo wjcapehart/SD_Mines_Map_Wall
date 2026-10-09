@@ -20,7 +20,7 @@ from metpy.plots    import add_timestamp
 from siphon.catalog import TDSCatalog
 from datetime       import datetime, timezone
 
-
+import xarray as xr
 import numpy             as np
 import os                as os
 import pandas            as pd
@@ -174,7 +174,7 @@ if (region == 'Mesoscale-2') :
     png_processing_directory = png_file_dir2
     gif_file_name            = gif_file_name2
 
-    
+
 if (region == 'CONUS') :
     region_lab               = ' SODAK Band '
     png_processing_directory = png_file_dir3
@@ -234,7 +234,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     filename = png_processing_directory + filename
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-        
+
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
 
 file_names_to_retain.sort()
@@ -277,39 +277,41 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     dataset_vis = cat_vis.datasets[i]
     dataset_tir = cat_tir.datasets[i]
 
-    
+
     filename = dataset_vis.name.replace(".nc", ".png")
     filename = filename[:20] + "xx" + filename[22:]
     dataset_png_file_name = png_processing_directory + filename
-    
-    
-    
+
+
+
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
-        
+
         channel = channel_vis
 
         ds  = dataset_vis.remote_access(service="OPENDAP",
                                    use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
-        
+
         print("pixels : ",channel,dat.values.shape)
-        
+
+        ptile_90     = np.quantile(a = dat.values, q=0.9)
         frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
         print("Fraction of Missings : ", frac_missing)
-        
-        if(frac_missing > 0.05):
+        print("90th ptile : ", ptile_90)
+
+        if((frac_missing > 0.05) or (np.quantile(a = dat.values, q=0.9) < 0.05)):
             print("Switching to IR")
             channel = channel_tir
             ds      = dataset_tir.remote_access(service="OPENDAP",
                                    use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')
-        
+
         proj = dat.metpy.cartopy_crs
         x = dat['x']
         y = dat['y']
-        
+
         #if(any(dat == np.nan):
-        
+
 
 
         tz         = 'America/Denver'
@@ -330,8 +332,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         alpha2d = np.where(alpha2d>alpha_factor,alpha_factor,alpha2d)
         alpha2d = alpha2d / alpha_factor
 
-        
-        
+
+
 
         fig = plt.figure(figsize=(8, 8), facecolor = 'white')
 
@@ -345,8 +347,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1, edgecolor=Mines_Blue)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
         ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor=Mines_Blue)
-        
-        
+
+
         if (channel >= 7):
 
             im = ax.imshow(                        dat, 
@@ -373,13 +375,13 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #
         # Insert a Clock
         #
-        
+
         axins = fig.add_axes(rect     =    [0.002,
                                             0.825,
                                             0.12,
                                             0.12],
                               projection  =  "polar")
-        
+
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
 
         hour   = time_for_clock.hour
@@ -392,21 +394,21 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         else:
             Clock_Color = "white"
             Clock_BgndC = Mines_Blue           
-        
+
         circle_theta  = np.deg2rad(np.arange(0,360,0.01))
         circle_radius = circle_theta * 0 + 1
-        
+
         if (hour > 12) :
             hour = hour - 12
-        
+
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-        
+
         print(time_for_clock)
         print(hour,   np.rad2deg(angles_h))
         print(minute, np.rad2deg(angles_m))
 
-        
+
         plt.setp(axins.get_yticklabels(), visible=False)
         plt.setp(axins.get_xticklabels(), visible=False)
         axins.spines['polar'].set_visible(False)
@@ -415,7 +417,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins.set_theta_direction(-1)
         axins.set_facecolor(Clock_BgndC)
         axins.grid(False)
-        
+
         axins.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
@@ -455,17 +457,17 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         #
         #########################################
-        
+
         ax.set_frame_on(False)
         plt.tight_layout()
-        
+
         plt.savefig( dataset_png_file_name,
                         facecolor   = 'white', 
                         transparent =   False)
         plt.close()
     else:
         print("We already have this one!")
-    
+
 
 #
 ##################################################
@@ -566,7 +568,7 @@ if (region == 'Mesoscale-2') :
     png_processing_directory = png_file_dir2
     gif_file_name            = gif_file_name2
 
-    
+
 if (region == 'CONUS') :
     region_lab               = ' SODAK Band '
     png_processing_directory = png_file_dir3
@@ -630,7 +632,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     filename = png_processing_directory + filename
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-        
+
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
 
 file_names_to_retain.sort()
@@ -674,37 +676,40 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     dataset_vis = cat_vis.datasets[i]
     dataset_tir = cat_tir.datasets[i]
 
-    
+
     filename = dataset_vis.name.replace(".nc", ".png")
     filename = filename[:20] + "xx" + filename[22:]
     dataset_png_file_name = png_processing_directory + filename
-    
-    
-    
+
+
+
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
-        
+
         channel = channel_vis
 
         ds  = dataset_vis.remote_access(service="OPENDAP",
                                    use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
-        
+
+        ptile_90     = np.quantile(a = dat.values, q=0.9)
         frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
         print("Fraction of Missings : ", frac_missing)
-        
-        if(frac_missing > 0.05):
+        print("90th ptile : ", ptile_90)
+
+        if((frac_missing > 0.05) or (np.quantile(a = dat.values, q=0.9) < 0.05)):
+
             print("Switching to IR")
             channel = channel_tir
             ds      = dataset_tir.remote_access(service="OPENDAP",
                                    use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')
-        
+
         proj = dat.metpy.cartopy_crs
         x = dat['x']
         y = dat['y']
-        
+
         #if(any(dat == np.nan):
-        
+
 
         ny = dat.shape[0]
         nx = dat.shape[1]      
@@ -713,8 +718,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         alpha2d = alpha2d / alpha_factor
 
 
-        
-   
+
+
 
         tz         = 'America/Denver'
         time_utc   = datetime.strptime(ds.start_date_time, '%Y%j%H%M%S')
@@ -740,8 +745,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1, edgecolor=Mines_Blue)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
         ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor=Mines_Blue)
-        
-        
+
+
         if (channel >= 7):
 
             im = ax.imshow(                        dat, 
@@ -768,13 +773,13 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #
         # Insert a Clock
         #
-        
+
         axins = fig.add_axes(rect     =    [0.002,
                                             0.825,
                                             0.12,
                                             0.12],
                               projection  =  "polar")
-        
+
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
 
         hour   = time_for_clock.hour
@@ -788,21 +793,21 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
             Clock_Color = "white"
             Clock_BgndC = Mines_Blue           
 
-        
+
         circle_theta  = np.deg2rad(np.arange(0,360,0.01))
         circle_radius = circle_theta * 0 + 1
-        
+
         if (hour > 12) :
             hour = hour - 12
-        
+
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-        
+
         #print(time_for_clock)
         #print(hour,   np.rad2deg(angles_h))
         #print(minute, np.rad2deg(angles_m))
 
-        
+
         plt.setp(axins.get_yticklabels(), visible=False)
         plt.setp(axins.get_xticklabels(), visible=False)
         axins.spines['polar'].set_visible(False)
@@ -811,7 +816,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins.set_theta_direction(-1)
         axins.set_facecolor(Clock_BgndC)
         axins.grid(False)
-        
+
         axins.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
@@ -851,17 +856,17 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         #
         #########################################
-        
+
         ax.set_frame_on(False)
         plt.tight_layout()
-        
+
         plt.savefig( dataset_png_file_name,
                         facecolor   = 'white', 
                         transparent =   False)
         plt.close()
     else:
         print("We already have this one!")
-    
+
 
 #
 ##################################################
@@ -1013,7 +1018,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     filename = png_processing_directory + filename
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-        
+
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
 
 file_names_to_retain.sort()
@@ -1057,37 +1062,40 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     dataset_vis = cat_vis.datasets[i]
     dataset_tir = cat_tir.datasets[i]
 
-    
+
     filename = dataset_vis.name.replace(".nc", ".png")
     filename = filename[:20] + "xx" + filename[22:]
     dataset_png_file_name = png_processing_directory + filename
-    
-    
-    
+
+
+
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
-        
+
         channel = channel_vis
 
         ds  = dataset_vis.remote_access(service="OPENDAP",
                                    use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
-        
+
+        ptile_90     = np.quantile(a = dat.values, q=0.9)
         frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
         print("Fraction of Missings : ", frac_missing)
-        
-        if(frac_missing > 0.05):
+        print("90th ptile : ", ptile_90)
+
+        if((frac_missing > 0.05) or (np.quantile(a = dat.values, q=0.9) < 0.05)):
+
             print("Switching to IR")
             channel = channel_tir
             ds      = dataset_tir.remote_access(service="OPENDAP",
                                    use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')
-        
+
         proj = dat.metpy.cartopy_crs
         x = dat['x']
         y = dat['y']
-        
+
         #if(any(dat == np.nan):
-        
+
 
         ny = dat.shape[0]
         nx = dat.shape[1]      
@@ -1096,8 +1104,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         alpha2d = alpha2d / alpha_factor
 
 
-        
-   
+
+
 
         tz         = 'America/Denver'
         time_utc   = datetime.strptime(ds.start_date_time, '%Y%j%H%M%S')
@@ -1123,8 +1131,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1, edgecolor=Mines_Blue)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
         ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor=Mines_Blue)
-        
-        
+
+
         if (channel >= 7):
 
             im = ax.imshow(                        dat, 
@@ -1151,13 +1159,13 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #
         # Insert a Clock
         #
-        
+
         axins = fig.add_axes(rect     =    [0.002,
                                             0.825,
                                             0.12,
                                             0.12],
                               projection  =  "polar")
-        
+
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
 
         hour   = time_for_clock.hour
@@ -1171,21 +1179,21 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
             Clock_Color = "white"
             Clock_BgndC = Mines_Blue           
 
-        
+
         circle_theta  = np.deg2rad(np.arange(0,360,0.01))
         circle_radius = circle_theta * 0 + 1
-        
+
         if (hour > 12) :
             hour = hour - 12
-        
+
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-        
+
         #print(time_for_clock)
         #print(hour,   np.rad2deg(angles_h))
         #print(minute, np.rad2deg(angles_m))
 
-        
+
         plt.setp(axins.get_yticklabels(), visible=False)
         plt.setp(axins.get_xticklabels(), visible=False)
         axins.spines['polar'].set_visible(False)
@@ -1194,7 +1202,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins.set_theta_direction(-1)
         axins.set_facecolor(Clock_BgndC)
         axins.grid(False)
-        
+
         axins.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
@@ -1234,17 +1242,17 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         #
         #########################################
-        
+
         ax.set_frame_on(False)
         plt.tight_layout()
-        
+
         plt.savefig( dataset_png_file_name,
                         facecolor   = 'white', 
                         transparent =   False)
         plt.close()
     else:
         print("We already have this one!")
-    
+
 
 #
 ##################################################
@@ -1390,7 +1398,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     filename = png_processing_directory + filename
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-        
+
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
 
 file_names_to_retain.sort()
@@ -1434,37 +1442,39 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     dataset_vis = cat_vis.datasets[i]
     dataset_tir = cat_tir.datasets[i]
 
-    
+
     filename = dataset_vis.name.replace(".nc", ".png")
     filename = filename[:20] + "xx" + filename[22:]
     dataset_png_file_name = png_processing_directory + filename
-    
-    
-    
+
+
+
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
-        
+
         channel = channel_vis
 
         ds  = dataset_vis.remote_access(service="OPENDAP",
                                    use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')
-        
+
+        ptile_90     = np.quantile(a = dat.values, q=0.9)
         frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
         print("Fraction of Missings : ", frac_missing)
-        
-        if(frac_missing > 0.05):
+        print("90th ptile : ", ptile_90)
+
+        if((frac_missing > 0.05) or (np.quantile(a = dat.values, q=0.9) < 0.05)):
             print("Switching to IR")
             channel = channel_tir
             ds      = dataset_tir.remote_access(service="OPENDAP",
                                    use_xarray=True)
             dat     = ds.metpy.parse_cf('Sectorized_CMI')
-        
+
         proj = dat.metpy.cartopy_crs
         x = dat['x']
         y = dat['y']
-        
+
         #if(any(dat == np.nan):
-        
+
 
         ny = dat.shape[0]
         nx = dat.shape[1]      
@@ -1473,8 +1483,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         alpha2d = alpha2d / alpha_factor
 
 
-        
-   
+
+
 
         tz         = 'America/Denver'
         time_utc   = datetime.strptime(ds.start_date_time, '%Y%j%H%M%S')
@@ -1500,8 +1510,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1, edgecolor=Mines_Blue)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
         ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor=Mines_Blue)
-        
-        
+
+
         if (channel >= 7):
 
             im = ax.imshow(                        dat, 
@@ -1528,13 +1538,13 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #
         # Insert a Clock
         #
-        
+
         axins = fig.add_axes(rect     =    [0.002,
                                             0.825,
                                             0.12,
                                             0.12],
                               projection  =  "polar")
-        
+
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
 
         hour   = time_for_clock.hour
@@ -1548,21 +1558,21 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
             Clock_Color = "white"
             Clock_BgndC = Mines_Blue           
 
-        
+
         circle_theta  = np.deg2rad(np.arange(0,360,0.01))
         circle_radius = circle_theta * 0 + 1
-        
+
         if (hour > 12) :
             hour = hour - 12
-        
+
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-        
+
         #print(time_for_clock)
         #print(hour,   np.rad2deg(angles_h))
         #print(minute, np.rad2deg(angles_m))
 
-        
+
         plt.setp(axins.get_yticklabels(), visible=False)
         plt.setp(axins.get_xticklabels(), visible=False)
         axins.spines['polar'].set_visible(False)
@@ -1571,7 +1581,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins.set_theta_direction(-1)
         axins.set_facecolor(Clock_BgndC)
         axins.grid(False)
-        
+
         axins.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
         axins.plot(circle_theta, circle_radius, color=Clock_Color, linewidth=1)
@@ -1611,17 +1621,17 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         #
         #########################################
-        
+
         ax.set_frame_on(False)
         plt.tight_layout()
-        
+
         plt.savefig( dataset_png_file_name,
                         facecolor   = 'white', 
                         transparent =   False)
         plt.close()
     else:
         print("We already have this one!")
-    
+
 
 #
 ##################################################
@@ -1735,7 +1745,7 @@ if (region == 'Mesoscale-2') :
     png_processing_directory = png_file_dir2
     gif_file_name            = gif_file_name2
 
-    
+
 if (region == 'CONUS') :
     region_lab               = ' SODAK Band '
     png_processing_directory = png_file_dir3
@@ -1800,7 +1810,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     filename = png_processing_directory + filename
     file_names_to_retain.append(filename)
     file_names_to_use.append(filename)
-        
+
 files_on_hand = [png_processing_directory + s for s in os.listdir(png_processing_directory)]
 
 file_names_to_retain.sort()
@@ -1844,15 +1854,15 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
     dataset_vis = cat_vis.datasets[i]
     dataset_tir = cat_tir.datasets[i]
 
-    
+
     filename = dataset_vis.name.replace(".nc", ".png")
     filename = filename[:19] + "xx" + filename[21:]
     dataset_png_file_name = png_processing_directory + filename
-    
-    
-    
+
+
+
     if (not pathlib.Path(dataset_png_file_name).is_file() ):
-        
+
         channel  = channel_vis
 
 
@@ -1860,14 +1870,16 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
                                    use_xarray=True)
         dat = ds.metpy.parse_cf('Sectorized_CMI')[jmin_rap_vis : jmax_rap_vis,
                                                   imin_rap_vis : imax_rap_vis]
-        
 
-        
-        frac_missing = np.isnan(dat.values).sum() / np.isnan(dat.values).size
-            
+
+
+        ptile_90     = np.quantile(a = dat.values, q=0.9)
+        frac_missing = np.isnan(dat.values).sum()/np.isnan(dat.values).size
         print("Fraction of Missings : ", frac_missing)
-        
-        if(frac_missing > 0.05):
+        print("90th ptile : ", ptile_90)
+
+        if((frac_missing > 0.05) or (np.quantile(a = dat.values, q=0.9) < 0.05)):
+
             print("Switching to IR")
             channel = channel_tir
             ds      = dataset_tir.remote_access(service="OPENDAP",
@@ -1878,7 +1890,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         x    = dat['x']       
         y    = dat['y']
         proj = dat.metpy.cartopy_crs
-        
+
         tz         = 'America/Denver'
         time_utc   = datetime.strptime(ds.start_date_time, '%Y%j%H%M%S')
         valid_time = pd.to_datetime(time_utc).tz_localize(tz="UTC").strftime("%Y-%m-%d %H:%M:%S %Z")
@@ -1899,8 +1911,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         alpha2d = alpha2d / alpha_factor
 
 
-        
-   
+
+
         fig = plt.figure(figsize=(8, 8), facecolor = 'white')
 
         plt.suptitle(image_header_label,
@@ -1913,8 +1925,8 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1, edgecolor=Mines_Blue)
         ax.add_feature(cfeature.STATES.with_scale('50m'),    linestyle=':', edgecolor=Mines_Blue)
         ax.add_feature(cfeature.BORDERS.with_scale('50m'),   linewidth=1, edgecolor=Mines_Blue)
-        
-        
+
+
         if (channel >= 7):
 
             im = ax.imshow(                       dat, 
@@ -1941,13 +1953,13 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         #
         # Insert a Clock
         #
-        
+
         axins = fig.add_axes(rect     =    [0.002,
                                             0.825,
                                             0.12,
                                             0.12],
                               projection  =  "polar")
-        
+
         time_for_clock = pd.to_datetime(time_utc).tz_localize(tz="UTC").tz_convert(tz=tz).time()
 
         hour   = time_for_clock.hour
@@ -1961,22 +1973,22 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
             Clock_Color = "white"
             Clock_BgndC = Mines_Blue           
 
- 
-        
+
+
         circle_theta  = np.deg2rad(np.arange(0,360,0.01))
         circle_radius = circle_theta * 0 + 1
-        
+
         if (hour > 12) :
             hour = hour - 12
-        
+
         angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
         angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-        
+
         #print(time_for_clock)
         #print(hour,   np.rad2deg(angles_h))
         #print(minute, np.rad2deg(angles_m))
 
-        
+
         plt.setp(axins.get_yticklabels(), visible=False)
         plt.setp(axins.get_xticklabels(), visible=False)
         axins.spines['polar'].set_visible(False)
@@ -1985,7 +1997,7 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
         axins.set_theta_direction(-1)
         axins.set_facecolor(Clock_BgndC)
         axins.grid(False)
-        
+
         axins.plot([angles_h,angles_h], [0,0.60], color=Clock_Color, linewidth=1.5)
         axins.plot([angles_m,angles_m], [0,0.95], color=Clock_Color, linewidth=1.5)
         axins.plot(circle_theta, circle_radius,   color=Clock_Color, linewidth=1)
@@ -2025,17 +2037,17 @@ for i in range(len(cat_vis.datasets)-total_frames,len(cat_vis.datasets),1) :
 
         #
         #########################################
-        
+
         ax.set_frame_on(False)
         plt.tight_layout()
-        
+
         plt.savefig( dataset_png_file_name,
                         facecolor   = 'white', 
                         transparent =   False)
         plt.close()
     else:
         print("We already have this one!")
-    
+
 
 #
 ##################################################
@@ -2193,30 +2205,6 @@ print("completed "+gif_file_name12)
 
 #
 ##################################################
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
