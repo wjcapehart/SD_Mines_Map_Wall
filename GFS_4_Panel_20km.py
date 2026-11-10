@@ -86,7 +86,7 @@ def plot_maxmin_points(lon, lat, data, extrema, nsize, symbol, color="#002554",
     (e.g., clip_on=True)
     """
     from scipy.ndimage import maximum_filter, minimum_filter
-	
+
     Mines_Blue = "#002554"
 
 
@@ -162,6 +162,7 @@ nws_precip_colors = [
     "#fdfdfd"]  # 10.00+
 
 precip_colormap = mpl.colors.ListedColormap(colors = nws_precip_colors)
+precip_colormap.set_bad(color="white", alpha = 0)
 
 precip_levels_in = [   0.01,   0.10,  0.25,   0.50, 
                        0.75,   1.00,  1.50,   2.00, 
@@ -457,7 +458,7 @@ precip.values                = precip.values / 25.4
 precip.attrs['units']        = 'in'
 dt_precip                    = precip.copy()
 dt_precip.values[1:,:,:]     = precip.values[1:,:,:] - precip.values[0:-1,:,:]
-          
+
 dt_precip.attrs['long_name'] = "x-hrly Precipitation"
 
 dt_precip_ishow = dt_precip.copy()
@@ -529,9 +530,9 @@ frat_done = 0
 nt = len(times_utc)
 
 for i in range(len(times_utc)) :    
-    
+
     print("========================================================")
-    
+
     plot_label = "NOAA-NCEP Global Forecast System Model"
 
     tz           = 'America/Denver'
@@ -552,7 +553,7 @@ for i in range(len(times_utc)) :
     minute = time_for_clock.minute
     second = time_for_clock.second
     percent_done = (1.0 * i) / (nt-1.)
-    
+
     if ((hour >= 6) and (hour < 18)):
         Clock_Color = Mines_Blue
         Clock_BgndC = "white"           
@@ -562,9 +563,9 @@ for i in range(len(times_utc)) :
 
     print(time_label)
     print(local_time_p)
-    
+
     #############################################################
-    
+
     colorbar_aspect = 30
     colorbar_shrink = 0.9
     colorbar_pad    = 0.01
@@ -574,17 +575,17 @@ for i in range(len(times_utc)) :
 
     fig = plt.figure(figsize   = (9*2, 8*2), 
                      facecolor = 'white')
-    
+
 
 
 
 
     #############################################################
-    
+
     ax1 = fig.add_subplot(    2,     2,     1, 
                          projection = gfs_crs)
-    
-    
+
+
 
 
 
@@ -598,7 +599,7 @@ for i in range(len(times_utc)) :
                        linewidths = 0.5,
                        facecolor  = 'none' , 
                        edgecolor  = Mines_Blue)
-    
+
 
     contourf_levels = np.arange(start = -20,
                                 stop  =  21,
@@ -623,7 +624,7 @@ for i in range(len(times_utc)) :
                                     levels     = contour_levels)
 
     ax1.clabel(contour_plot, colors=Mines_Blue)
-    
+
     ax1.annotate(r"500-hPa Relative Vorticity [10$^{-5}$ s$^{-1}$]", 
                  [0.5,-0.1], 
                  xycoords              = "axes fraction", 
@@ -646,7 +647,7 @@ for i in range(len(times_utc)) :
 
 
     #############################################################
-    
+
     ax2 = fig.add_subplot(    2,     2,     2, 
                          projection = gfs_crs)
 
@@ -661,7 +662,7 @@ for i in range(len(times_utc)) :
                        linewidths = 0.5,
                        facecolor  = 'none' , 
                        edgecolor  = Mines_Blue)
-    
+
     contourf_levels = np.arange(start =  480,
                                 stop  =  613,
                                 step  =    6)
@@ -688,19 +689,19 @@ for i in range(len(times_utc)) :
                                                   levels     = contourf_levels)
 
 
-        
-    ax2.clabel(contour_plot2, fontsize="xx-large", colors=Mines_Blue)
 
-  
-    
+    ax2.clabel(contour_plot2, fontsize="xx-large", colors="white")
 
-    
+
+
+
+
     contour_levels = np.arange(start =  900, 
                                stop  = 1090, 
                                step  =    4)
-    
+
     smoothed = mslp[i,:,:].copy()
-    
+
 
     contour_plot = smoothed[:,:].plot.contour(colors    =        Mines_Blue,
                                              linewidths =           1.5, 
@@ -734,10 +735,10 @@ for i in range(len(times_utc)) :
                  bbox = dict(facecolor =         'white', edgecolor =         "white"))
 
     #############################################################
-    
+
     ax3 = fig.add_subplot(    2,     2,     3, 
                          projection = gfs_crs)
- 
+
     ax3.coastlines(resolution = 'auto',
                    linewidths =  0.75,
                        facecolor  = 'none' , 
@@ -748,7 +749,7 @@ for i in range(len(times_utc)) :
                        linewidths = 0.5,
                        facecolor  = 'none' , 
                        edgecolor  = Mines_Blue)
-    
+
 
     contourf_levels = np.arange(start =  30,
                                 stop  =  71,
@@ -767,7 +768,7 @@ for i in range(len(times_utc)) :
                                                                  "shrink"      : colorbar_shrink,
                                                                  "aspect"      : colorbar_aspect})    
     lw = 5*m_850[i,:,:] / m_850[i,:,:].max()
-    
+
 
     ax3.streamplot(eastings1d, 
                    northings1d, 
@@ -775,11 +776,11 @@ for i in range(len(times_utc)) :
                    v_850[i,:,:].values,
                    linewidth = lw.values,
                    color     = Mines_Blue)
-    
+
     humidity_mask = np.ma.masked_greater_equal(rh_850[i,:,:].values,90)
 
     #ax3.pcolor(eastings1d, northings1d, humidity_mask, hatch='.', alpha=0.8)
-   
+
     ax3.annotate("850-hPa Dewpoint Temperature [°F]", 
                  [0.5,-0.1], 
                  xycoords              = "axes fraction", 
@@ -802,7 +803,7 @@ for i in range(len(times_utc)) :
 
 
     #############################################################
-    
+
     ax4 = fig.add_subplot(    2,     2,     4, 
                          projection = gfs_crs)
 
@@ -817,7 +818,7 @@ for i in range(len(times_utc)) :
                     linewidths = 0.5,
                     facecolor  = 'none' , 
                     edgecolor  = Mines_Blue)
-    
+
     contourf_levels = precip_levels_in
 
     contourf_plot = dt_precip_ishow[prec_i,:,:].plot.imshow( cmap          = precip_colormap,
@@ -840,10 +841,10 @@ for i in range(len(times_utc)) :
                                                     linewidths =               2, 
                                                     levels     = np.array([540]))
 
-        
-    ax4.clabel(contour_plot3, fontsize="xx-large", colors=Mines_Blue)
- 
-    
+
+    ax4.clabel(contour_plot3, fontsize="xx-large", colors="black")
+
+
     ax4.annotate(str(int( deltatp[prec_i]))+"-hrly Precip [in]", 
                  [0.5,-0.1], 
                  xycoords              = "axes fraction", 
@@ -869,14 +870,14 @@ for i in range(len(times_utc)) :
     #############################################################
 
 
-   
+
     plt.suptitle(plot_label, 
                  x        =        0.5,
                  y        =        1.0,
                  fontsize =         25, 
                  color    = Mines_Blue)
-            
- 
+
+
 
 
     ax1.annotate(time_label,[0.5,1.05],
@@ -899,7 +900,7 @@ for i in range(len(times_utc)) :
                   bbox = dict(facecolor =         'white', edgecolor =         "white"))
 
 
-    
+
     ax3.annotate(time_label,[0.5,1.05],
                  xycoords              = "axes fraction", 
                   verticalalignment     =           "top",
@@ -939,25 +940,25 @@ for i in range(len(times_utc)) :
                        linewidths = 0.5,
                        facecolor  = 'none' , 
                        edgecolor  = Mines_Blue)
-    
+
     ax1.set_extent(nam_crs_extent, crs=gfs_crs)
     ax2.set_extent(nam_crs_extent, crs=gfs_crs)
     ax3.set_extent(nam_crs_extent, crs=gfs_crs)
     ax4.set_extent(nam_crs_extent, crs=gfs_crs)
 
 
- 
 
- 
+
+
     plt.subplots_adjust(left   = 0.005, 
                         right  =  .995, 
                         top    =  0.99, 
                         bottom = -0.01, 
                         wspace =  0.01,
                         hspace =     0)
-    
+
     percent_done = fxx[i]/np.max(fxx)
-    
+
     rect1 = patches.Rectangle(xy        = (0, 0),
                          width     = percent_done,
                          height    = 0.01, 
@@ -982,20 +983,20 @@ for i in range(len(times_utc)) :
              edgecolor = Mines_Blue, 
              facecolor = Mines_Blue,
              transform = ax4.transAxes)
-    
+
     ax1.add_patch(rect1)
     ax2.add_patch(rect2)
     ax3.add_patch(rect3)
     ax4.add_patch(rect4)
 
-    
+
     ax1.set_frame_on(False)
     ax2.set_frame_on(False)
     ax3.set_frame_on(False)
     ax4.set_frame_on(False)
-    
-    
-    
+
+
+
     #################################
     #
     # Walking Clock 1
@@ -1005,7 +1006,7 @@ for i in range(len(times_utc)) :
     plot_box_y_start = plot_box.y0
     plot_box_x_end   = plot_box.x1
     plot_box_y_end   = plot_box.y1
-    
+
     circle_theta  = np.deg2rad(np.arange(0,360,0.01))
     circle_radius = circle_theta * 0 + 1
 
@@ -1014,7 +1015,7 @@ for i in range(len(times_utc)) :
 
     angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
     angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-    
+
     size_of_clock = 0.02
 
     x_clock = percent_done*(plot_box_x_end-plot_box_x_start) + plot_box_x_start - size_of_clock/2
@@ -1051,7 +1052,7 @@ for i in range(len(times_utc)) :
 
     #
     ##################################    
-    
+
     #################################
     #
     # Walking Clock 1
@@ -1061,7 +1062,7 @@ for i in range(len(times_utc)) :
     plot_box_y_start = plot_box.y0
     plot_box_x_end   = plot_box.x1
     plot_box_y_end   = plot_box.y1
-    
+
     circle_theta  = np.deg2rad(np.arange(0,360,0.01))
     circle_radius = circle_theta * 0 + 1
 
@@ -1070,7 +1071,7 @@ for i in range(len(times_utc)) :
 
     angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
     angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-    
+
     size_of_clock = 0.02
 
     x_clock = percent_done*(plot_box_x_end-plot_box_x_start) + plot_box_x_start - size_of_clock/2
@@ -1108,7 +1109,7 @@ for i in range(len(times_utc)) :
     #
     ##################################       
 
-        
+
     #################################
     #
     # Walking Clock 3
@@ -1118,7 +1119,7 @@ for i in range(len(times_utc)) :
     plot_box_y_start = plot_box.y0
     plot_box_x_end   = plot_box.x1
     plot_box_y_end   = plot_box.y1
-    
+
     circle_theta  = np.deg2rad(np.arange(0,360,0.01))
     circle_radius = circle_theta * 0 + 1
 
@@ -1127,7 +1128,7 @@ for i in range(len(times_utc)) :
 
     angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
     angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-    
+
     size_of_clock = 0.02
 
     x_clock = percent_done*(plot_box_x_end-plot_box_x_start) + plot_box_x_start - size_of_clock/2
@@ -1139,8 +1140,8 @@ for i in range(len(times_utc)) :
     ax3.annotate(dow+"-"+local_time_zone, 
                  [x_dow,y_dow],
                  horizontalalignment="center",
-                verticalalignment="center",fontsize="x-large",
-                xycoords='axes fraction')
+                 verticalalignment="center",fontsize="x-large",
+                 xycoords='axes fraction')
 
 
     axins3 = fig.add_axes(rect     =    [x_clock,
@@ -1164,8 +1165,8 @@ for i in range(len(times_utc)) :
 
     #
     ##################################    
- 
-       
+
+
     #################################
     #
     # Walking Clock 3
@@ -1175,7 +1176,7 @@ for i in range(len(times_utc)) :
     plot_box_y_start = plot_box.y0
     plot_box_x_end   = plot_box.x1
     plot_box_y_end   = plot_box.y1
-    
+
     circle_theta  = np.deg2rad(np.arange(0,360,0.01))
     circle_radius = circle_theta * 0 + 1
 
@@ -1184,7 +1185,7 @@ for i in range(len(times_utc)) :
 
     angles_h = 2*np.pi*hour/12+2*np.pi*minute/(12*60)+2*second/(12*60*60)
     angles_m = 2*np.pi*minute/60+2*np.pi*second/(60*60)
-    
+
     size_of_clock = 0.02
 
     x_clock = percent_done*(plot_box_x_end-plot_box_x_start) + plot_box_x_start - size_of_clock/2
@@ -1221,11 +1222,11 @@ for i in range(len(times_utc)) :
 
     #
     ##################################        
-    
-    
-    
-    
-    
+
+
+
+
+
     plt.savefig(png_file_root + "F" + str(int( fxx[i])).zfill(3) + ".png",
                         facecolor   = 'white', 
                         transparent =   False)
@@ -1234,9 +1235,9 @@ for i in range(len(times_utc)) :
 
 
     plt.close()
-    
+
     prec_i_array[i] = int(prec_i)
-    
+
     if (times_precip_utc[prec_i] == times_utc[i]):
         prec_i = prec_i+1
 
@@ -1291,6 +1292,36 @@ print()
 
 #
 #################################################
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

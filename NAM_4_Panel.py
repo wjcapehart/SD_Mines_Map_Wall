@@ -151,6 +151,7 @@ nws_precip_colors = [
     "#999999"]  # 10.00+
 
 precip_colormap = mpl.colors.ListedColormap(colors = nws_precip_colors)
+precip_colormap.set_bad(color="white", alpha = 0)
 
 precip_levels_in = [   0.01,   0.10,  0.25,   0.50, 
                        0.75,   1.00,  1.50,   2.00, 
@@ -467,6 +468,7 @@ deltatp[1:] = fpxx[1:] - fpxx[0:-1]
 
 precip_ishow = precip.copy()
 precip_ishow = precip_ishow.where(precip_ishow >= 0.01)
+
 
 print("Forecast Times", fxx)
 print("Prec Forecast Times", fpxx)
